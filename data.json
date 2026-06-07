@@ -1,6 +1,6 @@
 {
   "date": "2026-06-07",
-  "updated": "2026-06-07T03:16:30.810Z",
+  "updated": "2026-06-07T07:50:19.287Z",
   "phase": 1,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 414000
     },
     "bitcoin": {
-      "price": 61491,
-      "chg": 1.05493
+      "price": 62204,
+      "chg": 1.92164
     },
     "ethereum": {
-      "price": 1592.04,
-      "chg": 1.42374
+      "price": 1612.11,
+      "chg": 2.27693
     },
     "ripple": {
-      "price": 1.12,
-      "chg": 2.65317
+      "price": 1.13,
+      "chg": 3.49858
     },
     "solana": {
-      "price": 63.59,
-      "chg": 0.56716
+      "price": 64.81,
+      "chg": 2.94519
     },
     "dogecoin": {
-      "price": 0.083352,
-      "chg": 2.84099
+      "price": 0.08464,
+      "chg": 3.74383
     },
     "chainlink": {
-      "price": 7.56,
-      "chg": 3.22119
+      "price": 7.7,
+      "chg": 4.20554
     },
     "ondo-finance": {
-      "price": 0.334919,
-      "chg": 1.06552
+      "price": 0.350071,
+      "chg": 5.48822
     },
     "aave": {
-      "price": 62.22,
-      "chg": 3.08485
+      "price": 63.36,
+      "chg": 3.06503
     },
     "filecoin": {
-      "price": 0.749302,
-      "chg": 3.82998
+      "price": 0.758739,
+      "chg": 4.96121
     },
     "000660": {
       "price": 2070000
@@ -149,7 +149,7 @@
       "rsi": 27
     },
     "ethereum": {
-      "ath": "-68%",
+      "ath": "-67%",
       "athAbs": 4946.05,
       "rsi": 20
     },
@@ -163,11 +163,11 @@
       "rsi": 21
     },
     "dogecoin": {
-      "ath": "-89%",
+      "ath": "-88%",
       "athAbs": 0.731578
     },
     "chainlink": {
-      "ath": "-86%",
+      "ath": "-85%",
       "athAbs": 52.7,
       "rsi": 27
     },
@@ -176,7 +176,7 @@
       "athAbs": 2.14
     },
     "aave": {
-      "ath": "-91%",
+      "ath": "-90%",
       "athAbs": 661.69,
       "rsi": 20
     },
@@ -278,17 +278,17 @@
   "opts": {
     "BTC": {
       "maxPain": 61500,
-      "pcr": 1.48,
+      "pcr": 1.45,
       "expiry": "8JUN26",
-      "callOI": 1433,
-      "putOI": 2127
+      "callOI": 1632,
+      "putOI": 2362
     },
     "ETH": {
       "maxPain": 1650,
-      "pcr": 0.96,
+      "pcr": 0.85,
       "expiry": "8JUN26",
-      "callOI": 18385,
-      "putOI": 17558
+      "callOI": 23168,
+      "putOI": 19707
     }
   },
   "macro": {
