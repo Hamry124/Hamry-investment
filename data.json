@@ -1,6 +1,6 @@
 {
   "date": "2026-06-07",
-  "updated": "2026-06-07T14:00:33.129Z",
+  "updated": "2026-06-07T14:21:19.303Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 414000
     },
     "bitcoin": {
-      "price": 61723,
-      "chg": 1.54588
+      "price": 61884,
+      "chg": 1.62847
     },
     "ethereum": {
-      "price": 1617.95,
-      "chg": 3.92425
+      "price": 1620.75,
+      "chg": 3.71843
     },
     "ripple": {
-      "price": 1.12,
-      "chg": 2.20345
+      "price": 1.13,
+      "chg": 1.90477
     },
     "solana": {
-      "price": 64.34,
-      "chg": 3.18237
+      "price": 64.56,
+      "chg": 2.8255
     },
     "dogecoin": {
-      "price": 0.083868,
-      "chg": 2.48014
+      "price": 0.084139,
+      "chg": 2.44028
     },
     "chainlink": {
-      "price": 7.7,
-      "chg": 4.61519
+      "price": 7.72,
+      "chg": 4.20926
     },
     "ondo-finance": {
-      "price": 0.342867,
-      "chg": 5.35838
+      "price": 0.344059,
+      "chg": 4.22038
     },
     "aave": {
-      "price": 62.35,
-      "chg": 2.52867
+      "price": 62.57,
+      "chg": 1.89814
     },
     "filecoin": {
-      "price": 0.756045,
-      "chg": 3.49763
+      "price": 0.759441,
+      "chg": 3.4875
     },
     "NVDA": {
       "price": 205.1
@@ -226,7 +226,7 @@
       "rsi": 21
     },
     "dogecoin": {
-      "ath": "-89%",
+      "ath": "-88%",
       "athAbs": 0.731578
     },
     "chainlink": {
@@ -446,7 +446,7 @@
   "opts": {
     "BTC": {
       "maxPain": 62000,
-      "pcr": 1.44,
+      "pcr": 1.41,
       "expiry": "8JUN26"
     },
     "ETH": {
@@ -534,7 +534,9 @@
     }
   },
   "macro": {
-    "usdkrw": 1541
+    "usdkrw": 1541,
+    "cpi": "3.8%",
+    "cpiDate": "2026-04"
   },
   "si": {
     "NVDA": {
@@ -729,7 +731,7 @@
   },
   "meta": {
     "cryptoCount": 9,
-    "usCount": 22,
+    "usCount": 21,
     "krCount": 24,
     "pricesGot": 54,
     "techGot": 54,
@@ -737,23 +739,7 @@
     "indicesGot": 4,
     "siGot": 19,
     "fundGot": 28,
-    "errors": [
-      "US PX: HTTP 404",
-      "US SI PX: HTTP 404",
-      "KR SI: KRX 응답 없음(거래일/규격 확인)"
-    ],
-    "krDebug": {
-      "cookie": "__smVisitorID=snphf57Scvf…",
-      "lastErr": "20260605/mkt1/mktTpCd: HTTP 400",
-      "lastBody": "LOGOUT",
-      "mapSize": 0,
-      "mapSample": [],
-      "want": [
-        "000660",
-        "005930",
-        "373220"
-      ],
-      "matched": 0
-    }
+    "krSI": "수동(KRX 해외IP 차단)",
+    "errors": []
   }
 }
