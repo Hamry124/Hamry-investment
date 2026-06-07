@@ -268,14 +268,22 @@ async function fetchSI_KR(krCodes, errors, dbg) {
   const out = {};
   const cand = [];
   for (let i=2;i<=8;i++){ const dt=new Date(Date.now()-i*864e5); const dow=dt.getDay(); if(dow!==0&&dow!==6) cand.push(dt.toISOString().slice(0,10).replace(/-/g,'')); }
-  const headers = { 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 'Origin':'https://data.krx.co.kr', 'Referer':'https://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201' };
+  const headers = {
+    'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+    'Accept':'application/json, text/javascript, */*; q=0.01',
+    'Accept-Language':'ko-KR,ko;q=0.9,en;q=0.8',
+    'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
+    'X-Requested-With':'XMLHttpRequest',
+    'Origin':'http://data.krx.co.kr',
+    'Referer':'http://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201'
+  };
   const map = {}; let usedDate = '';
   for (const trdDd of cand) {
     let got = 0;
     for (const mkt of ['1','2']) {   // 1=KOSPI, 2=KOSDAQ
       try {
         const body = new URLSearchParams({ bld:'dbms/MDC/STAT/srt/MDCSTAT30501', searchType:'1', mktTpCd:mkt, trdDd, share:'1', money:'1', csvxls_isNo:'false' });
-        const j = await getJSON('https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd', { method:'POST', headers, body: body.toString() });
+        const j = await getJSON('http://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd', { method:'POST', headers, body: body.toString() });
         const rows = j.OutBlock_1 || j.output || j.block1 || j.OutBlock_2 || [];
         // 진단: 응답의 최상위 키 + 첫 행 키 + 첫 행 전체를 1회만 기록
         if (dbg && !dbg.topKeys && rows) { dbg.topKeys=Object.keys(j); if(rows[0]){ dbg.rowKeys=Object.keys(rows[0]); dbg.firstRow=rows[0]; dbg.rowCount=rows.length; dbg.usedDate=trdDd; dbg.mkt=mkt; } }
