@@ -1,6 +1,6 @@
 {
   "date": "2026-06-07",
-  "updated": "2026-06-07T23:26:54.285Z",
+  "updated": "2026-06-07T23:41:47.374Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 414000
     },
     "bitcoin": {
-      "price": 62936,
-      "chg": 3.75734
+      "price": 63169,
+      "chg": 3.79745
     },
     "ethereum": {
-      "price": 1676.21,
-      "chg": 7.50495
+      "price": 1681.1,
+      "chg": 7.28504
     },
     "ripple": {
-      "price": 1.15,
-      "chg": 5.90047
+      "price": 1.16,
+      "chg": 5.80331
     },
     "solana": {
-      "price": 65.89,
-      "chg": 6.45549
+      "price": 66.15,
+      "chg": 6.43767
     },
     "dogecoin": {
-      "price": 0.085712,
-      "chg": 5.35881
+      "price": 0.086049,
+      "chg": 5.20797
     },
     "chainlink": {
-      "price": 7.86,
-      "chg": 6.87204
+      "price": 7.9,
+      "chg": 7.03218
     },
     "ondo-finance": {
-      "price": 0.343804,
-      "chg": 6.69668
+      "price": 0.346533,
+      "chg": 6.7009
     },
     "aave": {
-      "price": 63.36,
-      "chg": 4.8291
+      "price": 63.41,
+      "chg": 4.41231
     },
     "filecoin": {
-      "price": 0.771849,
-      "chg": 5.93576
+      "price": 0.772711,
+      "chg": 5.62438
     },
     "NVDA": {
       "price": 205.1
@@ -209,7 +209,7 @@
     "bitcoin": {
       "ath": "-50%",
       "athAbs": 126080,
-      "rsi": 27
+      "rsi": 28
     },
     "ethereum": {
       "ath": "-66%",
@@ -221,7 +221,7 @@
       "athAbs": 3.65
     },
     "solana": {
-      "ath": "-78%",
+      "ath": "-77%",
       "athAbs": 293.31,
       "rsi": 22
     },
@@ -446,12 +446,12 @@
   "opts": {
     "BTC": {
       "maxPain": 62000,
-      "pcr": 1.49,
+      "pcr": 1.5,
       "expiry": "8JUN26"
     },
     "ETH": {
       "maxPain": 1625,
-      "pcr": 0.81,
+      "pcr": 0.82,
       "expiry": "8JUN26"
     },
     "NVDA": {
@@ -528,7 +528,7 @@
       "ath": "-5%"
     },
     "Brent 유가": {
-      "price": 95.4,
+      "price": 95.29,
       "rsi": 58,
       "ath": "-35%"
     }
