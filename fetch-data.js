@@ -228,23 +228,37 @@ async function fetchCPI(errors) {
 }
 
 /* ── Short Interest ────────────────────────────────────────────── */
-// 미국: Nasdaq 공개 엔드포인트(per-symbol, best-effort)
+// 미국: Yahoo quoteSummary > defaultKeyStatistics → shortPercentOfFloat(유동주식 대비 %)
+//  쿠키+크럼 핸드셰이크 후 종목별 조회. 키 불필요(서버에서 인증 처리).
+async function yahooCrumb() {
+  let cookie = '';
+  try {
+    const r = await fetch('https://fc.yahoo.com/', { headers: { 'User-Agent': UA } });
+    const sc = (typeof r.headers.getSetCookie === 'function' ? r.headers.getSetCookie().join('; ') : (r.headers.get('set-cookie') || ''));
+    cookie = sc.split(/,(?=[^;]+=)/).map(s => s.split(';')[0].trim()).filter(Boolean).join('; ');
+  } catch (e) {}
+  const r2 = await fetch('https://query1.finance.yahoo.com/v1/test/getcrumb', { headers: { 'User-Agent': UA, 'Cookie': cookie, 'Accept': 'text/plain' } });
+  const crumb = (await r2.text()).trim();
+  if (!crumb || crumb.length > 40) throw new Error('크럼 형식 이상');
+  return { cookie, crumb };
+}
 async function fetchSI_US(usSyms, errors) {
   const out = {};
+  let cc;
+  try { cc = await yahooCrumb(); } catch (e) { errors.push('US SI: 크럼 획득 실패 ' + e.message); return out; }
   for (const sym of usSyms) {
     try {
-      const j = await getJSON(`https://api.nasdaq.com/api/quote/${sym}/short-interest?assetClass=stocks`, {
-        headers: { 'Accept':'application/json', 'Origin':'https://www.nasdaq.com', 'Referer':'https://www.nasdaq.com/' }
-      });
-      const rows = j.data && j.data.shortInterestTable && j.data.shortInterestTable.rows;
-      const r0 = rows && rows[0];
-      if (r0 && r0.daysToCover != null) {
-        const dtc = parseFloat(String(r0.daysToCover).replace(/[^0-9.]/g,''));
-        const dstr = r0.settlementDate ? String(r0.settlementDate).replace(/^(\d+)\/(\d+)\/\d+$/,'$1/$2') : '';
-        if (!isNaN(dtc)) out[sym] = { si: dtc.toFixed(1)+'일', date: dstr };  // SIR(공매도 비율, 일)
+      const j = await getJSON(`https://query1.finance.yahoo.com/v10/finance/quoteSummary/${sym}?modules=defaultKeyStatistics&crumb=${encodeURIComponent(cc.crumb)}`, { headers: { 'Cookie': cc.cookie } });
+      const ks = j.quoteSummary && j.quoteSummary.result && j.quoteSummary.result[0] && j.quoteSummary.result[0].defaultKeyStatistics;
+      if (ks) {
+        const spf = ks.shortPercentOfFloat;
+        const raw = spf == null ? null : (spf.raw != null ? spf.raw : (typeof spf === 'number' ? spf : null));
+        const dsi = ks.dateShortInterest;
+        const dstr = (dsi && (dsi.fmt || (typeof dsi === 'string' ? dsi : ''))) || '';
+        if (raw != null) out[sym] = { si: (raw * 100).toFixed(2) + '%', date: dstr.replace(/^(\d+)-(\d+)-(\d+).*$/, '$2/$3') };
       }
     } catch (e) { errors.push(`US SI ${sym}: ${e.message}`); }
-    await sleep(250);
+    await sleep(300);
   }
   return out;
 }
@@ -267,7 +281,7 @@ async function fetchSI_KR(krCodes, errors, dbg) {
         if (dbg && !dbg.topKeys && rows) { dbg.topKeys=Object.keys(j); if(rows[0]){ dbg.rowKeys=Object.keys(rows[0]); dbg.firstRow=rows[0]; dbg.rowCount=rows.length; dbg.usedDate=trdDd; dbg.mkt=mkt; } }
         for (const r of rows) { const c=krShortCode(r); const rto=(r.BAL_RTO!=null?r.BAL_RTO:(r.bal_rto!=null?r.bal_rto:r.SHORT_BAL_RTO)); if(c&&rto!=null) map[c]=String(rto).replace(/[^0-9.]/g,''); }
         got += rows.length;
-      } catch (e) {}
+      } catch (e) { if (dbg && !dbg.lastErr) dbg.lastErr = `${trdDd}/mkt${mkt}: ${e.message}`; }
       await sleep(300);
     }
     if (got>0){ usedDate=trdDd; break; }

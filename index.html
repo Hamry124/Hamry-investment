@@ -276,7 +276,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-05 · v2</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-05 · v3</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -302,7 +302,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-05 · v2 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-05 · v3 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -387,15 +387,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-05 · v2 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-05 · v3 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-05 · v2</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-05 · v3</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-03";
 const PUB_DATE="2026-06-05";  // 발행일
-const VERSION="v2";          // 버전 (수정 시 v# 증가)
+const VERSION="v3";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -851,7 +851,7 @@ function stkCard(r){
       <span class="stk-medal">${MEDAL[r.g]}</span>
       <span class="stk-nm">${r.tk}</span>
       ${optBadgeByKey(r)}
-      <span class="stk-issue" title="${r.issue}">${r.issue}</span>
+      <span class="stk-issue" ${tkey?`data-issue="${tkey}"`:''} title="${r.issue}">${r.issue}</span>
     </div>
     <div class="stk-metrics">
       <div class="stk-m"><div class="ml">현재가</div><div class="mv ${isKr?'kr':''} live" ${cgAttr} ${avAttr} ${krAttr} data-px="1">${r.px}</div></div>
@@ -1366,6 +1366,13 @@ async function runUpdate(force){
 
 // 옵션 갱신값 반영: SG 표 + OPT + 매크로 카드의 BTC/ETH 맥스페인·PCR
 const CRYPTO_CG={BTC:'bitcoin',ETH:'ethereum'};
+// 서술 텍스트 내 "맥스페인 $금액"·"PCR 수치"만 칸 값과 일치하게 치환(판단·목표가 등은 보존)
+function rewriteFigures(text, mpFmt, pcrStr){
+  if(!text) return text;
+  text = text.replace(/맥스페인\s*\$[\d,.]+/g, '맥스페인 '+mpFmt);
+  text = text.replace(/PCR\s*[\d.]+\*?/g, 'PCR '+pcrStr);
+  return text;
+}
 function applyOptions(opts){
   if(!opts||!Object.keys(opts).length)return;
   Object.keys(opts).forEach(key=>{
@@ -1391,7 +1398,7 @@ function applyOptions(opts){
           if(key==='BTC'){ s.arg=`현재가 ${pxStr}(${rsiNote}). 맥스페인 ${mpStr}는 현재가보다 ${gapStr} → 자석효과 분할 적기`; }
           else { const dir=mpNum>rawPx?'<':'>'; s.arg=`현재가 ${dir} 맥스페인(${mpStr}, ${gapStr}) + ${rsiNote} = 분할 진입`; }
         }
-      }
+      } else if(s.arg){ s.arg=rewriteFigures(s.arg,mpFmt,pcrStr); }
     });
     // OPT 데이터(맥스페인·PCR·괴리)
     if(typeof OPT!=='undefined'&&OPT[key]){ OPT[key].mp=mpNum; OPT[key].pcrOI=o.pcr; }
@@ -1408,7 +1415,9 @@ function applyOptions(opts){
           const gapStr=gap>0?'+'+gap+'%':gap+'%';
           r.issue=r.issue.replace(/맥스페인\s*\$[\d,KkBbMm.]+(\([^)]*\))?/g,`맥스페인 ${mpStr}(현재가 ${gapStr})`);
         }
-      }
+      } else if(!isCrypto&&r.issue){ r.issue=rewriteFigures(r.issue,mpFmt,pcrStr); }
+      const ik=r.cgId||r.avSym||r.krCode;
+      if(ik&&r.issue){ document.querySelectorAll(`[data-issue="${ik}"]`).forEach(el=>{el.textContent=r.issue;el.title=r.issue;}); }
     })));
   });
   renderStable();
