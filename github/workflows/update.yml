@@ -1,0 +1,46 @@
+name: update-data
+
+# 실행 시점: 1시간마다 자동 + Actions 탭에서 수동(Run workflow)
+on:
+  schedule:
+    - cron: '0 * * * *'        # 매시 정각(UTC). 한국시간과 무관하게 1시간 간격
+  workflow_dispatch:            # 수동 실행 버튼
+
+# data.json 을 커밋하려면 쓰기 권한 필요
+permissions:
+  contents: write
+
+# 동시 실행 방지(이전 실행이 끝나기 전 중복 방지)
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node 설치
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 데이터 수집 (data.json 생성)
+        env:
+          KIS_APPKEY: ${{ secrets.KIS_APPKEY }}
+          KIS_APPSECRET: ${{ secrets.KIS_APPSECRET }}
+        run: node fetch-data.js
+
+      - name: 변경 시 커밋·푸시
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          if git diff --staged --quiet; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git commit -m "data: $(date -u +'%Y-%m-%d %H:%M UTC') 자동 갱신"
+            git push
+          fi
