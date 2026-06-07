@@ -276,7 +276,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-05 · v1</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-05 · v2</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -302,7 +302,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-05 · v1 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-05 · v2 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -387,15 +387,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-05 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-05 · v2 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-05 · v1</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-05 · v2</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-03";
 const PUB_DATE="2026-06-05";  // 발행일
-const VERSION="v1";          // 버전 (수정 시 v# 증가)
+const VERSION="v2";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -720,6 +720,7 @@ const gradeColor={S:"var(--s)",A:"var(--a)",B:"var(--b)"};
 function metricCol(c){if(c==="green")return"var(--green)";if(c==="red")return"var(--red)";if(c==="amber")return"var(--amber)";return"var(--text)";}
 function pcrColorN(n){if(n==null)return"var(--dim)";if(n>1.0)return"var(--green)";if(n<0.7)return"var(--red)";return"var(--amber)";}
 function siColorN(n){if(n>15)return"var(--red)";if(n>8)return"var(--amber)";return"var(--green)";}
+function siCol(v){if(v==null||v===''||v==='—'||v==='N/A')return"var(--dim)";const n=parseFloat(v);if(isNaN(n))return"var(--dim)";if(n>15)return"var(--red)";if(n>8)return"var(--amber)";return"var(--text)";}
 function pcrCol(v){if(v==="N/A"||(typeof v==="string"&&v.includes("*")))return"var(--dim)";const n=parseFloat(v);if(n>1.0)return"var(--green)";if(n<0.7)return"var(--red)";return"var(--amber)";}
 function rsiCol(r){if(r>=80)return"var(--red)";if(r<=39)return"var(--green)";return"var(--text)";}
 function athCol(a){const n=parseFloat(a);if(n<=-50)return"var(--red)";if(n===0)return"var(--amber)";return"var(--muted)";}
@@ -746,14 +747,15 @@ function signalCount(s){
 }
 function renderStable(){
   document.getElementById('stable').innerHTML=
-  `<thead><tr><th>종목명</th><th>현재가</th><th>맥스페인</th><th>PCR</th><th>RSI</th><th>ATH대비</th><th>핵심지표</th><th>매수 논거</th></tr></thead>
-  <tbody>${SG.map(s=>{const sig=signalCount(s);return `<tr class="${sig.cnt>0?'hl'+sig.cnt:''}">
+  `<thead><tr><th>종목명</th><th>현재가</th><th>맥스페인</th><th>PCR</th><th>RSI</th><th>ATH대비</th><th>SI</th><th>핵심지표</th><th>매수 논거</th></tr></thead>
+  <tbody>${SG.map(s=>{const sig=signalCount(s);const sikey=s.avSym||s.krCode||'';const si0=(sikey&&typeof OPT!=='undefined'&&OPT[sikey]&&OPT[sikey].si!=null&&OPT[sikey].si>0)?OPT[sikey].si+'%':'—';return `<tr class="${sig.cnt>0?'hl'+sig.cnt:''}">
   <td><span style="font-size:15px">${({S:"🥇",A:"🥈",B:"🥉"})[s.g]}</span> <span class="tk-cell">${s.tk}</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">▲${sig.cnt}</span>`:''}</td>
   <td class="mono live" ${s.cgId?`data-cg="${s.cgId}"`:''} ${s.avSym?`data-av="${s.avSym}"`:''} ${s.krCode?`data-kr="${s.krCode}"`:''} data-px="1">${s.px}</td>
-  <td class="mono" style="color:${s.mp==="N/A"?"var(--dim)":"var(--text)"}">${s.mp}</td>
-  <td class="mono" style="color:${pcrCol(s.pcr)};font-weight:700">${s.pcr}</td>
+  <td class="mono" ${sikey?`data-mp="${sikey}"`:''} style="color:${s.mp==="N/A"?"var(--dim)":"var(--text)"}">${s.mp}</td>
+  <td class="mono" ${sikey?`data-pcr="${sikey}"`:''} style="color:${pcrCol(s.pcr)};font-weight:700">${s.pcr}</td>
   <td class="mono" style="color:${rsiCol(s.rsi)}">${s.rsi}</td>
   <td class="mono" style="color:${athCol(s.ath)}">${s.ath}</td>
+  <td class="mono" ${sikey?`data-si="${sikey}"`:''} style="color:${siCol(si0)}">${si0}</td>
   <td style="color:var(--cyan);font-weight:600">${s.key}</td>
   <td style="color:var(--muted)">${s.arg}</td>
   </tr>`;}).join('')}</tbody>`;
@@ -770,9 +772,9 @@ function macroIdxTable(){
     return `<tr>
     <td class="tk-cell">${d.tk}</td>
     <td>${ob} <span style="color:var(--muted);font-size:10px">${d.optTxt}</span></td>
-    <td class="mono" ${d.cgId?`data-rsi="${d.cgId}"`:''} style="color:${rsiCol(d.rsi)}">${d.rsi}</td>
-    <td class="mono live" ${d.cgId?`data-cg="${d.cgId}"`:''} data-px="1">${d.px}</td>
-    <td class="mono" ${d.cgId?`data-ath="${d.cgId}"`:''} style="color:${athCol(d.ath)}">${d.ath}</td>
+    <td class="mono" data-idxrsi="${d.tk}" ${d.cgId?`data-rsi="${d.cgId}"`:''} style="color:${rsiCol(d.rsi)}">${d.rsi}</td>
+    <td class="mono live" data-idxpx="${d.tk}" ${d.cgId?`data-cg="${d.cgId}"`:''} data-px="1">${d.px}</td>
+    <td class="mono" data-idxath="${d.tk}" ${d.cgId?`data-ath="${d.cgId}"`:''} style="color:${athCol(d.ath)}">${d.ath}</td>
     </tr>`;
   }).join('')}
   </tbody></table></div>
@@ -854,11 +856,12 @@ function stkCard(r){
     <div class="stk-metrics">
       <div class="stk-m"><div class="ml">현재가</div><div class="mv ${isKr?'kr':''} live" ${cgAttr} ${avAttr} ${krAttr} data-px="1">${r.px}</div></div>
       <div class="stk-m"><div class="ml">ATH대비</div><div class="mv" ${tkey?`data-ath="${tkey}"`:''} style="color:${athCol(r.ath)}">${r.ath}</div></div>
-      <div class="stk-m"><div class="ml">맥스페인</div><div class="mv" style="color:${r.mp==='N/A'?'var(--dim)':'var(--text)'}">${r.mp}</div></div>
-      <div class="stk-m"><div class="ml">PCR</div><div class="mv" style="color:${pcrCol(r.pcr)}">${r.pcr}</div></div>
+      <div class="stk-m"><div class="ml">맥스페인</div><div class="mv" ${tkey?`data-mp="${tkey}"`:''} style="color:${r.mp==='N/A'?'var(--dim)':'var(--text)'}">${r.mp}</div></div>
+      <div class="stk-m"><div class="ml">PCR</div><div class="mv" ${tkey?`data-pcr="${tkey}"`:''} style="color:${pcrCol(r.pcr)}">${r.pcr}</div></div>
       <div class="stk-m"><div class="ml">주봉RSI</div><div class="mv" ${tkey?`data-rsi="${tkey}"`:''} style="color:${rsiCol2(r.rsi)}">${r.rsi}</div></div>
-      <div class="stk-m"><div class="ml">PER</div><div class="mv" style="color:var(--muted)">${r.per}</div></div>
-      <div class="stk-m"><div class="ml">선행PER</div><div class="mv" style="color:${r.fper.includes('배')&&parseFloat(r.fper)<10?'var(--green)':'var(--text)'}">${r.fper}</div></div>
+      <div class="stk-m"><div class="ml">SI</div><div class="mv" ${tkey?`data-si="${tkey}"`:''} style="color:${siCol(r.si)}">${r.si||'—'}</div></div>
+      <div class="stk-m"><div class="ml">PER</div><div class="mv" ${tkey?`data-per="${tkey}"`:''} style="color:var(--muted)">${r.per}</div></div>
+      <div class="stk-m"><div class="ml">선행PER</div><div class="mv" ${tkey?`data-fper="${tkey}"`:''} style="color:${r.fper.includes('배')&&parseFloat(r.fper)<10?'var(--green)':'var(--text)'}">${r.fper}</div></div>
       <div class="stk-m keycol"><div class="ml">핵심지표</div><div class="mv">${r.key}</div></div>
     </div>
   </div>`;
@@ -1362,50 +1365,63 @@ async function runUpdate(force){
 }
 
 // 옵션 갱신값 반영: SG 표 + OPT + 매크로 카드의 BTC/ETH 맥스페인·PCR
+const CRYPTO_CG={BTC:'bitcoin',ETH:'ethereum'};
 function applyOptions(opts){
   if(!opts||!Object.keys(opts).length)return;
-  ['BTC','ETH'].forEach(cur=>{
-    const o=opts[cur]; if(!o)return;
-    const mpFmt='$'+Number(o.maxPain).toLocaleString();
-    // SG 요약표 — mp·pcr·key·arg 동적 갱신
+  Object.keys(opts).forEach(key=>{
+    const o=opts[key]; if(!o||o.maxPain==null)return;
+    const isCrypto=(key==='BTC'||key==='ETH');
+    const mpNum=Number(o.maxPain);
+    const mpFmt='$'+mpNum.toLocaleString();
+    const pcrStr=String(o.pcr);
+    // SG 요약표
     SG.forEach(s=>{
-      if(s.tk!==cur)return;
-      s.mp=mpFmt; s.pcr=String(o.pcr); s.key='Deribit '+o.expiry;
-      // 현재가에서 숫자 추출 (달러 기호·콤마 제거)
-      const rawPx=parseFloat(String(s.px).replace(/[$,]/g,''));
-      const mp=Number(o.maxPain);
-      if(rawPx&&mp){
-        const gap=((mp-rawPx)/rawPx*100).toFixed(1);
-        const pxStr=rawPx>=1000?'$'+(rawPx/1000).toFixed(1)+'K':'$'+rawPx.toLocaleString(undefined,{maximumFractionDigits:0});
-        const mpStr=mp>=1000?'$'+(mp/1000).toFixed(0)+'K':'$'+mp.toLocaleString();
-        const gapStr=gap>0?'+'+gap+'%':gap+'%';
-        const rsiNote=s.rsi<=30?`RSI ${s.rsi} 과매도`:s.rsi>=70?`RSI ${s.rsi} 과매수`:`RSI ${s.rsi}`;
-        if(cur==='BTC'){
-          s.arg=`현재가 ${pxStr}(${rsiNote}). 맥스페인 ${mpStr}는 현재가보다 ${gapStr} → 자석효과 분할 적기`;
-        } else if(cur==='ETH'){
-          const dir=mp>rawPx?'<':'>';
-          s.arg=`현재가 ${dir} 맥스페인(${mpStr}, ${gapStr}) + ${rsiNote} = 분할 진입`;
+      const match=isCrypto?(s.tk===key):(s.avSym===key);
+      if(!match)return;
+      s.mp=mpFmt; s.pcr=pcrStr;
+      if(isCrypto){
+        if(o.expiry)s.key='Deribit '+o.expiry;
+        const rawPx=parseFloat(String(s.px).replace(/[$,]/g,''));
+        if(rawPx&&mpNum){
+          const gap=((mpNum-rawPx)/rawPx*100).toFixed(1);
+          const pxStr=rawPx>=1000?'$'+(rawPx/1000).toFixed(1)+'K':'$'+rawPx.toLocaleString(undefined,{maximumFractionDigits:0});
+          const mpStr=mpNum>=1000?'$'+(mpNum/1000).toFixed(0)+'K':'$'+mpNum.toLocaleString();
+          const gapStr=gap>0?'+'+gap+'%':gap+'%';
+          const rsiNote=s.rsi<=30?`RSI ${s.rsi} 과매도`:s.rsi>=70?`RSI ${s.rsi} 과매수`:`RSI ${s.rsi}`;
+          if(key==='BTC'){ s.arg=`현재가 ${pxStr}(${rsiNote}). 맥스페인 ${mpStr}는 현재가보다 ${gapStr} → 자석효과 분할 적기`; }
+          else { const dir=mpNum>rawPx?'<':'>'; s.arg=`현재가 ${dir} 맥스페인(${mpStr}, ${gapStr}) + ${rsiNote} = 분할 진입`; }
         }
       }
     });
-    // OPT 데이터
-    if(OPT[cur]){ OPT[cur].mp=o.maxPain; OPT[cur].pcrOI=o.pcr; }
-    // STOCKS 크립토 상세 — mp·pcr·issue 내 맥스페인 언급 동적 갱신
-    (STOCKS.crypto||[]).forEach(sec=>sec.rows.forEach(r=>{
-      if(r.tk!==cur)return;
-      r.mp='$'+Number(o.maxPain).toLocaleString(); r.pcr=String(o.pcr);
-      const rawPx=parseFloat(String(r.px).replace(/[$,]/g,''));
-      const mp=Number(o.maxPain);
-      if(rawPx&&mp&&r.issue){
-        const gap=((mp-rawPx)/rawPx*100).toFixed(1);
-        const mpStr=mp>=1000?'$'+(mp/1000).toFixed(0)+'K':'$'+mp.toLocaleString();
-        const gapStr=gap>0?'+'+gap+'%':gap+'%';
-        // issue 내 맥스페인 금액 패턴 교체 ($72K, $2,050 등)
-        r.issue=r.issue.replace(/맥스페인\s*\$[\d,KkBbMm.]+(\([^)]*\))?/g,`맥스페인 ${mpStr}(현재가 ${gapStr})`);
+    // OPT 데이터(맥스페인·PCR·괴리)
+    if(typeof OPT!=='undefined'&&OPT[key]){ OPT[key].mp=mpNum; OPT[key].pcrOI=o.pcr; }
+    // STOCKS 상세
+    ['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{
+      const match=isCrypto?(r.tk===key):(r.avSym===key);
+      if(!match)return;
+      r.mp=mpFmt; r.pcr=pcrStr;
+      if(isCrypto&&r.issue){
+        const rawPx=parseFloat(String(r.px).replace(/[$,]/g,''));
+        if(rawPx&&mpNum){
+          const gap=((mpNum-rawPx)/rawPx*100).toFixed(1);
+          const mpStr=mpNum>=1000?'$'+(mpNum/1000).toFixed(0)+'K':'$'+mpNum.toLocaleString();
+          const gapStr=gap>0?'+'+gap+'%':gap+'%';
+          r.issue=r.issue.replace(/맥스페인\s*\$[\d,KkBbMm.]+(\([^)]*\))?/g,`맥스페인 ${mpStr}(현재가 ${gapStr})`);
+        }
       }
-    }));
+    })));
   });
   renderStable();
+  // 한 번 렌더된 카드/표의 맥스페인·PCR DOM 직접 갱신
+  Object.keys(opts).forEach(key=>{
+    const o=opts[key]; if(!o||o.maxPain==null)return;
+    const mpFmt='$'+Number(o.maxPain).toLocaleString(); const pcrStr=String(o.pcr);
+    const domKeys=(key==='BTC'||key==='ETH')?[key,CRYPTO_CG[key]]:[key];
+    domKeys.forEach(dk=>{
+      document.querySelectorAll(`[data-mp="${dk}"]`).forEach(el=>{el.textContent=mpFmt;});
+      document.querySelectorAll(`[data-pcr="${dk}"]`).forEach(el=>{el.textContent=pcrStr;el.style.color=pcrCol(pcrStr);});
+    });
+  });
 }
 
 // 거시지표 갱신값 반영: 상단 스트립(환율·CPI)
@@ -1414,6 +1430,57 @@ function applyMacro(macro){
   if(macro.usdkrw){
     const el=document.getElementById('idx-USDKRW'); if(el){el.textContent=macro.usdkrw.toLocaleString()+'원';el.setAttribute('data-live','1');}
   }
+  if(macro.cpi){
+    const el=document.getElementById('idx-CPI'); if(el){el.textContent=macro.cpi;el.setAttribute('data-live','1');}
+  }
+}
+
+// 상단 지수 + IDXDATA 표 반영
+// indices 형식: { "KOSPI":{price,rsi,ath}, "S&P 500":{...}, "Nasdaq":{...}, "Brent 유가":{...} }
+function applyIndices(indices){
+  if(!indices)return;
+  Object.keys(indices).forEach(name=>{
+    const d=indices[name]; if(!d||d.price==null)return;
+    const isOil=name.includes('유가')||name.includes('Brent');
+    const pxStr=isOil?'$'+Math.round(d.price):Math.round(d.price).toLocaleString();
+    // 상단 스트립
+    const id='idx-'+name.replace(/[^A-Za-z0-9]/g,'');
+    const el=document.getElementById(id); if(el){el.textContent=pxStr;el.setAttribute('data-live','1');}
+    // IDXDATA 표(지수명 키)
+    document.querySelectorAll(`[data-idxpx="${name}"]`).forEach(c=>{c.textContent=pxStr;c.setAttribute('data-live','1');});
+    if(d.rsi!=null)document.querySelectorAll(`[data-idxrsi="${name}"]`).forEach(c=>{c.textContent=d.rsi;c.style.color=rsiCol(d.rsi);});
+    if(d.ath)document.querySelectorAll(`[data-idxath="${name}"]`).forEach(c=>{c.textContent=d.ath;c.style.color=athCol(d.ath);});
+    // 배열에도 반영(IDX/IDXDATA)
+    (typeof IDX!=='undefined'?IDX:[]).forEach(o=>{ if(o.l===name)o.v=pxStr; });
+    (typeof IDXDATA!=='undefined'?IDXDATA:[]).forEach(o=>{ if(o.tk===name){o.px=pxStr;if(d.rsi!=null)o.rsi=d.rsi;if(d.ath)o.ath=d.ath;} });
+  });
+}
+
+// Short Interest 반영: si 형식 { "<avSym/krCode>": {si:"15.7%", date:"MM/DD"} }
+function applySI(si){
+  if(!si||!Object.keys(si).length)return;
+  // 배열 반영(SG는 si 필드 없음 → DOM만; STOCKS rows는 si 필드 갱신)
+  ['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{
+    const key=r.avSym||r.krCode; if(key&&si[key]&&si[key].si)r.si=si[key].si;
+  })));
+  // OPT.si 도 갱신(숫자형)
+  Object.keys(si).forEach(key=>{ if(typeof OPT!=='undefined'&&OPT[key]&&si[key].si){ const n=parseFloat(si[key].si); if(!isNaN(n))OPT[key].si=n; }});
+  // DOM 갱신(카드·SG 표의 data-si 셀)
+  Object.keys(si).forEach(key=>{ const v=si[key].si; if(!v)return;
+    document.querySelectorAll(`[data-si="${key}"]`).forEach(el=>{el.textContent=v;el.style.color=siCol(v);el.title=si[key].date?('기준일 '+si[key].date):'';});
+  });
+}
+
+// PER·선행PER 반영: fund 형식 { "<key>": {per:"34.03배", fper:"19.57배"} }
+function applyFund(fund){
+  if(!fund||!Object.keys(fund).length)return;
+  ['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{
+    const key=r.cgId||r.avSym||r.krCode; if(key&&fund[key]){ if(fund[key].per)r.per=fund[key].per; if(fund[key].fper)r.fper=fund[key].fper; }
+  })));
+  Object.keys(fund).forEach(key=>{
+    if(fund[key].per)document.querySelectorAll(`[data-per="${key}"]`).forEach(el=>{el.textContent=fund[key].per;});
+    if(fund[key].fper)document.querySelectorAll(`[data-fper="${key}"]`).forEach(el=>{el.textContent=fund[key].fper;el.style.color=(parseFloat(fund[key].fper)<10?'var(--green)':'var(--text)');});
+  });
 }
 
 // 기술지표(주봉 RSI·ATH대비%) 반영: data.json의 tech를 화면·배열에 적용
@@ -1487,17 +1554,21 @@ async function loadServerData(){
     const res=await fetch('./data.json?t='+Date.now(),{cache:'no-store'});
     if(!res.ok)return; // data.json 없음(아직 첫 실행 전) → 기존 동작 유지
     const d=await res.json();
-    // 적용 순서: 옵션(맥스페인·PCR) → 환율 → 기술지표(RSI·ATH) → 시세
-    //  (시세를 마지막에 적용해 BTC/ETH 논거가 최신 RSI·맥스페인 기준으로 재계산되도록)
-    if(d.opts)  applyOptions(d.opts);
-    if(d.macro) applyMacro(d.macro);
-    if(d.tech)  applyTech(d.tech);
-    if(d.prices)applyPrices(d.prices);
+    // 적용 순서: 옵션 → 지수 → 환율/CPI → 기술지표(RSI·ATH) → 시세 → SI → PER
+    //  (시세를 RSI 뒤에 적용해 BTC/ETH 논거가 최신 RSI·맥스페인 기준으로 재계산되도록)
+    if(d.opts)   applyOptions(d.opts);
+    if(d.indices)applyIndices(d.indices);
+    if(d.macro)  applyMacro(d.macro);
+    if(d.tech)   applyTech(d.tech);
+    if(d.prices) applyPrices(d.prices);
+    if(d.si)     applySI(d.si);
+    if(d.fund)   applyFund(d.fund);
     // 상태줄·배지에 서버 갱신 시각 표기
     const t=d.updated?new Date(d.updated):null;
     const ts=t?t.toLocaleString('ko-KR',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):d.date;
-    const errs=(d.meta&&d.meta.errors&&d.meta.errors.length)?` · ⚠️ ${d.meta.errors.length}건 점검`:'';
-    setStatus(`<b>${ts}</b> 자동 갱신(서버) · 시세 ${d.meta?d.meta.pricesGot:'-'}종·기술지표 ${d.meta?d.meta.techGot:'-'}종${errs}`,"var(--green)");
+    const m=d.meta||{};
+    const errs=(m.errors&&m.errors.length)?` · ⚠️ ${m.errors.length}건 점검`:'';
+    setStatus(`<b>${ts}</b> 자동 갱신(서버) · 시세 ${m.pricesGot||'-'}·지수 ${m.indicesGot||'-'}·옵션 ${m.optsGot||'-'}·SI ${m.siGot||'-'}·PER ${m.fundGot||'-'}${errs}`,"var(--green)");
     const vb=document.getElementById('verBadge'); if(vb)vb.textContent=`발행 ${PUB_DATE} · ${VERSION} · 서버 자동갱신 ${ts}`;
     if(d.meta&&d.meta.errors&&d.meta.errors.length)console.warn('[data.json 점검 필요]',d.meta.errors);
   }catch(e){ /* 로컬에서 열어 data.json 접근 불가한 경우 등 → 무시하고 기존 동작 */ }

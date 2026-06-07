@@ -1,315 +1,326 @@
 /* =====================================================================
- * 2030 프로젝트 — 데이터 수집 스크립트 (1단계)
+ * 2030 프로젝트 — 데이터 수집 스크립트 (2단계: 전면 자동화)
  * ---------------------------------------------------------------------
- * 수집 대상:
- *   - 크립토 시세 + 주봉 RSI + ATH대비%  (CoinGecko, 키 불필요)
- *   - BTC/ETH 옵션 맥스페인 + PCR        (Deribit, 키 불필요)
- *   - USD/KRW 환율                       (Frankfurter, 키 불필요)
- *   - 한국주식 시세 + 주봉 RSI + ATH대비% (한국투자증권 KIS, 키 필요)
+ * 1단계(유지): 크립토(CoinGecko)·BTC/ETH옵션(Deribit)·환율(Frankfurter)
+ * 2단계(추가):
+ *   - 미국·한국 주식 시세·주봉RSI·ATH%     (Yahoo v8 chart, 키 불필요)
+ *   - 상단 지수 KOSPI·S&P·나스닥·브렌트     (Yahoo ^KS11·^GSPC·^IXIC·BZ=F)
+ *   - 미국 개별주 맥스페인·PCR             (CBOE delayed_quotes, 키 불필요)
+ *   - 美 CPI                              (BLS 공개 API, 키 불필요)
+ *   - Short Interest 미국·한국             (Nasdaq · KRX, 키 불필요·best-effort)
+ *   - PER·선행PER                         (시세 ÷ 시드EPS 자동 재계산)
  *
- * 산출물: data.json  (index.html이 읽어 자동 반영)
- * 실행: node fetch-data.js  (GitHub Actions가 1시간마다 실행)
- *
- * 설계 원칙
- *   1) 심볼 목록은 index.html에서 자동 추출 → 종목 추가 시 스크립트 수정 불필요
- *   2) 각 소스는 try/catch로 격리 → 하나가 실패해도 나머지는 정상 저장
- *   3) ATH는 "기존 값(시드) + 신고가 갱신"의 래칫 방식 → 과거 전고점 유지
- *   4) 실패 내역은 meta.errors에 기록 → Actions 로그에서 원인 추적
+ * 모든 외부 소스는 try/catch로 격리되며, 실패는 meta.errors에 기록된다.
+ * (※ Yahoo·CBOE·Nasdaq·KRX는 비공식/비문서 엔드포인트로, 첫 실행 로그에서
+ *    형식 변경 여부를 확인하는 전제로 작성됨. 실패해도 나머지는 정상 저장.)
  * ===================================================================== */
 
 const fs = require('fs');
-
-const HTML_FILE  = 'index.html';
-const OUT_FILE   = 'data.json';
+const HTML_FILE = 'index.html', OUT_FILE = 'data.json';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+const UA = 'Mozilla/5.0 (compatible; 2030-dashboard/2.0)';
 
-// ── 공통 fetch (타임아웃 + JSON) ────────────────────────────────────
-async function getJSON(url, opts = {}, timeoutMs = 15000) {
+async function getJSON(url, opts = {}, timeoutMs = 20000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    const res = await fetch(url, { ...opts, signal: ctrl.signal });
+    const res = await fetch(url, { headers: { 'User-Agent': UA, 'Accept': 'application/json', ...(opts.headers||{}) }, ...opts, signal: ctrl.signal });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } finally { clearTimeout(t); }
 }
 
-// ── 주봉 RSI(14) 계산 (Wilder 방식) ─────────────────────────────────
-// closes: 과거→현재 순서의 주봉 종가 배열
+/* ── 공통 계산 ──────────────────────────────────────────────────── */
 function weeklyRSI(closes, period = 14) {
-  if (!closes || closes.length < period + 1) return null;
+  closes = closes.filter(v => v != null && !isNaN(v));
+  if (closes.length < period + 1) return null;
   let gain = 0, loss = 0;
-  for (let i = 1; i <= period; i++) {
-    const d = closes[i] - closes[i - 1];
-    if (d >= 0) gain += d; else loss -= d;
+  for (let i = 1; i <= period; i++) { const d = closes[i] - closes[i-1]; if (d >= 0) gain += d; else loss -= d; }
+  let ag = gain/period, al = loss/period;
+  for (let i = period+1; i < closes.length; i++) {
+    const d = closes[i] - closes[i-1];
+    ag = (ag*(period-1) + (d>0?d:0))/period;
+    al = (al*(period-1) + (d<0?-d:0))/period;
   }
-  let avgGain = gain / period, avgLoss = loss / period;
-  for (let i = period + 1; i < closes.length; i++) {
-    const d = closes[i] - closes[i - 1];
-    avgGain = (avgGain * (period - 1) + (d > 0 ? d : 0)) / period;
-    avgLoss = (avgLoss * (period - 1) + (d < 0 ? -d : 0)) / period;
-  }
-  if (avgLoss === 0) return 100;
-  const rs = avgGain / avgLoss;
-  return Math.round(100 - 100 / (1 + rs));
+  if (al === 0) return 100;
+  return Math.round(100 - 100/(1 + ag/al));
 }
-
-// ── ATH대비% 포맷 (현재가 vs 전고점) ────────────────────────────────
-function athPctStr(current, ath) {
-  if (!ath || ath <= 0) return null;
-  const pct = Math.round((current - ath) / ath * 100);
+function athPctStr(cur, ath) {
+  if (!ath || ath <= 0 || cur == null) return null;
+  const pct = Math.round((cur - ath)/ath*100);
   return pct >= 0 ? '0%' : pct + '%';
 }
+function num(s) { const n = parseFloat(String(s).replace(/[$,원배%\s]/g,'')); return isNaN(n) ? null : n; }
 
-// ── 일봉 → 주봉 종가 리샘플 (7일 간격 마지막 종가) ─────────────────
-function toWeeklyCloses(dailyPrices) {
-  // dailyPrices: [[ts, price], ...] 과거→현재
-  const out = [];
-  for (let i = dailyPrices.length - 1; i >= 0; i -= 7) out.unshift(dailyPrices[i][1]);
-  return out;
-}
-
-/* ===================== index.html에서 심볼 추출 ===================== */
+/* ── index.html에서 심볼·시드 추출 ─────────────────────────────── */
 function parseSymbols(html) {
-  const cg = [...new Set([...html.matchAll(/cgId:\s*"([^"]+)"/g)].map(m => m[1]))];
+  const cg = [...new Set([...html.matchAll(/cgId:\s*"([^"]+)"/g)].map(m=>m[1]))];
+  const us = [...new Set([...html.matchAll(/avSym:\s*"([^"]+)"/g)].map(m=>m[1]))];
   const kr = [];
-  // krCode 와 같은 줄의 ath/rsi를 시드로 함께 수집
-  const lines = html.split('\n');
-  const seedAthPct = {}, seedRsi = {};
-  for (const line of lines) {
-    const cm = line.match(/krCode:\s*"(\d{6})"/);
-    if (!cm) continue;
-    const code = cm[1];
-    if (!kr.includes(code)) kr.push(code);
-    const am = line.match(/ath:\s*"(-?\d+)%"/);
-    if (am) seedAthPct[code] = parseInt(am[1], 10);
-    const rm = line.match(/rsi:\s*"?(\d+)"?/);
-    if (rm) seedRsi[code] = parseInt(rm[1], 10);
+  const seedAthPct = {}, fund = {};               // fund: key→{px,per,fper} (EPS 시드용)
+  for (const line of html.split('\n')) {
+    const km = line.match(/krCode:\s*"(\d{6})"/);
+    const am = line.match(/avSym:\s*"([^"]+)"/);
+    const cm = line.match(/cgId:\s*"([^"]+)"/);
+    const key = km ? km[1] : am ? am[1] : cm ? cm[1] : null;
+    if (km && !kr.includes(km[1])) kr.push(km[1]);
+    if (!key) continue;
+    const ath = line.match(/ath:\s*"(-?\d+)%"/);   if (ath) seedAthPct[key] = parseInt(ath[1],10);
+    const px = line.match(/px:\s*"([^"]+)"/);
+    const per = line.match(/[^f]per:\s*"([^"]+)"/);
+    const fper = line.match(/fper:\s*"([^"]+)"/);
+    if (px || per || fper) {
+      fund[key] = fund[key] || {};
+      if (px) fund[key].px = px[1];
+      if (per) fund[key].per = per[1];
+      if (fper) fund[key].fper = fper[1];
+    }
   }
-  return { cg, kr, seedAthPct, seedRsi };
+  return { cg, us, kr, seedAthPct, fund };
 }
 
-/* ===================== 크립토 (CoinGecko) ========================== */
-async function fetchCrypto(cgIds, prevTech) {
+/* ── 크립토 (CoinGecko) ─────────────────────────────────────────── */
+async function fetchCrypto(cgIds) {
   const prices = {}, tech = {};
-  // 1) 시세 + ATH% 일괄 (markets 엔드포인트가 ath_change_percentage 제공)
-  const idsParam = cgIds.join(',');
-  const markets = await getJSON(
-    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${idsParam}&price_change_percentage=24h`
-  );
-  const athAbsMap = {};
+  const markets = await getJSON(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${cgIds.join(',')}&price_change_percentage=24h`);
   for (const m of markets) {
     prices[m.id] = { price: m.current_price, chg: m.price_change_percentage_24h ?? 0 };
     const pct = m.ath_change_percentage;
-    tech[m.id] = { ath: (pct == null ? null : (pct >= 0 ? '0%' : Math.round(pct) + '%')) };
-    athAbsMap[m.id] = m.ath;
-    if (m.ath) tech[m.id].athAbs = m.ath;
+    tech[m.id] = { ath: pct == null ? null : (pct >= 0 ? '0%' : Math.round(pct)+'%'), athAbs: m.ath || null };
   }
-  // 2) 주봉 RSI (코인별 일봉 140일 → 주봉 리샘플)
   for (const id of cgIds) {
     try {
-      const mc = await getJSON(
-        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=140&interval=daily`
-      );
-      const weekly = toWeeklyCloses(mc.prices || []);
-      const rsi = weeklyRSI(weekly);
-      if (!tech[id]) tech[id] = {};
-      if (rsi != null) tech[id].rsi = rsi;
-    } catch (e) { /* 개별 코인 RSI 실패는 무시 */ }
-    await sleep(1300); // CoinGecko 무료 한도(분당 약 30회) 여유
+      const mc = await getJSON(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=140&interval=daily`);
+      const daily = (mc.prices||[]).map(p=>p[1]); const weekly=[];
+      for (let i=daily.length-1;i>=0;i-=7) weekly.unshift(daily[i]);
+      const rsi = weeklyRSI(weekly); if (rsi != null) tech[id].rsi = rsi;
+    } catch (e) {}
+    await sleep(1300);
   }
   return { prices, tech };
 }
 
-/* ===================== 옵션 (Deribit) ============================== */
-const MONTHS = { JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11 };
-function parseExpiry(s) { const m = s.match(/(\d+)([A-Z]+)(\d+)/); return new Date(2000 + +m[3], MONTHS[m[2]], +m[1]); }
-
-async function fetchDeribitOption(currency) {
-  const j = await getJSON(`https://www.deribit.com/api/v2/public/get_book_summary_by_currency?currency=${currency}&kind=option`);
-  const list = j.result || [];
-  const exp = {};
-  for (const o of list) {
-    const m = o.instrument_name.match(/^[A-Z]+-(\d+[A-Z]+\d+)-(\d+)-([CP])$/);
-    if (!m) continue;
-    (exp[m[1]] = exp[m[1]] || []).push({ strike: +m[2], type: m[3], oi: o.open_interest || 0 });
-  }
-  const keys = Object.keys(exp);
-  if (!keys.length) throw new Error('만기 없음');
-  keys.sort((a, b) => parseExpiry(a) - parseExpiry(b));
-  const now = Date.now();
-  const near = keys.find(k => parseExpiry(k).getTime() > now) || keys[0];
-  const opts = exp[near];
-  let callOI = 0, putOI = 0;
-  opts.forEach(o => o.type === 'C' ? callOI += o.oi : putOI += o.oi);
-  const pcr = callOI > 0 ? putOI / callOI : 0;
-  const strikes = [...new Set(opts.map(o => o.strike))].sort((a, b) => a - b);
-  let minPain = Infinity, maxPain = strikes[0];
-  for (const S of strikes) {
-    let pain = 0;
-    for (const o of opts) {
-      if (o.type === 'C' && S > o.strike) pain += (S - o.strike) * o.oi;
-      if (o.type === 'P' && S < o.strike) pain += (o.strike - S) * o.oi;
-    }
-    if (pain < minPain) { minPain = pain; maxPain = S; }
-  }
-  return { maxPain, pcr: +pcr.toFixed(2), expiry: near, callOI: Math.round(callOI), putOI: Math.round(putOI) };
+/* ── Yahoo 차트: 시세 + 주봉RSI + ATH (종목·지수 공통) ──────────── */
+async function yahooChart(ySym) {
+  const j = await getJSON(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ySym)}?interval=1wk&range=max`);
+  const r = j.chart && j.chart.result && j.chart.result[0];
+  if (!r) throw new Error('빈 응답');
+  const price = r.meta && (r.meta.regularMarketPrice ?? r.meta.chartPreviousClose);
+  const q = r.indicators && r.indicators.quote && r.indicators.quote[0] || {};
+  const closes = (q.close||[]).filter(v=>v!=null);
+  const highs = (q.high||[]).filter(v=>v!=null);
+  const athHigh = highs.length ? Math.max(...highs, r.meta.fiftyTwoWeekHigh||0) : (r.meta.fiftyTwoWeekHigh||0);
+  return { price, rsi: weeklyRSI(closes), high: athHigh };
 }
 
-async function fetchOptions() {
-  const out = {};
-  for (const cur of ['BTC', 'ETH']) {
-    try { out[cur] = await fetchDeribitOption(cur); } catch (e) { /* 무시 */ }
-  }
-  return out;
-}
-
-/* ===================== 환율 (Frankfurter) ========================== */
-async function fetchMacro() {
-  const out = {};
-  try {
-    const j = await getJSON('https://api.frankfurter.dev/v1/latest?base=USD&symbols=KRW');
-    if (j.rates && j.rates.KRW) out.usdkrw = Math.round(j.rates.KRW);
-  } catch (e) { /* 무시 */ }
-  return out;
-}
-
-/* ===================== 한국주식 (KIS) ============================== */
-const KIS_BASE = 'https://openapi.koreainvestment.com:9443';
-
-async function kisToken(ak, sk) {
-  const j = await getJSON(`${KIS_BASE}/oauth2/tokenP`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-    body: JSON.stringify({ grant_type: 'client_credentials', appkey: ak, appsecret: sk })
-  });
-  if (!j.access_token) throw new Error('토큰 발급 실패');
-  return j.access_token;
-}
-
-function ymd(d) { return d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0'); }
-
-async function fetchKRStocks(codes, seedAthPct, prevTech) {
-  const ak = process.env.KIS_APPKEY, sk = process.env.KIS_APPSECRET;
-  if (!ak || !sk) return { prices: {}, tech: {}, error: 'KIS 키 없음(Secrets 미설정)' };
-  let token;
-  try { token = await kisToken(ak, sk); }
-  catch (e) { return { prices: {}, tech: {}, error: 'KIS 토큰: ' + e.message }; }
-
-  const hdr = (tr) => ({
-    'Content-Type': 'application/json; charset=UTF-8',
-    'authorization': 'Bearer ' + token,
-    'appkey': ak, 'appsecret': sk, 'tr_id': tr, 'custtype': 'P'
-  });
+// 미국주식: 심볼 그대로. 한국주식: .KS(코스피) 우선, 실패 시 .KQ(코스닥)
+async function fetchEquities(usSyms, krCodes, seedAthPct, prevTech, errors) {
   const prices = {}, tech = {};
-  const today = new Date();
-  const start = new Date(); start.setDate(start.getDate() - 7 * 30); // 약 30주 전
-
-  for (const code of codes) {
-    // 1) 현재가
-    try {
-      const j = await getJSON(
-        `${KIS_BASE}/uapi/domestic-stock/v1/quotations/inquire-price?fid_cond_mrkt_div_code=J&fid_input_iscd=${code}`,
-        { headers: hdr('FHKST01010100') }
-      );
-      if (j.output && j.output.stck_prpr) prices[code] = { price: parseFloat(j.output.stck_prpr) };
-    } catch (e) { /* 개별 종목 실패 무시 */ }
-    await sleep(250);
-
-    // 2) 주봉 차트 → RSI + 신고가(ATH 래칫)
-    try {
-      const j = await getJSON(
-        `${KIS_BASE}/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?fid_cond_mrkt_div_code=J&fid_input_iscd=${code}&fid_input_date_1=${ymd(start)}&fid_input_date_2=${ymd(today)}&fid_period_div_code=W&fid_org_adj_prc=0`,
-        { headers: hdr('FHKST03010100') }
-      );
-      const rows = (j.output2 || []).filter(r => r && r.stck_clpr);
-      rows.sort((a, b) => a.stck_bsop_date.localeCompare(b.stck_bsop_date)); // 과거→현재
-      const closes = rows.map(r => parseFloat(r.stck_clpr));
-      const highs  = rows.map(r => parseFloat(r.stck_hgpr || r.stck_clpr));
-      const cur = prices[code] ? prices[code].price : (closes.length ? closes[closes.length-1] : null);
-
-      const t = {};
-      const rsi = weeklyRSI(closes);
-      if (rsi != null) t.rsi = rsi;
-
-      // ATH 래칫: 이전 athAbs > 시드(현재가/(1+시드%/100)) > 최근 신고가 중 최댓값
-      let athAbs = (prevTech[code] && prevTech[code].athAbs) || null;
-      if (!athAbs && cur != null && seedAthPct[code] != null) {
-        athAbs = Math.round(cur / (1 + seedAthPct[code] / 100));
-      }
-      const recentHigh = highs.length ? Math.max(...highs) : 0;
-      if (recentHigh > (athAbs || 0)) athAbs = recentHigh;
-      if (athAbs && cur != null) {
-        t.athAbs = athAbs;
-        const a = athPctStr(cur, athAbs);
-        if (a != null) t.ath = a;
-      }
-      if (Object.keys(t).length) tech[code] = t;
-    } catch (e) { /* 차트 실패 시 RSI/ATH 생략 */ }
-    await sleep(250);
+  const apply = (key, r) => {
+    if (r.price != null) prices[key] = { price: r.price };
+    const t = {};
+    if (r.rsi != null) t.rsi = r.rsi;
+    let athAbs = (prevTech[key]&&prevTech[key].athAbs) || null;
+    if (!athAbs && r.price != null && seedAthPct[key] != null) athAbs = r.price/(1+seedAthPct[key]/100);
+    if (r.high > (athAbs||0)) athAbs = r.high;
+    if (athAbs && r.price != null) { t.athAbs = athAbs; const a = athPctStr(r.price, athAbs); if (a) t.ath = a; }
+    if (Object.keys(t).length) tech[key] = t;
+  };
+  for (const s of usSyms) {
+    try { apply(s, await yahooChart(s)); } catch (e) { errors.push(`US ${s}: ${e.message}`); }
+    await sleep(200);
+  }
+  for (const code of krCodes) {
+    let ok = false;
+    for (const suf of ['.KS', '.KQ']) {
+      try { const r = await yahooChart(code + suf); if (r.price != null) { apply(code, r); ok = true; break; } } catch (e) {}
+      await sleep(150);
+    }
+    if (!ok) errors.push(`KR ${code}: Yahoo 조회 실패(.KS/.KQ)`);
   }
   return { prices, tech };
+}
+
+/* ── 상단 지수 + IDXDATA (Yahoo) ───────────────────────────────── */
+const INDEX_MAP = { 'KOSPI':'^KS11', 'S&P 500':'^GSPC', 'Nasdaq':'^IXIC', 'Brent 유가':'BZ=F' };
+async function fetchIndices(errors) {
+  const out = {};
+  for (const [name, ySym] of Object.entries(INDEX_MAP)) {
+    try {
+      const r = await yahooChart(ySym);
+      out[name] = { price: r.price, rsi: r.rsi };
+      if (r.high && r.price != null) out[name].ath = athPctStr(r.price, r.high);
+    } catch (e) { errors.push(`지수 ${name}: ${e.message}`); }
+    await sleep(200);
+  }
+  return out;
+}
+
+/* ── 옵션: BTC/ETH(Deribit) + 미국 개별주(CBOE) ────────────────── */
+const MONTHS = {JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
+function maxPainOf(opts) { // opts: [{strike,type:'C'/'P',oi}]
+  const strikes = [...new Set(opts.map(o=>o.strike))].sort((a,b)=>a-b);
+  let minPain = Infinity, mp = strikes[0];
+  for (const S of strikes) { let pain=0; for (const o of opts){ if(o.type==='C'&&S>o.strike)pain+=(S-o.strike)*o.oi; if(o.type==='P'&&S<o.strike)pain+=(o.strike-S)*o.oi; } if(pain<minPain){minPain=pain;mp=S;} }
+  let callOI=0,putOI=0; opts.forEach(o=>o.type==='C'?callOI+=o.oi:putOI+=o.oi);
+  return { maxPain: mp, pcr: callOI>0 ? +(putOI/callOI).toFixed(2) : 0 };
+}
+function expKey(s){ const m=s.match(/(\d+)([A-Z]+)(\d+)/); return new Date(2000+ +m[3], MONTHS[m[2]], +m[1]).getTime(); }
+async function deribitOption(cur) {
+  const j = await getJSON(`https://www.deribit.com/api/v2/public/get_book_summary_by_currency?currency=${cur}&kind=option`);
+  const exp = {};
+  for (const o of (j.result||[])) { const m=o.instrument_name.match(/^[A-Z]+-(\d+[A-Z]+\d+)-(\d+)-([CP])$/); if(!m)continue; (exp[m[1]]=exp[m[1]]||[]).push({strike:+m[2],type:m[3],oi:o.open_interest||0}); }
+  const keys = Object.keys(exp).sort((a,b)=>expKey(a)-expKey(b));
+  if (!keys.length) throw new Error('만기 없음');
+  const now = Date.now();
+  const near = keys.find(k=>expKey(k)>now) || keys[0];
+  return { ...maxPainOf(exp[near]), expiry: near };
+}
+// CBOE 옵션 심볼: ROOT + YYMMDD + C/P + strike*1000(8자리)
+async function cboeOption(sym) {
+  const j = await getJSON(`https://cdn.cboe.com/api/global/delayed_quotes/options/${sym}.json`);
+  const d = j.data || j;
+  const rows = d.options || [];
+  if (!rows.length) throw new Error('체인 없음');
+  const exp = {};
+  for (const o of rows) {
+    const m = String(o.option).match(/^[A-Z]+(\d{6})([CP])(\d{8})$/);
+    if (!m) continue;
+    const e = m[1], type = m[2], strike = parseInt(m[3],10)/1000;
+    (exp[e]=exp[e]||[]).push({ strike, type, oi: o.open_interest||0 });
+  }
+  const keys = Object.keys(exp).sort();
+  const todayYY = new Date().toISOString().slice(2,10).replace(/-/g,'');
+  const near = keys.find(k => k >= todayYY) || keys[0];
+  if (!near) throw new Error('만기 파싱 실패');
+  return maxPainOf(exp[near]);
+}
+async function fetchOptions(usOptSyms, errors) {
+  const out = {};
+  for (const cur of ['BTC','ETH']) { try { out[cur] = await deribitOption(cur); } catch (e) { errors.push(`옵션 ${cur}: ${e.message}`); } }
+  for (const sym of usOptSyms) {
+    try { out[sym] = await cboeOption(sym); } catch (e) { errors.push(`옵션 ${sym}(CBOE): ${e.message}`); }
+    await sleep(200);
+  }
+  return out;
+}
+
+/* ── 美 CPI (BLS 공개 API, 키 불필요) ──────────────────────────── */
+async function fetchCPI(errors) {
+  try {
+    // CUUR0000SA0 = CPI-U(전도시 평균, 전 품목), 전년동월대비 % 계산
+    const j = await getJSON('https://api.bls.gov/publicAPI/v2/timeseries/data/CUUR0000SA0', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ seriesid: ['CUUR0000SA0'], latest: true, calculations: true })
+    });
+    const series = j.Results && j.Results.series && j.Results.series[0];
+    const d = series && series.data && series.data[0];
+    const yoy = d && d.calculations && d.calculations.pct_changes && d.calculations.pct_changes['12'];
+    if (yoy != null) return { cpi: parseFloat(yoy).toFixed(1) + '%', cpiDate: `${d.year}-${d.period.replace('M','')}` };
+  } catch (e) { errors.push(`CPI(BLS): ${e.message}`); }
+  return {};
+}
+
+/* ── Short Interest ────────────────────────────────────────────── */
+// 미국: Nasdaq 공개 엔드포인트(per-symbol, best-effort)
+async function fetchSI_US(usSyms, errors) {
+  const out = {};
+  for (const sym of usSyms) {
+    try {
+      const j = await getJSON(`https://api.nasdaq.com/api/quote/${sym}/short-interest?assetClass=stocks`, {
+        headers: { 'Accept':'application/json', 'Origin':'https://www.nasdaq.com', 'Referer':'https://www.nasdaq.com/' }
+      });
+      const rows = j.data && j.data.shortInterestTable && j.data.shortInterestTable.rows;
+      const r0 = rows && rows[0];
+      if (r0) {
+        const pct = r0.percentOfFloat || null;
+        out[sym] = { si: pct ? (parseFloat(pct).toFixed(1)+'%') : (r0.daysToCover ? r0.daysToCover+'일' : '—'), date: r0.settlementDate || '' };
+      }
+    } catch (e) { errors.push(`US SI ${sym}: ${e.message}`); }
+    await sleep(250);
+  }
+  return out;
+}
+// 한국: KRX 정보데이터시스템 공개 JSON(개별종목 공매도 종합정보, best-effort)
+async function fetchSI_KR(krCodes, errors) {
+  const out = {};
+  const d3 = new Date(Date.now()-3*864e5).toISOString().slice(0,10).replace(/-/g,''); // T+2 지연 고려 3일 전
+  for (const code of krCodes) {
+    try {
+      const body = new URLSearchParams({
+        bld: 'dbms/MDC/STAT/srt/MDCSTAT30001', isuCd: 'KR7' + code + '000',
+        strtDd: d3, endDd: d3, share: '1', money: '1', csvxls_isNo: 'false'
+      });
+      const j = await getJSON('https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd', {
+        method: 'POST', headers: { 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 'Referer':'https://data.krx.co.kr/' }, body: body.toString()
+      });
+      const rows = j.OutBlock_1 || j.output || [];
+      const r0 = rows[rows.length-1] || rows[0];
+      const ratio = r0 && (r0.BAL_RTO || r0.bal_rto);
+      if (ratio != null) out[code] = { si: String(ratio).replace(/[^0-9.]/g,'')+'%', date: d3.slice(4,6)+'/'+d3.slice(6,8) };
+    } catch (e) { errors.push(`KR SI ${code}: ${e.message}`); }
+    await sleep(250);
+  }
+  return out;
+}
+
+/* ── PER·선행PER 시세 연동 재계산 ──────────────────────────────── */
+// per_live = per_authored × (price_live / price_authored).  EPS=px/per 를 앵커로 사용.
+function computeFund(fundSeed, prices) {
+  const out = {};
+  for (const key in fundSeed) {
+    const s = fundSeed[key]; const pNew = prices[key] && prices[key].price;
+    if (pNew == null) continue;
+    const pOld = num(s.px); const f = {};
+    if (s.per && pOld) { const per = num(s.per); if (per) f.per = (per * pNew/pOld).toFixed(2) + '배'; }
+    if (s.fper && pOld) { const fp = num(s.fper); if (fp) f.fper = (fp * pNew/pOld).toFixed(2) + '배'; }
+    if (Object.keys(f).length) out[key] = f;
+  }
+  return out;
+}
+
+/* ── 환율 ──────────────────────────────────────────────────────── */
+async function fetchFX(errors) {
+  try { const j = await getJSON('https://api.frankfurter.dev/v1/latest?base=USD&symbols=KRW'); if (j.rates && j.rates.KRW) return { usdkrw: Math.round(j.rates.KRW) }; }
+  catch (e) { errors.push(`환율: ${e.message}`); }
+  return {};
 }
 
 /* ============================ 메인 ================================= */
 (async () => {
   const html = fs.readFileSync(HTML_FILE, 'utf8');
-  const { cg, kr, seedAthPct } = parseSymbols(html);
-
-  // 이전 data.json (ATH 래칫 + 부분 병합용)
-  let prev = {};
-  try { prev = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8')); } catch (e) { prev = {}; }
+  const { cg, us, kr, seedAthPct, fund: fundSeed } = parseSymbols(html);
+  let prev = {}; try { prev = JSON.parse(fs.readFileSync(OUT_FILE,'utf8')); } catch (e) {}
   const prevTech = prev.tech || {};
+  const errors = [];
+  const prices = {}, tech = {};
 
-  const prices = {}, tech = {}, errors = [];
+  try { const c = await fetchCrypto(cg); Object.assign(prices,c.prices); Object.assign(tech,c.tech); } catch (e) { errors.push('크립토: '+e.message); }
+  try { const eq = await fetchEquities(us, kr, seedAthPct, prevTech, errors); Object.assign(prices,eq.prices); Object.assign(tech,eq.tech); } catch (e) { errors.push('주식: '+e.message); }
 
-  // 크립토
-  try {
-    const c = await fetchCrypto(cg, prevTech);
-    Object.assign(prices, c.prices); Object.assign(tech, c.tech);
-  } catch (e) { errors.push('크립토: ' + e.message); }
+  const indices = await fetchIndices(errors);
+  // 미국 옵션 대상: 이전 data.json에 있던 종목 + 옵션 상장 주요 종목
+  const usOptSyms = us.filter(s => ['NVDA','CRCL','IREN','ASTS','RKLB','IONQ','MU','SNDK','TSLA','AMD','VRT','QQQ','COIN','PLTR'].includes(s));
+  const opts = await fetchOptions(usOptSyms, errors);
+  const macro = await fetchFX(errors);
+  Object.assign(macro, await fetchCPI(errors));
+  const si = {};
+  Object.assign(si, await fetchSI_US(us, errors));
+  Object.assign(si, await fetchSI_KR(kr, errors));
+  const fund = computeFund(fundSeed, prices);
 
-  // 옵션
-  let opts = {};
-  try { opts = await fetchOptions(); }
-  catch (e) { errors.push('옵션: ' + e.message); }
-  if (!Object.keys(opts).length) errors.push('옵션: 데이터 없음');
-
-  // 환율
-  let macro = {};
-  try { macro = await fetchMacro(); }
-  catch (e) { errors.push('환율: ' + e.message); }
-  if (!macro.usdkrw) errors.push('환율: 데이터 없음');
-
-  // 한국주식
-  try {
-    const k = await fetchKRStocks(kr, seedAthPct, prevTech);
-    Object.assign(prices, k.prices); Object.assign(tech, k.tech);
-    if (k.error) errors.push('한국주식: ' + k.error);
-  } catch (e) { errors.push('한국주식: ' + e.message); }
-
-  // 직전 tech의 athAbs는 보존(이번에 못 받은 종목도 전고점 유지)
-  for (const key in prevTech) {
-    if (!tech[key]) tech[key] = {};
-    if (tech[key].athAbs == null && prevTech[key].athAbs != null) tech[key].athAbs = prevTech[key].athAbs;
-    if (tech[key].ath == null && prevTech[key].ath != null) tech[key].ath = prevTech[key].ath;
-    if (tech[key].rsi == null && prevTech[key].rsi != null) tech[key].rsi = prevTech[key].rsi;
-  }
+  // 직전 ATH(athAbs) 보존: 이번에 못 받은 종목도 전고점 유지
+  for (const k in prevTech) { if(!tech[k])tech[k]={}; ['athAbs','ath','rsi'].forEach(f=>{ if(tech[k][f]==null && prevTech[k][f]!=null) tech[k][f]=prevTech[k][f]; }); }
 
   const out = {
-    date: new Date().toISOString().slice(0, 10),
-    updated: new Date().toISOString(),
-    phase: 1,
-    prices, tech, opts, macro,
-    meta: {
-      cryptoCount: cg.length,
-      krCount: kr.length,
-      pricesGot: Object.keys(prices).length,
-      techGot: Object.keys(tech).length,
-      errors
-    }
+    date: new Date().toISOString().slice(0,10), updated: new Date().toISOString(), phase: 2,
+    prices, tech, opts, indices, macro, si, fund,
+    meta: { cryptoCount: cg.length, usCount: us.length, krCount: kr.length,
+      pricesGot: Object.keys(prices).length, techGot: Object.keys(tech).length,
+      optsGot: Object.keys(opts).length, indicesGot: Object.keys(indices).length,
+      siGot: Object.keys(si).length, fundGot: Object.keys(fund).length, errors }
   };
   fs.writeFileSync(OUT_FILE, JSON.stringify(out, null, 2));
-  console.log(`[done] prices=${out.meta.pricesGot} tech=${out.meta.techGot} opts=${Object.keys(opts).join(',')||'-'} usdkrw=${macro.usdkrw||'-'}`);
-  if (errors.length) console.log('[warn] ' + errors.join(' | '));
+  console.log(`[done] px=${out.meta.pricesGot} tech=${out.meta.techGot} opts=${out.meta.optsGot} idx=${out.meta.indicesGot} si=${out.meta.siGot} fund=${out.meta.fundGot}`);
+  if (errors.length) console.log(`[warn ${errors.length}] ` + errors.slice(0,40).join(' | '));
 })().catch(e => { console.error('FATAL', e); process.exit(1); });
