@@ -249,10 +249,9 @@ async function fetchSI_US(usSyms, errors) {
   return out;
 }
 // 한국: KRX 정보데이터시스템 — 특정 거래일의 전종목 공매도 순보유잔고를 한 번에 받아 필터
-function krShortCode(r){ if(r.ISU_SRT_CD)return r.ISU_SRT_CD; const c=r.ISU_CD||r.isu_cd||''; if(/^KR7/.test(c))return c.substr(3,6); return c.replace(/\D/g,'').slice(-6); }
-async function fetchSI_KR(krCodes, errors) {
+function krShortCode(r){ let v=r.ISU_SRT_CD||r.ISU_CD||r.isu_cd||r.ISU_SRT_CD2||''; v=String(v).trim(); if(/^KR7/.test(v))return v.substr(3,6); const d=v.replace(/\D/g,''); return d.length>=6?d.slice(0,6):d; }
+async function fetchSI_KR(krCodes, errors, dbg) {
   const out = {};
-  // 최근 거래일 후보(주말·T+2 지연 고려): 2~8일 전 평일
   const cand = [];
   for (let i=2;i<=8;i++){ const dt=new Date(Date.now()-i*864e5); const dow=dt.getDay(); if(dow!==0&&dow!==6) cand.push(dt.toISOString().slice(0,10).replace(/-/g,'')); }
   const headers = { 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 'Origin':'https://data.krx.co.kr', 'Referer':'https://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201' };
@@ -263,14 +262,17 @@ async function fetchSI_KR(krCodes, errors) {
       try {
         const body = new URLSearchParams({ bld:'dbms/MDC/STAT/srt/MDCSTAT30501', searchType:'1', mktTpCd:mkt, trdDd, share:'1', money:'1', csvxls_isNo:'false' });
         const j = await getJSON('https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd', { method:'POST', headers, body: body.toString() });
-        const rows = j.OutBlock_1 || j.output || j.block1 || [];
-        for (const r of rows) { const c=krShortCode(r); const rto=(r.BAL_RTO!=null?r.BAL_RTO:r.bal_rto); if(c&&rto!=null) map[c]=String(rto).replace(/[^0-9.]/g,''); }
+        const rows = j.OutBlock_1 || j.output || j.block1 || j.OutBlock_2 || [];
+        // 진단: 응답의 최상위 키 + 첫 행 키 + 첫 행 전체를 1회만 기록
+        if (dbg && !dbg.topKeys && rows) { dbg.topKeys=Object.keys(j); if(rows[0]){ dbg.rowKeys=Object.keys(rows[0]); dbg.firstRow=rows[0]; dbg.rowCount=rows.length; dbg.usedDate=trdDd; dbg.mkt=mkt; } }
+        for (const r of rows) { const c=krShortCode(r); const rto=(r.BAL_RTO!=null?r.BAL_RTO:(r.bal_rto!=null?r.bal_rto:r.SHORT_BAL_RTO)); if(c&&rto!=null) map[c]=String(rto).replace(/[^0-9.]/g,''); }
         got += rows.length;
       } catch (e) {}
       await sleep(300);
     }
     if (got>0){ usedDate=trdDd; break; }
   }
+  if (dbg) { dbg.mapSize=Object.keys(map).length; dbg.mapSample=Object.keys(map).slice(0,5); dbg.want=krCodes.slice(0,3); dbg.matched=krCodes.filter(c=>map[c]!=null).length; }
   if (!Object.keys(map).length) { errors.push('KR SI: KRX 응답 없음(거래일/규격 확인)'); return out; }
   const dstr = usedDate ? usedDate.slice(4,6)+'/'+usedDate.slice(6,8) : '';
   for (const code of krCodes) { if (map[code]!=null) out[code] = { si: map[code]+'%', date: dstr }; }
@@ -319,7 +321,8 @@ async function fetchFX(errors) {
   Object.assign(macro, await fetchCPI(errors));
   const si = {};
   Object.assign(si, await fetchSI_US(us, errors));
-  Object.assign(si, await fetchSI_KR(kr, errors));
+  const krDbg = {};
+  Object.assign(si, await fetchSI_KR(kr, errors, krDbg));
   const fund = computeFund(fundSeed, prices);
 
   // 직전 ATH(athAbs) 보존: 이번에 못 받은 종목도 전고점 유지
@@ -331,7 +334,7 @@ async function fetchFX(errors) {
     meta: { cryptoCount: cg.length, usCount: us.length, krCount: kr.length,
       pricesGot: Object.keys(prices).length, techGot: Object.keys(tech).length,
       optsGot: Object.keys(opts).length, indicesGot: Object.keys(indices).length,
-      siGot: Object.keys(si).length, fundGot: Object.keys(fund).length, errors }
+      siGot: Object.keys(si).length, fundGot: Object.keys(fund).length, errors, krDebug: krDbg }
   };
   fs.writeFileSync(OUT_FILE, JSON.stringify(out, null, 2));
   console.log(`[done] px=${out.meta.pricesGot} tech=${out.meta.techGot} opts=${out.meta.optsGot} idx=${out.meta.indicesGot} si=${out.meta.siGot} fund=${out.meta.fundGot}`);
