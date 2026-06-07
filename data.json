@@ -1,6 +1,6 @@
 {
   "date": "2026-06-07",
-  "updated": "2026-06-07T13:53:06.173Z",
+  "updated": "2026-06-07T14:00:33.129Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 414000
     },
     "bitcoin": {
-      "price": 61743,
-      "chg": 1.61091
+      "price": 61723,
+      "chg": 1.54588
     },
     "ethereum": {
-      "price": 1617.14,
-      "chg": 3.91302
+      "price": 1617.95,
+      "chg": 3.92425
     },
     "ripple": {
       "price": 1.12,
-      "chg": 2.14156
+      "chg": 2.20345
     },
     "solana": {
-      "price": 64.3,
-      "chg": 2.9016
+      "price": 64.34,
+      "chg": 3.18237
     },
     "dogecoin": {
-      "price": 0.083831,
-      "chg": 2.43471
+      "price": 0.083868,
+      "chg": 2.48014
     },
     "chainlink": {
-      "price": 7.69,
-      "chg": 4.39001
+      "price": 7.7,
+      "chg": 4.61519
     },
     "ondo-finance": {
-      "price": 0.341049,
-      "chg": 4.79965
+      "price": 0.342867,
+      "chg": 5.35838
     },
     "aave": {
-      "price": 62.34,
-      "chg": 2.04248
+      "price": 62.35,
+      "chg": 2.52867
     },
     "filecoin": {
-      "price": 0.757121,
-      "chg": 3.41655
+      "price": 0.756045,
+      "chg": 3.49763
     },
     "NVDA": {
       "price": 205.1
@@ -534,9 +534,7 @@
     }
   },
   "macro": {
-    "usdkrw": 1541,
-    "cpi": "3.8%",
-    "cpiDate": "2026-04"
+    "usdkrw": 1541
   },
   "si": {
     "NVDA": {
@@ -745,7 +743,9 @@
       "KR SI: KRX 응답 없음(거래일/규격 확인)"
     ],
     "krDebug": {
-      "lastErr": "20260605/mkt1: HTTP 400",
+      "cookie": "__smVisitorID=snphf57Scvf…",
+      "lastErr": "20260605/mkt1/mktTpCd: HTTP 400",
+      "lastBody": "LOGOUT",
       "mapSize": 0,
       "mapSample": [],
       "want": [
