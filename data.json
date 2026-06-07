@@ -1,6 +1,6 @@
 {
   "date": "2026-06-07",
-  "updated": "2026-06-07T21:04:39.979Z",
+  "updated": "2026-06-07T22:58:26.223Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 414000
     },
     "bitcoin": {
-      "price": 61817,
-      "chg": 1.82668
+      "price": 62915,
+      "chg": 3.8477
     },
     "ethereum": {
-      "price": 1626.41,
-      "chg": 4.41001
+      "price": 1675.86,
+      "chg": 7.50189
     },
     "ripple": {
-      "price": 1.13,
-      "chg": 4.39207
+      "price": 1.15,
+      "chg": 6.11474
     },
     "solana": {
-      "price": 64.67,
-      "chg": 4.61374
+      "price": 65.94,
+      "chg": 6.71491
     },
     "dogecoin": {
-      "price": 0.08414,
-      "chg": 3.98796
+      "price": 0.085679,
+      "chg": 5.16923
     },
     "chainlink": {
-      "price": 7.68,
-      "chg": 4.81231
+      "price": 7.88,
+      "chg": 7.10905
     },
     "ondo-finance": {
-      "price": 0.336041,
-      "chg": 4.42901
+      "price": 0.344342,
+      "chg": 6.6641
     },
     "aave": {
-      "price": 62.31,
-      "chg": 3.46896
+      "price": 63.86,
+      "chg": 5.71992
     },
     "filecoin": {
-      "price": 0.753422,
-      "chg": 3.76418
+      "price": 0.772609,
+      "chg": 6.385
     },
     "NVDA": {
       "price": 205.1
@@ -207,23 +207,23 @@
       "ath": "-34%"
     },
     "bitcoin": {
-      "ath": "-51%",
+      "ath": "-50%",
       "athAbs": 126080,
       "rsi": 27
     },
     "ethereum": {
-      "ath": "-67%",
+      "ath": "-66%",
       "athAbs": 4946.05,
-      "rsi": 20
+      "rsi": 21
     },
     "ripple": {
-      "ath": "-69%",
+      "ath": "-68%",
       "athAbs": 3.65
     },
     "solana": {
       "ath": "-78%",
       "athAbs": 293.31,
-      "rsi": 21
+      "rsi": 22
     },
     "dogecoin": {
       "ath": "-88%",
@@ -232,14 +232,14 @@
     "chainlink": {
       "ath": "-85%",
       "athAbs": 52.7,
-      "rsi": 27
+      "rsi": 28
     },
     "ondo-finance": {
       "ath": "-84%",
       "athAbs": 2.14
     },
     "aave": {
-      "ath": "-91%",
+      "ath": "-90%",
       "athAbs": 661.69,
       "rsi": 20
     },
@@ -446,12 +446,12 @@
   "opts": {
     "BTC": {
       "maxPain": 62000,
-      "pcr": 1.5,
+      "pcr": 1.49,
       "expiry": "8JUN26"
     },
     "ETH": {
       "maxPain": 1625,
-      "pcr": 0.87,
+      "pcr": 0.81,
       "expiry": "8JUN26"
     },
     "NVDA": {
@@ -528,9 +528,9 @@
       "ath": "-5%"
     },
     "Brent 유가": {
-      "price": 93.09,
-      "rsi": 57,
-      "ath": "-37%"
+      "price": 95.57,
+      "rsi": 58,
+      "ath": "-35%"
     }
   },
   "macro": {
