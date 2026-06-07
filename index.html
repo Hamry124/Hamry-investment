@@ -457,7 +457,7 @@ const OPT={
 // 필드: tk, g(등급), px(현재가), ath, mp(맥스페인), pcr, rsi, per, fper(선행PER), key(핵심지표), issue(주요이슈/매수근거), opt(옵션키), cgId, avSym
 const STOCKS={
  kr:[
-  {sector:"반도체", desc:"NVDA $81.6B 서프라이즈로 HBM 수요 폭발 재확인. SK하이닉스·삼성전자는 글로벌 AI주 중 최저 멀티플로 거래 중이다.", rows:[
+  {sector:"반도체", desc:"NVDA $81.6B 서프라이즈로 HBM 수요 재확인. 6/3~5 AI·반도체 급락 조정에도 HBM 장기공급계약 기반 슈퍼사이클은 지속(월가 삼성전자 목표가 85만원 상향). SK하이닉스·삼성전자는 글로벌 AI주 중 최저 멀티플.", rows:[
    {g:"S",tk:"SK하이닉스",px:"1,977,000원",ath:"0%",mp:"N/A",pcr:"0.92*",rsi:"64",per:"9.2배",fper:"6.79배",key:"HBM 점유 57%",issue:"Q1 영업익 37.6조(영업이익률 72%), HBM3E 독점 공급. KB증권 목표가 280만원. AI 서버 수요로 HBM4 양산 가속",krCode:"000660"},
    {g:"S",tk:"삼성전자",px:"316,500원",ath:"0%",mp:"285,000원",pcr:"0.88",rsi:"62",per:"11.5배",fper:"6.77배",key:"Q1 매출 133.87조",issue:"Q1 영업익 57.2조(YoY +756%) 사상최대. HBM3E NVDA 수주 기대. 5/29 +5.6% 급등하며 ATH 회복",krCode:"005930"},
   ]},
@@ -530,7 +530,7 @@ const STOCKS={
    {g:"B",tk:"IonQ (IONQ)",px:"$70.14",ath:"-45%",mp:"$58",pcr:"1.65",rsi:"-",per:"적자",fper:"적자",key:"이온트랩 정확도 1위",issue:"순수 플레이 양자 최대. SI 20.1% 숏스퀴즈 잠재(★★★★). 맥스페인 $58 대비 -17% 괴리 변동성 주의",optKey:"IONQ",avSym:"IONQ"},
    {g:"B",tk:"Infleqtion (INFQ)",px:"$17.77",ath:"-5%",mp:"$15",pcr:"0.43",rsi:"-",per:"적자",fper:"적자",key:"NVDA CUDA-Q 동맹",issue:"NASA·DoD B2G, NVDA CUDA-Q 동맹, CHIPS $100M. PCR 0.43 극단 콜 과열 = 과열 주의, 감마 압력 강함(★★★★)",optKey:"INFQ",avSym:"INFQ"},
   ]},
-  {sector:"AI SW · 지수 ETF · 가치주", desc:"PLTR(AI SW)·QQQ(나스닥 ETF)·PPIH(소형 가치주). QQQ PCR 2.40 극단 풋 우위, PPIH 감마 압력 최강(★★★★★).", rows:[
+  {sector:"AI SW · 지수 ETF · 가치주", desc:"PLTR(AI SW)·QQQ(나스닥 ETF)·PPIH(소형 가치주). QQQ PCR 2.49 극단 풋 우위, PPIH 감마 압력 최강(★★★★★).", rows:[
    {g:"A",tk:"Palantir (PLTR)",px:"$136.88",ath:"-16%",mp:"N/A",pcr:"N/A",rsi:"68",per:"180배",fper:"60배",key:"Rule of 40 = 145%",issue:"방산 AI 서사 인기 폭발. Rule of 40 = 145% 최고지만 P/S 60배 극단 고평가. $130 지지 확인 후",avSym:"PLTR"},
    {g:"B",tk:"Invesco QQQ",px:"$735.60",ath:"-3.3%",mp:"$711",pcr:"2.40",rsi:"-",per:"-",fper:"나스닥100 추종",key:"시장 헤지 지표",issue:"나스닥100 추종 ETF. PCR 2.40 극단 풋 우위(헤지 수요) = 시장 헤지 심리 지표. 맥스페인 $711 대비 -3.3% 괴리",optKey:"QQQ",avSym:"QQQ"},
    {g:"B",tk:"P10 (PPIH)",px:"$31.88",ath:"-5.9%",mp:"$30",pcr:"0.32",rsi:"-",per:"22배",fper:"20배",key:"소형 가치주",issue:"소형 사모펀드 가치주. PCR 0.32 극단 콜 과열 = 과열 주의, 감마 압력 최강(★★★★★) 변동성 극대",optKey:"PPIH",avSym:"PX"},
@@ -545,7 +545,7 @@ const STOCKS={
    {g:"A",tk:"DOGE",px:"$0.10",ath:"-75%",mp:"N/A",pcr:"N/A",rsi:"45",per:"-",fper:"시총 $15B",key:"SEC 직접 승인",issue:"21Shares TDOG SEC 직접 승인(1/22), 디지털 상품 지위 획득. 밈코인 중 유일 제도권 진입",cgId:"dogecoin"},
    {g:"A",tk:"SUI",px:"$0.85",ath:"-82%",mp:"N/A",pcr:"N/A",rsi:"38",per:"-",fper:"시총 $3B",key:"BUIDL 담보 통합",issue:"BlackRock BUIDL USDi 담보 통합. SUIG 상장 법인 매집. RSI 38 과매도. 고위험 고성장"},
   ]},
-  {sector:"RWA 인프라", desc:"RWA 실물자산 토큰화 2030년 $16T 전망. 토큰화 미국채만 $20B+ 온체인. LINK는 ATH -81% 압축인데 SWIFT 통합 = 디버전스 최대.", rows:[
+  {sector:"RWA 인프라", desc:"RWA 실물자산 토큰화 2030년 $16T 전망. 토큰화 미국채만 $20B+ 온체인. LINK는 ATH -85% 압축인데 SWIFT 통합 = 디버전스 최대.", rows:[
    {g:"S",tk:"LINK",px:"$8.97",ath:"-81%",mp:"$9.5",pcr:"0.85",rsi:"39",per:"-",fper:"시총 $5.9B",key:"SWIFT 프로덕션 통합",issue:"SWIFT 프로덕션 통합(11월), 30일간 고래 32.9M LINK 매집 사상최고. ATH -81% 펀더멘털 vs 가격 디버전스 최대",optKey:"LINK",cgId:"chainlink"},
    {g:"A",tk:"ONDO",px:"$0.367",ath:"-83%",mp:"N/A",pcr:"N/A",rsi:"40",per:"-",fper:"시총 $1.2B",key:"TVL $3B 돌파",issue:"TVL $3B 돌파, 21Shares ONDO ETF 신청, Franklin 합작 ETF. RWA 토큰화 대표주",cgId:"ondo-finance"},
    {g:"A",tk:"Centrifuge (CFG)",px:"$0.20",ath:"-75%",mp:"N/A",pcr:"N/A",rsi:"35",per:"-",fper:"시총 $0.2B",key:"P/TVL 0.10배",issue:"P/TVL 0.10배 = ONDO 대비 8배 저평가. Coinbase Base 통합. RSI 35 과매도 소형주"},
@@ -567,7 +567,7 @@ const STOCKS={
 
 
 const PARTS=[
- {id:"macro",ic:"🌐",name:"매크로",sub:"시황",intro:"유가·금리·무역 3대 역풍이 5월 들어 동시에 순풍 전환 신호. 그러나 KOSPI +100%·82% 종목 하락 쏠림, S&P 500 CAPE 40.93은 강세장 후반부 경고. 추격 금지·분할 매수·현금 10~30% 상시 유지가 원칙.",macro:true,idxTable:true,
+ {id:"macro",ic:"🌐",name:"매크로",sub:"시황",intro:"유가·금리·무역 3대 역풍이 5월 들어 동시에 순풍 전환 신호. 그러나 KOSPI +100%·82% 종목 하락 쏠림, S&P 500 CAPE 40.93은 강세장 후반부 경고 — 실제로 6/3~5 AI·반도체 급락으로 KOSPI 주간 -4%·나스닥 동반 조정됐다. 추격 금지·분할 매수·현금 10~30% 상시 유지가 원칙.",macro:true,idxTable:true,
   events:[
    {ev:"NVDA Q1 어닝",data:"매출 $81.6B (+85% YoY) / EPS $2.39 / FCF $49B",impact:"AI 사이클 재확인. SK하이닉스·삼성전자·VRT·IREN 동반 수혜",c:"green"},
    {ev:"미·이란 평화 협상",data:"도하 협상 / 핵문제 30~60일 유예 검토",impact:"종전 시 유가 $80대 → CPI 둔화 → 금리인하 → 위험자산 반등",c:"green"},
@@ -585,7 +585,7 @@ const PARTS=[
   ]},
  {id:"kr",ic:"🇰🇷",name:"한국주식",sub:"6섹터",intro:"사상최고 8,874 경신 후 6/3~5 반도체 급락 조정 국면 — 섹터별 현재가·밸류에이션·주봉 RSI 정밀 점검. RSI 88+ 극과매수(추격절대금지) / 80~87 경고 / 40~64 중립 / ~39 과매도(분할 적기).",
   sectors:[
-   {n:"반도체",d:"NVDA $81.6B 서프라이즈로 HBM 수요 폭발 재확인. SK하이닉스·삼성전자는 글로벌 AI주 중 최저 멀티플.",
+   {n:"반도체",d:"NVDA $81.6B 서프라이즈로 HBM 수요 재확인. 6/3~5 급락 조정에도 HBM 장기계약 기반 슈퍼사이클 지속(월가 삼성 목표가 85만원). SK하이닉스·삼성전자 글로벌 AI주 중 최저 멀티플.",
     rows:[
      {g:"S",tk:"SK하이닉스",px:"1,977,000원",m1:["선행PER","6.79배","green"],m2:["PBR","4.6배",""],m3:["RSI","64",""],m4:["ATH","0%","amber"],arg:"Q1 영업익 37.6조(영업이익률 72%), HBM 점유 57%, KB 목표가 280만원"},
      {g:"S",tk:"삼성전자",px:"316,500원",m1:["선행PER","6.77배","green"],m2:["PBR","1.4배",""],m3:["RSI","62",""],m4:["ATH","0%","amber"],arg:"Q1 영업익 57.2조(YoY +756%), 매출 133.87조 사상최대, HBM3E NVDA 수주 기대"},
@@ -630,18 +630,18 @@ const PARTS=[
   ]},
  {id:"us",ic:"🇺🇸",name:"미국주식",sub:"9섹터",intro:"S&P 500 CAPE 40.93 — 역사상 4번째 극단 고평가. PLTR P/S 60배·VRT PE 70배 같은 ATH 근방 추격 금지. NVDA·CRCL·IREN처럼 매출 가시성 있는 S등급만 선별. 옵션 13종목 중 미국 11종목은 맥스페인·PCR·SI로 단기 타이밍 보조.",
   sectors:[
-   {n:"GPU · 반도체 장비",d:"AI DC capex 2026년 $527B. 진입 타이밍 NVDA > AMD > ASML 순. AMD는 PCR 1.25 + 맥스페인 -11% 괴리로 과열 주의.",
+   {n:"GPU · 반도체 장비",d:"AI DC capex 2026년 $527B. 진입 타이밍 NVDA > AMD > ASML 순. AMD는 PCR 1.06 + 맥스페인 $492.5(현재가 +6%)·RSI 76 과열 주의.",
     rows:[
      {g:"S",tk:"NVIDIA",px:"$212.14",m1:["선행PER","21.85배","green"],m2:["P/S","20배",""],m3:["RSI","58",""],m4:["ATH","-10%",""],arg:"PC용 신칩 발표(+6%) 후 6/3 조정. $81.6B 서프라이즈, 목표가 평균 $294 (+36%)"},
      {g:"A",tk:"AMD",px:"$518.09",m1:["선행PER","42배",""],m2:["P/S","11배",""],m3:["RSI","52",""],m4:["ATH","-15%",""],arg:"NVDA 대항마, 데이터센터 +57% YoY. 옵션상 맥스페인 $460 대비 +11% 괴리 = 과열 주의",opt:"AMD"},
      {g:"A",tk:"ASML",px:"$850",m1:["선행PER","33배",""],m2:["P/S","10배",""],m3:["RSI","55",""],m4:["ATH","-15%",""],arg:"EUV 전세계 유일 독점, 장기 보유 적합"},
     ]},
-   {n:"메모리",d:"AI 서버는 메모리 8~10배 사용. HBM 라인 전용화 → 범용 DRAM 부족 → 계약가 급등. SNDK·MU 모두 옵션상 맥스페인 하회.",
+   {n:"메모리",d:"AI 서버는 메모리 8~10배 사용. HBM 라인 전용화 → 범용 DRAM 부족 → 계약가 급등(Q1 +90~95%). MU는 옵션상 맥스페인($940) 대폭 하회.",
     rows:[
      {g:"A",tk:"Micron (MU)",px:"$923.52",m1:["선행PER","18배",""],m2:["P/S","6배",""],m3:["RSI","70",""],m4:["ATH","-3%",""],arg:"미국 유일 DRAM 제조 희소성. 옵션상 PCR 2.02 극단 풋 우위 = 과열 주의",opt:"MU"},
      {g:"B",tk:"SanDisk (SNDK)",px:"$1,641.64",m1:["맥스페인","$1535",""],m2:["PCR","1.83",""],m3:["RSI","-",""],m4:["ATH","-7%",""],arg:"NAND 순수 플레이어. 맥스페인 $1535 대비 -6.5% 괴리, PCR 1.83 공포",opt:"SNDK"},
     ]},
-   {n:"전력 · AI 데이터센터",d:"AI 인프라는 가치사슬. 전력·냉각(VRT) → 메모리 → 연산 임대(IREN) 순. IREN은 PCR 1.49 공포 + SI 15.7% 숏커버 잠재.",
+   {n:"전력 · AI 데이터센터",d:"AI 인프라는 가치사슬. 전력·냉각(VRT) → 메모리 → 연산 임대(IREN) 순. IREN은 PCR 3.35 극단 풋 우위 + SI 14.7% 숏커버 잠재.",
     rows:[
      {g:"S",tk:"IREN",px:"$64.05",m1:["EV/EBITDA","5배","green"],m2:["PCR","1.49","green"],m3:["RSI","45",""],m4:["ATH","-17%",""],arg:"MS $9.7B + NVDA $3.4B 직접 계약, AI 매출 +833%. 맥스페인 $58 대비 -9% 괴리, SI 15.7%",opt:"IREN"},
      {g:"B",tk:"Vertiv (VRT)",px:"$314.18",m1:["선행PER","54배","red"],m2:["PCR","1.98",""],m3:["RSI","78","amber"],m4:["ATH","-2%",""],arg:"AI DC 전력·냉각 대장. 맥스페인 $320 = 주가 근접, PCR 1.98 극단 공포",opt:"VRT"},
@@ -658,7 +658,7 @@ const PARTS=[
     rows:[
      {g:"B",tk:"Tesla (TSLA)",px:"$442.10",m1:["맥스페인","$430",""],m2:["PCR","0.78",""],m3:["SI","2.58%",""],m4:["ATH","-2.7%",""],arg:"옵티머스 휴머노이드·로보택시 서사. 맥스페인 $430 근접, PCR 0.78 중립~낙관. LG엔솔 4680 공급 연결",opt:"TSLA"},
     ]},
-   {n:"스테이블코인 인프라",d:"스테이블코인 $323B ATH + 트럼프 결제통합 EO 더블 호재. CRCL은 맥스페인 $108에 정확히 수렴, PCR 0.65 콜 우위.",
+   {n:"스테이블코인 인프라",d:"스테이블코인 $323B ATH + 트럼프 결제통합 EO 더블 호재. CRCL은 맥스페인 $95 부근, PCR 0.56 콜 우위.",
     rows:[
      {g:"S",tk:"Circle (CRCL)",px:"$108.24",m1:["맥스페인","$108","green"],m2:["PCR","0.65","red"],m3:["RSI","45",""],m4:["ATH","-62%","red"],arg:"USDC 시장점유 27% = $87B, 금리↑=이자↑. 맥스페인 정확 수렴, PCR 0.65 콜 우위(낙관)",opt:"CRCL"},
      {g:"A",tk:"Coinbase (COIN)",px:"$200",m1:["선행PER","35배","amber"],m2:["P/S","12배",""],m3:["RSI","55",""],m4:["ATH","-3%",""],arg:"CLARITY 통과 시 기관 자금 최대 관문"},
@@ -668,19 +668,19 @@ const PARTS=[
      {g:"B",tk:"NuScale",px:"$12.50",m1:["수익화","2028",""],m2:["단계","Pre-rev",""],m3:["RSI","38","green"],m4:["ATH","-40%",""],arg:"미국 유일 NRC 설계 인증, 서사 옵션 장기 보유"},
      {g:"B",tk:"Oklo",px:"$65",m1:["상태","적자",""],m2:["기술","액체금속",""],m3:["RSI","48",""],m4:["ATH","-66%","red"],arg:"혁신 기술, 수익화 경로 불확실, NuScale 보완재"},
     ]},
-   {n:"양자컴퓨터",d:"BCG 전망 2030년 $100B → 2040년 $450~850B. IONQ는 SI 20.1% 숏스퀴즈 잠재(★★★★), INFQ는 PCR 0.43 과열 주의.",
+   {n:"양자컴퓨터",d:"BCG 전망 2030년 $100B → 2040년 $450~850B. IONQ는 SI 19.7% 숏스퀴즈 잠재(★★★★), INFQ는 RSI 28 과매도.",
     rows:[
      {g:"B",tk:"IonQ (IONQ)",px:"$70.14",m1:["맥스페인","$58",""],m2:["PCR","1.65",""],m3:["SI","20.1%","amber"],m4:["ATH","-45%",""],arg:"순수 플레이 양자 최대. SI 20.1% 숏스퀴즈 잠재(★★★★), 맥스페인 $58 -17% 괴리 변동성 주의",opt:"IONQ"},
      {g:"B",tk:"Infleqtion (INFQ)",px:"$17.77",m1:["맥스페인","$15",""],m2:["PCR","0.43","red"],m3:["SI","3.3%",""],m4:["ATH","-5%",""],arg:"NASA·DoD B2G, NVDA CUDA-Q 동맹. PCR 0.43 극단 콜 과열 = 과열 주의, 감마 압력 강함(★★★★)",opt:"INFQ"},
     ]},
-   {n:"AI SW · 지수 ETF · 가치주",d:"PLTR(AI SW)·QQQ(나스닥 ETF)·PPIH(소형 가치주). QQQ PCR 2.40 극단 풋 우위, PPIH 감마 압력 최강(★★★★★).",
+   {n:"AI SW · 지수 ETF · 가치주",d:"PLTR(AI SW)·QQQ(나스닥 ETF)·PPIH(소형 가치주). QQQ PCR 2.49 극단 풋 우위, PPIH 감마 압력 최강(★★★★★).",
     rows:[
      {g:"A",tk:"Palantir (PLTR)",px:"$136.88",m1:["P/S","60배","red"],m2:["Rule40","145%",""],m3:["RSI","68",""],m4:["ATH","-16%",""],arg:"Rule of 40 = 145% 최고, $130 지지 확인 후"},
      {g:"B",tk:"Invesco QQQ",px:"$735.60",m1:["맥스페인","$711",""],m2:["PCR","2.40",""],m3:["SI","0%",""],m4:["ATH","-3.3%",""],arg:"나스닥100 추종 ETF. PCR 2.40 극단 풋 우위(헤지 수요), 맥스페인 $711 -3.3% 괴리. 시장 헤지 지표",opt:"QQQ"},
      {g:"B",tk:"P10 (PPIH)",px:"$31.88",m1:["맥스페인","$30",""],m2:["PCR","0.32","red"],m3:["SI","1.39%",""],m4:["ATH","-5.9%",""],arg:"소형 가치주. PCR 0.32 극단 콜 과열 = 과열 주의, 감마 압력 최강(★★★★★) 변동성 극대",opt:"PPIH"},
     ]},
   ]},
- {id:"crypto",ic:"₿",name:"크립토",sub:"4섹터",intro:"BTC 반감기(2024.4) 후 약 25개월. BTC ATH $126,080 → $73,276(-42%), ETH -56%. BTC ETF 9일 연속 순유출(5/28 BlackRock $733M 매도), 도미넌스 57.7%. 단 Goldman은 5월 XRP·SOL ETF 전량 청산.",
+ {id:"crypto",ic:"₿",name:"크립토",sub:"4섹터",intro:"BTC 반감기(2024.4) 후 약 26개월. BTC ATH $126,080 → 약 $62K(전고점 -50%, RSI 27 과매도), ETH 전고점 -67%. 6/3 이후 위험자산 동반 조정으로 알트 전반 과매도 심화(SOL -78%·AAVE -90%). 도미넌스 57%대, RWA·스테이블코인 제도화 카탈리스트는 유지.",
   sectors:[
    {n:"L1 베이스 레이어",d:"반감기 + CLARITY 직접 수혜 그룹.",
     rows:[
@@ -691,7 +691,7 @@ const PARTS=[
      {g:"A",tk:"DOGE",px:"$0.10",m1:["시총","$15B",""],m2:["ATH","-75%","red"],m3:["RSI","45",""],m4:["MP","N/A",""],arg:"21Shares TDOG SEC 직접 승인(1/22), 디지털 상품 지위 획득"},
      {g:"A",tk:"SUI",px:"$0.85",m1:["시총","$3B",""],m2:["ATH","-82%","red"],m3:["RSI","38","green"],m4:["MP","N/A",""],arg:"BlackRock BUIDL USDi 담보 통합, SUIG 상장 법인 매집"},
     ]},
-   {n:"RWA 인프라",d:"RWA 2030년 $16T 전망. 토큰화 미국채만 $20B+ 온체인. LINK는 ATH -81% 압축인데 SWIFT·DTCC 프로덕션 통합 = 디버전스 최대.",
+   {n:"RWA 인프라",d:"RWA 2030년 $16T 전망. 토큰화 미국채만 $20B+ 온체인. LINK는 ATH -85% 압축인데 SWIFT·DTCC 프로덕션 통합 = 디버전스 최대.",
     rows:[
      {g:"S",tk:"LINK",px:"$8.97",opt:"LINK",m1:["시총","$5.9B",""],m2:["ATH","-81%","red"],m3:["RSI","40","green"],m4:["MP","$9.5",""],arg:"SWIFT 프로덕션 통합(11월), 30일간 고래 32.9M LINK 매집 사상최고"},
      {g:"A",tk:"ONDO",px:"$0.367",m1:["시총","$1.2B",""],m2:["ATH","-83%","red"],m3:["RSI","40","green"],m4:["MP","N/A",""],arg:"TVL $3B 돌파, 21Shares ONDO ETF 신청, Franklin 합작 ETF"},
