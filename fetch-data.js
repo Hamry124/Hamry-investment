@@ -262,58 +262,6 @@ async function fetchSI_US(usSyms, errors) {
   }
   return out;
 }
-// 한국: KRX 정보데이터시스템 — 특정 거래일의 전종목 공매도 순보유잔고를 한 번에 받아 필터
-function krShortCode(r){ let v=r.ISU_SRT_CD||r.ISU_CD||r.isu_cd||r.ISU_SRT_CD2||''; v=String(v).trim(); if(/^KR7/.test(v))return v.substr(3,6); const d=v.replace(/\D/g,''); return d.length>=6?d.slice(0,6):d; }
-async function fetchSI_KR(krCodes, errors, dbg) {
-  const out = {};
-  const bUA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
-  // 1) 세션 쿠키 선확보(메뉴 페이지 GET → JSESSIONID 등)
-  let cookie='';
-  try {
-    const rp=await fetch('http://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201',{headers:{'User-Agent':bUA,'Accept-Language':'ko-KR,ko;q=0.9'}});
-    const sc=(typeof rp.headers.getSetCookie==='function'?rp.headers.getSetCookie().join('; '):(rp.headers.get('set-cookie')||''));
-    cookie=sc.split(/,(?=[^;]+=)/).map(s=>s.split(';')[0].trim()).filter(Boolean).join('; ');
-    if(dbg) dbg.cookie = cookie ? cookie.slice(0,30)+'…' : '(없음)';
-  } catch(e){ if(dbg) dbg.cookieErr=e.message; }
-  const headers = {
-    'User-Agent':bUA, 'Accept':'application/json, text/javascript, */*; q=0.01', 'Accept-Language':'ko-KR,ko;q=0.9,en;q=0.8',
-    'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 'X-Requested-With':'XMLHttpRequest',
-    'Origin':'http://data.krx.co.kr', 'Referer':'http://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201',
-    'Cookie': cookie
-  };
-  const cand = [];
-  for (let i=2;i<=8;i++){ const dt=new Date(Date.now()-i*864e5); const dow=dt.getDay(); if(dow!==0&&dow!==6) cand.push(dt.toISOString().slice(0,10).replace(/-/g,'')); }
-  // 두 가지 파라미터 규격을 모두 시도(mktTpCd 방식 / mktId 방식)
-  const paramSets = (trdDd, mkt) => [
-    { bld:'dbms/MDC/STAT/srt/MDCSTAT30501', searchType:'1', mktTpCd:mkt, trdDd, share:'1', money:'1', csvxls_isNo:'false' },
-    { bld:'dbms/MDC/STAT/srt/MDCSTAT30501', mktId:(mkt==='1'?'STK':'KSQ'), trdDd, share:'1', money:'1', csvxls_isNo:'false' }
-  ];
-  const map = {}; let usedDate = '';
-  for (const trdDd of cand) {
-    let got = 0;
-    for (const mkt of ['1','2']) {   // 1/STK=KOSPI, 2/KSQ=KOSDAQ
-      for (const ps of paramSets(trdDd, mkt)) {
-        try {
-          const res = await fetch('http://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd', { method:'POST', headers, body: new URLSearchParams(ps).toString() });
-          if (!res.ok) { if (dbg && !dbg.lastErr) { dbg.lastErr=`${trdDd}/mkt${mkt}/${ps.mktId?'mktId':'mktTpCd'}: HTTP ${res.status}`; try{ dbg.lastBody=(await res.text()).slice(0,200); }catch(e){} } continue; }
-          const j = await res.json();
-          const rows = j.OutBlock_1 || j.output || j.block1 || j.OutBlock_2 || [];
-          if (dbg && !dbg.rowKeys && rows[0]) { dbg.topKeys=Object.keys(j); dbg.rowKeys=Object.keys(rows[0]); dbg.firstRow=rows[0]; dbg.okParam=ps.mktId?'mktId':'mktTpCd'; }
-          for (const r of rows) { const c=krShortCode(r); const rto=(r.BAL_RTO!=null?r.BAL_RTO:(r.bal_rto!=null?r.bal_rto:r.SHORT_BAL_RTO)); if(c&&rto!=null) map[c]=String(rto).replace(/[^0-9.]/g,''); }
-          got += rows.length;
-          if (rows.length) break;   // 이 규격이 먹혔으면 다음 시장으로
-        } catch (e) { if (dbg && !dbg.lastErr) dbg.lastErr = `${trdDd}/mkt${mkt}: ${e.message}`; }
-        await sleep(300);
-      }
-    }
-    if (got>0){ usedDate=trdDd; break; }
-  }
-  if (dbg) { dbg.mapSize=Object.keys(map).length; dbg.mapSample=Object.keys(map).slice(0,5); dbg.want=krCodes.slice(0,3); dbg.matched=krCodes.filter(c=>map[c]!=null).length; }
-  if (!Object.keys(map).length) { errors.push('KR SI: KRX 응답 없음(거래일/규격 확인)'); return out; }
-  const dstr = usedDate ? usedDate.slice(4,6)+'/'+usedDate.slice(6,8) : '';
-  for (const code of krCodes) { if (map[code]!=null) out[code] = { si: map[code]+'%', date: dstr }; }
-  return out;
-}
 
 /* ── PER·선행PER 시세 연동 재계산 ──────────────────────────────── */
 // per_live = per_authored × (price_live / price_authored).  EPS=px/per 를 앵커로 사용.
@@ -340,7 +288,10 @@ async function fetchFX(errors) {
 /* ============================ 메인 ================================= */
 (async () => {
   const html = fs.readFileSync(HTML_FILE, 'utf8');
-  const { cg, us, kr, seedAthPct, fund: fundSeed } = parseSymbols(html);
+  const { cg, kr, seedAthPct, fund: fundSeed } = parseSymbols(html);
+  // Yahoo에서 조회되지 않는 티커 제외(예: PX — 정확한 거래소 티커 확인 시 매핑 추가)
+  const YAHOO_SKIP = ['PX'];
+  const us = parseSymbols(html).us.filter(s => !YAHOO_SKIP.includes(s));
   let prev = {}; try { prev = JSON.parse(fs.readFileSync(OUT_FILE,'utf8')); } catch (e) {}
   const prevTech = prev.tech || {};
   const errors = [];
@@ -357,8 +308,8 @@ async function fetchFX(errors) {
   Object.assign(macro, await fetchCPI(errors));
   const si = {};
   Object.assign(si, await fetchSI_US(us, errors));
-  const krDbg = {};
-  Object.assign(si, await fetchSI_KR(kr, errors, krDbg));
+  // 한국 SI: KRX 정보데이터시스템이 해외(GitHub) IP를 WAF로 차단(응답 "LOGOUT")하여 자동 수집 불가 → 수동 운영
+  //  (한국 IP에서 KRX 조회 후 index.html의 해당 종목 si 값을 직접 갱신)
   const fund = computeFund(fundSeed, prices);
 
   // 직전 ATH(athAbs) 보존: 이번에 못 받은 종목도 전고점 유지
@@ -370,7 +321,7 @@ async function fetchFX(errors) {
     meta: { cryptoCount: cg.length, usCount: us.length, krCount: kr.length,
       pricesGot: Object.keys(prices).length, techGot: Object.keys(tech).length,
       optsGot: Object.keys(opts).length, indicesGot: Object.keys(indices).length,
-      siGot: Object.keys(si).length, fundGot: Object.keys(fund).length, errors, krDebug: krDbg }
+      siGot: Object.keys(si).length, fundGot: Object.keys(fund).length, krSI: '수동(KRX 해외IP 차단)', errors }
   };
   fs.writeFileSync(OUT_FILE, JSON.stringify(out, null, 2));
   console.log(`[done] px=${out.meta.pricesGot} tech=${out.meta.techGot} opts=${out.meta.optsGot} idx=${out.meta.indicesGot} si=${out.meta.siGot} fund=${out.meta.fundGot}`);
