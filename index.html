@@ -276,7 +276,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-07 · v1</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-07 · v2</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -302,7 +302,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-07 · v1 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-07 · v2 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -387,15 +387,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-07 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-07 · v2 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-07 · v1</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-07 · v2</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-03";
 const PUB_DATE="2026-06-07";  // 발행일
-const VERSION="v1";          // 버전 (수정 시 v# 증가)
+const VERSION="v2";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -1373,6 +1373,25 @@ function rewriteFigures(text, mpFmt, pcrStr){
   text = text.replace(/PCR\s*[\d.]+\*?/g, 'PCR '+pcrStr);
   return text;
 }
+// 서술 텍스트 내 "RSI 숫자[+판단어]"·"ATH -xx%"를 실시간 값과 일치시킴(판단어는 실제 RSI로 재계산)
+function rsiQual(n){ n=+n; if(isNaN(n))return''; if(n>=80)return'극과매수'; if(n>=70)return'과매수'; if(n<=30)return'과매도'; return'중립'; }
+function syncRSIATH(text, rsi, ath){
+  if(!text) return text;
+  if(rsi!=null && !isNaN(+rsi)){ const q=rsiQual(rsi); text=text.replace(/RSI\s*\d+(?:\s*(?:극과매수|과매수|과매도|중립))?/g, 'RSI '+rsi+(q?' '+q:'')); }
+  if(ath){ text=text.replace(/ATH\s*-?\d+%/g, 'ATH '+ath); }
+  return text;
+}
+// 모든 종목(한국 포함)의 SG 논거·카드 서술에서 RSI·ATH 수치를 실시간 값과 일치
+function applyNarrativeSync(){
+  SG.forEach(s=>{ if(s.arg) s.arg=syncRSIATH(s.arg, s.rsi, s.ath); });
+  renderStable();
+  ['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{
+    if(!r.issue)return;
+    const before=r.issue;
+    r.issue=syncRSIATH(r.issue, r.rsi, r.ath);
+    if(r.issue!==before){ const ik=r.cgId||r.avSym||r.krCode; if(ik) document.querySelectorAll(`[data-issue="${ik}"]`).forEach(el=>{el.textContent=r.issue;el.title=r.issue;}); }
+  })));
+}
 function applyOptions(opts){
   if(!opts||!Object.keys(opts).length)return;
   Object.keys(opts).forEach(key=>{
@@ -1572,6 +1591,7 @@ async function loadServerData(){
     if(d.prices) applyPrices(d.prices);
     if(d.si)     applySI(d.si);
     if(d.fund)   applyFund(d.fund);
+    applyNarrativeSync();   // 서술의 RSI·ATH 수치를 실시간 값과 일치(한국 포함 전 종목)
     // 상태줄·배지에 서버 갱신 시각 표기
     const t=d.updated?new Date(d.updated):null;
     const ts=t?t.toLocaleString('ko-KR',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):d.date;
