@@ -208,15 +208,21 @@ async function fetchOptions(usOptSyms, errors) {
 /* ── 美 CPI (BLS 공개 API, 키 불필요) ──────────────────────────── */
 async function fetchCPI(errors) {
   try {
-    // CUUR0000SA0 = CPI-U(전도시 평균, 전 품목), 전년동월대비 % 계산
-    const j = await getJSON('https://api.bls.gov/publicAPI/v2/timeseries/data/CUUR0000SA0', {
+    // CUUR0000SA0 = CPI-U(전 품목). 최근 13개월 이상 받아 전년동월대비(YoY) 직접 계산
+    const ey = new Date().getFullYear();
+    const j = await getJSON('https://api.bls.gov/publicAPI/v2/timeseries/data/', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ seriesid: ['CUUR0000SA0'], latest: true, calculations: true })
+      body: JSON.stringify({ seriesid: ['CUUR0000SA0'], startyear: String(ey-1), endyear: String(ey) })
     });
     const series = j.Results && j.Results.series && j.Results.series[0];
-    const d = series && series.data && series.data[0];
-    const yoy = d && d.calculations && d.calculations.pct_changes && d.calculations.pct_changes['12'];
-    if (yoy != null) return { cpi: parseFloat(yoy).toFixed(1) + '%', cpiDate: `${d.year}-${d.period.replace('M','')}` };
+    const data = series && series.data;   // 최신이 [0]
+    if (data && data.length >= 13) {
+      const latest = parseFloat(data[0].value), prior = parseFloat(data[12].value);
+      if (latest && prior) {
+        const yoy = ((latest - prior) / prior * 100).toFixed(1);
+        return { cpi: yoy + '%', cpiDate: `${data[0].year}-${data[0].period.replace('M','')}` };
+      }
+    }
   } catch (e) { errors.push(`CPI(BLS): ${e.message}`); }
   return {};
 }
@@ -232,35 +238,42 @@ async function fetchSI_US(usSyms, errors) {
       });
       const rows = j.data && j.data.shortInterestTable && j.data.shortInterestTable.rows;
       const r0 = rows && rows[0];
-      if (r0) {
-        const pct = r0.percentOfFloat || null;
-        out[sym] = { si: pct ? (parseFloat(pct).toFixed(1)+'%') : (r0.daysToCover ? r0.daysToCover+'일' : '—'), date: r0.settlementDate || '' };
+      if (r0 && r0.daysToCover != null) {
+        const dtc = parseFloat(String(r0.daysToCover).replace(/[^0-9.]/g,''));
+        const dstr = r0.settlementDate ? String(r0.settlementDate).replace(/^(\d+)\/(\d+)\/\d+$/,'$1/$2') : '';
+        if (!isNaN(dtc)) out[sym] = { si: dtc.toFixed(1)+'일', date: dstr };  // SIR(공매도 비율, 일)
       }
     } catch (e) { errors.push(`US SI ${sym}: ${e.message}`); }
     await sleep(250);
   }
   return out;
 }
-// 한국: KRX 정보데이터시스템 공개 JSON(개별종목 공매도 종합정보, best-effort)
+// 한국: KRX 정보데이터시스템 — 특정 거래일의 전종목 공매도 순보유잔고를 한 번에 받아 필터
+function krShortCode(r){ if(r.ISU_SRT_CD)return r.ISU_SRT_CD; const c=r.ISU_CD||r.isu_cd||''; if(/^KR7/.test(c))return c.substr(3,6); return c.replace(/\D/g,'').slice(-6); }
 async function fetchSI_KR(krCodes, errors) {
   const out = {};
-  const d3 = new Date(Date.now()-3*864e5).toISOString().slice(0,10).replace(/-/g,''); // T+2 지연 고려 3일 전
-  for (const code of krCodes) {
-    try {
-      const body = new URLSearchParams({
-        bld: 'dbms/MDC/STAT/srt/MDCSTAT30001', isuCd: 'KR7' + code + '000',
-        strtDd: d3, endDd: d3, share: '1', money: '1', csvxls_isNo: 'false'
-      });
-      const j = await getJSON('https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd', {
-        method: 'POST', headers: { 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 'Referer':'https://data.krx.co.kr/' }, body: body.toString()
-      });
-      const rows = j.OutBlock_1 || j.output || [];
-      const r0 = rows[rows.length-1] || rows[0];
-      const ratio = r0 && (r0.BAL_RTO || r0.bal_rto);
-      if (ratio != null) out[code] = { si: String(ratio).replace(/[^0-9.]/g,'')+'%', date: d3.slice(4,6)+'/'+d3.slice(6,8) };
-    } catch (e) { errors.push(`KR SI ${code}: ${e.message}`); }
-    await sleep(250);
+  // 최근 거래일 후보(주말·T+2 지연 고려): 2~8일 전 평일
+  const cand = [];
+  for (let i=2;i<=8;i++){ const dt=new Date(Date.now()-i*864e5); const dow=dt.getDay(); if(dow!==0&&dow!==6) cand.push(dt.toISOString().slice(0,10).replace(/-/g,'')); }
+  const headers = { 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 'Origin':'https://data.krx.co.kr', 'Referer':'https://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201' };
+  const map = {}; let usedDate = '';
+  for (const trdDd of cand) {
+    let got = 0;
+    for (const mkt of ['1','2']) {   // 1=KOSPI, 2=KOSDAQ
+      try {
+        const body = new URLSearchParams({ bld:'dbms/MDC/STAT/srt/MDCSTAT30501', searchType:'1', mktTpCd:mkt, trdDd, share:'1', money:'1', csvxls_isNo:'false' });
+        const j = await getJSON('https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd', { method:'POST', headers, body: body.toString() });
+        const rows = j.OutBlock_1 || j.output || j.block1 || [];
+        for (const r of rows) { const c=krShortCode(r); const rto=(r.BAL_RTO!=null?r.BAL_RTO:r.bal_rto); if(c&&rto!=null) map[c]=String(rto).replace(/[^0-9.]/g,''); }
+        got += rows.length;
+      } catch (e) {}
+      await sleep(300);
+    }
+    if (got>0){ usedDate=trdDd; break; }
   }
+  if (!Object.keys(map).length) { errors.push('KR SI: KRX 응답 없음(거래일/규격 확인)'); return out; }
+  const dstr = usedDate ? usedDate.slice(4,6)+'/'+usedDate.slice(6,8) : '';
+  for (const code of krCodes) { if (map[code]!=null) out[code] = { si: map[code]+'%', date: dstr }; }
   return out;
 }
 
