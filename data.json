@@ -1,6 +1,6 @@
 {
   "date": "2026-06-07",
-  "updated": "2026-06-07T18:00:43.429Z",
+  "updated": "2026-06-07T19:42:27.067Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 414000
     },
     "bitcoin": {
-      "price": 62139,
-      "chg": 2.63232
+      "price": 61279,
+      "chg": 1.16556
     },
     "ethereum": {
-      "price": 1631.14,
-      "chg": 4.9825
+      "price": 1609.98,
+      "chg": 3.5793
     },
     "ripple": {
-      "price": 1.14,
-      "chg": 5.70086
+      "price": 1.12,
+      "chg": 3.92841
     },
     "solana": {
-      "price": 65.3,
-      "chg": 6.08958
+      "price": 63.84,
+      "chg": 3.43388
     },
     "dogecoin": {
-      "price": 0.084751,
-      "chg": 5.19008
+      "price": 0.083255,
+      "chg": 3.10622
     },
     "chainlink": {
-      "price": 7.74,
-      "chg": 5.81284
+      "price": 7.58,
+      "chg": 3.6644
     },
     "ondo-finance": {
-      "price": 0.342858,
-      "chg": 5.95206
+      "price": 0.332862,
+      "chg": 3.8967
     },
     "aave": {
-      "price": 62.74,
-      "chg": 4.29767
+      "price": 61.26,
+      "chg": 1.63931
     },
     "filecoin": {
-      "price": 0.757833,
-      "chg": 5.36207
+      "price": 0.741396,
+      "chg": 1.98985
     },
     "NVDA": {
       "price": 205.1
@@ -223,14 +223,14 @@
     "solana": {
       "ath": "-78%",
       "athAbs": 293.31,
-      "rsi": 22
+      "rsi": 21
     },
     "dogecoin": {
-      "ath": "-88%",
+      "ath": "-89%",
       "athAbs": 0.731578
     },
     "chainlink": {
-      "ath": "-85%",
+      "ath": "-86%",
       "athAbs": 52.7,
       "rsi": 27
     },
@@ -239,7 +239,7 @@
       "athAbs": 2.14
     },
     "aave": {
-      "ath": "-90%",
+      "ath": "-91%",
       "athAbs": 661.69,
       "rsi": 20
     },
@@ -446,12 +446,12 @@
   "opts": {
     "BTC": {
       "maxPain": 62000,
-      "pcr": 1.41,
+      "pcr": 1.48,
       "expiry": "8JUN26"
     },
     "ETH": {
       "maxPain": 1625,
-      "pcr": 0.87,
+      "pcr": 0.86,
       "expiry": "8JUN26"
     },
     "NVDA": {
