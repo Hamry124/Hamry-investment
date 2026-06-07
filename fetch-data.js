@@ -266,31 +266,45 @@ async function fetchSI_US(usSyms, errors) {
 function krShortCode(r){ let v=r.ISU_SRT_CD||r.ISU_CD||r.isu_cd||r.ISU_SRT_CD2||''; v=String(v).trim(); if(/^KR7/.test(v))return v.substr(3,6); const d=v.replace(/\D/g,''); return d.length>=6?d.slice(0,6):d; }
 async function fetchSI_KR(krCodes, errors, dbg) {
   const out = {};
+  const bUA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+  // 1) 세션 쿠키 선확보(메뉴 페이지 GET → JSESSIONID 등)
+  let cookie='';
+  try {
+    const rp=await fetch('http://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201',{headers:{'User-Agent':bUA,'Accept-Language':'ko-KR,ko;q=0.9'}});
+    const sc=(typeof rp.headers.getSetCookie==='function'?rp.headers.getSetCookie().join('; '):(rp.headers.get('set-cookie')||''));
+    cookie=sc.split(/,(?=[^;]+=)/).map(s=>s.split(';')[0].trim()).filter(Boolean).join('; ');
+    if(dbg) dbg.cookie = cookie ? cookie.slice(0,30)+'…' : '(없음)';
+  } catch(e){ if(dbg) dbg.cookieErr=e.message; }
+  const headers = {
+    'User-Agent':bUA, 'Accept':'application/json, text/javascript, */*; q=0.01', 'Accept-Language':'ko-KR,ko;q=0.9,en;q=0.8',
+    'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 'X-Requested-With':'XMLHttpRequest',
+    'Origin':'http://data.krx.co.kr', 'Referer':'http://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201',
+    'Cookie': cookie
+  };
   const cand = [];
   for (let i=2;i<=8;i++){ const dt=new Date(Date.now()-i*864e5); const dow=dt.getDay(); if(dow!==0&&dow!==6) cand.push(dt.toISOString().slice(0,10).replace(/-/g,'')); }
-  const headers = {
-    'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'Accept':'application/json, text/javascript, */*; q=0.01',
-    'Accept-Language':'ko-KR,ko;q=0.9,en;q=0.8',
-    'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
-    'X-Requested-With':'XMLHttpRequest',
-    'Origin':'http://data.krx.co.kr',
-    'Referer':'http://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201'
-  };
+  // 두 가지 파라미터 규격을 모두 시도(mktTpCd 방식 / mktId 방식)
+  const paramSets = (trdDd, mkt) => [
+    { bld:'dbms/MDC/STAT/srt/MDCSTAT30501', searchType:'1', mktTpCd:mkt, trdDd, share:'1', money:'1', csvxls_isNo:'false' },
+    { bld:'dbms/MDC/STAT/srt/MDCSTAT30501', mktId:(mkt==='1'?'STK':'KSQ'), trdDd, share:'1', money:'1', csvxls_isNo:'false' }
+  ];
   const map = {}; let usedDate = '';
   for (const trdDd of cand) {
     let got = 0;
-    for (const mkt of ['1','2']) {   // 1=KOSPI, 2=KOSDAQ
-      try {
-        const body = new URLSearchParams({ bld:'dbms/MDC/STAT/srt/MDCSTAT30501', searchType:'1', mktTpCd:mkt, trdDd, share:'1', money:'1', csvxls_isNo:'false' });
-        const j = await getJSON('http://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd', { method:'POST', headers, body: body.toString() });
-        const rows = j.OutBlock_1 || j.output || j.block1 || j.OutBlock_2 || [];
-        // 진단: 응답의 최상위 키 + 첫 행 키 + 첫 행 전체를 1회만 기록
-        if (dbg && !dbg.topKeys && rows) { dbg.topKeys=Object.keys(j); if(rows[0]){ dbg.rowKeys=Object.keys(rows[0]); dbg.firstRow=rows[0]; dbg.rowCount=rows.length; dbg.usedDate=trdDd; dbg.mkt=mkt; } }
-        for (const r of rows) { const c=krShortCode(r); const rto=(r.BAL_RTO!=null?r.BAL_RTO:(r.bal_rto!=null?r.bal_rto:r.SHORT_BAL_RTO)); if(c&&rto!=null) map[c]=String(rto).replace(/[^0-9.]/g,''); }
-        got += rows.length;
-      } catch (e) { if (dbg && !dbg.lastErr) dbg.lastErr = `${trdDd}/mkt${mkt}: ${e.message}`; }
-      await sleep(300);
+    for (const mkt of ['1','2']) {   // 1/STK=KOSPI, 2/KSQ=KOSDAQ
+      for (const ps of paramSets(trdDd, mkt)) {
+        try {
+          const res = await fetch('http://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd', { method:'POST', headers, body: new URLSearchParams(ps).toString() });
+          if (!res.ok) { if (dbg && !dbg.lastErr) { dbg.lastErr=`${trdDd}/mkt${mkt}/${ps.mktId?'mktId':'mktTpCd'}: HTTP ${res.status}`; try{ dbg.lastBody=(await res.text()).slice(0,200); }catch(e){} } continue; }
+          const j = await res.json();
+          const rows = j.OutBlock_1 || j.output || j.block1 || j.OutBlock_2 || [];
+          if (dbg && !dbg.rowKeys && rows[0]) { dbg.topKeys=Object.keys(j); dbg.rowKeys=Object.keys(rows[0]); dbg.firstRow=rows[0]; dbg.okParam=ps.mktId?'mktId':'mktTpCd'; }
+          for (const r of rows) { const c=krShortCode(r); const rto=(r.BAL_RTO!=null?r.BAL_RTO:(r.bal_rto!=null?r.bal_rto:r.SHORT_BAL_RTO)); if(c&&rto!=null) map[c]=String(rto).replace(/[^0-9.]/g,''); }
+          got += rows.length;
+          if (rows.length) break;   // 이 규격이 먹혔으면 다음 시장으로
+        } catch (e) { if (dbg && !dbg.lastErr) dbg.lastErr = `${trdDd}/mkt${mkt}: ${e.message}`; }
+        await sleep(300);
+      }
     }
     if (got>0){ usedDate=trdDd; break; }
   }
