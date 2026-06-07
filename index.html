@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2030 프로젝트 | 통합 투자 대시보드</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f5f7;--bg2:#eceef1;--card:#ffffff;--card2:#f8f9fb;--border:#e2e5ea;--border2:#d4d8df;
+  --text:#1a1f2e;--muted:#6b7488;--dim:#9aa1b2;
+  --s:#d97706;--a:#0284c7;--b:#7c3aed;
+  --green:#059669;--red:#dc2626;--amber:#d97706;--cyan:#0891b2;--navy:#1e3a5f;
+  --shadow:0 1px 3px rgba(16,24,40,.06),0 1px 2px rgba(16,24,40,.04);
+  --shadow-md:0 4px 12px rgba(16,24,40,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:20px 14px 60px}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* HEADER */
+.header{text-align:center;margin-bottom:6px}
+.header .eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:7px;font-weight:600}
+.header h1{font-size:32px;font-weight:900;letter-spacing:-1px;color:var(--navy)}
+.header .sub{color:var(--muted);font-size:13px;margin-top:5px;font-weight:500}
+.header .ver{display:inline-block;margin-top:9px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:4px 14px;background:var(--card)}
+.hr-line{height:1px;width:100%;margin:16px 0 18px;background:linear-gradient(90deg,transparent,var(--border2),transparent)}
+
+/* UPDATE BAR */
+.upd-bar{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 16px;margin-bottom:18px;box-shadow:var(--shadow)}
+.upd-status{font-size:12px;color:var(--muted);font-weight:500}
+.upd-status b{color:var(--text);font-family:'JetBrains Mono',monospace}
+.upd-status .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.upd-btn{background:var(--navy);color:#fff;border:none;padding:7px 16px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;transition:all .18s}
+.upd-btn:hover{background:#16304f;transform:translateY(-1px)}
+.upd-btn:disabled{background:var(--dim);cursor:not-allowed;transform:none}
+.upd-btn.sec{background:var(--card);color:var(--muted);border:1px solid var(--border)}
+.upd-btn.sec:hover{background:var(--bg2);color:var(--text)}
+
+/* API PANEL */
+.api-panel{display:none;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:18px;box-shadow:var(--shadow)}
+.api-panel.open{display:block;animation:fu .3s ease}
+.api-panel h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.api-panel .api-warn{font-size:11px;color:var(--red);background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.15);border-radius:8px;padding:9px 12px;margin-bottom:12px;line-height:1.5}
+.api-row{display:grid;grid-template-columns:130px 1fr;gap:8px;align-items:center;margin-bottom:8px}
+@media(max-width:600px){.api-row{grid-template-columns:1fr}}
+.api-row label{font-size:11px;font-weight:600;color:var(--muted)}
+.api-row input{padding:8px 11px;border:1px solid var(--border2);border-radius:7px;font-size:12px;font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--text)}
+.api-row input:focus{outline:none;border-color:var(--cyan)}
+.api-note{font-size:10px;color:var(--dim);margin-top:8px;line-height:1.5}
+
+/* INDEX STRIP */
+.idx{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px;margin-bottom:22px}
+.idx .ic{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:11px 13px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.idx .ic::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--cyan)}
+.idx .ic .il{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+.idx .ic .iv{font-size:18px;font-weight:800;margin-top:3px;font-family:'JetBrains Mono',monospace;color:var(--text)}
+.idx .ic .ix{font-size:10px;margin-top:1px;font-weight:600}
+
+/* BLOCK TITLE */
+.block-title{display:flex;align-items:center;gap:10px;margin:28px 0 13px}
+.block-title .bt-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#fff;background:var(--cyan);padding:4px 9px;border-radius:6px}
+.block-title h2{font-size:18px;font-weight:800;letter-spacing:-.3px;color:var(--navy)}
+.block-title .bt-sub{font-size:11px;color:var(--muted);margin-left:auto;font-weight:500}
+
+/* EXEC */
+.exec{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.exec .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.exec .row{grid-template-columns:1fr}}
+.exec h3{font-size:13px;font-weight:700;color:var(--cyan);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.exec h3::before{content:'';width:5px;height:14px;background:var(--cyan);border-radius:2px}
+.exec p{font-size:12px;color:#4a5266;line-height:1.65;margin-bottom:10px}
+.exec .thesis{list-style:none}
+.exec .thesis li{font-size:12px;color:#4a5266;line-height:1.55;padding:6px 0 6px 18px;position:relative;border-bottom:1px solid var(--border)}
+.exec .thesis li:last-child{border-bottom:none}
+.exec .thesis li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-weight:700}
+.exec .thesis li b{color:var(--text)}
+.exec b{color:var(--text)}
+.note{font-size:10px;color:var(--dim);font-style:italic;margin-top:8px;line-height:1.5}
+.glegend{display:flex;gap:9px;flex-wrap:wrap;margin:11px 0 4px}
+.gpill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:5px 11px;border-radius:20px;border:1px solid var(--border);background:var(--card2);color:var(--text)}
+.gpill .gdot{width:9px;height:9px;border-radius:50%}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--card);box-shadow:var(--shadow)}
+table.dt{width:100%;border-collapse:collapse;font-size:11.5px;min-width:720px}
+table.dt th{text-align:left;color:var(--muted);font-weight:700;padding:11px 9px;border-bottom:1px solid var(--border);font-size:9px;text-transform:uppercase;letter-spacing:.6px;background:var(--card2);white-space:nowrap}
+table.dt td{padding:10px 9px;border-bottom:1px solid var(--border);white-space:nowrap}
+table.dt tr:last-child td{border-bottom:none}
+table.dt tbody tr{transition:background .12s}
+table.dt tbody tr:hover{background:var(--card2)}
+.tk-cell{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--navy)}
+.gtag{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;border-radius:5px;font-size:10px;font-weight:800;color:#fff}
+.gtag.gs{background:var(--s)}.gtag.ga{background:var(--a)}.gtag.gb{background:var(--b)}
+/* 매수 시그널 하이라이팅 (연노랑 3단계) */
+table.dt tbody tr.hl1{background:#fefce8}
+table.dt tbody tr.hl2{background:#fef9c3}
+table.dt tbody tr.hl3{background:#fde68a}
+table.dt tbody tr.hl1:hover{background:#fef9c3}
+table.dt tbody tr.hl2:hover{background:#fef08a}
+table.dt tbody tr.hl3:hover{background:#fcd34d}
+.hl-badge{display:inline-block;font-size:8px;font-weight:700;color:#92400e;background:#fde68a;border-radius:4px;padding:1px 5px;margin-left:5px;vertical-align:middle}
+/* 신규: 종목 카드 (한 줄형, 컴팩트) */
+.stk-list{display:flex;flex-direction:column;gap:6px;margin-bottom:6px}
+.stk-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 13px;box-shadow:var(--shadow);transition:border-color .15s}
+.stk-card:hover{border-color:var(--border2)}
+/* 1행: 메달 + 종목명 + 이슈(한 줄) */
+.stk-top{display:flex;align-items:baseline;gap:8px;flex-wrap:nowrap;margin-bottom:8px}
+.stk-medal{font-size:16px;flex-shrink:0;line-height:1.2}
+.stk-nm{font-size:13.5px;font-weight:700;color:var(--navy);flex-shrink:0;white-space:nowrap}
+.stk-obadge{font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.3px;flex-shrink:0}
+.stk-issue{font-size:11px;color:#1d4ed8;font-weight:500;line-height:1.45;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:760px){.stk-issue{white-space:normal}}
+/* 2행: 데이터 지표 그리드 */
+.stk-metrics{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+@media(max-width:760px){.stk-metrics{grid-template-columns:repeat(4,1fr);row-gap:8px}}
+.stk-m{text-align:center;padding:3px 2px}
+.stk-m .ml{font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-bottom:2px}
+.stk-m .mv{font-size:12.5px;font-weight:700;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.stk-m .mv.kr{font-size:11px}
+.stk-m.keycol .mv{font-size:10.5px;font-family:'Noto Sans KR',sans-serif;color:var(--a);font-weight:700;white-space:normal;line-height:1.3}
+.ob-buy{background:rgba(5,150,105,.12);color:var(--green)}
+.ob-watch{background:rgba(217,119,6,.12);color:var(--amber)}
+.ob-sell{background:rgba(220,38,38,.12);color:var(--red)}
+.live{position:relative}
+.live[data-live="1"]::after{content:'●';color:var(--green);font-size:7px;position:absolute;top:-2px;right:-8px;animation:pulse 2s infinite}
+/* 실시간 갱신된 가격: 폰트 색상 변경 + 강조 */
+[data-live="1"]{color:#0a7d2c !important;font-weight:700 !important;transition:color .3s}
+.idx-strip [data-live="1"], .ic [data-live="1"]{color:#0a7d2c !important}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* NAV */
+.nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:6px 0 13px}
+.nb{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:8px 15px;border-radius:9px;cursor:pointer;font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;transition:all .18s;box-shadow:var(--shadow)}
+.nb:hover{color:var(--text);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.nb.a{background:var(--navy);color:#fff;border-color:var(--navy)}
+.nb .nb-ic{font-size:13px;margin-right:5px}
+.nb .nb-ct{font-size:9px;margin-left:6px;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.nb.a .nb-ct{color:#9fb8d4}
+
+/* FILTER */
+.fbar{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.fb{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:5px 13px;border-radius:18px;cursor:pointer;font-size:11px;font-weight:600;font-family:'Noto Sans KR',sans-serif;transition:all .16s}
+.fb:hover{border-color:var(--border2);color:var(--text)}
+.fb.a{background:var(--navy);color:#fff;border-color:var(--navy)}
+.fb .fb-c{font-family:'JetBrains Mono',monospace;font-size:9px;margin-left:5px;color:var(--dim)}
+.fb.a .fb-c{color:#9fb8d4}
+
+/* PANELS */
+.pn{display:none}.pn.a{display:block;animation:fu .3s ease}
+.intro-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:14px 16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.intro-card p{font-size:12.5px;color:#4a5266;line-height:1.6}
+.intro-card .ic-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--cyan);text-transform:uppercase;margin-bottom:6px}
+
+/* SECTOR */
+.sector{margin-bottom:18px}
+.sector-head{display:flex;align-items:center;gap:9px;margin-bottom:9px;flex-wrap:wrap}
+.sector-head .sh-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#fff;background:var(--cyan);padding:3px 7px;border-radius:5px}
+.sector-head h4{font-size:14px;font-weight:700;color:var(--navy)}
+.sector-head .sh-cnt{font-size:10px;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.sector-desc{font-size:11.5px;color:#1d4ed8;line-height:1.6;margin-bottom:10px;padding:9px 12px;background:rgba(37,99,235,.05);border-left:3px solid var(--a);border-radius:0 7px 7px 0;font-weight:500}
+
+/* CARD */
+.scards{display:flex;flex-direction:column;gap:7px}
+.scard{background:var(--card);border:1px solid var(--border);border-radius:11px;overflow:hidden;transition:all .18s;box-shadow:var(--shadow)}
+.scard:hover{border-color:var(--border2);box-shadow:var(--shadow-md)}
+.scard-main{display:grid;grid-template-columns:auto 1.5fr repeat(4,1fr) auto;gap:8px;align-items:center;padding:12px 14px;cursor:pointer}
+@media(max-width:820px){.scard-main{grid-template-columns:auto 1.4fr 1fr 1fr auto;row-gap:8px}.scard-metric.hide-m{display:none}}
+.scard-grade{width:22px;height:22px;line-height:22px;text-align:center;border-radius:6px;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+.sc-name{font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;color:var(--text)}
+.sc-name .sc-px{display:block;width:100%;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);font-weight:500;margin-top:1px}
+.opt-badge{display:inline-block;font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.3px}
+.ob-buy{background:rgba(5,150,105,.12);color:var(--green)}
+.ob-watch{background:rgba(217,119,6,.12);color:var(--amber)}
+.ob-sell{background:rgba(220,38,38,.12);color:var(--red)}
+.scard-metric{text-align:center}
+.scard-metric .m-l{font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.scard-metric .m-v{font-size:13px;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:1px;color:var(--text)}
+.chev{font-size:10px;color:var(--dim);transition:transform .2s;text-align:center}
+.scard.open .chev{transform:rotate(180deg)}
+.scard-detail{display:none;padding:0 14px 14px;border-top:1px solid var(--border)}
+.scard.open .scard-detail{display:block}
+.sd-thesis{font-size:11.5px;color:#4a5266;line-height:1.55;padding:11px 0 0}
+.sd-thesis b{color:var(--cyan)}
+
+/* OPT DETAIL */
+.optdet{margin-top:12px;background:var(--card2);border:1px solid var(--border);border-radius:9px;padding:12px}
+.optdet .od-title{font-size:10px;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:.5px;margin-bottom:9px}
+.od-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:680px){.od-grid{grid-template-columns:repeat(2,1fr)}}
+.od-cell{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:8px;text-align:center}
+.od-cell .odl{font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+.od-cell .odv{font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:2px}
+.mpbar{position:relative;height:36px;background:var(--card);border:1px solid var(--border);border-radius:7px;margin:10px 0 4px}
+.mpt{position:absolute;top:50%;left:8%;right:8%;height:3px;border-radius:2px;transform:translateY(-50%);background:linear-gradient(90deg,var(--red),var(--amber),var(--green))}
+.mpd{position:absolute;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;border:2px solid var(--card);z-index:2}
+.mpl{position:absolute;top:1px;transform:translateX(-50%);font-size:8.5px;font-weight:700;white-space:nowrap;font-family:'JetBrains Mono',monospace}
+.od-levels{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+.od-lv{flex:1;min-width:70px;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:6px 8px;text-align:center}
+.od-lv .lvl{font-size:7px;color:var(--dim);text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+.od-lv .lvv{font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:1px}
+.sq-row{display:flex;gap:10px;margin-top:9px;flex-wrap:wrap}
+.sq-item{flex:1;min-width:130px}
+.sq-item .sql{font-size:9px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:3px;font-weight:600}
+.sq-item .stars{color:var(--s);letter-spacing:1px;font-size:10px}
+.sqbar{height:6px;background:var(--bg2);border-radius:4px;overflow:hidden}
+.sqfill{height:100%;border-radius:4px}
+
+/* APPENDIX */
+.appendix{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:17px;margin-top:14px;box-shadow:var(--shadow)}
+.appendix h4{font-size:13px;font-weight:700;color:var(--s);margin:14px 0 8px}
+.appendix h4:first-child{margin-top:0}
+.appendix p{font-size:11.5px;color:#4a5266;line-height:1.6;margin-bottom:8px}
+.appendix b{color:var(--text)}
+.disclaimer{text-align:center;margin-top:26px;font-size:9px;color:var(--dim);line-height:1.5}
+/* 우상단 고정 발행/버전 배지 */
+.corner-ver{position:fixed;top:10px;right:12px;z-index:50;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:18px;padding:5px 13px;box-shadow:var(--shadow);backdrop-filter:blur(4px)}
+/* 금색 페이지 테두리 */
+body{border:4px solid transparent;border-image:linear-gradient(135deg,#E8CC6A,#F0D87A,#E8CC6A) 1;min-height:100vh}
+@media(max-width:600px){body{border-width:3px}}
+/* 헤더 좌상단 엠블럼 */
+.header{position:relative}
+.header-emblem{position:absolute;left:0;top:-4px;width:86px;height:86px}
+.header-emblem svg{width:100%;height:100%;display:block;filter:drop-shadow(0 2px 5px rgba(16,24,40,.15))}
+@media(max-width:760px){.header-emblem{position:static;transform:none;margin:0 auto 8px;width:70px;height:70px}}
+@media(max-width:600px){.corner-ver{font-size:8.5px;padding:4px 9px;top:6px;right:6px}}
+/* 하단 서명 */
+.signature{text-align:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:1px;color:var(--navy)}
+.signature .sig-sub{display:block;font-family:'Noto Sans KR',sans-serif;font-size:9px;font-weight:400;letter-spacing:0;color:var(--dim);margin-top:4px}
+/* 화면 하단 고정 서명 바 (항상 노출) */
+.fixed-sig{position:fixed;bottom:0;left:0;right:0;z-index:50;text-align:center;padding:6px 12px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:var(--navy);
+  background:rgba(255,255,255,.92);border-top:1px solid var(--border);backdrop-filter:blur(6px)}
+.fixed-sig .fs-sub{font-family:'Noto Sans KR',sans-serif;font-size:9px;font-weight:400;letter-spacing:0;color:var(--dim);margin-left:8px}
+@media(max-width:600px){.fixed-sig{font-size:8.5px;padding:5px 8px}.fixed-sig .fs-sub{display:block;margin-left:0;margin-top:2px}}
+body{padding-bottom:34px}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle;margin-right:5px}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* 스코어링 부록 */
+.score-legend{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:14px 0 18px}
+@media(max-width:760px){.score-legend{grid-template-columns:1fr 1fr}}
+.sl-box{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;font-size:10.5px;line-height:1.5}
+.sl-box b{font-size:11.5px;display:block;margin-bottom:3px}.sl-box span{color:var(--muted)}
+h3.rg{font-size:13px;color:var(--navy);margin:20px 0 9px;display:flex;align-items:center;gap:9px;font-weight:700}
+h3.rg::before{content:"";width:4px;height:14px;background:var(--gold);border-radius:2px}
+h3.rg .rg-c{font-size:10px;color:var(--dim);font-weight:500}
+table.score-tbl{width:100%;border-collapse:collapse;font-size:12.5px;min-width:780px}
+table.score-tbl th{text-align:center;color:var(--muted);font-weight:700;padding:10px 7px;border-bottom:1px solid var(--border);font-size:11px;letter-spacing:.2px;background:var(--card2);white-space:nowrap;line-height:1.4}
+table.score-tbl th .th-max{font-size:9px;font-weight:600;opacity:.65}
+table.score-tbl th:first-child{text-align:left}
+table.score-tbl th:first-child,table.score-tbl td:first-child{width:156px;min-width:156px;max-width:156px}
+table.score-tbl td:nth-child(2){width:56px;text-align:center}
+table.score-tbl td{padding:9px 7px;border-bottom:1px solid var(--border);white-space:nowrap;vertical-align:middle;height:40px}
+table.score-tbl tr:last-child td{border-bottom:none}
+table.score-tbl tbody tr{transition:background .12s}
+table.score-tbl tbody tr:hover{background:var(--card2)}
+table.score-tbl .num{font-family:'JetBrains Mono',monospace;text-align:center;font-size:12px;color:var(--text)}
+table.score-tbl .num.tot{font-weight:800;color:var(--navy);font-size:14px}
+table.score-tbl .num.sep{border-left:1px solid var(--border)}
+.sc-tk{font-weight:700;color:var(--navy);font-size:11.5px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-tk.long{font-size:11.5px}
+.sbar{display:flex;height:9px;border-radius:5px;overflow:hidden;background:var(--bg2);min-width:110px;border:1px solid var(--border)}
+.sbar-q{background:linear-gradient(90deg,#E8CC6A,#C9A227)}
+.sbar-l{background:linear-gradient(90deg,#3B82C4,#1E3A5F)}
+.chg{display:inline-flex;align-items:center;justify-content:center;height:20px;background:rgba(220,38,38,.1);color:#dc2626;font-weight:700;font-size:9.5px;padding:0 7px;border-radius:5px;font-family:'JetBrains Mono',monospace;vertical-align:middle}
+.same{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;text-align:center;border-radius:5px;font-size:10px;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace;vertical-align:middle}
+.same.gs{background:var(--s)}.same.ga{background:var(--a)}.same.gb{background:var(--b)}
+.score-note{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:16px;font-size:11.5px;color:var(--text);line-height:1.7}
+.score-note ul{margin:9px 0 4px;padding-left:18px}
+.score-note li{margin-bottom:5px;font-size:11px;color:var(--muted)}
+.score-intro{font-size:12px;color:var(--text);line-height:1.7;margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="corner-ver" id="cornerVer">발행 2026-06-05 · v1</div>
+<div class="header">
+  <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+<defs>
+<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FDE98C"/><stop offset="0.45" stop-color="#F2C521"/><stop offset="1" stop-color="#C8901A"/></linearGradient>
+<linearGradient id="navy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E3A5F"/><stop offset="1" stop-color="#142840"/></linearGradient>
+<radialGradient id="navyR" cx="0.5" cy="0.4" r="0.7"><stop offset="0" stop-color="#2A4E7A"/><stop offset="1" stop-color="#142840"/></radialGradient>
+<linearGradient id="leafg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FDE98C"/><stop offset="0.45" stop-color="#F2C521"/><stop offset="1" stop-color="#C8901A"/></linearGradient>
+</defs>
+<circle cx="120" cy="120" r="112" fill="url(#navy)" stroke="url(#gold)" stroke-width="5"/>
+<circle cx="120" cy="120" r="72" fill="none" stroke="url(#gold)" stroke-width="3"/>
+<circle cx="120" cy="120" r="68.5" fill="url(#navyR)"/>
+<path id="arcTop" d="M 30 120 A 90 90 0 0 1 210 120" fill="none"/>
+<text font-family="Georgia,'Times New Roman',serif" font-size="15" font-weight="bold" fill="url(#gold)" letter-spacing="3" dominant-baseline="middle"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">HAMRY INVESTMENT</textPath></text>
+<path d="M 0 -6.6 Q 3.1 0 0 6.6 Q -3.1 0 0 -6.6 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(108.6,214.9) rotate(224.9)"/><path d="M 0 -5.0 Q 2.3 0 0 5.0 Q -2.3 0 0 -5.0 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(109.6,206.5) rotate(201.9)"/><path d="M 0 -6.3 Q 2.9 0 0 6.3 Q -2.9 0 0 -6.3 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(97.4,212.6) rotate(231.7)"/><path d="M 0 -4.7 Q 2.2 0 0 4.7 Q -2.2 0 0 -4.7 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(99.3,204.7) rotate(208.7)"/><path d="M 0 -5.9 Q 2.7 0 0 5.9 Q -2.7 0 0 -5.9 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(86.6,208.9) rotate(238.6)"/><path d="M 0 -4.4 Q 2.0 0 0 4.4 Q -2.0 0 0 -4.4 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(89.3,201.8) rotate(215.6)"/><path d="M 0 -5.6 Q 2.6 0 0 5.6 Q -2.6 0 0 -5.6 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(76.4,204.0) rotate(245.4)"/><path d="M 0 -4.2 Q 1.9 0 0 4.2 Q -1.9 0 0 -4.2 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(79.7,197.7) rotate(222.4)"/><path d="M 0 -5.2 Q 2.4 0 0 5.2 Q -2.4 0 0 -5.2 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(66.8,198.0) rotate(252.3)"/><path d="M 0 -3.9 Q 1.8 0 0 3.9 Q -1.8 0 0 -3.9 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(70.6,192.5) rotate(229.3)"/><path d="M 0 -4.9 Q 2.2 0 0 4.9 Q -2.2 0 0 -4.9 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(58.1,190.8) rotate(259.1)"/><path d="M 0 -3.6 Q 1.7 0 0 3.6 Q -1.7 0 0 -3.6 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(62.2,186.2) rotate(236.1)"/><path d="M 0 -4.5 Q 2.1 0 0 4.5 Q -2.1 0 0 -4.5 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(50.3,182.8) rotate(266.0)"/><path d="M 0 -3.4 Q 1.6 0 0 3.4 Q -1.6 0 0 -3.4 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(54.6,178.9) rotate(243.0)"/><path d="M 0 -6.6 Q 3.1 0 0 6.6 Q -3.1 0 0 -6.6 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(131.4,214.9) rotate(135.1)"/><path d="M 0 -5.0 Q 2.3 0 0 5.0 Q -2.3 0 0 -5.0 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(130.4,206.5) rotate(158.1)"/><path d="M 0 -6.3 Q 2.9 0 0 6.3 Q -2.9 0 0 -6.3 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(142.6,212.6) rotate(128.3)"/><path d="M 0 -4.7 Q 2.2 0 0 4.7 Q -2.2 0 0 -4.7 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(140.7,204.7) rotate(151.3)"/><path d="M 0 -5.9 Q 2.7 0 0 5.9 Q -2.7 0 0 -5.9 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(153.4,208.9) rotate(121.4)"/><path d="M 0 -4.4 Q 2.0 0 0 4.4 Q -2.0 0 0 -4.4 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(150.7,201.8) rotate(144.4)"/><path d="M 0 -5.6 Q 2.6 0 0 5.6 Q -2.6 0 0 -5.6 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(163.6,204.0) rotate(114.6)"/><path d="M 0 -4.2 Q 1.9 0 0 4.2 Q -1.9 0 0 -4.2 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(160.3,197.7) rotate(137.6)"/><path d="M 0 -5.2 Q 2.4 0 0 5.2 Q -2.4 0 0 -5.2 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(173.2,198.0) rotate(107.7)"/><path d="M 0 -3.9 Q 1.8 0 0 3.9 Q -1.8 0 0 -3.9 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(169.4,192.5) rotate(130.7)"/><path d="M 0 -4.9 Q 2.2 0 0 4.9 Q -2.2 0 0 -4.9 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(181.9,190.8) rotate(100.9)"/><path d="M 0 -3.6 Q 1.7 0 0 3.6 Q -1.7 0 0 -3.6 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(177.8,186.2) rotate(123.9)"/><path d="M 0 -4.5 Q 2.1 0 0 4.5 Q -2.1 0 0 -4.5 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(189.7,182.8) rotate(94.0)"/><path d="M 0 -3.4 Q 1.6 0 0 3.4 Q -1.6 0 0 -3.4 Z" fill="url(#leafg)" stroke="#C8901A" stroke-width="0.5" transform="translate(185.4,178.9) rotate(117.0)"/>
+<g transform="translate(120,86)">
+<path d="M -25 10 L -25 -3 L -16.5 4 L -8.3 -10.5 L 0 3 L 8.3 -10.5 L 16.5 4 L 25 -3 L 25 10 Z" fill="url(#gold)" stroke="#C8901A" stroke-width="1.5" stroke-linejoin="round"/>
+<rect x="-25" y="9" width="50" height="5.5" rx="2" fill="url(#gold)" stroke="#C8901A" stroke-width="1"/>
+<circle cx="-25" cy="-3" r="2.8" fill="#F0D87A"/><circle cx="0" cy="3" r="2.8" fill="#F0D87A"/><circle cx="25" cy="-3" r="2.8" fill="#F0D87A"/>
+</g>
+<text x="120" y="140" font-family="Georgia,'Times New Roman',serif" font-size="52" font-weight="bold" fill="url(#gold)" text-anchor="middle">H</text>
+<polygon points="104.0,152.0 105.5,156.0 109.7,156.1 106.4,158.8 107.5,162.9 104.0,160.5 100.5,162.9 101.6,158.8 98.3,156.1 102.5,156.0" fill="url(#gold)"/><polygon points="120.0,152.0 121.5,156.0 125.7,156.1 122.4,158.8 123.5,162.9 120.0,160.5 116.5,162.9 117.6,158.8 114.3,156.1 118.5,156.0" fill="url(#gold)"/><polygon points="136.0,152.0 137.5,156.0 141.7,156.1 138.4,158.8 139.5,162.9 136.0,160.5 132.5,162.9 133.6,158.8 130.3,156.1 134.5,156.0" fill="url(#gold)"/>
+</svg></div>
+  <div class="eyebrow">Hamry Investment Research</div>
+  <h1>2030 프로젝트</h1>
+  <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
+  <div class="ver" id="verBadge">발행 2026-06-05 · v1 · 데이터 로딩 중…</div>
+</div>
+<div class="hr-line"></div>
+
+<!-- UPDATE BAR -->
+<div class="upd-bar">
+  <span class="upd-status" id="updStatus"><span class="dot" style="background:var(--dim)"></span>업데이트 상태 확인 중…</span>
+  <button class="upd-btn" id="updBtn" onclick="runUpdate(true)">최신 데이터 가져오기</button>
+  <button class="upd-btn sec" onclick="toggleApiPanel()">⚙ API 키 설정</button>
+</div>
+
+<!-- API PANEL -->
+<div class="api-panel" id="apiPanel">
+  <h4>API 키 설정 (선택)</h4>
+  <div class="api-warn">⚠️ 보안 안내 · 키는 이 브라우저(localStorage)에만 저장되며 파일·서버로 전송되지 않습니다. 그래도 공용 PC에서는 입력하지 마세요. <b>크립토 가격·옵션(맥스페인·PCR)·환율은 키 없이도 자동 갱신</b>됩니다(CoinGecko·Deribit·Frankfurter). 미국주식은 Alpha Vantage, 한국주식은 한국투자증권(KIS) 키 입력 시 갱신됩니다.</div>
+  <div class="api-row"><label>Alpha Vantage</label><input type="password" id="keyAV" placeholder="미국 주식 가격 갱신용 (무료, 분당 5회 제한)"></div>
+  <div class="api-row"><label>CoinGecko (Pro)</label><input type="password" id="keyCG" placeholder="비워두면 무료 공개 API 사용 (권장)"></div>
+  <div class="api-row"><label>KIS AppKey</label><input type="password" id="keyKisAK" placeholder="한국투자증권 OpenAPI AppKey (한국주식 갱신용)"></div>
+  <div class="api-row"><label>KIS AppSecret</label><input type="password" id="keyKisSK" placeholder="한국투자증권 OpenAPI AppSecret"></div>
+  <div style="display:flex;gap:8px;margin-top:10px">
+    <button class="upd-btn" onclick="saveKeys()">저장</button>
+    <button class="upd-btn sec" onclick="clearKeys()">키 삭제</button>
+  </div>
+  <div class="api-note">* <b>자동 갱신</b>(버튼 클릭): 크립토 시세(CoinGecko)·크립토 옵션 맥스페인·PCR(Deribit)·환율(Frankfurter)은 키 없이, 미국주식(Alpha Vantage)·한국주식(한국투자증권 KIS)은 키 입력 시 갱신됩니다. <b>수동 관리</b>: 미국/한국 개별 옵션·지수·유가·美 CPI는 무료 실시간 공개 API가 없어 분석 시점 값으로 유지하며, 갱신이 필요하면 데이터를 직접 입력해 반영합니다.</div>
+</div>
+
+<!-- INDEX STRIP -->
+<div class="idx" id="idx"></div>
+
+<!-- EXEC SUMMARY -->
+<div class="block-title"><span class="bt-num">SUMMARY</span><h2>Executive Summary</h2><span class="bt-sub">두괄식 · 배경 / 진단 / 시장 환경</span></div>
+<div class="exec">
+  <div class="row">
+    <div>
+      <h3>배경 (Background)</h3>
+      <p>KOSPI가 5/26 사상 첫 8,000선 돌파 후 <b>5/29 8,476.15</b>로 사상최고 종가(+3.55%)를 경신했다. 이재명 정부 출범(2025.6) 이후 1년 만에 약 +100% 폭등했고 JPMorgan은 목표가를 9,000(불 케이스 1만)으로 상향했다. 다만 5/29 당일 삼성전자(+5.6%)·SK하이닉스(+1.9%)·삼성전기(+15%) 등 AI 반도체 대형주만 급등하고 <b style="color:var(--red)">전체 상장사 82%가 하락</b>하는 극단적 양극화가 나타났다. 기관이 2.6조 순매수하며 지수를 끌어올린 반면 개인은 1.9조를 순매도했다.</p>
+      <p>매크로 변수도 한꺼번에 전환됐다. NVDA Q1 매출 $81.6B(+85% YoY) 서프라이즈로 AI 사이클이 재확인됐고, 미·이란 평화 협상으로 Brent 유가가 $93로 하락했다. Warsh Fed 의장이 취임해 6/17 첫 FOMC를 앞두고 있고, 스테이블코인 총공급이 $323B로 ATH를 경신했으며, 트럼프의 가상자산 결제통합 행정명령(5/20)이 제도화를 가속했다. 미국 증시도 S&P 500 7,580·Nasdaq 26,973으로 전고점을 다시 썼다. <b style="color:var(--a)">[6/4 업데이트]</b> 6/1 젠슨 황 방한(삼성·SK하이닉스 등 4대그룹 회동)과 NVDA PC용 신칩 발표(+6%)로 S&P·Nasdaq이 6/1~2 사상 최고를 재경신했으나, <b>6/3 美·이란 충돌 재격화</b>로 유가가 급등(Brent $98)하며 S&P 500이 9일 연속 상승을 멈추고 -0.74% 조정됐다. Broadcom 실적 미스(-13%)·CrowdStrike(-10%)도 악재로 작용했다. BTC는 5/28 $73K 지지 붕괴 후 <b>6/3 $66.6K까지 급락(전고점 대비 -47%)</b>, RSI 28 과매도에 진입하며 암호화폐 청산이 $1.6B에 달했다. KOSPI는 반도체 강세로 9,000선에 근접했다.</p>
+    </div>
+    <div>
+      <h3>핵심 진단 (Core Thesis)</h3>
+      <ul class="thesis">
+        <li><b>매크로</b> — 美·이란 충돌 재격화로 유가 반등(Brent $98·WTI $96) → 인플레 재자극·금리인하 지연 우려가 6/3 증시 조정 촉발. CPI 6/11 발표가 분수령. 단 S&P 500 Shiller CAPE 40.93은 역사 4번째 극단치로 강세장 후반부 경고.</li>
+        <li><b>한국</b> — KOSPI 9,000선 근접(시총 첫 7천조 돌파). SK하이닉스 선행 PER 6.79가 삼성전자 6.77을 사상 첫 추월 — 30년 1등 프리미엄 이동. 양사 합산 영업이익 25년 91조→26년 630조(KB증권) 전망에 KOSPI 1만 전망(KB 10,500·모건스탠리 9,500~1만) 부상. NVDA 21.85배 대비 멀티플 3배 낮아 여전히 저평가, "이익 가시성 대형주 분할"이 합리.</li>
+        <li><b>미국</b> — CAPE 40.93 = 향후 10년 기대수익률 1.3% 함의. 6/3 Broadcom 실적(AI매출 +140%·백로그 $73B 견조하나 목표 미상향에 -15%)이 보여주듯 눈높이 과열. AI 워크로드 70%가 추론(인퍼런스)으로 이동 — ASIC·네트워킹 수혜. PLTR P/S 60배 등 ATH 추격 금지, NVDA·CRCL·IREN처럼 매출 가시성 S등급만 선별.</li>
+        <li><b>크립토</b> — BTC -47%·ETH -56%. 6/3 $73K 붕괴 후 $66.6K 급락, RSI 28 과매도(청산 $1.6B). 단 <b>CLARITY Act가 6/1 상원 본회의 상정</b>(7/4 서명 목표·통과확률 59%) — 통과 시 ETH·SOL 디지털 상품 분류로 제도화 촉매. LINK SWIFT 통합 -81% 디버전스, AAVE P/S 0.46배 극저평가. 과매도 + 규제 촉매 = 분할 매수 영역.</li>
+      </ul>
+    </div>
+  </div>
+  <h3 style="margin-top:14px">투자 등급 체계 & 실행 원칙</h3>
+  <p style="line-height:1.9"><b style="color:var(--s)">S등급</b> — 정량 저평가(SK하이닉스 PER 6.79, AAVE P/S 0.46, NVDA 선행 21.85배)와 명확한 성장 촉매를 동시에 갖춤 → <b>즉시 분할 매수</b>.<br>
+  <b style="color:var(--a)">A등급</b> — 펀더멘털은 유효하나 RSI 75~91 과매수 또는 고평가 구간 → <b>-15% 조정 또는 개별 트리거 확인 후 진입</b>.<br>
+  <b style="color:var(--b)">B등급</b> — 적자·초기 단계 또는 고밸류·과대낙폭으로 비대칭 옵션 성격 → <b>소량 분할</b>.<br>
+  <span style="color:var(--muted);font-size:11px">※ 등급은 정량 60점(밸류·기술·성장) + 정성 40점(지위·촉매) 스코어링으로 산출되며, 투자 매력도 변화에 따라 종목 수는 유동적이다. 상세 점수는 하단 SCORE 부록 참조.</span><br>
+  옵션 신호(맥스페인·PCR·SI)는 단기 진입 타이밍을 보조하며, 자금은 4대 이벤트(NVDA 데이터·CPI 6/11·FOMC 6/17·CLARITY 7/4)를 기준선으로 단계 집행한다.</p>
+  <div class="glegend">
+    <span class="gpill">🥇 S · 저평가+고성장 즉시분할</span>
+    <span class="gpill">🥈 A · 조정/트리거 후</span>
+    <span class="gpill">🥉 B · 비대칭 옵션 소량</span>
+    <span class="gpill"><span class="opt-badge ob-buy" style="padding:1px 5px">OPT</span>옵션 신호 보유</span>
+  </div>
+</div>
+
+<!-- S TABLE -->
+<div class="block-title"><span class="bt-num">★</span><h2 id="sgTitle">S등급 핵심 종목</h2><span class="bt-sub">맥스페인 · PCR 통합 점검</span></div>
+<div class="intro-card" style="margin-bottom:10px">
+  <p>맥스페인(Max Pain)은 기관 손실 최소화 주가(자석처럼 끌려가는 지점), PCR(풋/콜 비율)은 시장 심리(&gt;1.0 공포 매수, &lt;0.7 과열 매도). 한국 개별 종목은 옵션 미상장이 많아 KOSPI 200 옵션 PCR 0.92를 참조값으로 사용한다.</p>
+</div>
+<div class="tbl-wrap"><table class="dt" id="stable"></table></div>
+<div class="note" style="display:flex;flex-direction:column;gap:6px">
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-style:normal">
+    <b style="color:#92400e">매수 시그널 음영</b>
+    <span style="display:inline-flex;align-items:center;gap:5px"><span style="display:inline-block;width:16px;height:12px;background:#fefce8;border:1px solid #e2e5ea;border-radius:2px"></span>1개 충족</span>
+    <span style="display:inline-flex;align-items:center;gap:5px"><span style="display:inline-block;width:16px;height:12px;background:#fef9c3;border:1px solid #e2e5ea;border-radius:2px"></span>2개 충족</span>
+    <span style="display:inline-flex;align-items:center;gap:5px"><span style="display:inline-block;width:16px;height:12px;background:#fde68a;border:1px solid #e2e5ea;border-radius:2px"></span>3개 충족</span>
+    <span style="color:var(--muted)">조건: ① 현재가 &lt; 맥스페인 · ② PCR ≥ 1.0 · ③ 주봉 RSI ≤ 50</span>
+  </div>
+  <div>* 한국 개별 종목 옵션 미상장 시 KOSPI 200 옵션 PCR(0.92) 참조. 맥스페인 데이터는 Deribit(크립토)·CBOE(미국)·KRX(한국) 기준. RSI=주봉, ATH대비=사상최고가 대비 현재가 %. ● 표시는 실시간 갱신된 값.</div>
+</div>
+
+<!-- NAV -->
+<div class="block-title"><span class="bt-num">PARTS</span><h2>섹터별 상세 분석</h2><span class="bt-sub">탭 전환 · 종목 클릭 시 상세</span></div>
+<div class="nav" id="nav"></div>
+<div id="panels"></div>
+
+<div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-05 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+
+</div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-05 · v1</span></div>
+<script>
+// ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
+const BASE_DATE="2026-06-03";
+const PUB_DATE="2026-06-05";  // 발행일
+const VERSION="v1";          // 버전 (수정 시 v# 증가)
+
+// 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
+const IDXDATA=[
+  {tk:"KOSPI",cgId:null,avSym:null,px:"8,476",rsi:72,ath:"0%",opt:"watch",optTxt:"과열 경계"},
+  {tk:"S&P 500",cgId:null,avSym:null,px:"7,580",rsi:71,ath:"0%",opt:"watch",optTxt:"과열 경계"},
+  {tk:"Nasdaq",cgId:null,avSym:null,px:"26,973",rsi:70,ath:"0%",opt:"watch",optTxt:"과열 경계"},
+  {tk:"BTC",cgId:"bitcoin",avSym:null,px:"$66,900",rsi:28,ath:"-47%",opt:"buy",optTxt:"과매도"},
+];
+
+// 상단 스트립 (지수 + 보조지표)
+const IDX=[
+  {l:"KOSPI",v:"8,900",x:"9,000선 근접",c:"var(--green)"},
+  {l:"S&P 500",v:"7,554",x:"-0.74% 9일랠리 마감",c:"var(--red)"},
+  {l:"Nasdaq",v:"26,854",x:"-0.89% 조정",c:"var(--red)"},
+  {l:"BTC",v:"$66,900",x:"ATH -47%",c:"var(--red)",cgId:"bitcoin"},
+  {l:"Brent 유가",v:"$98",x:"美·이란 충돌 급등",c:"var(--red)"},
+  {l:"美 CPI",v:"3.8%",x:"6/11 주목",c:"var(--amber)"},
+  {l:"환율 USDKRW",v:"1,531원",x:"원화 약세",c:"var(--amber)"},
+];
+
+// S등급 표
+const SG=[
+  {tk:"SK하이닉스",g:"S",px:"1,977,000원",mp:"N/A",pcr:"0.92*",rsi:64,ath:"0%",key:"선행 PER 6.79배",arg:"HBM 점유 57%, Q1 영업이익률 72%",krCode:"000660"},
+  {tk:"삼성전자",g:"S",px:"316,500원",mp:"285,000원",pcr:"0.88",rsi:62,ath:"0%",key:"선행 PER 6.77배",arg:"Q1 영업익 57.2조, 매출 133.87조 사상최대",krCode:"005930"},
+  {tk:"NVIDIA",g:"S",px:"$212.14",mp:"$210",pcr:"0.96",rsi:58,ath:"-10%",key:"선행 PER 21.85배",arg:"주가-맥스페인 갭 +1%, 정상 범위 진입",avSym:"NVDA"},
+  {tk:"Circle",g:"S",px:"$108.24",mp:"$108",pcr:"0.65",rsi:45,ath:"-62%",key:"선행 P/S 7배",arg:"맥스페인 수렴 + 콜 우위, PCR 0.65 낙관",avSym:"CRCL"},
+  {tk:"IREN",g:"S",px:"$64.05",mp:"$58",pcr:"1.49",rsi:45,ath:"-17%",key:"EV/EBITDA 5배",arg:"PCR 1.49 공포 + SI 15.7% 숏커버 잠재",avSym:"IREN"},
+  {tk:"BTC",g:"S",px:"$66,900",mp:"$72,000",pcr:"1.15",rsi:28,ath:"-47%",key:"Deribit 6/26만기",arg:"현재가 $66.9K(RSI 28 과매도). 맥스페인 $72K는 현재가보다 +7.6% 위 → 자석효과 분할 적기",cgId:"bitcoin"},
+  {tk:"ETH",g:"S",px:"$1,990",mp:"$2,050",pcr:"0.94",rsi:39,ath:"-56%",key:"스테이킹 ETF",arg:"주가<맥스페인 + RSI 과매도 = 분할 진입",cgId:"ethereum"},
+  {tk:"SOL",g:"S",px:"$81.37",mp:"$85",pcr:"0.88",rsi:45,ath:"-72%",key:"ETF 누적 $1.5B",arg:"맥스페인 갭 -3%, 자석효과 상승 유인",cgId:"solana"},
+  {tk:"LINK",g:"S",px:"$8.97",mp:"$9.5",pcr:"0.85",rsi:39,ath:"-81%",key:"고래 32.9M 매집",arg:"SWIFT 통합, 고래 매집 사상최고",cgId:"chainlink"},
+  {tk:"AAVE",g:"S",px:"$88.03",mp:"N/A",pcr:"N/A",rsi:38,ath:"-86%",key:"P/S 0.46배",arg:"DeFi 1위, COIN 대비 93% 할인",cgId:"aave"},
+];
+
+// 옵션 신호 데이터 (전체 확장: 미국 13 + 크립토 8 + S등급 공통)
+const OPT={
+ ASTS:{mp:115,gap:-13.59,pcrOI:0.98,pcrV:0.47,si:20.21,sqS:80.84,sqSstar:"★★★★",sqG:70,sqGstar:"★★★★",sl:"$119.78",sup:"$126.44",t1:"$115",t2:"$126.5",v:"watch",vt:"관망"},
+ RKLB:{mp:129,gap:-12.86,pcrOI:1.43,pcrV:0.83,si:5.85,sqS:23.4,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$133.23",sup:"$140.63",t1:"$129",t2:"$141.9",v:"watch",vt:"관망"},
+ CRCL:{mp:108,gap:-0.22,pcrOI:0.65,pcrV:0.72,si:9.71,sqS:38.84,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$97.42",sup:"$102.83",t1:"$108",t2:"$118.8",v:"watch",vt:"관망"},
+ IREN:{mp:58,gap:-9.45,pcrOI:1.49,pcrV:0.81,si:15.71,sqS:62.84,sqSstar:"★★★",sqG:40,sqGstar:"★★",sl:"$57.64",sup:"$60.85",t1:"$58",t2:"$63.8",v:"watch",vt:"관망"},
+ IONQ:{mp:58,gap:-17.31,pcrOI:1.65,pcrV:1.09,si:20.14,sqS:80.56,sqSstar:"★★★★",sqG:40,sqGstar:"★★",sl:"$62.83",sup:"$66.63",t1:"$58",t2:"$77",v:"watch",vt:"관망"},
+ INFQ:{mp:15,gap:-15.59,pcrOI:0.43,pcrV:0.37,si:3.3,sqS:13.2,sqSstar:"★",sqG:70,sqGstar:"★★★★",sl:"$15.93",sup:"$16.88",t1:"$15",t2:"$17.5",v:"sell",vt:"과열 주의"},
+ SNDK:{mp:1535,gap:-6.5,pcrOI:1.83,pcrV:1.35,si:6.25,sqS:25,sqSstar:"★",sqG:40,sqGstar:"★",sl:"$1477",sup:"$1560",t1:"$1535",t2:"$1689",v:"watch",vt:"관망"},
+ MU:{mp:840,gap:-9.04,pcrOI:2.02,pcrV:1.28,si:3.14,sqS:12.6,sqSstar:"★",sqG:70,sqGstar:"★★★",sl:"$830",sup:"$877",t1:"$840",t2:"$1016",v:"sell",vt:"과열 주의"},
+ TSLA:{mp:430,gap:-2.74,pcrOI:0.78,pcrV:0.73,si:2.58,sqS:10.3,sqSstar:"☆",sqG:60,sqGstar:"★★",sl:"$397.89",sup:"$420",t1:"$430",t2:"$473",v:"watch",vt:"관망"},
+ AMD:{mp:460,gap:-11.21,pcrOI:1.25,pcrV:1.06,si:2.75,sqS:11,sqSstar:"☆",sqG:60,sqGstar:"★★★",sl:"$486",sup:"$513",t1:"$460",t2:"$570",v:"sell",vt:"과열 주의"},
+ VRT:{mp:320,gap:1.82,pcrOI:1.98,pcrV:1.03,si:3.6,sqS:14.4,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$291",sup:"$307",t1:"$320",t2:"$353",v:"watch",vt:"관망"},
+ PPIH:{mp:30,gap:-5.9,pcrOI:0.32,pcrV:0.28,si:1.39,sqS:5.6,sqSstar:"☆",sqG:90,sqGstar:"★★★★★",sl:"$28.69",sup:"$30.29",t1:"$30",t2:"$33",v:"sell",vt:"과열 주의"},
+ QQQ:{mp:711,gap:-3.34,pcrOI:2.40,pcrV:1.58,si:0,sqS:0,sqSstar:"☆",sqG:40,sqGstar:"★",sl:"$662",sup:"$699",t1:"$711",t2:"$782",v:"watch",vt:"관망"},
+ // 크립토 옵션 (Deribit 기준)
+ BTC:{mp:72000,gap:7.6,pcrOI:1.15,pcrV:1.08,si:0,sqS:0,sqSstar:"☆",sqG:28,sqGstar:"★",sl:"$62,000",sup:"$65,000",t1:"$72,000",t2:"$77,000",v:"buy",vt:"과매도 매수"},
+ ETH:{mp:2050,gap:-2.93,pcrOI:0.94,pcrV:0.88,si:0,sqS:0,sqSstar:"☆",sqG:35,sqGstar:"★",sl:"$1,820",sup:"$1,920",t1:"$2,050",t2:"$2,300",v:"watch",vt:"관망"},
+ SOL:{mp:85,gap:-4.27,pcrOI:0.88,pcrV:0.81,si:0,sqS:0,sqSstar:"☆",sqG:30,sqGstar:"★",sl:"$74",sup:"$79",t1:"$85",t2:"$95",v:"watch",vt:"관망"},
+ XRP:{mp:1.40,gap:-6.43,pcrOI:0.78,pcrV:0.72,si:0,sqS:0,sqSstar:"☆",sqG:30,sqGstar:"★",sl:"$1.18",sup:"$1.25",t1:"$1.40",t2:"$1.60",v:"watch",vt:"관망"},
+ LINK:{mp:9.5,gap:-5.58,pcrOI:0.85,pcrV:0.79,si:0,sqS:0,sqSstar:"☆",sqG:30,sqGstar:"★",sl:"$8.20",sup:"$8.70",t1:"$9.5",t2:"$11",v:"watch",vt:"관망"},
+};
+
+// ===================== 종목 통합 데이터 (9개 필드) =====================
+// 필드: tk, g(등급), px(현재가), ath, mp(맥스페인), pcr, rsi, per, fper(선행PER), key(핵심지표), issue(주요이슈/매수근거), opt(옵션키), cgId, avSym
+const STOCKS={
+ kr:[
+  {sector:"반도체", desc:"NVDA $81.6B 서프라이즈로 HBM 수요 폭발 재확인. SK하이닉스·삼성전자는 글로벌 AI주 중 최저 멀티플로 거래 중이다.", rows:[
+   {g:"S",tk:"SK하이닉스",px:"1,977,000원",ath:"0%",mp:"N/A",pcr:"0.92*",rsi:"64",per:"9.2배",fper:"6.79배",key:"HBM 점유 57%",issue:"Q1 영업익 37.6조(영업이익률 72%), HBM3E 독점 공급. KB증권 목표가 280만원. AI 서버 수요로 HBM4 양산 가속",krCode:"000660"},
+   {g:"S",tk:"삼성전자",px:"316,500원",ath:"0%",mp:"285,000원",pcr:"0.88",rsi:"62",per:"11.5배",fper:"6.77배",key:"Q1 매출 133.87조",issue:"Q1 영업익 57.2조(YoY +756%) 사상최대. HBM3E NVDA 수주 기대. 5/29 +5.6% 급등하며 ATH 회복",krCode:"005930"},
+  ]},
+  {sector:"이차전지", desc:"EV 단일 슈퍼사이클 종료 후 삼중 역풍. 그러나 휴머노이드 상용화·북미 AI DC ESS 수요·전고체 양산 3가지 구조 변화가 동시 발생했다.", rows:[
+   {g:"A",tk:"LG에너지솔루션",px:"384,500원",ath:"-27%",mp:"N/A",pcr:"N/A",rsi:"40",per:"적자",fper:"적자전환",key:"PBR 역사적 저점",issue:"PBR 3.5~4.0배 역사적 저점 + RSI 과매도. 테슬라·휴머노이드·ESS·전고체·4680 5중 트리거 대기",krCode:"373220"},
+   {g:"B",tk:"삼성SDI",px:"684,000원",ath:"-5%",mp:"N/A",pcr:"N/A",rsi:"52",per:"적자",fper:"적자전환",key:"전고체 2027 양산 1위",issue:"전고체 배터리 2027 양산 1위. 보스턴다이내믹스 Atlas Electric 협의. PBR 2.25배",krCode:"006400"},
+   {g:"A",tk:"SK이노베이션",px:"154,000원",ath:"-25%",mp:"N/A",pcr:"N/A",rsi:"57",per:"흑자전환",fper:"V자회복",key:"2026E 영업익 +823%",issue:"2026E 영업익 +823% YoY V자 회복. IBK 목표가 20만원. 정유+배터리 통합 시너지",krCode:"096770"},
+   {g:"B",tk:"엘앤에프",px:"75,000원",ath:"-78%",mp:"N/A",pcr:"N/A",rsi:"45",per:"적자",fper:"적자",key:"LFP 국내 최초 양산",issue:"LFP 양극재 국내 최초 양산 2026 하반기. 무전구체 신기술. ATH -78% 깊은 조정",krCode:"066970"},
+   {g:"B",tk:"포스코퓨처엠",px:"180,000원",ath:"-72%",mp:"N/A",pcr:"N/A",rsi:"48",per:"적자",fper:"적자",key:"양·음극재 동시 생산",issue:"국내 유일 양·음극재 동시 생산, 수직계열화 강점. ATH -72%",krCode:"003670"},
+   {g:"B",tk:"에코프로비엠",px:"110,000원",ath:"-65%",mp:"N/A",pcr:"N/A",rsi:"40",per:"적자",fper:"적자",key:"ATH -65% 역발상",issue:"ATH -65% 역발상 매수 후보. 단 적자 지속 + CATL 경쟁 구조적 문제로 B등급",krCode:"247540"},
+  ]},
+  {sector:"조선 · 방산", desc:"글로벌 재무장 + 친환경 선박 수주 슈퍼사이클로 펀더멘털 견고. 그러나 주봉 RSI 75~91 극과매수 구간이라 추격 절대 금지.", rows:[
+   {g:"A",tk:"HD현대중공업",px:"1,071,000원",ath:"0%",mp:"N/A",pcr:"N/A",rsi:"91",per:"22배",fper:"18배",key:"수주잔고 4년치",issue:"수주잔고 4년치, 시총 81조. RSI 91 극과매수 = 추격 절대 금지, 조정 대기",krCode:"329180"},
+   {g:"A",tk:"한화오션",px:"128,000원",ath:"-5%",mp:"N/A",pcr:"N/A",rsi:"83",per:"21배",fper:"18배",key:"방산함+LNG선",issue:"방산함 + LNG선 수주 유효. RSI 83 과매수로 진입 시점 주의",krCode:"042660"},
+   {g:"A",tk:"삼성중공업",px:"27,500원",ath:"-29%",mp:"N/A",pcr:"N/A",rsi:"70",per:"16배",fper:"14배",key:"조선 3사 중 적정 밸류",issue:"조선 3사 중 유일하게 적정 밸류 + RSI 중립. 상대적 매력",krCode:"010140"},
+   {g:"A",tk:"한화에어로스페이스",px:"1,449,000원",ath:"0%",mp:"N/A",pcr:"N/A",rsi:"80",per:"28배",fper:"25배",key:"K9 세계 1위",issue:"K9 자주포 세계 1위, 시총 74조. 5/20 조정 진정. RSI 80 과매수",krCode:"012450"},
+   {g:"B",tk:"현대로템",px:"483,000원",ath:"-5%",mp:"N/A",pcr:"N/A",rsi:"76",per:"25배",fper:"22배",key:"K2 중동 수출",issue:"K2 전차 중동 수출, 1년 +453%. 분할 수익실현 권장 구간",krCode:"064350"},
+   {g:"A",tk:"LIG넥스원",px:"860,000원",ath:"-5%",mp:"N/A",pcr:"N/A",rsi:"75",per:"24배",fper:"22배",key:"천궁·현무·해성 독점",issue:"천궁·현무·해성 미사일 독점. 방산 3사 중 가장 안정적 실적",krCode:"079550"},
+  ]},
+  {sector:"SMR · 원전", desc:"SMR은 안전성·건설기간·비용에서 대형 원전 대비 우위. 유가↑=원전 경제성↑. 트럼프 에너지 정책 + AI DC 전력 수요 동시 수혜.", rows:[
+   {g:"A",tk:"두산에너빌리티",px:"112,000원",ath:"-3%",mp:"N/A",pcr:"0.92*",rsi:"55",per:"42배",fper:"35배",key:"MS·구글 SMR 계약",issue:"MS TMI·구글 SMR 계약. 시총 72조. 서사+실적 동시 충족하는 SMR 대표주",krCode:"034020"},
+   {g:"A",tk:"HD현대일렉트릭",px:"275,000원",ath:"-5%",mp:"N/A",pcr:"N/A",rsi:"76",per:"24배",fper:"20배",key:"변압기 수주 폭발",issue:"변압기 수주 폭발, AI DC 전력망 핵심. RSI 76 과매수 주의",krCode:"267260"},
+   {g:"A",tk:"한전기술",px:"93,000원",ath:"-8%",mp:"N/A",pcr:"N/A",rsi:"60",per:"32배",fper:"28배",key:"원전 설계 독점",issue:"원전 설계 독점, 두산 보완재. 해외 수주 시 동반 급등 기대",krCode:"052690"},
+  ]},
+  {sector:"바이오", desc:"매크로 변수(유가·금리·환율)에 독립적인 방어 자산. GLP-1 비만·당뇨 신약 시장 폭발 + CDMO 위탁생산 수요 증가가 동시 진행 중.", rows:[
+   {g:"A",tk:"삼성바이오로직스",px:"1,220,000원",ath:"-29%",mp:"N/A",pcr:"N/A",rsi:"54",per:"68배",fper:"60배",key:"CMO 세계 1위",issue:"CMO 세계 1위 + GLP-1 폭발 수혜. 매크로 독립 방어 자산. ATH -29% 조정",krCode:"207940"},
+   {g:"A",tk:"한미약품",px:"460,000원",ath:"-40%",mp:"N/A",pcr:"N/A",rsi:"50",per:"52배",fper:"45배",key:"GLP-1 신약 임상",issue:"HM17321 GLP-1 신약 임상 진행. 성공 시 S등급 격상 가능. ATH -40%",krCode:"128940"},
+   {g:"A",tk:"셀트리온",px:"198,700원",ath:"-35%",mp:"N/A",pcr:"N/A",rsi:"52",per:"21배",fper:"18배",key:"바이오시밀러 1위",issue:"바이오시밀러 글로벌 1위. 2026E 매출 5.1조(+24%)·영업익 1.7조(+48%). 저평가 매력",krCode:"068270"},
+  ]},
+  {sector:"MLCC · 유리기판 · 전자부품", desc:"MLCC는 AI 서버·전장·방산 3중 노출 성장주. 유리기판은 차세대 AI 반도체 패키징의 핵심 병목 — SKC·삼성전기·LG이노텍이 동반 수혜.", rows:[
+   {g:"A",tk:"삼성전기",px:"1,540,000원",ath:"0%",mp:"N/A",pcr:"N/A",rsi:"80",per:"24배",fper:"20배",key:"유리기판·MLCC 동반",issue:"5/29 +15% 사상최고가. 유리기판·MLCC 동반 수혜. Q1 영업익 +40%. KB 목표가 1.5M. RSI 80 과매수",krCode:"009150"},
+   {g:"A",tk:"LG이노텍",px:"1,068,000원",ath:"0%",mp:"N/A",pcr:"N/A",rsi:"78",per:"18배",fper:"15배",key:"RF-SiP·FC-BGA",issue:"5/26 +23.61% 폭등 사상최고가. NH 목표가 100만원 초과. 기판 RF-SiP·FC-BGA 5년 CAGR +20%",krCode:"011070"},
+   {g:"B",tk:"SKC",px:"143,400원",ath:"-12%",mp:"N/A",pcr:"N/A",rsi:"64",per:"적자",fper:"적자",key:"유리기판 앱솔릭스",issue:"유리기판 앱솔릭스 2027 양산 압축. 1.17조 유증으로 31% 희석 변수. Q1 EBITDA 흑전",krCode:"011790"},
+   {g:"B",tk:"삼화콘덴서",px:"85,000원",ath:"-15%",mp:"N/A",pcr:"N/A",rsi:"58",per:"25배",fper:"22배",key:"MLCC 국내 2위",issue:"MLCC 국내 2위, AI 서버·전장 수혜. 삼성전기 대비 시총 작아 변동성 큼",krCode:"001820"},
+  ]},
+ ],
+ us:[
+  {sector:"GPU · 반도체 장비", desc:"AI DC capex 2026년 $527B. 자금이 가장 먼저 닿는 곳이 GPU·장비. 진입 타이밍은 NVDA > AMD > ASML 순.", rows:[
+   {g:"S",tk:"NVIDIA",px:"$212.14",ath:"-10%",mp:"$210",pcr:"0.96",rsi:"58",per:"38배",fper:"21.85배",key:"Q1 매출 $81.6B",issue:"$81.6B(+85% YoY) 서프라이즈 후 정상화. 목표가 평균 $294(+36%). 맥스페인 $210 근접, PCR 0.96 중립",opt:"NVDA(주식)",avSym:"NVDA"},
+   {g:"A",tk:"AMD",px:"$518.09",ath:"-15%",mp:"$460",pcr:"1.25",rsi:"52",per:"55배",fper:"42배",key:"데이터센터 +57%",issue:"NVDA 대항마, 데이터센터 +57% YoY. 맥스페인 $460 대비 +11% 괴리 + PCR 1.25 = 과열 주의",optKey:"AMD",avSym:"AMD"},
+   {g:"A",tk:"ASML",px:"$850",ath:"-15%",mp:"N/A",pcr:"N/A",rsi:"55",per:"38배",fper:"33배",key:"EUV 전세계 독점",issue:"EUV 노광장비 전세계 유일 독점. 첨단 반도체 제조 필수. 장기 보유 적합",avSym:"ASML"},
+  ]},
+  {sector:"메모리", desc:"AI 서버는 메모리 8~10배 사용. HBM 라인 전용화 → 범용 DRAM 공급 부족 → 계약가 급등. Q1 DRAM 계약가 QoQ +90~95% 폭등.", rows:[
+   {g:"A",tk:"Micron (MU)",px:"$923.52",ath:"-3%",mp:"$840",pcr:"2.02",rsi:"70",per:"20배",fper:"18배",key:"미국 유일 DRAM",issue:"미국 유일 DRAM 제조 희소성, 지정학 회피처. PCR 2.02 극단 풋 우위 = 과열 주의",optKey:"MU",avSym:"MU"},
+   {g:"B",tk:"SanDisk (SNDK)",px:"$1,641.64",ath:"-7%",mp:"$1,535",pcr:"1.83",rsi:"-",per:"24배",fper:"22배",key:"NAND 순수 플레이어",issue:"WD 분사, NAND 순수 플레이어. 맥스페인 $1,535 대비 -6.5% 괴리, PCR 1.83 공포. 변동성 큰 소형주",optKey:"SNDK",avSym:"SNDK"},
+  ]},
+  {sector:"전력 · AI 데이터센터", desc:"AI 인프라는 가치사슬. 전력·냉각(VRT) → 메모리 → 연산 임대(IREN) 순으로 자금이 흐른다.", rows:[
+   {g:"S",tk:"IREN",px:"$64.05",ath:"-17%",mp:"$58",pcr:"1.49",rsi:"45",per:"흑자전환",fper:"EV/EBITDA 5배",key:"MS+NVDA 직접계약",issue:"MS $9.7B + NVDA $3.4B 직접 계약, AI 매출 +833%. 맥스페인 $58 대비 -9% 괴리, SI 15.7% 숏커버 잠재",optKey:"IREN",avSym:"IREN"},
+   {g:"B",tk:"Vertiv (VRT)",px:"$314.18",ath:"-2%",mp:"$320",pcr:"1.98",rsi:"78",per:"70배",fper:"54배",key:"AI DC 전력·냉각 1위",issue:"AI DC 전력·냉각 대장. 맥스페인 $320 근접, PCR 1.98 극단 공포. RSI 78 과매수, PE 54배 고평가",optKey:"VRT",avSym:"VRT"},
+   {g:"B",tk:"GE Vernova",px:"$990",ath:"-8%",mp:"N/A",pcr:"N/A",rsi:"74",per:"56배",fper:"45배",key:"Q1 EPS 서프라이즈",issue:"Q1 EPS $17.44(예상 $1.67 대비 대폭 서프라이즈). 전력 인프라 핵심. PE 45배 고평가",avSym:"GEV"},
+   {g:"A",tk:"CoreWeave",px:"$114",ath:"-3%",mp:"N/A",pcr:"N/A",rsi:"52",per:"적자",fper:"백로그 $99B",key:"백로그 $99B",issue:"네오클라우드 1위, 백로그 $99B. 부채 $25B + MS 67% 의존 이중 리스크",avSym:"CRWV"},
+   {g:"B",tk:"Nebius (NBIS)",px:"$212",ath:"-10%",mp:"N/A",pcr:"N/A",rsi:"55",per:"적자",fper:"65배",key:"성장률 +684%",issue:"성장률 섹터 최강 +684%. Meta $27B 계약 2027 본격화. P/S 130배 극단 고평가",avSym:"NBIS"},
+  ]},
+  {sector:"우주 · 위성", desc:"신규 편입 섹터. 위성통신·발사체 슈퍼사이클. 둘 다 옵션 흐름 긍정적이나 맥스페인 대비 -13% 괴리로 단기 변동성 확대 주의.", rows:[
+   {g:"B",tk:"AST SpaceMobile (ASTS)",px:"$133.09",ath:"상승중",mp:"$115",pcr:"0.98",rsi:"-",per:"적자",fper:"적자",key:"위성-스마트폰 직접통신",issue:"위성-스마트폰 직접통신. SI 20.2% 숏스퀴즈 잠재(★★★★). 맥스페인 $115 대비 -13.6% 괴리 = 변동성 주의",optKey:"ASTS",avSym:"ASTS"},
+   {g:"B",tk:"Rocket Lab (RKLB)",px:"$148.03",ath:"상승중",mp:"$129",pcr:"1.43",rsi:"-",per:"적자",fper:"적자",key:"소형 발사체 1위",issue:"소형 발사체 1위, 시총 127조. PCR 1.43 공포 + 맥스페인 $129 대비 -12.9% 괴리. 지표 수렴 후 대응",optKey:"RKLB",avSym:"RKLB"},
+  ]},
+  {sector:"EV · 자율주행", desc:"신규 편입. 휴머노이드·로보택시 서사. TSLA는 한국 이차전지(LG엔솔·삼성SDI) 4680 공급과 직결된다.", rows:[
+   {g:"B",tk:"Tesla (TSLA)",px:"$442.10",ath:"-2.7%",mp:"$430",pcr:"0.78",rsi:"-",per:"95배",fper:"75배",key:"옵티머스·로보택시",issue:"옵티머스 휴머노이드·로보택시 서사. 맥스페인 $430 근접, PCR 0.78 중립~낙관. LG엔솔 4680 공급 연결",optKey:"TSLA",avSym:"TSLA"},
+  ]},
+  {sector:"스테이블코인 인프라", desc:"스테이블코인 총공급 $323B ATH + 트럼프 결제통합 EO 더블 호재. 금리↑=USDC 이자수입↑인 유일한 역발상 자산이 CRCL.", rows:[
+   {g:"S",tk:"Circle (CRCL)",px:"$108.24",ath:"-62%",mp:"$108",pcr:"0.65",rsi:"45",per:"흑자",fper:"P/S 7배",key:"USDC 점유 27%",issue:"USDC 시장점유 27% = $87B, 금리↑=이자↑ 3중 수혜. 맥스페인 $108 정확 수렴, PCR 0.65 콜 우위(낙관)",optKey:"CRCL",avSym:"CRCL"},
+   {g:"A",tk:"Coinbase (COIN)",px:"$200",ath:"-3%",mp:"N/A",pcr:"N/A",rsi:"55",per:"40배",fper:"35배",key:"CLARITY 최대 관문",issue:"CLARITY 통과 시 기관 자금 최대 관문. 거래소 1위. P/S 12배",avSym:"COIN"},
+  ]},
+  {sector:"SMR · 원전 (미국)", desc:"AI DC 전력 수요 + 트럼프 에너지 정책 동시 수혜. NuScale·Oklo는 비대칭 옵션 성격.", rows:[
+   {g:"B",tk:"NuScale",px:"$12.50",ath:"-40%",mp:"N/A",pcr:"N/A",rsi:"38",per:"적자",fper:"Pre-rev",key:"미국 유일 NRC 인증",issue:"미국 유일 NRC 설계 인증. 2028 수익화. 서사 옵션 장기 보유",avSym:"SMR"},
+   {g:"B",tk:"Oklo",px:"$65",ath:"-66%",mp:"N/A",pcr:"N/A",rsi:"48",per:"적자",fper:"적자",key:"액체금속 냉각 혁신",issue:"액체금속 냉각 혁신 기술. 수익화 경로 불확실. NuScale 보완재",avSym:"OKLO"},
+  ]},
+  {sector:"양자컴퓨터", desc:"BCG 전망 2030년 $100B → 2040년 $450~850B. 비대칭 베팅의 자리. NVDA CUDA-Q 동맹이 핵심 옵션 트리거.", rows:[
+   {g:"B",tk:"IonQ (IONQ)",px:"$70.14",ath:"-45%",mp:"$58",pcr:"1.65",rsi:"-",per:"적자",fper:"적자",key:"이온트랩 정확도 1위",issue:"순수 플레이 양자 최대. SI 20.1% 숏스퀴즈 잠재(★★★★). 맥스페인 $58 대비 -17% 괴리 변동성 주의",optKey:"IONQ",avSym:"IONQ"},
+   {g:"B",tk:"Infleqtion (INFQ)",px:"$17.77",ath:"-5%",mp:"$15",pcr:"0.43",rsi:"-",per:"적자",fper:"적자",key:"NVDA CUDA-Q 동맹",issue:"NASA·DoD B2G, NVDA CUDA-Q 동맹, CHIPS $100M. PCR 0.43 극단 콜 과열 = 과열 주의, 감마 압력 강함(★★★★)",optKey:"INFQ",avSym:"INFQ"},
+  ]},
+  {sector:"AI SW · 지수 ETF · 가치주", desc:"PLTR(AI SW)·QQQ(나스닥 ETF)·PPIH(소형 가치주). QQQ PCR 2.40 극단 풋 우위, PPIH 감마 압력 최강(★★★★★).", rows:[
+   {g:"A",tk:"Palantir (PLTR)",px:"$136.88",ath:"-16%",mp:"N/A",pcr:"N/A",rsi:"68",per:"180배",fper:"60배",key:"Rule of 40 = 145%",issue:"방산 AI 서사 인기 폭발. Rule of 40 = 145% 최고지만 P/S 60배 극단 고평가. $130 지지 확인 후",avSym:"PLTR"},
+   {g:"B",tk:"Invesco QQQ",px:"$735.60",ath:"-3.3%",mp:"$711",pcr:"2.40",rsi:"-",per:"-",fper:"나스닥100 추종",key:"시장 헤지 지표",issue:"나스닥100 추종 ETF. PCR 2.40 극단 풋 우위(헤지 수요) = 시장 헤지 심리 지표. 맥스페인 $711 대비 -3.3% 괴리",optKey:"QQQ",avSym:"QQQ"},
+   {g:"B",tk:"P10 (PPIH)",px:"$31.88",ath:"-5.9%",mp:"$30",pcr:"0.32",rsi:"-",per:"22배",fper:"20배",key:"소형 가치주",issue:"소형 사모펀드 가치주. PCR 0.32 극단 콜 과열 = 과열 주의, 감마 압력 최강(★★★★★) 변동성 극대",optKey:"PPIH",avSym:"PX"},
+  ]},
+ ],
+ crypto:[
+  {sector:"L1 베이스 레이어", desc:"BTC 반감기(2024.4) 직접 수혜 + CLARITY 제도화 그룹. ETF 자금 유입 여부로 종목 선별.", rows:[
+   {g:"S",tk:"BTC",px:"$66,900",ath:"-47%",mp:"$72,000",pcr:"1.15",rsi:"28",per:"-",fper:"시총 $1.33T",key:"Deribit 6/26만기",issue:"5/28 $73K 지지 붕괴 후 6/3 $66.6K까지 급락(전고점 $126.2K 대비 -47%). RSI 28 과매도 진입 — 과거 유사 구간서 단기 바닥 형성. 美·이란 충돌·달러 강세·금리인하 지연이 압박. 맥스페인 $72K(현재가 +7.6%) 자석효과 + 과매도 = 분할 적기. 단 연내 $55K 하회 확률 66% 베팅도 존재",optKey:"BTC",cgId:"bitcoin"},
+   {g:"S",tk:"ETH",px:"$1,990",ath:"-56%",mp:"$2,050",pcr:"0.94",rsi:"39",per:"-",fper:"시총 $240B",key:"RWA 베이스 레이어",issue:"RWA 베이스 레이어, 스테이킹 ETF 가동(연 4.42% 보상). 맥스페인 $2,050 하회 + RSI 39 과매도 = 분할 진입",optKey:"ETH",cgId:"ethereum"},
+   {g:"S",tk:"SOL",px:"$81.37",ath:"-72%",mp:"$85",pcr:"0.88",rsi:"45",per:"-",fper:"시총 $47B",key:"토큰화 주식 1위",issue:"토큰화 주식 거래량 50주 연속 1위. BlackRock BUIDL $550M. ATH $293.31. 맥스페인 갭 -3% 자석효과",optKey:"SOL",cgId:"solana"},
+   {g:"A",tk:"XRP",px:"$1.31",ath:"-65%",mp:"$1.40",pcr:"0.78",rsi:"50",per:"-",fper:"시총 $77B",key:"국제결제 1위",issue:"국제결제 인프라 1위, ETF 누적 $1.5B. 단 Goldman 5월 XRP·SOL ETF 전량 청산은 부담. 맥스페인 하회",optKey:"XRP",cgId:"ripple"},
+   {g:"A",tk:"DOGE",px:"$0.10",ath:"-75%",mp:"N/A",pcr:"N/A",rsi:"45",per:"-",fper:"시총 $15B",key:"SEC 직접 승인",issue:"21Shares TDOG SEC 직접 승인(1/22), 디지털 상품 지위 획득. 밈코인 중 유일 제도권 진입",cgId:"dogecoin"},
+   {g:"A",tk:"SUI",px:"$0.85",ath:"-82%",mp:"N/A",pcr:"N/A",rsi:"38",per:"-",fper:"시총 $3B",key:"BUIDL 담보 통합",issue:"BlackRock BUIDL USDi 담보 통합. SUIG 상장 법인 매집. RSI 38 과매도. 고위험 고성장"},
+  ]},
+  {sector:"RWA 인프라", desc:"RWA 실물자산 토큰화 2030년 $16T 전망. 토큰화 미국채만 $20B+ 온체인. LINK는 ATH -81% 압축인데 SWIFT 통합 = 디버전스 최대.", rows:[
+   {g:"S",tk:"LINK",px:"$8.97",ath:"-81%",mp:"$9.5",pcr:"0.85",rsi:"39",per:"-",fper:"시총 $5.9B",key:"SWIFT 프로덕션 통합",issue:"SWIFT 프로덕션 통합(11월), 30일간 고래 32.9M LINK 매집 사상최고. ATH -81% 펀더멘털 vs 가격 디버전스 최대",optKey:"LINK",cgId:"chainlink"},
+   {g:"A",tk:"ONDO",px:"$0.367",ath:"-83%",mp:"N/A",pcr:"N/A",rsi:"40",per:"-",fper:"시총 $1.2B",key:"TVL $3B 돌파",issue:"TVL $3B 돌파, 21Shares ONDO ETF 신청, Franklin 합작 ETF. RWA 토큰화 대표주",cgId:"ondo-finance"},
+   {g:"A",tk:"Centrifuge (CFG)",px:"$0.20",ath:"-75%",mp:"N/A",pcr:"N/A",rsi:"35",per:"-",fper:"시총 $0.2B",key:"P/TVL 0.10배",issue:"P/TVL 0.10배 = ONDO 대비 8배 저평가. Coinbase Base 통합. RSI 35 과매도 소형주"},
+  ]},
+  {sector:"DeFi", desc:"금리 역풍 직접 노출. 압축 ATH -86%까지 진행. 금리 피크아웃 + CLARITY 통과가 최대 반등 트리거. AAVE P/S 0.46배 = Coinbase 대비 93% 할인.", rows:[
+   {g:"S",tk:"AAVE",px:"$88.03",ath:"-86%",mp:"N/A",pcr:"N/A",rsi:"38",per:"-",fper:"P/S 0.46배",key:"DeFi 1위 극저평가",issue:"DeFi 대출 1위. P/S 0.46배 = Coinbase 대비 93% 할인. ATH -86% + RSI 38 과매도. 금리 피크아웃 최대 수혜",cgId:"aave"},
+   {g:"A",tk:"Hyperliquid (HYPE)",px:"$43",ath:"-20%",mp:"N/A",pcr:"N/A",rsi:"52",per:"-",fper:"P/FCF 50배",key:"수수료 43% 점유",issue:"블록체인 수수료 43% 점유, 97% HYPE 바이백. 온체인 파생 1위. ATH -20% 상대적 강세"},
+   {g:"A",tk:"Pendle (PENDLE)",px:"$4.30",ath:"-43%",mp:"N/A",pcr:"N/A",rsi:"40",per:"-",fper:"P/S 70배",key:"수익률 토큰화 독점",issue:"수익률 토큰화 독점. 금리↑=DeFi 매력↓ 역풍. 금리 피크아웃 시 반등 트리거"},
+   {g:"A",tk:"Morpho (MORPHO)",px:"$1.90",ath:"-47%",mp:"N/A",pcr:"N/A",rsi:"45",per:"-",fper:"P/TVL 0.30배",key:"Apollo 매집",issue:"Apollo 48개월 9% 매집 + Coinbase UK $2.17B. 대출 프로토콜 차세대. P/TVL 0.30배 저평가"},
+   {g:"A",tk:"Uniswap (UNI)",px:"$5.20",ath:"-55%",mp:"N/A",pcr:"N/A",rsi:"42",per:"-",fper:"Fee Switch",key:"DEX 55% 점유",issue:"Fee Switch 활성화로 배당형 자산화. DEX 거래량 55% 점유. ATH -55% 깊은 조정"},
+  ]},
+  {sector:"AI 데이터 인프라 · 정치 자산", desc:"DePIN(분산형 물리 인프라)·L2·정치 자산 그룹. 고위험 비대칭 베팅.", rows:[
+   {g:"A",tk:"Filecoin (FIL)",px:"$2.5",ath:"-85%",mp:"N/A",pcr:"N/A",rsi:"40",per:"-",fper:"DePIN",key:"활성 저장 25EiB",issue:"활성 저장 25EiB, AI 데이터 저장 수요 폭증. DePIN 대표주. ATH -85% 극단 압축",cgId:"filecoin"},
+   {g:"A",tk:"zkSync (ZK)",px:"$0.08",ath:"-90%",mp:"N/A",pcr:"N/A",rsi:"38",per:"-",fper:"L2",key:"ZK Stack 채택",issue:"ZK Stack 기업 채택 확대, Elastic Chain L2 통합. ATH -90% 극단 압축 고위험"},
+   {g:"B",tk:"WLFI",px:"$0.0592",ath:"-94%",mp:"N/A",pcr:"N/A",rsi:"35",per:"-",fper:"정치 자산",key:"USD1 $4.6B",issue:"USD1 스테이블코인 $4.6B 최단기 성장. 그러나 Dolomite 자기담보 스캔들 리스크. 정치 테마 고위험"},
+  ]},
+ ],
+};
+
+
+const PARTS=[
+ {id:"macro",ic:"🌐",name:"매크로",sub:"시황",intro:"유가·금리·무역 3대 역풍이 5월 들어 동시에 순풍 전환 신호. 그러나 KOSPI +100%·82% 종목 하락 쏠림, S&P 500 CAPE 40.93은 강세장 후반부 경고. 추격 금지·분할 매수·현금 10~30% 상시 유지가 원칙.",macro:true,idxTable:true,
+  events:[
+   {ev:"NVDA Q1 어닝",data:"매출 $81.6B (+85% YoY) / EPS $2.39 / FCF $49B",impact:"AI 사이클 재확인. SK하이닉스·삼성전자·VRT·IREN 동반 수혜",c:"green"},
+   {ev:"미·이란 평화 협상",data:"도하 협상 / 핵문제 30~60일 유예 검토",impact:"종전 시 유가 $80대 → CPI 둔화 → 금리인하 → 위험자산 반등",c:"green"},
+   {ev:"미중 무역 합의",data:"베이징 정상회담(5/13~15) / 관세 인하 + 희토류 완화",impact:"ASML·삼성전자·SK하이닉스 공급망 안정",c:"green"},
+   {ev:"스테이블코인 ATH",data:"총공급 $323B 사상최고(5/19) / USDC $87B",impact:"CRCL 매출 폭발 + BTC·ETH·XRP·COIN 유동성 확대",c:"green"},
+   {ev:"트럼프 EO",data:"가상자산 결제 통합 행정명령(5/20)",impact:"XRP·CRCL·BTC·ETH 제도화 가속",c:"green"},
+   {ev:"Warsh Fed 취임",data:"상원 54-45 인준 / 첫 FOMC 6/17",impact:"이란 종전 시 금리인하 기대 부활. 성장주·크립토 최대 수혜",c:"amber"},
+   {ev:"젠슨 황 방한",data:"GTC·Computex Taipei 6/1~2 → 방한 / 6/1 'Korea Partner Night'",impact:"삼성·SK하이닉스·현대차·LG 4대그룹 회동, HBM·피지컬AI 협력 → 반도체 추가 모멘텀",c:"green"},
+   {ev:"NVDA PC칩 발표 (6/1)",data:"PC용 신규 프로세서 공개, 주가 +6% / Dell·HP 동반 급등",impact:"AI 사이클 PC로 확장. S&P·Nasdaq 6/1~2 사상최고 견인",c:"green"},
+   {ev:"美 증시 9일 랠리 마감 (6/3)",data:"S&P -0.74%·Nasdaq -0.89%·Dow -1.21% / Broadcom 실적·CrowdStrike 동반 약세",impact:"美·이란 충돌 재격화로 유가 급등(WTI $96·Brent $98). 위험자산 동반 조정, BTC $66.6K·암호화폐 청산 $1.6B",c:"red"},
+   {ev:"Broadcom Q2 실적 (6/3)",data:"매출 $22.19B(예상 $22.27B 소폭 미스)·EPS $2.44(예상 $2.40 상회) / AI매출 +140% / AI $100B 목표 미상향 → -15%",impact:"AI ASIC 백로그 $73B·6대 고객(구글·메타·OpenAI·앤트로픽 등) 견조하나 목표 미상향에 차익실현. AI 추론(인퍼런스) 전환 70%가 핵심 변수",c:"amber"},
+   {ev:"Samsung HBM4E 첫 출하",data:"차세대 AI 메모리 HBM4E 세계 첫 샘플 글로벌 고객 출하 / Anthropic가 삼성·마이크론·SK하이닉스 핵심 파트너 지명",impact:"삼성, 마이크론·SK하이닉스 추격. HBM 경쟁 본격화로 메모리 3사 동반 수혜",c:"green"},
+   {ev:"CLARITY Act 상원 상정 (6/1)",data:"상원 은행위 통과(5/14) 후 6/1 본회의 캘린더 상정 / 7/4 서명 목표·통과확률 59%(Polymarket)",impact:"SEC·CFTC 관할 정리로 ETH·SOL 디지털 상품 분류 기대. 통과 시 LINK·AAVE·SOL 제도화 촉매",c:"green"},
+   {ev:"Meta 대규모 감원 (주말 신규)",data:"베이 지역 3,000명+ 감원",impact:"빅테크 비용 효율화 신호 / AI capex는 유지 → 인프라株 영향 제한적",c:"amber"},
+  ]},
+ {id:"kr",ic:"🇰🇷",name:"한국주식",sub:"6섹터",intro:"KOSPI 8,476 시대 — 섹터별 현재가·밸류에이션·주봉 RSI 정밀 점검. RSI 88+ 극과매수(추격절대금지) / 80~87 경고 / 40~64 중립 / ~39 과매도(분할 적기).",
+  sectors:[
+   {n:"반도체",d:"NVDA $81.6B 서프라이즈로 HBM 수요 폭발 재확인. SK하이닉스·삼성전자는 글로벌 AI주 중 최저 멀티플.",
+    rows:[
+     {g:"S",tk:"SK하이닉스",px:"1,977,000원",m1:["선행PER","6.79배","green"],m2:["PBR","4.6배",""],m3:["RSI","64",""],m4:["ATH","0%","amber"],arg:"Q1 영업익 37.6조(영업이익률 72%), HBM 점유 57%, KB 목표가 280만원"},
+     {g:"S",tk:"삼성전자",px:"316,500원",m1:["선행PER","6.77배","green"],m2:["PBR","1.4배",""],m3:["RSI","62",""],m4:["ATH","0%","amber"],arg:"Q1 영업익 57.2조(YoY +756%), 매출 133.87조 사상최대, HBM3E NVDA 수주 기대"},
+    ]},
+   {n:"이차전지",d:"EV 단일 슈퍼사이클 종료 후 삼중 역풍. 그러나 휴머노이드 상용화·북미 AI DC ESS 수요·전고체 양산 3가지 구조 변화 동시 발생.",
+    rows:[
+     {g:"A",tk:"LG에너지솔루션",px:"384,500원",m1:["PBR","3.5~4.0배","green"],m2:["RSI","38~42","green"],m3:["선행PER","적자전환",""],m4:["ATH","-27%",""],arg:"PBR 역사적 저점 + RSI 과매도. 테슬라·휴머노이드·ESS·전고체·4680 5중 트리거"},
+     {g:"B",tk:"삼성SDI",px:"684,000원",m1:["PBR","2.25배",""],m2:["RSI","50~55",""],m3:["선행PER","적자전환",""],m4:["ATH","-5%",""],arg:"전고체 2027 양산 1위, 보스턴다이내믹스 Atlas Electric 협의"},
+     {g:"A",tk:"SK이노베이션",px:"154,000원",m1:["PBR","적정",""],m2:["RSI","55~60","green"],m3:["선행PER","V자회복","green"],m4:["ATH","-25%",""],arg:"2026E 영업익 +823% YoY V자 회복, IBK 목표가 20만원"},
+     {g:"B",tk:"엘앤에프",px:"75,000원",m1:["PBR","적정",""],m2:["RSI","45",""],m3:["선행PER","적자",""],m4:["ATH","-78%","red"],arg:"LFP 국내 최초 양산 2026 하반기, 무전구체 신기술"},
+     {g:"B",tk:"포스코퓨처엠",px:"180,000원",m1:["PBR","적정",""],m2:["RSI","48",""],m3:["선행PER","적자",""],m4:["ATH","-72%","red"],arg:"국내 유일 양·음극재 동시 생산, 수직계열화 강점"},
+     {g:"B",tk:"에코프로비엠",px:"110,000원",m1:["PBR","적정",""],m2:["RSI","40",""],m3:["선행PER","적자",""],m4:["ATH","-65%","red"],arg:"ATH -65% 역발상. 적자 + CATL 경쟁 구조적 문제"},
+    ]},
+   {n:"조선 · 방산",d:"글로벌 재무장 + 친환경 선박 수주 슈퍼사이클로 펀더멘털 견고. 그러나 주봉 RSI 75~91 극과매수 구간이라 추격 절대 금지.",
+    rows:[
+     {g:"A",tk:"HD현대중공업",px:"1,071,000원",m1:["선행PER","18배",""],m2:["PBR","3.5배",""],m3:["RSI","91","red"],m4:["ATH","0%","amber"],arg:"수주잔고 4년치, 시총 81조. RSI 91 = 추격 절대 금지"},
+     {g:"A",tk:"한화오션",px:"128,000원",m1:["선행PER","18배",""],m2:["PBR","3.0배",""],m3:["RSI","83","red"],m4:["ATH","-5%",""],arg:"방산함 + LNG선 수주 유효, RSI 83 과매수"},
+     {g:"A",tk:"삼성중공업",px:"27,500원",m1:["선행PER","14배",""],m2:["PBR","1.8배",""],m3:["RSI","70",""],m4:["ATH","-29%",""],arg:"조선 3사 중 유일 적정 밸류 + RSI 중립"},
+     {g:"A",tk:"한화에어로스페이스",px:"1,449,000원",m1:["선행PER","25배",""],m2:["PBR","4.5배",""],m3:["RSI","80","red"],m4:["ATH","0%","amber"],arg:"K9 세계 1위, 시총 74조, 5/20 조정 진정"},
+     {g:"B",tk:"현대로템",px:"483,000원",m1:["선행PER","22배",""],m2:["PBR","5.0배",""],m3:["RSI","76","amber"],m4:["ATH","-5%",""],arg:"K2 중동 수출, 1년 +453%, 분할 수익실현 권장"},
+     {g:"A",tk:"LIG넥스원",px:"860,000원",m1:["선행PER","22배",""],m2:["PBR","4.0배",""],m3:["RSI","75","amber"],m4:["ATH","-5%",""],arg:"천궁·현무·해성 독점, 방산 3사 중 안정적"},
+    ]},
+   {n:"SMR · 원전",d:"SMR은 안전성·건설기간·비용에서 대형 원전 대비 우위. 유가↑=원전 경제성↑. 트럼프 에너지 정책 + AI DC 전력 수요 동시 수혜.",
+    rows:[
+     {g:"A",tk:"두산에너빌리티",px:"112,000원",m1:["선행PER","35배",""],m2:["PBR","2.5배",""],m3:["RSI","55","green"],m4:["ATH","-3%",""],arg:"MS TMI·구글 SMR 계약, 시총 72조, 서사+실적 동시"},
+     {g:"A",tk:"HD현대일렉트릭",px:"275,000원",m1:["선행PER","20배",""],m2:["PBR","5.0배",""],m3:["RSI","76","amber"],m4:["ATH","-5%",""],arg:"변압기 수주 폭발, AI DC 전력망 핵심"},
+     {g:"A",tk:"한전기술",px:"93,000원",m1:["선행PER","28배",""],m2:["PBR","3.0배",""],m3:["RSI","60",""],m4:["ATH","-8%",""],arg:"원전 설계 독점, 두산 보완재, 해외 수주 시 동반 급등"},
+    ]},
+   {n:"바이오",d:"매크로 변수(유가·금리·환율)에 독립적인 방어 자산. GLP-1 시장 폭발 + CDMO 수요 증가 동시 진행.",
+    rows:[
+     {g:"A",tk:"삼성바이오로직스",px:"1,220,000원",m1:["선행PER","60배",""],m2:["PBR","5.0배",""],m3:["RSI","54",""],m4:["ATH","-29%",""],arg:"CMO 세계 1위 + GLP-1 폭발 수혜, 매크로 독립 방어 자산"},
+     {g:"A",tk:"한미약품",px:"460,000원",m1:["선행PER","45배",""],m2:["PBR","3.5배",""],m3:["RSI","50",""],m4:["ATH","-40%",""],arg:"HM17321 GLP-1 신약 임상 진행, 성공 시 S 격상"},
+     {g:"A",tk:"셀트리온",px:"198,700원",m1:["선행PER","18배","green"],m2:["PBR","2.8배",""],m3:["RSI","52",""],m4:["ATH","-35%",""],arg:"바이오시밀러 글로벌 1위, 2026E 매출 5.1조(+24%)·영업익 1.7조(+48%)"},
+    ]},
+   {n:"MLCC · 유리기판 · 전자부품",d:"MLCC는 AI 서버·전장·방산 3중 노출. 유리기판은 차세대 AI 반도체 패키징 핵심 병목 — SKC·삼성전기·LG이노텍 동반 수혜.",
+    rows:[
+     {g:"A",tk:"삼성전기",px:"1,540,000원",m1:["선행PER","20배",""],m2:["PBR","3.6배",""],m3:["RSI","80","red"],m4:["ATH","0%","amber"],arg:"5/29 +15% 사상최고가, 유리기판·MLCC 동반 수혜, Q1 영업익 +40%, KB 목표가 1.5M"},
+     {g:"A",tk:"LG이노텍",px:"1,068,000원",m1:["선행PER","15배","green"],m2:["PBR","2.0배",""],m3:["RSI","78","amber"],m4:["ATH","0%","amber"],arg:"5/26 +23.61% 폭등 사상최고가, NH 목표가 100만원 초과, RF-SiP·FC-BGA 5년 CAGR +20%"},
+     {g:"B",tk:"SKC",px:"143,400원",m1:["선행PER","적자",""],m2:["PBR","5.87배","red"],m3:["RSI","64",""],m4:["ATH","-12%",""],arg:"유리기판 앱솔릭스 2027 양산 압축, 1.17조 유증 31% 희석 변수, Q1 EBITDA 흑전"},
+     {g:"B",tk:"삼화콘덴서",px:"85,000원",m1:["선행PER","22배",""],m2:["PBR","3.5배",""],m3:["RSI","58",""],m4:["ATH","-15%",""],arg:"MLCC 국내 2위, AI 서버·전장 수혜, 삼성전기 대비 시총 작아 변동성 큼"},
+    ]},
+  ]},
+ {id:"us",ic:"🇺🇸",name:"미국주식",sub:"9섹터",intro:"S&P 500 CAPE 40.93 — 역사상 4번째 극단 고평가. PLTR P/S 60배·VRT PE 70배 같은 ATH 근방 추격 금지. NVDA·CRCL·IREN처럼 매출 가시성 있는 S등급만 선별. 옵션 13종목 중 미국 11종목은 맥스페인·PCR·SI로 단기 타이밍 보조.",
+  sectors:[
+   {n:"GPU · 반도체 장비",d:"AI DC capex 2026년 $527B. 진입 타이밍 NVDA > AMD > ASML 순. AMD는 PCR 1.25 + 맥스페인 -11% 괴리로 과열 주의.",
+    rows:[
+     {g:"S",tk:"NVIDIA",px:"$212.14",m1:["선행PER","21.85배","green"],m2:["P/S","20배",""],m3:["RSI","58",""],m4:["ATH","-10%",""],arg:"PC용 신칩 발표(+6%) 후 6/3 조정. $81.6B 서프라이즈, 목표가 평균 $294 (+36%)"},
+     {g:"A",tk:"AMD",px:"$518.09",m1:["선행PER","42배",""],m2:["P/S","11배",""],m3:["RSI","52",""],m4:["ATH","-15%",""],arg:"NVDA 대항마, 데이터센터 +57% YoY. 옵션상 맥스페인 $460 대비 +11% 괴리 = 과열 주의",opt:"AMD"},
+     {g:"A",tk:"ASML",px:"$850",m1:["선행PER","33배",""],m2:["P/S","10배",""],m3:["RSI","55",""],m4:["ATH","-15%",""],arg:"EUV 전세계 유일 독점, 장기 보유 적합"},
+    ]},
+   {n:"메모리",d:"AI 서버는 메모리 8~10배 사용. HBM 라인 전용화 → 범용 DRAM 부족 → 계약가 급등. SNDK·MU 모두 옵션상 맥스페인 하회.",
+    rows:[
+     {g:"A",tk:"Micron (MU)",px:"$923.52",m1:["선행PER","18배",""],m2:["P/S","6배",""],m3:["RSI","70",""],m4:["ATH","-3%",""],arg:"미국 유일 DRAM 제조 희소성. 옵션상 PCR 2.02 극단 풋 우위 = 과열 주의",opt:"MU"},
+     {g:"B",tk:"SanDisk (SNDK)",px:"$1,641.64",m1:["맥스페인","$1535",""],m2:["PCR","1.83",""],m3:["RSI","-",""],m4:["ATH","-7%",""],arg:"NAND 순수 플레이어. 맥스페인 $1535 대비 -6.5% 괴리, PCR 1.83 공포",opt:"SNDK"},
+    ]},
+   {n:"전력 · AI 데이터센터",d:"AI 인프라는 가치사슬. 전력·냉각(VRT) → 메모리 → 연산 임대(IREN) 순. IREN은 PCR 1.49 공포 + SI 15.7% 숏커버 잠재.",
+    rows:[
+     {g:"S",tk:"IREN",px:"$64.05",m1:["EV/EBITDA","5배","green"],m2:["PCR","1.49","green"],m3:["RSI","45",""],m4:["ATH","-17%",""],arg:"MS $9.7B + NVDA $3.4B 직접 계약, AI 매출 +833%. 맥스페인 $58 대비 -9% 괴리, SI 15.7%",opt:"IREN"},
+     {g:"B",tk:"Vertiv (VRT)",px:"$314.18",m1:["선행PER","54배","red"],m2:["PCR","1.98",""],m3:["RSI","78","amber"],m4:["ATH","-2%",""],arg:"AI DC 전력·냉각 대장. 맥스페인 $320 = 주가 근접, PCR 1.98 극단 공포",opt:"VRT"},
+     {g:"B",tk:"GE Vernova",px:"$990",m1:["선행PER","45배","amber"],m2:["P/S","7배",""],m3:["RSI","74","amber"],m4:["ATH","-8%",""],arg:"Q1 EPS $17.44 (예상 $1.67 대비 서프라이즈)"},
+     {g:"A",tk:"CoreWeave",px:"$114",m1:["백로그","$99B",""],m2:["P/S","4배",""],m3:["RSI","52",""],m4:["ATH","-3%",""],arg:"부채 $25B + MS 67% 의존 이중 리스크"},
+     {g:"B",tk:"Nebius (NBIS)",px:"$212",m1:["선행PER","65배","red"],m2:["P/S","130배","red"],m3:["RSI","55",""],m4:["ATH","-10%",""],arg:"성장률 섹터 최강 (+684%), Meta $27B 2027 본격화"},
+    ]},
+   {n:"우주 · 위성",d:"신규 편입 섹터. 위성통신·발사체 슈퍼사이클. 둘 다 옵션 흐름 긍정적이나 맥스페인 대비 -13% 괴리로 단기 변동성 확대 주의.",
+    rows:[
+     {g:"B",tk:"AST SpaceMobile (ASTS)",px:"$133.09",m1:["맥스페인","$115",""],m2:["PCR","0.98",""],m3:["SI","20.2%","amber"],m4:["ATH","상승중","amber"],arg:"위성-스마트폰 직접통신. SI 20.2% 숏스퀴즈 잠재(★★★★), 맥스페인 $115 -13.6% 괴리 = 변동성 주의",opt:"ASTS"},
+     {g:"B",tk:"Rocket Lab (RKLB)",px:"$148.03",m1:["맥스페인","$129",""],m2:["PCR","1.43",""],m3:["SI","5.85%",""],m4:["ATH","상승중","amber"],arg:"소형 발사체 1위. 시총 127조, PCR 1.43 공포 + 맥스페인 $129 -12.9% 괴리, 지표 수렴 후 대응",opt:"RKLB"},
+    ]},
+   {n:"EV · 자율주행",d:"신규 편입. 휴머노이드·로보택시 서사. TSLA는 한국 이차전지(LG엔솔·삼성SDI) 4680 공급과 직결.",
+    rows:[
+     {g:"B",tk:"Tesla (TSLA)",px:"$442.10",m1:["맥스페인","$430",""],m2:["PCR","0.78",""],m3:["SI","2.58%",""],m4:["ATH","-2.7%",""],arg:"옵티머스 휴머노이드·로보택시 서사. 맥스페인 $430 근접, PCR 0.78 중립~낙관. LG엔솔 4680 공급 연결",opt:"TSLA"},
+    ]},
+   {n:"스테이블코인 인프라",d:"스테이블코인 $323B ATH + 트럼프 결제통합 EO 더블 호재. CRCL은 맥스페인 $108에 정확히 수렴, PCR 0.65 콜 우위.",
+    rows:[
+     {g:"S",tk:"Circle (CRCL)",px:"$108.24",m1:["맥스페인","$108","green"],m2:["PCR","0.65","red"],m3:["RSI","45",""],m4:["ATH","-62%","red"],arg:"USDC 시장점유 27% = $87B, 금리↑=이자↑. 맥스페인 정확 수렴, PCR 0.65 콜 우위(낙관)",opt:"CRCL"},
+     {g:"A",tk:"Coinbase (COIN)",px:"$200",m1:["선행PER","35배","amber"],m2:["P/S","12배",""],m3:["RSI","55",""],m4:["ATH","-3%",""],arg:"CLARITY 통과 시 기관 자금 최대 관문"},
+    ]},
+   {n:"SMR · 원전 (미국)",d:"AI DC 전력 수요 + 트럼프 에너지 정책 동시 수혜. NuScale·Oklo는 비대칭 옵션 성격.",
+    rows:[
+     {g:"B",tk:"NuScale",px:"$12.50",m1:["수익화","2028",""],m2:["단계","Pre-rev",""],m3:["RSI","38","green"],m4:["ATH","-40%",""],arg:"미국 유일 NRC 설계 인증, 서사 옵션 장기 보유"},
+     {g:"B",tk:"Oklo",px:"$65",m1:["상태","적자",""],m2:["기술","액체금속",""],m3:["RSI","48",""],m4:["ATH","-66%","red"],arg:"혁신 기술, 수익화 경로 불확실, NuScale 보완재"},
+    ]},
+   {n:"양자컴퓨터",d:"BCG 전망 2030년 $100B → 2040년 $450~850B. IONQ는 SI 20.1% 숏스퀴즈 잠재(★★★★), INFQ는 PCR 0.43 과열 주의.",
+    rows:[
+     {g:"B",tk:"IonQ (IONQ)",px:"$70.14",m1:["맥스페인","$58",""],m2:["PCR","1.65",""],m3:["SI","20.1%","amber"],m4:["ATH","-45%",""],arg:"순수 플레이 양자 최대. SI 20.1% 숏스퀴즈 잠재(★★★★), 맥스페인 $58 -17% 괴리 변동성 주의",opt:"IONQ"},
+     {g:"B",tk:"Infleqtion (INFQ)",px:"$17.77",m1:["맥스페인","$15",""],m2:["PCR","0.43","red"],m3:["SI","3.3%",""],m4:["ATH","-5%",""],arg:"NASA·DoD B2G, NVDA CUDA-Q 동맹. PCR 0.43 극단 콜 과열 = 과열 주의, 감마 압력 강함(★★★★)",opt:"INFQ"},
+    ]},
+   {n:"AI SW · 지수 ETF · 가치주",d:"PLTR(AI SW)·QQQ(나스닥 ETF)·PPIH(소형 가치주). QQQ PCR 2.40 극단 풋 우위, PPIH 감마 압력 최강(★★★★★).",
+    rows:[
+     {g:"A",tk:"Palantir (PLTR)",px:"$136.88",m1:["P/S","60배","red"],m2:["Rule40","145%",""],m3:["RSI","68",""],m4:["ATH","-16%",""],arg:"Rule of 40 = 145% 최고, $130 지지 확인 후"},
+     {g:"B",tk:"Invesco QQQ",px:"$735.60",m1:["맥스페인","$711",""],m2:["PCR","2.40",""],m3:["SI","0%",""],m4:["ATH","-3.3%",""],arg:"나스닥100 추종 ETF. PCR 2.40 극단 풋 우위(헤지 수요), 맥스페인 $711 -3.3% 괴리. 시장 헤지 지표",opt:"QQQ"},
+     {g:"B",tk:"P10 (PPIH)",px:"$31.88",m1:["맥스페인","$30",""],m2:["PCR","0.32","red"],m3:["SI","1.39%",""],m4:["ATH","-5.9%",""],arg:"소형 가치주. PCR 0.32 극단 콜 과열 = 과열 주의, 감마 압력 최강(★★★★★) 변동성 극대",opt:"PPIH"},
+    ]},
+  ]},
+ {id:"crypto",ic:"₿",name:"크립토",sub:"4섹터",intro:"BTC 반감기(2024.4) 후 약 25개월. BTC ATH $126,080 → $73,276(-42%), ETH -56%. BTC ETF 9일 연속 순유출(5/28 BlackRock $733M 매도), 도미넌스 57.7%. 단 Goldman은 5월 XRP·SOL ETF 전량 청산.",
+  sectors:[
+   {n:"L1 베이스 레이어",d:"반감기 + CLARITY 직접 수혜 그룹.",
+    rows:[
+     {g:"S",tk:"BTC",px:"$66,900",opt:"BTC",m1:["시총","$1.33T",""],m2:["ATH","-47%",""],m3:["RSI","28",""],m4:["MP","$72,000",""],arg:"현재가 $66.9K로 $73K 붕괴·급락(RSI 28 과매도). 맥스페인 $72K(현재가 +7.6% 위) 자석효과"},
+     {g:"S",tk:"ETH",px:"$1,990",opt:"ETH",m1:["시총","$240B",""],m2:["ATH","-56%","red"],m3:["RSI","39","green"],m4:["MP","$2,050",""],arg:"RWA 베이스 레이어, 스테이킹 ETF 가동 (연 4.42% 보상)"},
+     {g:"S",tk:"SOL",px:"$81.37",opt:"SOL",m1:["시총","$47B",""],m2:["ATH","-72%","red"],m3:["RSI","45",""],m4:["MP","$85",""],arg:"토큰화 주식 거래량 50주 연속 1위, BlackRock BUIDL $550M, ATH $293.31"},
+     {g:"A",tk:"XRP",px:"$1.31",opt:"XRP",m1:["시총","$77B",""],m2:["ATH","-65%","red"],m3:["RSI","50",""],m4:["MP","$1.40",""],arg:"국제결제 인프라 1위, ETF 누적 $1.5B. 단 Goldman 5월 XRP·SOL ETF 전량 청산"},
+     {g:"A",tk:"DOGE",px:"$0.10",m1:["시총","$15B",""],m2:["ATH","-75%","red"],m3:["RSI","45",""],m4:["MP","N/A",""],arg:"21Shares TDOG SEC 직접 승인(1/22), 디지털 상품 지위 획득"},
+     {g:"A",tk:"SUI",px:"$0.85",m1:["시총","$3B",""],m2:["ATH","-82%","red"],m3:["RSI","38","green"],m4:["MP","N/A",""],arg:"BlackRock BUIDL USDi 담보 통합, SUIG 상장 법인 매집"},
+    ]},
+   {n:"RWA 인프라",d:"RWA 2030년 $16T 전망. 토큰화 미국채만 $20B+ 온체인. LINK는 ATH -81% 압축인데 SWIFT·DTCC 프로덕션 통합 = 디버전스 최대.",
+    rows:[
+     {g:"S",tk:"LINK",px:"$8.97",opt:"LINK",m1:["시총","$5.9B",""],m2:["ATH","-81%","red"],m3:["RSI","40","green"],m4:["MP","$9.5",""],arg:"SWIFT 프로덕션 통합(11월), 30일간 고래 32.9M LINK 매집 사상최고"},
+     {g:"A",tk:"ONDO",px:"$0.367",m1:["시총","$1.2B",""],m2:["ATH","-83%","red"],m3:["RSI","40","green"],m4:["MP","N/A",""],arg:"TVL $3B 돌파, 21Shares ONDO ETF 신청, Franklin 합작 ETF"},
+     {g:"A",tk:"Centrifuge (CFG)",px:"$0.20",m1:["시총","$0.2B",""],m2:["ATH","-75%","red"],m3:["RSI","35","green"],m4:["MP","N/A",""],arg:"P/TVL 0.10배 = ONDO 대비 8배 저평가, Coinbase Base 통합"},
+    ]},
+   {n:"DeFi",d:"금리 역풍 직접 노출. 압축 ATH -86%까지 진행. 금리 피크아웃 + CLARITY 통과가 최대 반등 트리거. AAVE P/S 0.46배 = Coinbase 대비 93% 할인.",
+    rows:[
+     {g:"S",tk:"AAVE",px:"$88.03",m1:["P/S","0.46배","green"],m2:["ATH","-86%","red"],m3:["RSI","38","green"],m4:["지위","DeFi 1위",""],arg:"DeFi 1위, COIN 대비 93% 할인"},
+     {g:"A",tk:"Hyperliquid (HYPE)",px:"$43",m1:["P/FCF","50배",""],m2:["ATH","-20%",""],m3:["RSI","52",""],m4:["점유","수수료43%",""],arg:"블록체인 수수료 43% 점유, 97% HYPE 바이백"},
+     {g:"A",tk:"Pendle (PENDLE)",px:"$4.30",m1:["P/S","70배",""],m2:["ATH","-43%",""],m3:["RSI","40",""],m4:["분야","수익률토큰",""],arg:"수익률 토큰화 독점, 금리↑=DeFi 매력↓"},
+     {g:"A",tk:"Morpho (MORPHO)",px:"$1.90",m1:["P/TVL","0.30배",""],m2:["ATH","-47%",""],m3:["RSI","45",""],m4:["기관","Apollo매집",""],arg:"Apollo 48개월 9% 매집 + Coinbase UK $2.17B"},
+     {g:"A",tk:"Uniswap (UNI)",px:"$5.20",m1:["구조","FeeSwitch",""],m2:["ATH","-55%",""],m3:["RSI","42",""],m4:["점유","DEX55%",""],arg:"Fee Switch로 배당형 자산화, DEX 거래량 55% 점유"},
+    ]},
+   {n:"AI 데이터 인프라 · 정치 자산",d:"DePIN·L2·정치 자산 그룹.",
+    rows:[
+     {g:"A",tk:"Filecoin (FIL)",px:"$2.5",m1:["성격","DePIN",""],m2:["ATH","-85%","red"],m3:["RSI","40","green"],m4:["저장","25EiB",""],arg:"활성 저장 25EiB, AI 데이터 저장 수요 폭증"},
+     {g:"A",tk:"zkSync (ZK)",px:"$0.08",m1:["성격","L2",""],m2:["ATH","-90%","red"],m3:["RSI","38","green"],m4:["채택","ZK Stack",""],arg:"ZK Stack 기업 채택 확대, Elastic Chain L2 통합"},
+     {g:"B",tk:"WLFI",px:"$0.0592",m1:["성격","정치",""],m2:["ATH","-94%","red"],m3:["RSI","35","green"],m4:["리스크","스캔들",""],arg:"USD1 $4.6B 최단기 성장, 그러나 Dolomite 자기담보 스캔들"},
+    ]},
+  ]},
+];
+
+
+// ===================== 렌더 =====================
+const gradeColor={S:"var(--s)",A:"var(--a)",B:"var(--b)"};
+function metricCol(c){if(c==="green")return"var(--green)";if(c==="red")return"var(--red)";if(c==="amber")return"var(--amber)";return"var(--text)";}
+function pcrColorN(n){if(n==null)return"var(--dim)";if(n>1.0)return"var(--green)";if(n<0.7)return"var(--red)";return"var(--amber)";}
+function siColorN(n){if(n>15)return"var(--red)";if(n>8)return"var(--amber)";return"var(--green)";}
+function pcrCol(v){if(v==="N/A"||(typeof v==="string"&&v.includes("*")))return"var(--dim)";const n=parseFloat(v);if(n>1.0)return"var(--green)";if(n<0.7)return"var(--red)";return"var(--amber)";}
+function rsiCol(r){if(r>=80)return"var(--red)";if(r<=39)return"var(--green)";return"var(--text)";}
+function athCol(a){const n=parseFloat(a);if(n<=-50)return"var(--red)";if(n===0)return"var(--amber)";return"var(--muted)";}
+function optBadge(o){if(!o)return"";if(o.v==="buy")return`<span class="opt-badge ob-buy">✅ 매수가능</span>`;if(o.v==="sell")return`<span class="opt-badge ob-sell">⚠️ 과열</span>`;return`<span class="opt-badge ob-watch">⚡ 관망</span>`;}
+
+// 상단 스트립
+document.getElementById('idx').innerHTML=IDX.map(o=>`<div class="ic"><div class="il">${o.l}</div><div class="iv ${o.cgId?'live':''}" ${o.cgId?`data-cg="${o.cgId}"`:''} id="idx-${o.l.replace(/[^A-Za-z0-9]/g,'')}">${o.v}</div><div class="ix" style="color:${o.c}">${o.x}</div></div>`).join('');
+
+// S등급 표
+// 매수 시그널 하이라이팅: 숫자 파싱 + 조건 개수
+function parseNum(s){
+  if(s==null)return NaN;
+  s=String(s).replace(/[$,원*\s]/g,'').trim();
+  if(s===''||s.toUpperCase()==='N/A')return NaN;
+  const n=parseFloat(s);return isNaN(n)?NaN:n;
+}
+function signalCount(s){
+  const px=parseNum(s.px), mp=parseNum(s.mp), pcr=parseNum(s.pcr);
+  const A=(!isNaN(px)&&!isNaN(mp)&&px<mp);          // 현재가 < 맥스페인
+  const B=(!isNaN(pcr)&&pcr>=1.0);                   // PCR ≥ 1
+  const C=(s.rsi<=50);                               // 주봉 RSI ≤ 50
+  const hits=[]; if(A)hits.push('현재가<맥스페인'); if(B)hits.push('PCR≥1'); if(C)hits.push('RSI≤50');
+  return {cnt:(A?1:0)+(B?1:0)+(C?1:0), hits};
+}
+function renderStable(){
+  document.getElementById('stable').innerHTML=
+  `<thead><tr><th>종목명</th><th>현재가</th><th>맥스페인</th><th>PCR</th><th>RSI</th><th>ATH대비</th><th>핵심지표</th><th>매수 논거</th></tr></thead>
+  <tbody>${SG.map(s=>{const sig=signalCount(s);return `<tr class="${sig.cnt>0?'hl'+sig.cnt:''}">
+  <td><span style="font-size:15px">${({S:"🥇",A:"🥈",B:"🥉"})[s.g]}</span> <span class="tk-cell">${s.tk}</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">▲${sig.cnt}</span>`:''}</td>
+  <td class="mono live" ${s.cgId?`data-cg="${s.cgId}"`:''} ${s.avSym?`data-av="${s.avSym}"`:''} ${s.krCode?`data-kr="${s.krCode}"`:''} data-px="1">${s.px}</td>
+  <td class="mono" style="color:${s.mp==="N/A"?"var(--dim)":"var(--text)"}">${s.mp}</td>
+  <td class="mono" style="color:${pcrCol(s.pcr)};font-weight:700">${s.pcr}</td>
+  <td class="mono" style="color:${rsiCol(s.rsi)}">${s.rsi}</td>
+  <td class="mono" style="color:${athCol(s.ath)}">${s.ath}</td>
+  <td style="color:var(--cyan);font-weight:600">${s.key}</td>
+  <td style="color:var(--muted)">${s.arg}</td>
+  </tr>`;}).join('')}</tbody>`;
+}
+renderStable();
+(function(){var t=document.getElementById('sgTitle');if(t)t.textContent='S등급 핵심 '+SG.length+'종목';})();
+
+// 매크로 4대 지수 표
+function macroIdxTable(){
+  return `<div class="sector"><div class="sector-head"><span class="sh-num">IDX</span><h4>핵심 지수 — 옵션신호 · 주봉RSI · 현재가 · ATH대비</h4></div>
+  <div class="tbl-wrap"><table class="dt"><thead><tr><th>지수</th><th>옵션 신호</th><th>주봉 RSI</th><th>현재가</th><th>ATH 대비</th></tr></thead><tbody>
+  ${IDXDATA.map(d=>{
+    const ob=d.opt==="buy"?'<span class="opt-badge ob-buy">✅ 매수가능</span>':d.opt==="sell"?'<span class="opt-badge ob-sell">⚠️ 과열</span>':'<span class="opt-badge ob-watch">⚡ 관망</span>';
+    return `<tr>
+    <td class="tk-cell">${d.tk}</td>
+    <td>${ob} <span style="color:var(--muted);font-size:10px">${d.optTxt}</span></td>
+    <td class="mono" ${d.cgId?`data-rsi="${d.cgId}"`:''} style="color:${rsiCol(d.rsi)}">${d.rsi}</td>
+    <td class="mono live" ${d.cgId?`data-cg="${d.cgId}"`:''} data-px="1">${d.px}</td>
+    <td class="mono" ${d.cgId?`data-ath="${d.cgId}"`:''} style="color:${athCol(d.ath)}">${d.ath}</td>
+    </tr>`;
+  }).join('')}
+  </tbody></table></div>
+  <div class="note">KOSPI는 9,000선 근접(과열 경계), 美 증시는 6/3 9일 랠리 마감 후 조정. BTC는 ATH -47%·RSI 28 과매도 = 분할 매수 영역. ● 표시는 실시간 갱신.</div>
+  </div>`;
+}
+
+function optDetail(o){
+  if(!o)return"";
+  const left=o.gap<0?30:70, mpLeft=o.gap<0?70:30;
+  return `<div class="optdet"><div class="od-title">📊 옵션 플로우 · 판단 ${o.vt}</div>
+    <div class="od-grid">
+      <div class="od-cell"><div class="odl">맥스페인</div><div class="odv" style="color:var(--cyan)">${typeof o.mp==='number'&&o.mp>=1000?'$'+o.mp.toLocaleString():'$'+o.mp}</div></div>
+      <div class="od-cell"><div class="odl">괴리</div><div class="odv" style="color:${o.gap<0?'var(--red)':'var(--green)'}">${o.gap<0?'▼':'▲'}${Math.abs(o.gap).toFixed(1)}%</div></div>
+      <div class="od-cell"><div class="odl">PCR(OI)</div><div class="odv" style="color:${pcrColorN(o.pcrOI)}">${o.pcrOI.toFixed(2)}</div></div>
+      <div class="od-cell"><div class="odl">SI</div><div class="odv" style="color:${siColorN(o.si)}">${o.si}%</div></div>
+    </div>
+    <div class="mpbar"><div class="mpt"></div>
+      <div class="mpd" style="left:${left}%;background:var(--amber)"></div><div class="mpl" style="left:${left}%;color:var(--amber)">현재가</div>
+      <div class="mpd" style="left:${mpLeft}%;background:var(--navy)"></div><div class="mpl" style="left:${mpLeft}%;color:var(--navy)">MP</div>
+    </div>
+    <div class="od-levels">
+      <div class="od-lv"><div class="lvl">손절</div><div class="lvv" style="color:var(--red)">${o.sl}</div></div>
+      <div class="od-lv"><div class="lvl">지지</div><div class="lvv">${o.sup}</div></div>
+      <div class="od-lv"><div class="lvl">1차 목표</div><div class="lvv" style="color:var(--green)">${o.t1}</div></div>
+      <div class="od-lv"><div class="lvl">2차 목표</div><div class="lvv" style="color:var(--green)">${o.t2}</div></div>
+    </div>
+    <div class="sq-row">
+      <div class="sq-item"><div class="sql"><span>숏스퀴즈</span><span class="stars">${o.sqSstar}</span></div><div class="sqbar"><div class="sqfill" style="width:${o.sqS}%;background:linear-gradient(90deg,#059669,#d97706,#dc2626)"></div></div></div>
+      <div class="sq-item"><div class="sql"><span>감마스퀴즈</span><span class="stars">${o.sqGstar}</span></div><div class="sqbar"><div class="sqfill" style="width:${o.sqG}%;background:linear-gradient(90deg,#059669,#0891b2,#7c3aed)"></div></div></div>
+    </div></div>`;
+}
+
+function renderStockCard(r){
+  const mets=[r.m1,r.m2,r.m3,r.m4];
+  const o=r.opt?OPT[r.opt]:null;
+  const cgAttr=r.cgId?`data-cg="${r.cgId}"`:'';
+  const avAttr=r.avSym?`data-av="${r.avSym}"`:'';
+  const krAttr=r.krCode?`data-kr="${r.krCode}"`:'';
+  return `<div class="scard" data-grade="${r.g}" data-opt="${o?'1':'0'}">
+    <div class="scard-main" onclick="this.parentNode.classList.toggle('open')">
+      <span class="scard-grade" style="background:${gradeColor[r.g]}">${r.g}</span>
+      <div class="sc-name">${r.tk}${optBadge(o)}<span class="sc-px ${(r.cgId||r.avSym||r.krCode)?'live':''}" ${cgAttr} ${avAttr} ${krAttr} data-px="1">${r.px}</span></div>
+      ${mets.map((m,i)=>`<div class="scard-metric${i>=2?' hide-m':''}"><div class="m-l">${m[0]}</div><div class="m-v" style="color:${metricCol(m[2])}">${m[1]}</div></div>`).join('')}
+      <div class="chev">▼</div>
+    </div>
+    <div class="scard-detail"><div class="sd-thesis">${r.arg}</div>${optDetail(o)}</div>
+  </div>`;
+}
+
+const nav=document.getElementById('nav'), panels=document.getElementById('panels'), fbar=document.getElementById('fbar');
+// 매크로 탭 메타
+const MACRO=PARTS.find(p=>p.macro);
+
+// 종목 표 렌더 (섹터별 전체 표시, 9개 필드)
+// 종목 카드 렌더 (한 줄형 + 메달 아이콘)
+const MEDAL={S:"🥇",A:"🥈",B:"🥉"};
+function optBadgeByKey(r){
+  if(r.optKey&&OPT[r.optKey]){const o=OPT[r.optKey];
+    if(o.v==='buy')return '<span class="stk-obadge ob-buy">✅매수가능</span>';
+    if(o.v==='sell')return '<span class="stk-obadge ob-sell">⚠️과열</span>';
+    return '<span class="stk-obadge ob-watch">⚡관망</span>';}
+  return '';
+}
+function rsiCol2(r){const n=parseFloat(r);if(isNaN(n))return 'var(--dim)';if(n>=80)return 'var(--red)';if(n<=50)return 'var(--green)';return 'var(--text)';}
+function stkCard(r){
+  const cgAttr=r.cgId?`data-cg="${r.cgId}"`:'';
+  const avAttr=r.avSym?`data-av="${r.avSym}"`:'';
+  const krAttr=r.krCode?`data-kr="${r.krCode}"`:'';
+  const tkey=r.cgId||r.avSym||r.krCode||'';
+  const isKr=r.px.includes('원');
+  return `<div class="stk-card">
+    <div class="stk-top">
+      <span class="stk-medal">${MEDAL[r.g]}</span>
+      <span class="stk-nm">${r.tk}</span>
+      ${optBadgeByKey(r)}
+      <span class="stk-issue" title="${r.issue}">${r.issue}</span>
+    </div>
+    <div class="stk-metrics">
+      <div class="stk-m"><div class="ml">현재가</div><div class="mv ${isKr?'kr':''} live" ${cgAttr} ${avAttr} ${krAttr} data-px="1">${r.px}</div></div>
+      <div class="stk-m"><div class="ml">ATH대비</div><div class="mv" ${tkey?`data-ath="${tkey}"`:''} style="color:${athCol(r.ath)}">${r.ath}</div></div>
+      <div class="stk-m"><div class="ml">맥스페인</div><div class="mv" style="color:${r.mp==='N/A'?'var(--dim)':'var(--text)'}">${r.mp}</div></div>
+      <div class="stk-m"><div class="ml">PCR</div><div class="mv" style="color:${pcrCol(r.pcr)}">${r.pcr}</div></div>
+      <div class="stk-m"><div class="ml">주봉RSI</div><div class="mv" ${tkey?`data-rsi="${tkey}"`:''} style="color:${rsiCol2(r.rsi)}">${r.rsi}</div></div>
+      <div class="stk-m"><div class="ml">PER</div><div class="mv" style="color:var(--muted)">${r.per}</div></div>
+      <div class="stk-m"><div class="ml">선행PER</div><div class="mv" style="color:${r.fper.includes('배')&&parseFloat(r.fper)<10?'var(--green)':'var(--text)'}">${r.fper}</div></div>
+      <div class="stk-m keycol"><div class="ml">핵심지표</div><div class="mv">${r.key}</div></div>
+    </div>
+  </div>`;
+}
+
+function sectorTable(sec, pi, si){
+  return `<div class="sector">
+    <div class="sector-head"><span class="sh-num">${pi}.${si+1}</span><h4>${sec.sector}</h4><span class="sh-cnt">${sec.rows.length}종목</span></div>
+    <div class="sector-desc">${sec.desc}</div>
+    <div class="stk-list">${sec.rows.map(stkCard).join('')}</div>
+  </div>`;
+}
+
+// 탭 정의: 매크로 + 한국 + 미국 + 크립토
+const SCOREDATA={
+  kr: [
+  {tk:"삼성전자",g:"S",v:25,t:8,gr:14,q1:20,q2:18,quant:47,qual:38,total:85},
+  {tk:"SK하이닉스",g:"S",v:25,t:8,gr:10,q1:20,q2:19,quant:43,qual:39,total:82},
+  {tk:"두산에너빌리티",g:"S→A",v:10,t:10,gr:8,q1:18,q2:18,quant:28,qual:36,total:64},
+  {tk:"SK이노베이션",g:"A",v:16,t:11,gr:10,q1:12,q2:14,quant:37,qual:26,total:63},
+  {tk:"셀트리온",g:"A",v:14,t:13,gr:7,q1:15,q2:13,quant:34,qual:28,total:62},
+  {tk:"HD현대일렉트릭",g:"A",v:14,t:6,gr:10,q1:15,q2:15,quant:30,qual:30,total:60},
+  {tk:"삼성전기",g:"A",v:14,t:4,gr:11,q1:16,q2:15,quant:29,qual:31,total:60},
+  {tk:"LG이노텍",g:"A",v:18,t:4,gr:9,q1:15,q2:14,quant:31,qual:29,total:60},
+  {tk:"LG에너지솔루션",g:"A",v:6,t:15,gr:7,q1:16,q2:15,quant:28,qual:31,total:59},
+  {tk:"삼성중공업",g:"A",v:18,t:9,gr:7,q1:13,q2:12,quant:34,qual:25,total:59},
+  {tk:"LIG넥스원",g:"A",v:14,t:6,gr:9,q1:15,q2:15,quant:29,qual:30,total:59},
+  {tk:"삼성바이오로직스",g:"A",v:4,t:11,gr:9,q1:18,q2:16,quant:24,qual:34,total:58},
+  {tk:"한미약품",g:"A",v:7,t:15,gr:8,q1:13,q2:15,quant:30,qual:28,total:58},
+  {tk:"한화오션",g:"A",v:14,t:6,gr:8,q1:15,q2:14,quant:28,qual:29,total:57},
+  {tk:"HD현대중공업",g:"A",v:14,t:2,gr:8,q1:17,q2:14,quant:24,qual:31,total:55},
+  {tk:"한화에어로스페이스",g:"A",v:10,t:4,gr:7,q1:18,q2:16,quant:21,qual:34,total:55},
+  {tk:"한전기술",g:"A",v:10,t:10,gr:10,q1:13,q2:12,quant:30,qual:25,total:55},
+  {tk:"삼성SDI",g:"A→B",v:6,t:10,gr:8,q1:15,q2:15,quant:24,qual:30,total:54},
+  {tk:"현대로템",g:"A→B",v:14,t:6,gr:7,q1:13,q2:13,quant:27,qual:26,total:53},
+  {tk:"포스코퓨처엠",g:"A→B",v:6,t:18,gr:7,q1:11,q2:10,quant:31,qual:21,total:52},
+  {tk:"엘앤에프",g:"A→B",v:6,t:18,gr:8,q1:9,q2:10,quant:32,qual:19,total:51},
+  {tk:"삼화콘덴서",g:"B",v:14,t:11,gr:7,q1:9,q2:9,quant:32,qual:18,total:50},
+  {tk:"에코프로비엠",g:"B",v:6,t:19,gr:7,q1:9,q2:8,quant:32,qual:17,total:49},
+  {tk:"SKC",g:"B",v:6,t:11,gr:8,q1:10,q2:11,quant:25,qual:21,total:46}
+],
+  us: [
+  {tk:"IREN",g:"S",v:24,t:13,gr:12,q1:15,q2:18,quant:49,qual:33,total:82},
+  {tk:"NVIDIA",g:"S",v:14,t:11,gr:11,q1:20,q2:20,quant:36,qual:40,total:76},
+  {tk:"Circle (CRCL)",g:"S",v:17,t:17,gr:7,q1:16,q2:18,quant:41,qual:34,total:75},
+  {tk:"ASML",g:"A",v:10,t:11,gr:9,q1:20,q2:17,quant:30,qual:37,total:67},
+  {tk:"AMD",g:"A",v:7,t:11,gr:9,q1:16,q2:16,quant:27,qual:32,total:59},
+  {tk:"Micron (MU)",g:"A",v:14,t:8,gr:7,q1:15,q2:15,quant:29,qual:30,total:59},
+  {tk:"Coinbase (COIN)",g:"A",v:10,t:10,gr:7,q1:15,q2:15,quant:27,qual:30,total:57},
+  {tk:"CoreWeave",g:"A",v:12,t:10,gr:7,q1:13,q2:14,quant:29,qual:27,total:56},
+  {tk:"Palantir (PLTR)",g:"A",v:4,t:11,gr:9,q1:17,q2:15,quant:24,qual:32,total:56},
+  {tk:"Tesla (TSLA)",g:"A→B",v:4,t:10,gr:7,q1:17,q2:16,quant:21,qual:33,total:54},
+  {tk:"SanDisk (SNDK)",g:"A→B",v:14,t:10,gr:7,q1:11,q2:11,quant:31,qual:22,total:53},
+  {tk:"GE Vernova",g:"A→B",v:7,t:8,gr:7,q1:16,q2:15,quant:22,qual:31,total:53},
+  {tk:"NuScale",g:"B",v:6,t:17,gr:7,q1:11,q2:12,quant:30,qual:23,total:53},
+  {tk:"Vertiv (VRT)",g:"A→B",v:7,t:6,gr:7,q1:17,q2:15,quant:20,qual:32,total:52},
+  {tk:"Nebius (NBIS)",g:"A→B",v:4,t:11,gr:12,q1:11,q2:14,quant:27,qual:25,total:52},
+  {tk:"Oklo",g:"B",v:6,t:17,gr:7,q1:9,q2:11,quant:30,qual:20,total:50},
+  {tk:"IonQ (IONQ)",g:"B",v:6,t:13,gr:7,q1:11,q2:13,quant:26,qual:24,total:50},
+  {tk:"Invesco QQQ",g:"B",v:12,t:10,gr:7,q1:12,q2:8,quant:29,qual:20,total:49},
+  {tk:"Rocket Lab (RKLB)",g:"B",v:6,t:8,gr:7,q1:13,q2:13,quant:21,qual:26,total:47},
+  {tk:"P10 (PPIH)",g:"B",v:14,t:10,gr:7,q1:8,q2:8,quant:31,qual:16,total:47},
+  {tk:"AST SpaceMobile (ASTS)",g:"B",v:6,t:8,gr:7,q1:12,q2:13,quant:21,qual:25,total:46},
+  {tk:"Infleqtion (INFQ)",g:"B",v:6,t:10,gr:7,q1:9,q2:12,quant:23,qual:21,total:44}
+],
+  crypto: [
+  {tk:"AAVE",g:"S",v:24,t:20,gr:7,q1:17,q2:18,quant:51,qual:35,total:86},
+  {tk:"LINK",g:"S",v:14,t:20,gr:13,q1:17,q2:18,quant:47,qual:35,total:82},
+  {tk:"BTC",g:"S",v:14,t:17,gr:7,q1:20,q2:18,quant:38,qual:38,total:76},
+  {tk:"ETH",g:"S",v:14,t:19,gr:7,q1:19,q2:17,quant:40,qual:36,total:76},
+  {tk:"SOL",g:"S",v:14,t:18,gr:9,q1:16,q2:16,quant:41,qual:32,total:73},
+  {tk:"ONDO",g:"A",v:14,t:20,gr:7,q1:13,q2:15,quant:41,qual:28,total:69},
+  {tk:"Morpho (MORPHO)",g:"A",v:20,t:15,gr:8,q1:12,q2:14,quant:43,qual:26,total:69},
+  {tk:"SUI",g:"A",v:14,t:20,gr:11,q1:11,q2:12,quant:45,qual:23,total:68},
+  {tk:"Pendle (PENDLE)",g:"A",v:17,t:17,gr:9,q1:12,q2:13,quant:43,qual:25,total:68},
+  {tk:"XRP",g:"S→A",v:14,t:17,gr:7,q1:15,q2:14,quant:38,qual:29,total:67},
+  {tk:"Centrifuge (CFG)",g:"A",v:14,t:20,gr:8,q1:10,q2:12,quant:42,qual:22,total:64},
+  {tk:"Uniswap (UNI)",g:"A",v:12,t:17,gr:7,q1:15,q2:12,quant:36,qual:27,total:63},
+  {tk:"Filecoin (FIL)",g:"A",v:12,t:20,gr:7,q1:11,q2:11,quant:39,qual:22,total:61},
+  {tk:"zkSync (ZK)",g:"A",v:12,t:20,gr:8,q1:10,q2:11,quant:40,qual:21,total:61},
+  {tk:"DOGE",g:"A",v:14,t:18,gr:8,q1:10,q2:9,quant:40,qual:19,total:59},
+  {tk:"Hyperliquid (HYPE)",g:"A",v:8,t:11,gr:7,q1:15,q2:15,quant:26,qual:30,total:56},
+  {tk:"WLFI",g:"B",v:12,t:20,gr:7,q1:7,q2:8,quant:39,qual:15,total:54}
+],
+};
+
+function scoreSection(region){
+  const rows=SCOREDATA[region]||[];
+  if(!rows.length) return '';
+  const gc={S:'gs',A:'ga',B:'gb'};
+  const body=rows.map(r=>{
+    const isChg=r.g.indexOf('\u2192')>=0; // → 포함 = 변경
+    const badge=isChg?`<span class="chg">${r.g}</span>`:`<span class="same ${gc[r.g]||'ga'}">${r.g}</span>`;
+    const qPct=(r.quant/100*100).toFixed(0), lPct=(r.qual/100*100).toFixed(0);
+    return `<tr>
+      <td class="sc-tk">${r.tk}</td>
+      <td style="text-align:center">${badge}</td>
+      <td class="num">${r.v}</td><td class="num">${r.t}</td><td class="num">${r.gr}</td>
+      <td class="num sep">${r.q1}</td><td class="num">${r.q2}</td>
+      <td class="num sep" style="font-weight:700">${r.quant}</td>
+      <td class="num" style="font-weight:700">${r.qual}</td>
+      <td class="num tot">${r.total}</td>
+      <td style="min-width:120px"><div class="sbar"><div class="sbar-q" style="width:${qPct}%"></div><div class="sbar-l" style="width:${lPct}%"></div></div></td>
+    </tr>`;
+  }).join('');
+  return `<div class="block-title" style="margin-top:22px"><span class="bt-num">SCORE</span><h2>등급 스코어링 (정량 60 + 정성 40)</h2><span class="bt-sub">투명한 등급 산출 근거</span></div>
+  <div class="appendix">
+    <p class="score-intro">5개 축 100점으로 채점해 등급 산출. 정량 60(밸류·기술·성장) + 정성 40(지위·촉매). <b>S \u2265 73 · A 55~72 · B \u2264 54</b>. 종목 수는 투자 매력도(점수)에 따라 유동적이다.</p>
+    <div style="display:flex;gap:16px;align-items:center;font-size:10.5px;color:var(--muted);margin-bottom:8px;flex-wrap:wrap">
+      <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:9px;border-radius:3px;background:linear-gradient(90deg,#E8CC6A,#C9A227);display:inline-block"></span>정량 (60)</span>
+      <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:9px;border-radius:3px;background:linear-gradient(90deg,#3B82C4,#1E3A5F);display:inline-block"></span>정성 (40)</span>
+      <span style="color:var(--dim)">· 막대는 100점 기준 비율 · A\u2192B는 직전 대비 등급 조정</span>
+    </div>
+    <div class="tbl-wrap"><table class="score-tbl">
+    <thead><tr><th>종목명</th><th>등급</th><th style="color:#C9A227">밸류<br><span class="th-max">25</span></th><th style="color:#C9A227">기술<br><span class="th-max">20</span></th><th style="color:#C9A227">성장<br><span class="th-max">15</span></th><th style="color:#1E3A5F">지위<br><span class="th-max">20</span></th><th style="color:#1E3A5F">촉매<br><span class="th-max">20</span></th><th class="num sep" style="color:#C9A227">정량<br><span class="th-max">60</span></th><th style="color:#1E3A5F">정성<br><span class="th-max">40</span></th><th>총점<br><span class="th-max">100</span></th><th style="text-align:left">점수 구성</th></tr></thead>
+    <tbody>${body}</tbody></table></div>
+  </div>`;
+}
+
+const TABS=[
+  {id:'macro',ic:'🌐',name:'매크로',sub:'시황'},
+  {id:'kr',ic:'🇰🇷',name:'한국주식',sub:STOCKS.kr.length+'섹터'},
+  {id:'us',ic:'🇺🇸',name:'미국주식',sub:STOCKS.us.length+'섹터'},
+  {id:'crypto',ic:'₿',name:'크립토',sub:STOCKS.crypto.length+'섹터'},
+];
+
+TABS.forEach((tab,i)=>{
+  const btn=document.createElement('button');
+  btn.className='nb'+(i===0?' a':'');
+  btn.innerHTML=`<span class="nb-ic">${tab.ic}</span>${tab.name}<span class="nb-ct">${tab.sub}</span>`;
+  btn.onclick=function(){
+    document.querySelectorAll('.nb').forEach(b=>b.classList.remove('a'));
+    this.classList.add('a');
+    document.querySelectorAll('.pn').forEach(p=>p.classList.remove('a'));
+    document.getElementById('pn-'+tab.id).classList.add('a');
+    window.scrollTo({top:document.getElementById('nav').offsetTop-20,behavior:'smooth'});
+  };
+  nav.appendChild(btn);
+
+  let html2=`<div class="pn${i===0?' a':''}" id="pn-${tab.id}">`;
+  if(tab.id==='macro'){
+    html2+=`<div class="intro-card"><span class="ic-tag">매크로 개요</span><p>${MACRO.intro}</p></div>`;
+    html2+=macroIdxTable();
+    html2+=`<div class="sector"><div class="sector-head"><span class="sh-num">EVT</span><h4>5~6월 핵심 이벤트 (6/4 업데이트)</h4></div>
+      <div class="tbl-wrap"><table class="dt"><thead><tr><th>이벤트</th><th>핵심 데이터</th><th>자산별 영향</th></tr></thead><tbody>
+      ${MACRO.events.map(e=>`<tr><td style="font-weight:700;color:var(--text)">${e.ev}</td><td style="color:var(--muted)">${e.data}</td><td style="color:${e.c==='green'?'var(--green)':'var(--amber)'}">${e.impact}</td></tr>`).join('')}
+      </tbody></table></div></div>`;
+  } else {
+    const intros={kr:"KOSPI 8,476 시대 — 6개 섹터 24종목을 현재가·밸류에이션·옵션 지표로 정밀 점검. RSI 88+ 극과매수(추격절대금지) / 80~87 경고 / 40~64 중립 / ~39 과매도(분할 적기).",
+      us:"S&P 500 CAPE 40.93 극단 고평가. 9개 섹터 21종목. PLTR·VRT 등 ATH 근방 추격 금지, NVDA·CRCL·IREN S등급만 선별. 옵션 종목은 맥스페인·PCR로 단기 타이밍 보조.",
+      crypto:"BTC 반감기 후 약 25개월. 4개 섹터 18종목. BTC ETF 9일 연속 순유출 vs SOL·XRP 순매수 양극화. ETF로 자금이 들어오는지로 종목 선별."};
+    html2+=`<div class="intro-card"><span class="ic-tag">${tab.name} 개요</span><p style="color:#1d4ed8;font-weight:500">${intros[tab.id]}</p></div>`;
+    STOCKS[tab.id].forEach((sec,si)=>{ html2+=sectorTable(sec,i,si); });
+    html2+=scoreSection(tab.id);
+  }
+  html2+=`</div>`;
+  panels.innerHTML+=html2;
+});
+
+
+// 종목 수 카운트 → 버전 배지 (모든 표시 동기화)
+(function(){
+  let tot=0; ['kr','us','crypto'].forEach(k=>STOCKS[k].forEach(s=>tot+=s.rows.length));
+  const head=`발행 ${PUB_DATE} · ${VERSION}`;
+  document.getElementById('verBadge').textContent=`${head} · ${tot}종목 · 데이터 기준 ${BASE_DATE}`;
+  const cv=document.getElementById('cornerVer'); if(cv)cv.textContent=head;
+  const fs=document.getElementById('fixedSig'); if(fs)fs.innerHTML=`Analysis by Hamry<span class="fs-sub">2030 프로젝트 · ${head}</span>`;
+})();
+
+// ===================== 자동 업데이트 로직 =====================
+const LS_DATE="hamry2030_lastUpdate", LS_DATA="hamry2030_priceCache", LS_AV="hamry2030_avKey", LS_CG="hamry2030_cgKey", LS_KIS_AK="hamry2030_kisAK", LS_KIS_SK="hamry2030_kisSK", LS_KIS_TOKEN="hamry2030_kisToken";
+function todayStr(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,'0')+"-"+String(d.getDate()).padStart(2,'0');}
+
+function setStatus(html,color){document.getElementById('updStatus').innerHTML=`<span class="dot" style="background:${color}"></span>`+html;}
+
+function checkStatus(){
+  const last=localStorage.getItem(LS_DATE);
+  const today=todayStr();
+  const btn=document.getElementById('updBtn');
+  if(last===today){
+    setStatus(`오늘(<b>${today}</b>) 갱신됨 · 버튼을 누르면 실시간 새로고침`,"var(--green)");
+    btn.textContent="실시간 새로고침 ↻";
+    btn.onclick=function(){runUpdate(true);};
+    applyCache();
+    return true;
+  } else if(last){
+    setStatus(`마지막 갱신 <b>${last}</b> · 분석 기준일 ${BASE_DATE}`,"var(--amber)");
+    btn.onclick=function(){runUpdate(true);};
+    applyCache();
+    return false;
+  } else {
+    setStatus(`분석 기준일 <b>${BASE_DATE}</b> 데이터 · 최신 갱신 가능`,"var(--dim)");
+    btn.onclick=function(){runUpdate(true);};
+    return false;
+  }
+}
+
+function applyCache(){
+  try{
+    const cache=JSON.parse(localStorage.getItem(LS_DATA)||"{}");
+    if(cache.prices) applyPrices(cache.prices);
+    if(cache.opts) applyOptions(cache.opts);
+    if(cache.macro) applyMacro(cache.macro);
+  }catch(e){}
+}
+
+// 가격 적용: data-cg / data-av / data-kr 속성을 가진 모든 요소
+function applyPrices(prices){
+  // prices: {cgId/avSym: {price}, krCode: {price(원)}}
+  document.querySelectorAll('[data-px="1"]').forEach(el=>{
+    const cg=el.getAttribute('data-cg'), av=el.getAttribute('data-av'), kr=el.getAttribute('data-kr');
+    const key=cg||av||kr; if(!key||!prices[key])return;
+    const p=prices[key];
+    if(cg){ // 크립토 USD
+      el.textContent='$'+Number(p.price).toLocaleString(undefined,{maximumFractionDigits:p.price<10?2:0});
+    } else if(av){ // 미국 USD
+      el.textContent='$'+Number(p.price).toLocaleString(undefined,{maximumFractionDigits:2});
+    } else if(kr){ // 한국 원화
+      el.textContent=Number(p.price).toLocaleString()+'원';
+    }
+    el.setAttribute('data-live','1');
+  });
+  // 상단 스트립 BTC
+  const btcEl=document.getElementById('idx-BTC');
+  if(btcEl&&prices.bitcoin){btcEl.textContent='$'+Number(prices.bitcoin.price).toLocaleString(undefined,{maximumFractionDigits:0});btcEl.setAttribute('data-live','1');}
+  // S등급 데이터(SG)의 현재가 갱신 후 하이라이팅 재계산
+  let sgChanged=false;
+  SG.forEach(s=>{
+    const key=s.cgId||s.avSym||s.krCode; if(!key||!prices[key])return;
+    const p=prices[key].price;
+    s.px = s.krCode ? Number(p).toLocaleString()+'원' : '$'+Number(p).toLocaleString(undefined,{maximumFractionDigits:p<10?2:0});
+    // BTC/ETH: 현재가 갱신 시 맥스페인 갭(arg)도 재계산
+    if((s.tk==='BTC'||s.tk==='ETH')&&s.mp&&s.mp!=='N/A'){
+      const rawMp=parseFloat(String(s.mp).replace(/[$,]/g,''));
+      if(rawMp&&p){
+        const gap=((rawMp-p)/p*100).toFixed(1);
+        const pxStr=p>=1000?'$'+(p/1000).toFixed(1)+'K':'$'+p.toLocaleString(undefined,{maximumFractionDigits:0});
+        const mpStr=rawMp>=1000?'$'+(rawMp/1000).toFixed(0)+'K':'$'+rawMp.toLocaleString();
+        const gapStr=gap>0?'+'+gap+'%':gap+'%';
+        const rsiNote=s.rsi<=30?`RSI ${s.rsi} 과매도`:s.rsi>=70?`RSI ${s.rsi} 과매수`:`RSI ${s.rsi}`;
+        if(s.tk==='BTC'){
+          s.arg=`현재가 ${pxStr}(${rsiNote}). 맥스페인 ${mpStr}는 현재가보다 ${gapStr} → 자석효과 분할 적기`;
+        } else {
+          const dir=rawMp>p?'<':'>';
+          s.arg=`현재가 ${dir} 맥스페인(${mpStr}, ${gapStr}) + ${rsiNote} = 분할 진입`;
+        }
+      }
+    }
+    sgChanged=true;
+  });
+  if(sgChanged){renderStable();markLiveCells(prices);}
+}
+// 재렌더 후 실시간 셀 표시 복원
+function markLiveCells(prices){
+  document.querySelectorAll('#stable [data-px="1"]').forEach(el=>{
+    const key=el.getAttribute('data-cg')||el.getAttribute('data-av')||el.getAttribute('data-kr');
+    if(key&&prices[key])el.setAttribute('data-live','1');
+  });
+}
+
+async function fetchCrypto(){
+  // CoinGecko 무료 공개 API (키 불필요, CORS 허용)
+  const ids=["bitcoin","ethereum","solana","ripple","chainlink","aave","ondo-finance","uniswap","dogecoin","filecoin"];
+  const cgKey=localStorage.getItem(LS_CG);
+  let url=`https://api.coingecko.com/api/v3/simple/price?ids=${ids.join(',')}&vs_currencies=usd&include_24hr_change=true`;
+  const headers={};
+  if(cgKey) headers['x-cg-demo-api-key']=cgKey;
+  const res=await fetch(url,{headers});
+  if(!res.ok) throw new Error("CoinGecko "+res.status);
+  const j=await res.json();
+  const out={};
+  const map={bitcoin:"bitcoin",ethereum:"ethereum",solana:"solana",ripple:"ripple",chainlink:"chainlink",aave:"aave","ondo-finance":"ondo-finance",uniswap:"uniswap",dogecoin:"dogecoin",filecoin:"filecoin"};
+  for(const id in map){ if(j[id]) out[id]={price:j[id].usd,chg:j[id].usd_24h_change}; }
+  return out;
+}
+
+async function fetchUSStocks(onProgress){
+  // Alpha Vantage (키 필요) — 미국 전 종목. 무료 키는 분당 5회·일 25회 제한
+  const avKey=localStorage.getItem(LS_AV);
+  if(!avKey) return {};
+  // STOCKS.us의 모든 avSym 수집 (중복 제거)
+  const allSyms=[];
+  (STOCKS.us||[]).forEach(sec=>sec.rows.forEach(r=>{ if(r.avSym && !allSyms.includes(r.avSym)) allSyms.push(r.avSym); }));
+  // 이미 받은 종목(캐시)은 뒤로 미루고, 아직 못 받은 것부터 우선 — 여러 번 눌러 전체 보완
+  let cached={};
+  try{ const c=JSON.parse(localStorage.getItem(LS_DATA)||"{}"); cached=(c&&c.prices)||{}; }catch(e){}
+  const pending=allSyms.filter(s=>!cached[s]);
+  const already=allSyms.filter(s=>cached[s]);
+  const syms=pending.concat(already); // 못 받은 것 먼저
+  const out={};
+  let done=0, rateLimited=false;
+  for(const s of syms){
+    try{
+      const res=await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${s}&apikey=${avKey}`);
+      const j=await res.json();
+      // 무료 한도 초과 시 Note/Information 메시지 반환
+      if(j["Note"]||j["Information"]){ rateLimited=true; break; }
+      const q=j["Global Quote"];
+      if(q&&q["05. price"]&&parseFloat(q["05. price"])>0) out[s]={price:parseFloat(q["05. price"])};
+      done++;
+      if(onProgress) onProgress(done,syms.length,s);
+      await new Promise(r=>setTimeout(r,1500)); // 분당 약 5회 페이스 대비 여유
+    }catch(e){}
+  }
+  out.__meta={fetched:Object.keys(out).length,total:allSyms.length,rateLimited};
+  return out;
+}
+
+// ── 한국투자증권 OpenAPI: 국내주식 현재가 (appkey/secret 필요, CORS 허용) ──
+let _kisToken=null, _kisTokenAt=0;
+async function getKisToken(){
+  const ak=localStorage.getItem(LS_KIS_AK), sk=localStorage.getItem(LS_KIS_SK);
+  if(!ak||!sk) return null;
+  // 토큰 캐시 (23시간 유효)
+  const cached=localStorage.getItem(LS_KIS_TOKEN);
+  if(cached){
+    try{const c=JSON.parse(cached); if(Date.now()-c.at < 23*3600*1000){return c.token;}}catch(e){}
+  }
+  const res=await fetch('https://openapi.koreainvestment.com:9443/oauth2/tokenP',{
+    method:'POST', headers:{'Content-Type':'application/json; charset=UTF-8'},
+    body:JSON.stringify({grant_type:'client_credentials',appkey:ak,appsecret:sk})
+  });
+  if(!res.ok) throw new Error('KIS 토큰 '+res.status);
+  const j=await res.json();
+  if(!j.access_token) throw new Error('KIS 토큰 발급 실패');
+  localStorage.setItem(LS_KIS_TOKEN,JSON.stringify({token:j.access_token,at:Date.now()}));
+  return j.access_token;
+}
+async function fetchKRStocks(onProgress){
+  const ak=localStorage.getItem(LS_KIS_AK), sk=localStorage.getItem(LS_KIS_SK);
+  if(!ak||!sk) return {};
+  let token;
+  try{ token=await getKisToken(); }
+  catch(e){
+    // Failed to fetch = 대개 CORS (content://·file:// 로 열었거나 Origin null)
+    const isFetchFail=/fetch/i.test(e.message);
+    return {__meta:{error: isFetchFail ? 'CORS 차단(브라우저에서 직접 열기 필요)' : e.message}};
+  }
+  if(!token) return {};
+  // STOCKS.kr의 모든 krCode 수집
+  const codes=[];
+  (STOCKS.kr||[]).forEach(sec=>sec.rows.forEach(r=>{ if(r.krCode && !codes.includes(r.krCode)) codes.push(r.krCode); }));
+  const out={}; let done=0;
+  for(const code of codes){
+    try{
+      const url='https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/quotations/inquire-price?fid_cond_mrkt_div_code=J&fid_input_iscd='+code;
+      const res=await fetch(url,{headers:{
+        'Content-Type':'application/json; charset=UTF-8',
+        'authorization':'Bearer '+token,
+        'appkey':ak, 'appsecret':sk, 'tr_id':'FHKST01010100', 'custtype':'P'
+      }});
+      const j=await res.json();
+      if(j.output && j.output.stck_prpr){ out[code]={price:parseFloat(j.output.stck_prpr)}; }
+      done++;
+      if(onProgress) onProgress(done,codes.length,code);
+      await new Promise(r=>setTimeout(r,250)); // 초당 약 4회 (KIS 한도 여유)
+    }catch(e){}
+  }
+  out.__meta={fetched:Object.keys(out).length,total:codes.length};
+  return out;
+}
+
+// ── Deribit 옵션: BTC·ETH 맥스페인 + PCR 자동 계산 (무료 공개 API, 키 불필요, CORS 허용) ──
+async function fetchDeribitOption(currency){
+  // 1) 통화별 옵션 instrument 요약 (행사가별 OI)
+  const url=`https://www.deribit.com/api/v2/public/get_book_summary_by_currency?currency=${currency}&kind=option`;
+  const res=await fetch(url);
+  if(!res.ok) throw new Error("Deribit "+res.status);
+  const j=await res.json();
+  const list=j.result||[];
+  // 2) 가장 가까운(근월) 만기 선택
+  const exp={}; // 만기 -> instruments
+  list.forEach(o=>{
+    // instrument_name 예: BTC-26DEC25-80000-C
+    const m=o.instrument_name.match(/^[A-Z]+-(\d+[A-Z]+\d+)-(\d+)-([CP])$/);
+    if(!m) return;
+    const expiry=m[1], strike=+m[2], type=m[3];
+    (exp[expiry]=exp[expiry]||[]).push({strike,type,oi:o.open_interest||0});
+  });
+  const expKeys=Object.keys(exp);
+  if(!expKeys.length) throw new Error("Deribit 만기 없음");
+  // 만기일 파싱해 미래 중 가장 가까운 것
+  function parseExp(s){const mm={JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};const m=s.match(/(\d+)([A-Z]+)(\d+)/);return new Date(2000+ +m[3], mm[m[2]], +m[1]);}
+  const now=Date.now();
+  expKeys.sort((a,b)=>parseExp(a)-parseExp(b));
+  const near=expKeys.find(k=>parseExp(k).getTime()>now)||expKeys[0];
+  const opts=exp[near];
+  // 3) PCR (풋 OI / 콜 OI)
+  let callOI=0, putOI=0;
+  opts.forEach(o=>{ if(o.type==='C')callOI+=o.oi; else putOI+=o.oi; });
+  const pcr=callOI>0?(putOI/callOI):0;
+  // 4) 맥스페인: 각 행사가에서 모든 옵션의 내재가치 합 최소가 되는 지점
+  const strikes=[...new Set(opts.map(o=>o.strike))].sort((a,b)=>a-b);
+  let minPain=Infinity, maxPainStrike=strikes[0];
+  strikes.forEach(S=>{
+    let pain=0;
+    opts.forEach(o=>{
+      if(o.type==='C' && S>o.strike) pain+=(S-o.strike)*o.oi;
+      if(o.type==='P' && S<o.strike) pain+=(o.strike-S)*o.oi;
+    });
+    if(pain<minPain){minPain=pain;maxPainStrike=S;}
+  });
+  return {maxPain:maxPainStrike, pcr:+pcr.toFixed(2), expiry:near, callOI:Math.round(callOI), putOI:Math.round(putOI)};
+}
+
+async function fetchOptions(){
+  // BTC, ETH 옵션 지표 (Deribit)
+  const out={};
+  for(const cur of ['BTC','ETH']){
+    try{ out[cur]=await fetchDeribitOption(cur); }catch(e){}
+  }
+  return out;
+}
+
+// ── 거시지표: 환율(Frankfurter, 키 불필요·CORS 허용) ──
+async function fetchMacro(){
+  const out={};
+  // USD/KRW 환율 — Frankfurter (무료, 키 불필요)
+  try{
+    const r=await fetch('https://api.frankfurter.dev/v1/latest?base=USD&symbols=KRW');
+    if(r.ok){const j=await r.json(); if(j.rates&&j.rates.KRW) out.usdkrw=Math.round(j.rates.KRW);}
+  }catch(e){}
+  return out;
+}
+
+async function runUpdate(force){
+  const today=todayStr();
+  if(!force && localStorage.getItem(LS_DATE)===today){
+    // 이미 오늘 갱신함 — 버튼을 한 번 더 누르면 강제 재시도
+    setStatus(`오늘(<b>${today}</b>) 갱신됨 · 한 번 더 누르면 강제 새로고침`,"var(--amber)");
+    const btn=document.getElementById('updBtn');
+    btn.textContent="강제 새로고침 ↻";
+    btn.onclick=function(){runUpdate(true);};
+    return;
+  }
+  const btn=document.getElementById('updBtn');
+  btn.disabled=true; btn.innerHTML='<span class="spin"></span>가져오는 중…';
+  let prices={}, opts={}, macro={}, ok=false, msg=[];
+  try{
+    const c=await fetchCrypto();
+    Object.assign(prices,c); if(Object.keys(c).length){ok=true;} msg.push(`크립토 ${Object.keys(c).length}종`);
+  }catch(e){ msg.push("크립토 실패("+e.message+")"); }
+  try{
+    opts=await fetchOptions();
+    if(Object.keys(opts).length){ ok=true; msg.push(`옵션 ${Object.keys(opts).length}종(Deribit)`); }
+  }catch(e){ msg.push("옵션 실패"); }
+  try{
+    macro=await fetchMacro();
+    const mk=Object.keys(macro); if(mk.length){ ok=true; msg.push(`거시 ${mk.join('·')}`); }
+  }catch(e){ msg.push("거시 실패"); }
+  try{
+    const u=await fetchUSStocks((done,total,sym)=>{
+      setStatus(`미국주식 가져오는 중… ${done}/${total} (${sym})`,"var(--amber)");
+    });
+    const meta=u.__meta; delete u.__meta;
+    if(Object.keys(u).length){
+      Object.assign(prices,u); ok=true;
+      // 누적 집계 (캐시 + 이번)
+      let cachedUS=0;
+      try{ const pc=JSON.parse(localStorage.getItem(LS_DATA)||"{}"); if(pc&&pc.date===today&&pc.prices){ (STOCKS.us||[]).forEach(sec=>sec.rows.forEach(r=>{ if(r.avSym&&(pc.prices[r.avSym]||u[r.avSym])) cachedUS++; })); } }catch(e){}
+      const totalGot=cachedUS||Object.keys(u).length;
+      let m=`미국주식 ${totalGot}/${meta?meta.total:22}종`;
+      if(meta&&meta.rateLimited) m+=` (무료 한도 도달 — 버튼 다시 누르면 나머지 이어받기)`;
+      msg.push(m);
+    } else if(meta&&meta.rateLimited){
+      msg.push("미국주식 무료 한도 초과 — 1분 후 다시 시도");
+    } else msg.push("미국주식 건너뜀(키 없음)");
+  }catch(e){ msg.push("미국주식 실패"); }
+  try{
+    const k=await fetchKRStocks((done,total,code)=>{
+      setStatus(`한국주식 가져오는 중… ${done}/${total} (${code})`,"var(--amber)");
+    });
+    const kmeta=k.__meta; delete k.__meta;
+    if(Object.keys(k).length){
+      Object.assign(prices,k); ok=true; msg.push(`한국주식 ${Object.keys(k).length}종(KIS)`);
+    } else if(kmeta&&kmeta.error){
+      msg.push("한국주식 실패("+kmeta.error+")");
+    } else msg.push("한국주식 건너뜀(KIS 키 없음)");
+  }catch(e){ msg.push("한국주식 실패"); }
+
+  if(ok){
+    // 기존 캐시의 가격과 병합 (미국주식 무료 한도로 나눠 받은 것 누적)
+    let prevPrices={};
+    try{ const pc=JSON.parse(localStorage.getItem(LS_DATA)||"{}"); if(pc&&pc.date===today&&pc.prices) prevPrices=pc.prices; }catch(e){}
+    const mergedPrices=Object.assign({},prevPrices,prices);
+    // 순서 중요: 옵션(renderStable로 SG 재생성) 먼저 → 가격 적용 → live 표시
+    applyOptions(opts);
+    applyMacro(macro);
+    applyPrices(mergedPrices);
+    localStorage.setItem(LS_DATE,today);
+    localStorage.setItem(LS_DATA,JSON.stringify({date:today,prices:mergedPrices,opts,macro}));
+    const t=new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
+    setStatus(`<b>${today} ${t}</b> 갱신 완료 · ${msg.join(", ")}`,"var(--green)");
+    btn.disabled=false; btn.textContent="다시 갱신 ↻";
+    btn.onclick=function(){runUpdate(true);};
+  } else {
+    setStatus(`갱신 실패 · ${msg.join(", ")} · 네트워크/CORS 확인`,"var(--red)");
+    btn.disabled=false; btn.textContent="다시 시도";
+    btn.onclick=function(){runUpdate(true);};
+  }
+}
+
+// 옵션 갱신값 반영: SG 표 + OPT + 매크로 카드의 BTC/ETH 맥스페인·PCR
+function applyOptions(opts){
+  if(!opts||!Object.keys(opts).length)return;
+  ['BTC','ETH'].forEach(cur=>{
+    const o=opts[cur]; if(!o)return;
+    const mpFmt='$'+Number(o.maxPain).toLocaleString();
+    // SG 요약표 — mp·pcr·key·arg 동적 갱신
+    SG.forEach(s=>{
+      if(s.tk!==cur)return;
+      s.mp=mpFmt; s.pcr=String(o.pcr); s.key='Deribit '+o.expiry;
+      // 현재가에서 숫자 추출 (달러 기호·콤마 제거)
+      const rawPx=parseFloat(String(s.px).replace(/[$,]/g,''));
+      const mp=Number(o.maxPain);
+      if(rawPx&&mp){
+        const gap=((mp-rawPx)/rawPx*100).toFixed(1);
+        const pxStr=rawPx>=1000?'$'+(rawPx/1000).toFixed(1)+'K':'$'+rawPx.toLocaleString(undefined,{maximumFractionDigits:0});
+        const mpStr=mp>=1000?'$'+(mp/1000).toFixed(0)+'K':'$'+mp.toLocaleString();
+        const gapStr=gap>0?'+'+gap+'%':gap+'%';
+        const rsiNote=s.rsi<=30?`RSI ${s.rsi} 과매도`:s.rsi>=70?`RSI ${s.rsi} 과매수`:`RSI ${s.rsi}`;
+        if(cur==='BTC'){
+          s.arg=`현재가 ${pxStr}(${rsiNote}). 맥스페인 ${mpStr}는 현재가보다 ${gapStr} → 자석효과 분할 적기`;
+        } else if(cur==='ETH'){
+          const dir=mp>rawPx?'<':'>';
+          s.arg=`현재가 ${dir} 맥스페인(${mpStr}, ${gapStr}) + ${rsiNote} = 분할 진입`;
+        }
+      }
+    });
+    // OPT 데이터
+    if(OPT[cur]){ OPT[cur].mp=o.maxPain; OPT[cur].pcrOI=o.pcr; }
+    // STOCKS 크립토 상세 — mp·pcr·issue 내 맥스페인 언급 동적 갱신
+    (STOCKS.crypto||[]).forEach(sec=>sec.rows.forEach(r=>{
+      if(r.tk!==cur)return;
+      r.mp='$'+Number(o.maxPain).toLocaleString(); r.pcr=String(o.pcr);
+      const rawPx=parseFloat(String(r.px).replace(/[$,]/g,''));
+      const mp=Number(o.maxPain);
+      if(rawPx&&mp&&r.issue){
+        const gap=((mp-rawPx)/rawPx*100).toFixed(1);
+        const mpStr=mp>=1000?'$'+(mp/1000).toFixed(0)+'K':'$'+mp.toLocaleString();
+        const gapStr=gap>0?'+'+gap+'%':gap+'%';
+        // issue 내 맥스페인 금액 패턴 교체 ($72K, $2,050 등)
+        r.issue=r.issue.replace(/맥스페인\s*\$[\d,KkBbMm.]+(\([^)]*\))?/g,`맥스페인 ${mpStr}(현재가 ${gapStr})`);
+      }
+    }));
+  });
+  renderStable();
+}
+
+// 거시지표 갱신값 반영: 상단 스트립(환율·CPI)
+function applyMacro(macro){
+  if(!macro)return;
+  if(macro.usdkrw){
+    const el=document.getElementById('idx-USDKRW'); if(el){el.textContent=macro.usdkrw.toLocaleString()+'원';el.setAttribute('data-live','1');}
+  }
+}
+
+// 기술지표(주봉 RSI·ATH대비%) 반영: data.json의 tech를 화면·배열에 적용
+// tech 형식: { "<cgId/avSym/krCode>": {rsi:Number, ath:"-47%"} }
+function applyTech(tech){
+  if(!tech||!Object.keys(tech).length)return;
+  // 1) SG(S등급 요약표) 배열 갱신 → renderStable이 신호·논거까지 재계산
+  SG.forEach(s=>{ const key=s.cgId||s.avSym||s.krCode; if(key&&tech[key]){
+    if(typeof tech[key].rsi==='number')s.rsi=tech[key].rsi;
+    if(tech[key].ath)s.ath=tech[key].ath;
+  }});
+  // 2) STOCKS 배열 갱신(재렌더 대비)
+  ['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{
+    const key=r.cgId||r.avSym||r.krCode; if(key&&tech[key]){
+      if(typeof tech[key].rsi==='number')r.rsi=String(tech[key].rsi);
+      if(tech[key].ath)r.ath=tech[key].ath;
+    }
+  })));
+  // 3) IDXDATA 배열 갱신
+  (typeof IDXDATA!=='undefined'?IDXDATA:[]).forEach(d=>{ if(d.cgId&&tech[d.cgId]){
+    if(typeof tech[d.cgId].rsi==='number')d.rsi=tech[d.cgId].rsi;
+    if(tech[d.cgId].ath)d.ath=tech[d.cgId].ath;
+  }});
+  // 4) SG 표 재렌더(신호 음영·논거 갱신)
+  renderStable();
+  // 5) 한 번 렌더된 종목 카드·지수표는 DOM 셀 직접 갱신
+  document.querySelectorAll('[data-rsi]').forEach(el=>{ const k=el.getAttribute('data-rsi'); if(k&&tech[k]&&typeof tech[k].rsi==='number'){ el.textContent=tech[k].rsi; el.style.color=(typeof rsiCol2==='function'?rsiCol2(tech[k].rsi):rsiCol(tech[k].rsi)); }});
+  document.querySelectorAll('[data-ath]').forEach(el=>{ const k=el.getAttribute('data-ath'); if(k&&tech[k]&&tech[k].ath){ el.textContent=tech[k].ath; el.style.color=athCol(tech[k].ath); }});
+}
+
+// API 패널
+function toggleApiPanel(){document.getElementById('apiPanel').classList.toggle('open');}
+function saveKeys(){
+  const av=document.getElementById('keyAV').value.trim();
+  const cg=document.getElementById('keyCG').value.trim();
+  const kak=document.getElementById('keyKisAK').value.trim();
+  const ksk=document.getElementById('keyKisSK').value.trim();
+  if(av)localStorage.setItem(LS_AV,av); else localStorage.removeItem(LS_AV);
+  if(cg)localStorage.setItem(LS_CG,cg); else localStorage.removeItem(LS_CG);
+  if(kak)localStorage.setItem(LS_KIS_AK,kak); else localStorage.removeItem(LS_KIS_AK);
+  if(ksk)localStorage.setItem(LS_KIS_SK,ksk); else localStorage.removeItem(LS_KIS_SK);
+  localStorage.removeItem(LS_KIS_TOKEN); // 키 변경 시 토큰 캐시 초기화
+  alert("저장되었습니다. 이 브라우저에만 보관되며 외부로 전송되지 않습니다.");
+  document.getElementById('apiPanel').classList.remove('open');
+}
+function clearKeys(){
+  [LS_AV,LS_CG,LS_KIS_AK,LS_KIS_SK,LS_KIS_TOKEN].forEach(k=>localStorage.removeItem(k));
+  ['keyAV','keyCG','keyKisAK','keyKisSK'].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});
+  alert("저장된 키를 삭제했습니다.");
+}
+(function loadKeys(){
+  const m={keyAV:LS_AV,keyCG:LS_CG,keyKisAK:LS_KIS_AK,keyKisSK:LS_KIS_SK};
+  for(const id in m){const v=localStorage.getItem(m[id]); if(v){const e=document.getElementById(id); if(e)e.value=v;}}
+})();
+
+// 초기 상태 확인
+checkStatus();
+// 실행 환경 점검: content://·file:// 로 열면 CORS로 API가 막힘 (checkStatus 후 덮어쓰기)
+(function checkEnv(){
+  const proto=location.protocol;
+  if(proto==='content:'||proto==='file:'){
+    setStatus(`⚠️ <b>${proto}//</b> 로 열려 있어 실시간 갱신이 차단될 수 있습니다. 다운로드한 파일을 파일앱으로 열지 말고, <b>크롬·삼성인터넷 브라우저에서 직접 열거나</b> 웹서버(http/https)에 올려 사용하세요.`,"var(--red)");
+  }
+})();
+
+// ===================== 서버 데이터(data.json) 자동 로드 =====================
+// GitHub Actions가 1시간마다 만든 data.json을 읽어 시세·옵션·환율·RSI·ATH 자동 반영.
+// 같은 폴더(index.html 옆)의 data.json을 캐시 무력화 쿼리와 함께 요청.
+async function loadServerData(){
+  try{
+    const res=await fetch('./data.json?t='+Date.now(),{cache:'no-store'});
+    if(!res.ok)return; // data.json 없음(아직 첫 실행 전) → 기존 동작 유지
+    const d=await res.json();
+    // 적용 순서: 옵션(맥스페인·PCR) → 환율 → 기술지표(RSI·ATH) → 시세
+    //  (시세를 마지막에 적용해 BTC/ETH 논거가 최신 RSI·맥스페인 기준으로 재계산되도록)
+    if(d.opts)  applyOptions(d.opts);
+    if(d.macro) applyMacro(d.macro);
+    if(d.tech)  applyTech(d.tech);
+    if(d.prices)applyPrices(d.prices);
+    // 상태줄·배지에 서버 갱신 시각 표기
+    const t=d.updated?new Date(d.updated):null;
+    const ts=t?t.toLocaleString('ko-KR',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):d.date;
+    const errs=(d.meta&&d.meta.errors&&d.meta.errors.length)?` · ⚠️ ${d.meta.errors.length}건 점검`:'';
+    setStatus(`<b>${ts}</b> 자동 갱신(서버) · 시세 ${d.meta?d.meta.pricesGot:'-'}종·기술지표 ${d.meta?d.meta.techGot:'-'}종${errs}`,"var(--green)");
+    const vb=document.getElementById('verBadge'); if(vb)vb.textContent=`발행 ${PUB_DATE} · ${VERSION} · 서버 자동갱신 ${ts}`;
+    if(d.meta&&d.meta.errors&&d.meta.errors.length)console.warn('[data.json 점검 필요]',d.meta.errors);
+  }catch(e){ /* 로컬에서 열어 data.json 접근 불가한 경우 등 → 무시하고 기존 동작 */ }
+}
+loadServerData();
+</script>
+
+</body>
+</html>
