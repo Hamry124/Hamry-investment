@@ -1,6 +1,6 @@
 {
   "date": "2026-06-07",
-  "updated": "2026-06-07T09:15:22.954Z",
+  "updated": "2026-06-07T09:32:05.830Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 414000
     },
     "bitcoin": {
-      "price": 62737,
-      "chg": 2.46905
+      "price": 62651,
+      "chg": 2.29053
     },
     "ethereum": {
-      "price": 1639.25,
-      "chg": 3.65795
+      "price": 1640.31,
+      "chg": 3.46622
     },
     "ripple": {
       "price": 1.16,
-      "chg": 6.12704
+      "chg": 5.37515
     },
     "solana": {
-      "price": 65.9,
-      "chg": 4.41517
+      "price": 65.69,
+      "chg": 3.66039
     },
     "dogecoin": {
-      "price": 0.085607,
-      "chg": 4.28689
+      "price": 0.085564,
+      "chg": 3.93665
     },
     "chainlink": {
-      "price": 7.82,
-      "chg": 5.29225
+      "price": 7.79,
+      "chg": 4.66109
     },
     "ondo-finance": {
-      "price": 0.350765,
-      "chg": 4.75654
+      "price": 0.347703,
+      "chg": 3.84474
     },
     "aave": {
-      "price": 63.96,
-      "chg": 3.364
+      "price": 63.76,
+      "chg": 2.87979
     },
     "filecoin": {
-      "price": 0.769015,
-      "chg": 4.68266
+      "price": 0.766435,
+      "chg": 4.37848
     },
     "NVDA": {
       "price": 205.1
@@ -446,7 +446,7 @@
   "opts": {
     "BTC": {
       "maxPain": 61500,
-      "pcr": 1.39,
+      "pcr": 1.37,
       "expiry": "8JUN26"
     },
     "ETH": {
@@ -722,6 +722,16 @@
     "errors": [
       "US PX: HTTP 404",
       "KR SI: KRX 응답 없음(거래일/규격 확인)"
-    ]
+    ],
+    "krDebug": {
+      "mapSize": 0,
+      "mapSample": [],
+      "want": [
+        "000660",
+        "005930",
+        "373220"
+      ],
+      "matched": 0
+    }
   }
 }
