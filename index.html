@@ -286,7 +286,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-08 · v5</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-08 · v6</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -312,7 +312,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-08 · v5 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-08 · v6 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -376,9 +376,9 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </div>
 
 <!-- S TABLE -->
-<div class="block-title"><span class="bt-num">★</span><h2 id="sgTitle">S등급 핵심 종목</h2><span class="bt-sub">맥스페인 · PCR 통합 점검</span></div>
+<div class="block-title"><span class="bt-num">★</span><h2 id="sgTitle">S등급 핵심 종목</h2><span class="bt-sub">자동평가 점수순 · 저평가70+성장성30</span></div>
 <div class="intro-card" style="margin-bottom:10px">
-  <p>맥스페인(Max Pain)은 기관 손실 최소화 주가(자석처럼 끌려가는 지점), PCR(풋/콜 비율)은 시장 심리(&gt;1.0 공포 매수, &lt;0.7 과열 매도). 한국 개별 종목은 옵션 미상장이 많아 KOSPI 200 옵션 PCR 0.92를 참조값으로 사용한다.</p>
+  <p>전체 63종목을 자동 평가(정량 70%: 저평가·맥스페인·PCR·RSI·SI / 성장성 30%)해 <b>S등급(종합 70점 이상)으로 산출된 종목만 점수 높은 순</b>으로 자동 리스트업한다. 데이터가 갱신되면 구성·순위가 자동 재평가된다. 맥스페인(Max Pain)은 기관 손실 최소화 주가, PCR(풋/콜 비율)은 시장 심리(&gt;1.0 공포 매수, &lt;0.7 과열 매도)다.</p>
 </div>
 <div class="tbl-wrap"><table class="dt" id="stable"></table></div>
 <div class="note" style="display:flex;flex-direction:column;gap:6px">
@@ -398,15 +398,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-08 · v5 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-08 · v6 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-08 · v5</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-08 · v6</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-03";
 const PUB_DATE="2026-06-08";  // 발행일
-const VERSION="v5";          // 버전 (수정 시 v# 증가)
+const VERSION="v6";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -866,22 +866,33 @@ function signalCount(s){
   return {cnt:(A?1:0)+(B?1:0)+(C?1:0), hits};
 }
 function renderStable(){
-  document.getElementById('stable').innerHTML=
-  `<thead><tr><th>종목명</th><th>현재가</th><th>맥스페인</th><th>PCR</th><th>RSI</th><th>ATH대비</th><th>SI</th><th>핵심지표</th><th>매수 논거</th></tr></thead>
-  <tbody>${SG.map(s=>{const sig=signalCount(s);const sikey=s.avSym||s.krCode||'';const si0=(sikey&&typeof OPT!=='undefined'&&OPT[sikey]&&OPT[sikey].si!=null&&OPT[sikey].si>0)?OPT[sikey].si+'%':'—';const ev=evalScore(Object.assign({},s,{si:si0}));return `<tr class="${sig.cnt>0?'hl'+sig.cnt:''}">
-  <td><span style="font-size:15px">${({S:"🥇",A:"🥈",B:"🥉"})[ev.grade]}</span> <span class="tk-cell">${s.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:#cbd5e1;background:#f8fafc;color:#475569" title="정량 ${ev.q}(저평가 ${ev.v}·시그널 ${ev.sig}) · 성장성 ${ev.g}">${ev.sc}·${ev.grade}</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">▲${sig.cnt}</span>`:''}</td>
-  <td class="mono live" ${s.cgId?`data-cg="${s.cgId}"`:''} ${s.avSym?`data-av="${s.avSym}"`:''} ${s.krCode?`data-kr="${s.krCode}"`:''} data-px="1">${s.px}</td>
-  <td class="mono" ${sikey?`data-mp="${sikey}"`:''} style="color:${s.mp==="N/A"?"var(--dim)":"var(--text)"}">${s.mp}</td>
-  <td class="mono" ${sikey?`data-pcr="${sikey}"`:''} style="color:${pcrCol(s.pcr)};font-weight:700">${s.pcr}</td>
-  <td class="mono" style="color:${rsiCol(s.rsi)}">${s.rsi}</td>
-  <td class="mono" style="color:${athCol(s.ath)}">${s.ath}</td>
-  <td class="mono" ${sikey?`data-si="${sikey}"`:''} style="color:${siCol(si0)}">${si0}</td>
-  <td style="color:var(--cyan);font-weight:600">${s.key}</td>
-  <td style="color:var(--muted)">${diagPill(diagnose({px:s.px,mp:s.mp,pcr:s.pcr,rsi:s.rsi,si:si0}),false)} ${s.arg}</td>
-  </tr>`;}).join('')}</tbody>`;
+  const all=[];
+  ['kr','us','crypto'].forEach(mk=>((typeof STOCKS!=='undefined'&&STOCKS[mk])||[]).forEach(sec=>sec.rows.forEach(r=>all.push(r))));
+  const sList=all.map(r=>({r,sig:signalCount(r),e:evalScore(r)}))
+                 .filter(x=>x.e.grade==='S')
+                 .sort((a,b)=>b.e.sc-a.e.sc);
+  const head=`<thead><tr><th>종목명</th><th>현재가</th><th>맥스페인</th><th>PCR</th><th>RSI</th><th>ATH대비</th><th>SI</th><th>핵심지표</th><th>매수 논거</th></tr></thead>`;
+  const body=sList.map(x=>{
+    const r=x.r, sig=x.sig, ev=x.e;
+    const sikey=r.avSym||r.krCode||'';
+    const si0=(r.si&&r.si!=='—'&&r.si!=='')?r.si:'—';
+    return `<tr class="${sig.cnt>0?'hl'+sig.cnt:''}">
+    <td><span style="font-size:15px">🥇</span> <span class="tk-cell">${r.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:#86efac;background:#dcfce7;color:#166534" title="정량 ${ev.q}(저평가 ${ev.v}·시그널 ${ev.sig}) · 성장성 ${ev.g}">${ev.sc}점</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">▲${sig.cnt}</span>`:''}</td>
+    <td class="mono live" ${r.cgId?`data-cg="${r.cgId}"`:''} ${r.avSym?`data-av="${r.avSym}"`:''} ${r.krCode?`data-kr="${r.krCode}"`:''} data-px="1">${r.px}</td>
+    <td class="mono" ${sikey?`data-mp="${sikey}"`:''} style="color:${r.mp==="N/A"?"var(--dim)":"var(--text)"}">${r.mp}</td>
+    <td class="mono" ${sikey?`data-pcr="${sikey}"`:''} style="color:${pcrCol(r.pcr)};font-weight:700">${r.pcr}</td>
+    <td class="mono" style="color:${rsiCol(r.rsi)}">${r.rsi}</td>
+    <td class="mono" style="color:${athCol(r.ath)}">${r.ath}</td>
+    <td class="mono" ${sikey?`data-si="${sikey}"`:''} style="color:${siCol(si0)}">${si0}</td>
+    <td style="color:var(--cyan);font-weight:600">${r.key}</td>
+    <td style="color:var(--muted);max-width:340px;white-space:normal;word-break:keep-all">${diagPill(diagnose(r),false)} ${r.issue||''}</td>
+    </tr>`;
+  }).join('');
+  const empty=`<tbody><tr><td colspan="9" style="text-align:center;color:var(--muted);padding:18px">현재 S등급으로 산출된 종목이 없습니다 (데이터·임계값 기준 자동 선별).</td></tr></tbody>`;
+  document.getElementById('stable').innerHTML=head+(sList.length?`<tbody>${body}</tbody>`:empty);
+  const t=document.getElementById('sgTitle'); if(t)t.textContent='S등급 자동 선별 '+sList.length+'종목 · 점수순';
 }
 renderStable();
-(function(){var t=document.getElementById('sgTitle');if(t)t.textContent='S등급 핵심 '+SG.length+'종목';})();
 
 // 매크로 4대 지수 표
 function macroIdxTable(){
