@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: 저장소 체크아웃
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0            # 전체 이력(푸시 전 rebase 안정화)
 
       - name: Node 설치
         uses: actions/setup-node@v5
@@ -40,7 +42,14 @@ jobs:
           git add data.json
           if git diff --staged --quiet; then
             echo "변경 없음 — 커밋 생략"
-          else
-            git commit -m "data: $(date -u +'%Y-%m-%d %H:%M UTC') 자동 갱신"
-            git push
+            exit 0
           fi
+          git commit -m "data: $(date -u +'%Y-%m-%d %H:%M UTC') 자동 갱신"
+          # 원격에 다른 커밋(예: index.html 업로드)이 있어도 충돌 없이 합쳐 푸시 (재시도 포함)
+          BR="${GITHUB_REF_NAME:-main}"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin "$BR" && git push origin "HEAD:$BR" && { echo "푸시 성공(시도 $i)"; exit 0; }
+            echo "원격 변경 감지 — 재동기화 후 재시도 $i …"; sleep 5
+          done
+          echo "::warning::푸시 5회 실패 — 다음 정시 실행에서 자동 재시도됩니다(데이터 손실 없음)"
+          exit 0
