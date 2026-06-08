@@ -287,7 +287,9 @@ async function fetchFX(errors) {
 
 /* ============================ 메인 ================================= */
 (async () => {
-  const html = fs.readFileSync(HTML_FILE, 'utf8');
+  let html;
+  try { html = fs.readFileSync(HTML_FILE, 'utf8'); }
+  catch (e) { console.error('[skip] ' + HTML_FILE + ' 읽기 실패 — 직전 data.json 유지:', e.message); return; }
   const { cg, kr, seedAthPct, fund: fundSeed } = parseSymbols(html);
   // Yahoo에서 조회되지 않는 티커 제외(예: PX — 정확한 거래소 티커 확인 시 매핑 추가)
   const YAHOO_SKIP = ['PX'];
@@ -297,20 +299,19 @@ async function fetchFX(errors) {
   const errors = [];
   const prices = {}, tech = {};
 
+  // 모든 소스를 개별 격리 — 하나가 실패해도 나머지는 수집되고 워크플로는 성공 유지
   try { const c = await fetchCrypto(cg); Object.assign(prices,c.prices); Object.assign(tech,c.tech); } catch (e) { errors.push('크립토: '+e.message); }
   try { const eq = await fetchEquities(us, kr, seedAthPct, prevTech, errors); Object.assign(prices,eq.prices); Object.assign(tech,eq.tech); } catch (e) { errors.push('주식: '+e.message); }
 
-  const indices = await fetchIndices(errors);
-  // 미국 옵션 대상: 이전 data.json에 있던 종목 + 옵션 상장 주요 종목
+  let indices = {}, opts = {}, macro = {}, si = {}, fund = {};
+  try { indices = (await fetchIndices(errors)) || {}; } catch (e) { errors.push('지수: '+e.message); }
   const usOptSyms = us.filter(s => ['NVDA','CRCL','IREN','ASTS','RKLB','IONQ','MU','SNDK','TSLA','AMD','VRT','QQQ','COIN','PLTR'].includes(s));
-  const opts = await fetchOptions(usOptSyms, errors);
-  const macro = await fetchFX(errors);
-  Object.assign(macro, await fetchCPI(errors));
-  const si = {};
-  Object.assign(si, await fetchSI_US(us, errors));
-  // 한국 SI: KRX 정보데이터시스템이 해외(GitHub) IP를 WAF로 차단(응답 "LOGOUT")하여 자동 수집 불가 → 수동 운영
-  //  (한국 IP에서 KRX 조회 후 index.html의 해당 종목 si 값을 직접 갱신)
-  const fund = computeFund(fundSeed, prices);
+  try { opts = (await fetchOptions(usOptSyms, errors)) || {}; } catch (e) { errors.push('옵션: '+e.message); }
+  try { macro = (await fetchFX(errors)) || {}; } catch (e) { errors.push('환율: '+e.message); }
+  try { Object.assign(macro, (await fetchCPI(errors)) || {}); } catch (e) { errors.push('CPI: '+e.message); }
+  try { Object.assign(si, (await fetchSI_US(us, errors)) || {}); } catch (e) { errors.push('US SI: '+e.message); }
+  // 한국 SI: KRX가 해외(GitHub) IP를 WAF 차단(응답 "LOGOUT")하여 자동 수집 불가 → 수동 운영
+  try { fund = computeFund(fundSeed, prices) || {}; } catch (e) { errors.push('PER: '+e.message); }
 
   // 직전 ATH(athAbs) 보존: 이번에 못 받은 종목도 전고점 유지
   for (const k in prevTech) { if(!tech[k])tech[k]={}; ['athAbs','ath','rsi'].forEach(f=>{ if(tech[k][f]==null && prevTech[k][f]!=null) tech[k][f]=prevTech[k][f]; }); }
@@ -326,4 +327,4 @@ async function fetchFX(errors) {
   fs.writeFileSync(OUT_FILE, JSON.stringify(out, null, 2));
   console.log(`[done] px=${out.meta.pricesGot} tech=${out.meta.techGot} opts=${out.meta.optsGot} idx=${out.meta.indicesGot} si=${out.meta.siGot} fund=${out.meta.fundGot}`);
   if (errors.length) console.log(`[warn ${errors.length}] ` + errors.slice(0,40).join(' | '));
-})().catch(e => { console.error('FATAL', e); process.exit(1); });
+})().catch(e => { console.error('FATAL(무시 — 직전 data.json 유지, 워크플로는 성공 처리):', e); /* exit 0 유지: 데이터 파이프라인이 일시적 오류로 중단되지 않도록 */ });
