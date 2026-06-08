@@ -279,11 +279,14 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 .dg-detail{color:#64748b;margin-left:7px;font-size:10.5px}
 .macro-diag{margin-top:10px;padding:9px 12px;background:#f1f5f9;border:1px solid #cbd5e1;border-radius:7px;font-size:11.5px;line-height:1.6;color:#334155}
 .macro-diag b{color:#1F3864}
+.eval-pill{display:inline-block;font-size:10.5px;font-weight:800;padding:1px 8px;border-radius:10px;border:1px solid;white-space:nowrap;vertical-align:middle}
+.eval-bd{color:#64748b;margin-left:7px;font-size:10px}
+.stk-eval{margin:8px 12px 0;padding:6px 10px;background:#fbfdff;border:1px solid #e2e8f0;border-left:3px solid #BF9000;border-radius:6px;font-size:11px;line-height:1.5}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-08 · v4</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-08 · v5</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -309,7 +312,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-08 · v4 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-08 · v5 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -395,15 +398,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-08 · v4 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-08 · v5 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-08 · v4</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-08 · v5</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-03";
 const PUB_DATE="2026-06-08";  // 발행일
-const VERSION="v4";          // 버전 (수정 시 v# 증가)
+const VERSION="v5";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -799,6 +802,61 @@ function renderMacroDiag(){
   else verdict='지수 중립권 — 종목별 시그널 우선';
   el.innerHTML=`<b>⚙ 자동 진단</b>(데이터 기준) — ${parts.join(' · ')}. <b>종합:</b> ${verdict}`;
 }
+// ===== 자동 평가(그레이딩) 엔진: 정량지표 70%(저평가+맥스페인·PCR·RSI·SI) + 성장성 정성 30% =====
+const EVALCFG={wQuant:0.7,wGrowth:0.3,wVal:0.6,wSig:0.4,S:70,A:55};  // 가중치·등급 임계값(편집 가능)
+// 성장성(정성 서사 그레이딩) 0~100 — 키(cgId/avSym/krCode) 또는 종목명
+const GROWTH={
+ "000660":90,"005930":84,"373220":80,"006400":78,"096770":68,"066970":62,"003670":64,"247540":58,
+ "329180":88,"042660":82,"010140":72,"012450":90,"064350":86,"079550":80,"034020":88,"267260":86,"052690":74,
+ "207940":86,"128940":76,"068270":82,"009150":82,"011070":74,"011790":70,"001820":60,
+ "NVDA":95,"AMD":86,"ASML":82,"MU":88,"SNDK":74,"IREN":76,"VRT":88,"GEV":86,"CRWV":72,"NBIS":80,
+ "ASTS":80,"RKLB":82,"TSLA":84,"CRCL":86,"COIN":84,"SMR":72,"OKLO":70,"IONQ":84,"INFQ":68,"PLTR":88,"QQQ":60,"PX":40,
+ "bitcoin":82,"ethereum":80,"solana":78,"ripple":70,"dogecoin":55,"chainlink":80,"ondo-finance":78,"aave":76,"filecoin":55,
+ "SUI":66,"Centrifuge (CFG)":60,"Hyperliquid (HYPE)":82,"Pendle (PENDLE)":68,"Morpho (MORPHO)":70,"Uniswap (UNI)":72,"zkSync (ZK)":50,"WLFI":48
+};
+function valScore(r){           // 저평가(선행PER·ATH할인) 0~100
+  const d=Math.abs(parseNum(r.ath)); let athS=isNaN(d)?50:Math.max(0,Math.min(95,18+d*0.92));
+  const f=parseNum(r.fper);
+  if(!isNaN(f)&&f>0){const perS=f<8?92:f<12?80:f<20?65:f<30?50:f<45?38:f<60?27:16;return Math.round(0.5*perS+0.5*athS);}
+  return Math.round(athS);
+}
+function sigScore(r){           // 옵션·기술 시그널(맥스페인·PCR·RSI·SI) 0~100 — 높을수록 매력
+  const rsi=parseNum(r.rsi),px=parseNum(r.px),mp=parseNum(r.mp),pcr=parseNum(r.pcr),si=parseNum(r.si);
+  const a=[];
+  if(!isNaN(rsi))a.push(rsi<=30?90:rsi<=50?70:rsi<=70?50:rsi<=80?30:12);
+  if(!isNaN(px)&&!isNaN(mp)){const g=(mp-px)/px*100;a.push(Math.max(10,Math.min(95,55+g*1.5)));}
+  if(!isNaN(pcr))a.push(pcr>=1.3?85:pcr>=1.0?68:pcr>=0.7?50:25);
+  if(!isNaN(si))a.push(si>=20?85:si>=15?72:si>=5?58:50);
+  return a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):50;
+}
+function growthOf(r){
+  const k=r.cgId||r.avSym||r.krCode;
+  if(k&&GROWTH[k]!=null)return GROWTH[k];
+  if(GROWTH[r.tk]!=null)return GROWTH[r.tk];
+  const nt=String(r.tk||'').replace(/\s*\(.*\)\s*/,'').trim();
+  return GROWTH[nt]!=null?GROWTH[nt]:62;
+}
+function evalScore(r){
+  const v=valScore(r), sig=sigScore(r), g=growthOf(r);
+  const q=Math.round(EVALCFG.wVal*v+EVALCFG.wSig*sig);
+  const sc=Math.round(EVALCFG.wQuant*q+EVALCFG.wGrowth*g);
+  const grade=sc>=EVALCFG.S?'S':sc>=EVALCFG.A?'A':'B';
+  return {v,sig,q,g,sc,grade};
+}
+function evalKey(r){return String(r.cgId||r.avSym||r.krCode||r.tk||'').replace(/[^A-Za-z0-9가-힣]/g,'');}
+function evalBadge(r){
+  const e=evalScore(r);
+  const col=e.grade==='S'?'#166534':e.grade==='A'?'#1d4ed8':'#64748b';
+  const bg=e.grade==='S'?'#dcfce7':e.grade==='A'?'#dbeafe':'#eef2f7';
+  return `<span class="eval-pill" style="background:${bg};color:${col};border-color:${col}55">📊 종합 ${e.sc} → ${e.grade}등급</span><span class="eval-bd">정량 ${e.q}(저평가 ${e.v}·시그널 ${e.sig}) · 성장성 ${e.g}</span>`;
+}
+function renderEval(){
+  ['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{
+    const ek=evalKey(r); const e=evalScore(r);
+    const el=document.querySelector(`[data-eval="${ek}"]`); if(el)el.innerHTML=evalBadge(r);
+    const md=document.querySelector(`[data-medal="${ek}"]`); if(md)md.textContent=MEDAL[e.grade];
+  })));
+}
 function signalCount(s){
   const px=parseNum(s.px), mp=parseNum(s.mp), pcr=parseNum(s.pcr);
   const A=(!isNaN(px)&&!isNaN(mp)&&px<mp);          // 현재가 < 맥스페인
@@ -810,8 +868,8 @@ function signalCount(s){
 function renderStable(){
   document.getElementById('stable').innerHTML=
   `<thead><tr><th>종목명</th><th>현재가</th><th>맥스페인</th><th>PCR</th><th>RSI</th><th>ATH대비</th><th>SI</th><th>핵심지표</th><th>매수 논거</th></tr></thead>
-  <tbody>${SG.map(s=>{const sig=signalCount(s);const sikey=s.avSym||s.krCode||'';const si0=(sikey&&typeof OPT!=='undefined'&&OPT[sikey]&&OPT[sikey].si!=null&&OPT[sikey].si>0)?OPT[sikey].si+'%':'—';return `<tr class="${sig.cnt>0?'hl'+sig.cnt:''}">
-  <td><span style="font-size:15px">${({S:"🥇",A:"🥈",B:"🥉"})[s.g]}</span> <span class="tk-cell">${s.tk}</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">▲${sig.cnt}</span>`:''}</td>
+  <tbody>${SG.map(s=>{const sig=signalCount(s);const sikey=s.avSym||s.krCode||'';const si0=(sikey&&typeof OPT!=='undefined'&&OPT[sikey]&&OPT[sikey].si!=null&&OPT[sikey].si>0)?OPT[sikey].si+'%':'—';const ev=evalScore(Object.assign({},s,{si:si0}));return `<tr class="${sig.cnt>0?'hl'+sig.cnt:''}">
+  <td><span style="font-size:15px">${({S:"🥇",A:"🥈",B:"🥉"})[ev.grade]}</span> <span class="tk-cell">${s.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:#cbd5e1;background:#f8fafc;color:#475569" title="정량 ${ev.q}(저평가 ${ev.v}·시그널 ${ev.sig}) · 성장성 ${ev.g}">${ev.sc}·${ev.grade}</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">▲${sig.cnt}</span>`:''}</td>
   <td class="mono live" ${s.cgId?`data-cg="${s.cgId}"`:''} ${s.avSym?`data-av="${s.avSym}"`:''} ${s.krCode?`data-kr="${s.krCode}"`:''} data-px="1">${s.px}</td>
   <td class="mono" ${sikey?`data-mp="${sikey}"`:''} style="color:${s.mp==="N/A"?"var(--dim)":"var(--text)"}">${s.mp}</td>
   <td class="mono" ${sikey?`data-pcr="${sikey}"`:''} style="color:${pcrCol(s.pcr)};font-weight:700">${s.pcr}</td>
@@ -907,10 +965,11 @@ function stkCard(r){
   const avAttr=r.avSym?`data-av="${r.avSym}"`:'';
   const krAttr=r.krCode?`data-kr="${r.krCode}"`:'';
   const tkey=r.cgId||r.avSym||r.krCode||'';
+  const ek=evalKey(r);
   const isKr=r.px.includes('원');
   return `<div class="stk-card">
     <div class="stk-top">
-      <span class="stk-medal">${MEDAL[r.g]}</span>
+      <span class="stk-medal" data-medal="${ek}">${MEDAL[evalScore(r).grade]}</span>
       <span class="stk-nm">${r.tk}</span>
       ${optBadgeByKey(r)}
     </div>
@@ -926,6 +985,7 @@ function stkCard(r){
       <div class="stk-m"><div class="ml">선행PER</div><div class="mv" ${tkey?`data-fper="${tkey}"`:''} style="color:${r.fper.includes('배')&&parseFloat(r.fper)<10?'var(--green)':'var(--text)'}">${r.fper}</div></div>
       <div class="stk-m keycol"><div class="ml">핵심지표</div><div class="mv">${r.key}</div></div>
     </div>
+    <div class="stk-eval" data-eval="${ek}">${evalBadge(r)}</div>
     <div class="stk-diag" data-diag="${tkey}">${diagPill(diagnose(r),true)}</div>
   </div>`;
 }
@@ -1444,7 +1504,7 @@ function applyNarrativeSync(){
     r.issue=syncRSIATH(r.issue, r.rsi, r.ath);
     if(r.issue!==before){ const ik=r.cgId||r.avSym||r.krCode; if(ik) document.querySelectorAll(`[data-issue="${ik}"]`).forEach(el=>{el.textContent=r.issue;el.title=r.issue;}); }
   })));
-  renderCardDiag(); renderMacroDiag();   // 데이터 반영 후 자동 재진단
+  renderCardDiag(); renderMacroDiag(); renderEval();   // 데이터 반영 후 자동 재진단·재평가
 }
 function applyOptions(opts){
   if(!opts||!Object.keys(opts).length)return;
@@ -1633,7 +1693,7 @@ async function loadServerData(){
     if(d.meta&&d.meta.errors&&d.meta.errors.length)console.warn('[data.json 점검 필요]',d.meta.errors);
   }catch(e){ /* 로컬에서 열어 data.json 접근 불가한 경우 등 → 무시하고 기존 동작 */ }
 }
-renderCardDiag(); renderMacroDiag();   // 초기 진단(작성 시점 값)
+renderCardDiag(); renderMacroDiag(); renderEval();   // 초기 진단·평가(작성 시점 값)
 loadServerData();
 </script>
 
