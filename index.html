@@ -106,12 +106,11 @@ table.dt tbody tr.hl3:hover{background:#fcd34d}
 .stk-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 13px;box-shadow:var(--shadow);transition:border-color .15s}
 .stk-card:hover{border-color:var(--border2)}
 /* 1행: 메달 + 종목명 + 이슈(한 줄) */
-.stk-top{display:flex;align-items:baseline;gap:8px;flex-wrap:nowrap;margin-bottom:8px}
+.stk-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
 .stk-medal{font-size:16px;flex-shrink:0;line-height:1.2}
 .stk-nm{font-size:13.5px;font-weight:700;color:var(--navy);flex-shrink:0;white-space:nowrap}
 .stk-obadge{font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.3px;flex-shrink:0}
-.stk-issue{font-size:11px;color:#1d4ed8;font-weight:500;line-height:1.45;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-@media(max-width:760px){.stk-issue{white-space:normal}}
+.stk-issue{display:block;font-size:11.5px;color:#1d4ed8;font-weight:500;line-height:1.55;white-space:normal;word-break:keep-all;overflow-wrap:anywhere;margin:0 0 9px}
 /* 2행: 데이터 지표 그리드 */
 .stk-metrics{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
 @media(max-width:760px){.stk-metrics{grid-template-columns:repeat(4,1fr);row-gap:8px}}
@@ -284,7 +283,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-08 · v3</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-08 · v4</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -310,7 +309,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-08 · v3 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-08 · v4 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -396,15 +395,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-08 · v3 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-08 · v4 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-08 · v3</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-08 · v4</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-03";
 const PUB_DATE="2026-06-08";  // 발행일
-const VERSION="v3";          // 버전 (수정 시 v# 증가)
+const VERSION="v4";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -429,12 +428,12 @@ const IDX=[
 const SG=[
   {tk:"SK하이닉스",g:"S",px:"1,977,000원",mp:"N/A",pcr:"0.92*",rsi:64,ath:"0%",key:"선행 PER 6.79배",arg:"HBM 점유 57%, Q1 영업이익률 72%",krCode:"000660"},
   {tk:"삼성전자",g:"S",px:"316,500원",mp:"285,000원",pcr:"0.88",rsi:62,ath:"0%",key:"선행 PER 6.77배",arg:"Q1 영업익 57.2조, 매출 133.87조 사상최대",krCode:"005930"},
-  {tk:"NVIDIA",g:"S",px:"$212.14",mp:"$210",pcr:"0.96",rsi:58,ath:"-10%",key:"선행 PER 21.85배",arg:"주가-맥스페인 갭 +1%, 정상 범위 진입",avSym:"NVDA"},
-  {tk:"Circle",g:"S",px:"$108.24",mp:"$108",pcr:"0.65",rsi:45,ath:"-62%",key:"선행 P/S 7배",arg:"맥스페인 수렴 + 콜 우위, PCR 0.65 낙관",avSym:"CRCL"},
-  {tk:"IREN",g:"S",px:"$64.05",mp:"$58",pcr:"1.49",rsi:45,ath:"-17%",key:"EV/EBITDA 5배",arg:"PCR 1.49 공포 + SI 15.7% 숏커버 잠재",avSym:"IREN"},
-  {tk:"BTC",g:"S",px:"$66,900",mp:"$72,000",pcr:"1.15",rsi:28,ath:"-47%",key:"Deribit 6/26만기",arg:"현재가 $66.9K(RSI 28 과매도). 맥스페인 $72K는 현재가보다 +7.6% 위 → 자석효과 분할 적기",cgId:"bitcoin"},
-  {tk:"ETH",g:"S",px:"$1,990",mp:"$2,050",pcr:"0.94",rsi:39,ath:"-56%",key:"스테이킹 ETF",arg:"주가<맥스페인 + RSI 과매도 = 분할 진입",cgId:"ethereum"},
-  {tk:"SOL",g:"S",px:"$81.37",mp:"$85",pcr:"0.88",rsi:45,ath:"-72%",key:"ETF 누적 $1.5B",arg:"맥스페인 갭 -3%, 자석효과 상승 유인",cgId:"solana"},
+  {tk:"NVIDIA",g:"S",px:"$212.14",mp:"$210",pcr:"0.96",rsi:58,ath:"-10%",key:"선행 PER 21.85배",arg:"AI 가속기 점유 75~86%로 압도적 1위, 매출 가시성 최고",avSym:"NVDA"},
+  {tk:"Circle",g:"S",px:"$108.24",mp:"$108",pcr:"0.65",rsi:45,ath:"-62%",key:"선행 P/S 7배",arg:"USDC 세계 최대 규제 스테이블코인, 금리 수혜 역발상 자산",avSym:"CRCL"},
+  {tk:"IREN",g:"S",px:"$64.05",mp:"$58",pcr:"1.49",rsi:45,ath:"-17%",key:"EV/EBITDA 5배",arg:"MS·NVDA 직접계약 + 숏커버 잠재의 네오클라우드 1위",avSym:"IREN"},
+  {tk:"BTC",g:"S",px:"$66,900",mp:"$72,000",pcr:"1.15",rsi:28,ath:"-47%",key:"Deribit 6/26만기",arg:"반감기 사이클상 분할 매집 적기로 평가되는 디지털 금",cgId:"bitcoin"},
+  {tk:"ETH",g:"S",px:"$1,990",mp:"$2,050",pcr:"0.94",rsi:39,ath:"-56%",key:"스테이킹 ETF",arg:"RWA·스테이블코인 베이스 레이어, 스테이킹 ETF 수요 확대",cgId:"ethereum"},
+  {tk:"SOL",g:"S",px:"$81.37",mp:"$85",pcr:"0.88",rsi:45,ath:"-72%",key:"ETF 누적 $1.5B",arg:"토큰화 주식 거래량 1위, 기관 RWA 채택 확대",cgId:"solana"},
   {tk:"LINK",g:"S",px:"$8.97",mp:"$9.5",pcr:"0.85",rsi:39,ath:"-81%",key:"고래 32.9M 매집",arg:"SWIFT 통합, 고래 매집 사상최고",cgId:"chainlink"},
   {tk:"AAVE",g:"S",px:"$88.03",mp:"N/A",pcr:"N/A",rsi:38,ath:"-86%",key:"P/S 0.46배",arg:"DeFi 1위, COIN 대비 93% 할인",cgId:"aave"},
 ];
@@ -914,8 +913,8 @@ function stkCard(r){
       <span class="stk-medal">${MEDAL[r.g]}</span>
       <span class="stk-nm">${r.tk}</span>
       ${optBadgeByKey(r)}
-      <span class="stk-issue" ${tkey?`data-issue="${tkey}"`:''} title="${r.issue}">${r.issue}</span>
     </div>
+    <div class="stk-issue" ${tkey?`data-issue="${tkey}"`:''}>${r.issue}</div>
     <div class="stk-metrics">
       <div class="stk-m"><div class="ml">현재가</div><div class="mv ${isKr?'kr':''} live" ${cgAttr} ${avAttr} ${krAttr} data-px="1">${r.px}</div></div>
       <div class="stk-m"><div class="ml">ATH대비</div><div class="mv" ${tkey?`data-ath="${tkey}"`:''} style="color:${athCol(r.ath)}">${r.ath}</div></div>
