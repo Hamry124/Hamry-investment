@@ -272,11 +272,19 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 .score-note ul{margin:9px 0 4px;padding-left:18px}
 .score-note li{margin-bottom:5px;font-size:11px;color:var(--muted)}
 .score-intro{font-size:12px;color:var(--text);line-height:1.7;margin-bottom:4px}
+.dg-pill{display:inline-block;font-size:10px;font-weight:800;padding:1px 7px;border-radius:10px;white-space:nowrap;vertical-align:middle}
+.dg-buy{background:#dcfce7;color:#166534;border:1px solid #86efac}
+.dg-warn{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+.dg-neu{background:#eef2f7;color:#475569;border:1px solid #cbd5e1}
+.stk-diag{margin:8px 12px 10px;padding:7px 10px;background:#f8fafc;border:1px solid #e2e8f0;border-left:3px solid #1F3864;border-radius:6px;font-size:11px;line-height:1.55}
+.dg-detail{color:#64748b;margin-left:7px;font-size:10.5px}
+.macro-diag{margin-top:10px;padding:9px 12px;background:#f1f5f9;border:1px solid #cbd5e1;border-radius:7px;font-size:11.5px;line-height:1.6;color:#334155}
+.macro-diag b{color:#1F3864}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-08 · v2</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-08 · v3</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -302,7 +310,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-08 · v2 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-08 · v3 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -348,6 +356,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
         <li><b>미국</b> — CAPE 40.93 = 향후 10년 기대수익률 1.3% 함의. 6/3 Broadcom 실적(AI매출 +140%·백로그 $73B 견조하나 목표 미상향에 -15%)이 보여주듯 눈높이 과열. AI 워크로드 70%가 추론(인퍼런스)으로 이동 — ASIC·네트워킹 수혜. PLTR P/S 60배 등 ATH 추격 금지, NVDA·CRCL·IREN처럼 매출 가시성 S등급만 선별.</li>
         <li><b>크립토</b> — BTC -47%·ETH -56%. 6/3 $73K 붕괴 후 $66.6K 급락, RSI 28 과매도(청산 $1.6B). 단 <b>CLARITY Act가 6/1 상원 본회의 상정</b>(7/4 서명 목표·통과확률 59%) — 통과 시 ETH·SOL 디지털 상품 분류로 제도화 촉매. LINK SWIFT 통합 -81% 디버전스, AAVE P/S 0.46배 극저평가. 과매도 + 규제 촉매 = 분할 매수 영역.</li>
       </ul>
+        <div class="macro-diag" id="macroDiag">⚙ 자동 진단 — 데이터 로딩 중…</div>
     </div>
   </div>
   <h3 style="margin-top:14px">투자 등급 체계 & 실행 원칙</h3>
@@ -387,15 +396,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-08 · v2 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-08 · v3 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-08 · v2</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-08 · v3</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-03";
 const PUB_DATE="2026-06-08";  // 발행일
-const VERSION="v2";          // 버전 (수정 시 v# 증가)
+const VERSION="v3";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -737,6 +746,60 @@ function parseNum(s){
   if(s===''||s.toUpperCase()==='N/A')return NaN;
   const n=parseFloat(s);return isNaN(n)?NaN:n;
 }
+// ===== 자동 진단 규칙 엔진 (맥스페인·PCR·RSI·SI) — 데이터 갱신 시 자동 재진단 =====
+function diagnose(o){
+  const rsi=parseNum(o.rsi), px=parseNum(o.px), mp=parseNum(o.mp), pcr=parseNum(o.pcr), si=parseNum(o.si);
+  const sA=(!isNaN(px)&&!isNaN(mp)&&px<mp);   // 현재가<맥스페인
+  const sB=(!isNaN(pcr)&&pcr>=1.0);           // PCR≥1.0
+  const sC=(!isNaN(rsi)&&rsi<=50);            // 주봉RSI≤50
+  const cnt=(sA?1:0)+(sB?1:0)+(sC?1:0);
+  let tag,cls;
+  if(!isNaN(rsi)&&rsi>=80){tag='추격 금지·조정 대기';cls='dg-warn';}
+  else if(cnt>=3){tag='강력 분할 매수';cls='dg-buy';}
+  else if(cnt===2){tag='분할 매수 영역';cls='dg-buy';}
+  else if(!isNaN(rsi)&&rsi>=70){tag='과열 주의';cls='dg-warn';}
+  else if(cnt===1){tag='관망·소량';cls='dg-neu';}
+  else{tag='중립';cls='dg-neu';}
+  const p=[];
+  if(!isNaN(rsi)){const rg=rsi>=80?'극과매수':rsi>=70?'과매수':rsi<=30?'과매도':rsi<50?'중립약세':'중립';p.push('RSI '+rsi+' '+rg);}
+  if(!isNaN(px)&&!isNaN(mp)){const g=(mp-px)/px*100;p.push('맥스페인 '+(g>=0?'+':'')+g.toFixed(1)+'%('+(g>0?'상방 자석':'하방')+')');}
+  if(!isNaN(pcr)){p.push('PCR '+pcr.toFixed(2)+' '+(pcr>=1.3?'공포':pcr>=1.0?'약공포':pcr<0.7?'과열':'중립'));}
+  if(!isNaN(si)&&si>0){p.push('SI '+si+'%'+(si>=20?' 숏스퀴즈':si>=15?' 숏커버 잠재':''));}
+  return {tag,cls,cnt,detail:p.join(' · ')};
+}
+function diagPill(d,withDetail){
+  return `<span class="dg-pill ${d.cls}" title="${d.detail}">⚙ ${d.tag}</span>`+(withDetail&&d.detail?`<span class="dg-detail">${d.detail}</span>`:'');
+}
+// 카드 자동진단 일괄 갱신(데이터 로드 후 호출)
+function renderCardDiag(){
+  ['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{
+    const tkey=r.cgId||r.avSym||r.krCode||''; if(!tkey)return;
+    const el=document.querySelector(`[data-diag="${tkey}"]`); if(!el)return;
+    el.innerHTML=diagPill(diagnose(r),true);
+  })));
+}
+function macroReg(rsi){return rsi>=70?'과열':rsi<=30?'과매도':'중립';}
+// 매크로 자동진단 한 줄(데이터 기준) — 지수/BTC/거시 셀에서 재계산
+function renderMacroDiag(){
+  const el=document.getElementById('macroDiag'); if(!el)return;
+  const byTk={}; (typeof IDXDATA!=='undefined'?IDXDATA:[]).forEach(d=>byTk[d.tk]=d);
+  const get=id=>{const e=document.getElementById(id);return e?e.textContent.trim():'';};
+  const k=byTk['KOSPI']||{}, sp=byTk['S&P 500']||{}, nq=byTk['Nasdaq']||{}, bt=byTk['BTC']||{};
+  const hot=[k,sp,nq].filter(x=>x.rsi>=70).length;
+  const parts=[];
+  if(k.px)parts.push(`KOSPI ${get('idx-KOSPI')||k.px}(RSI ${k.rsi} ${macroReg(k.rsi)})`);
+  if(sp.px)parts.push(`S&P ${get('idx-SP500')||sp.px}`);
+  if(nq.px)parts.push(`Nasdaq ${get('idx-Nasdaq')||nq.px}`);
+  if(bt.px)parts.push(`BTC ${get('idx-BTC')||bt.px}(RSI ${bt.rsi} ${macroReg(bt.rsi)}·ATH ${bt.ath})`);
+  const cpi=get('idx-CPI'), fx=get('idx-USDKRW'), br=get('idx-Brent');
+  if(cpi)parts.push('CPI '+cpi); if(fx)parts.push('원/달러 '+fx); if(br)parts.push('Brent '+br);
+  let verdict;
+  if(hot>=2&&bt.rsi<=30)verdict='주식 과열·크립토 과매도 — 신규 추격 자제, 크립토 분할 매집 우위';
+  else if(hot>=2)verdict='주식 지수 과열권 — 신규 추격 자제, 분할 익절·헤지 고려';
+  else if(bt.rsi<=30)verdict='크립토 과매도 — 분할 매집 구간';
+  else verdict='지수 중립권 — 종목별 시그널 우선';
+  el.innerHTML=`<b>⚙ 자동 진단</b>(데이터 기준) — ${parts.join(' · ')}. <b>종합:</b> ${verdict}`;
+}
 function signalCount(s){
   const px=parseNum(s.px), mp=parseNum(s.mp), pcr=parseNum(s.pcr);
   const A=(!isNaN(px)&&!isNaN(mp)&&px<mp);          // 현재가 < 맥스페인
@@ -757,7 +820,7 @@ function renderStable(){
   <td class="mono" style="color:${athCol(s.ath)}">${s.ath}</td>
   <td class="mono" ${sikey?`data-si="${sikey}"`:''} style="color:${siCol(si0)}">${si0}</td>
   <td style="color:var(--cyan);font-weight:600">${s.key}</td>
-  <td style="color:var(--muted)">${s.arg}</td>
+  <td style="color:var(--muted)">${diagPill(diagnose({px:s.px,mp:s.mp,pcr:s.pcr,rsi:s.rsi,si:si0}),false)} ${s.arg}</td>
   </tr>`;}).join('')}</tbody>`;
 }
 renderStable();
@@ -864,6 +927,7 @@ function stkCard(r){
       <div class="stk-m"><div class="ml">선행PER</div><div class="mv" ${tkey?`data-fper="${tkey}"`:''} style="color:${r.fper.includes('배')&&parseFloat(r.fper)<10?'var(--green)':'var(--text)'}">${r.fper}</div></div>
       <div class="stk-m keycol"><div class="ml">핵심지표</div><div class="mv">${r.key}</div></div>
     </div>
+    <div class="stk-diag" data-diag="${tkey}">${diagPill(diagnose(r),true)}</div>
   </div>`;
 }
 
@@ -1093,25 +1157,15 @@ function applyPrices(prices){
     const key=s.cgId||s.avSym||s.krCode; if(!key||!prices[key])return;
     const p=prices[key].price;
     s.px = s.krCode ? Number(p).toLocaleString()+'원' : '$'+Number(p).toLocaleString(undefined,{maximumFractionDigits:p<10?2:0});
-    // BTC/ETH: 현재가 갱신 시 맥스페인 갭(arg)도 재계산
-    if((s.tk==='BTC'||s.tk==='ETH')&&s.mp&&s.mp!=='N/A'){
-      const rawMp=parseFloat(String(s.mp).replace(/[$,]/g,''));
-      if(rawMp&&p){
-        const gap=((rawMp-p)/p*100).toFixed(1);
-        const pxStr=p>=1000?'$'+(p/1000).toFixed(1)+'K':'$'+p.toLocaleString(undefined,{maximumFractionDigits:0});
-        const mpStr=rawMp>=1000?'$'+(rawMp/1000).toFixed(0)+'K':'$'+rawMp.toLocaleString();
-        const gapStr=gap>0?'+'+gap+'%':gap+'%';
-        const rsiNote=s.rsi<=30?`RSI ${s.rsi} 과매도`:s.rsi>=70?`RSI ${s.rsi} 과매수`:`RSI ${s.rsi}`;
-        if(s.tk==='BTC'){
-          s.arg=`현재가 ${pxStr}(${rsiNote}). 맥스페인 ${mpStr}는 현재가보다 ${gapStr} → 자석효과 분할 적기`;
-        } else {
-          const dir=rawMp>p?'<':'>';
-          s.arg=`현재가 ${dir} 맥스페인(${mpStr}, ${gapStr}) + ${rsiNote} = 분할 진입`;
-        }
-      }
-    }
+    // BTC/ETH 현재가 갱신(논거는 데이터-free 유지 → 자동진단 엔진이 별도 처리)
     sgChanged=true;
   });
+  // STOCKS 상세 배열 현재가도 메모리 갱신(자동진단이 최신 px로 계산되도록)
+  ['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{
+    const key=r.cgId||r.avSym||r.krCode; if(!key||!prices[key])return;
+    const p=prices[key].price;
+    r.px = r.krCode ? Number(p).toLocaleString()+'원' : '$'+Number(p).toLocaleString(undefined,{maximumFractionDigits:p<10?2:0});
+  })));
   if(sgChanged){renderStable();markLiveCells(prices);}
 }
 // 재렌더 후 실시간 셀 표시 복원
@@ -1391,6 +1445,7 @@ function applyNarrativeSync(){
     r.issue=syncRSIATH(r.issue, r.rsi, r.ath);
     if(r.issue!==before){ const ik=r.cgId||r.avSym||r.krCode; if(ik) document.querySelectorAll(`[data-issue="${ik}"]`).forEach(el=>{el.textContent=r.issue;el.title=r.issue;}); }
   })));
+  renderCardDiag(); renderMacroDiag();   // 데이터 반영 후 자동 재진단
 }
 function applyOptions(opts){
   if(!opts||!Object.keys(opts).length)return;
@@ -1405,19 +1460,7 @@ function applyOptions(opts){
       const match=isCrypto?(s.tk===key):(s.avSym===key);
       if(!match)return;
       s.mp=mpFmt; s.pcr=pcrStr;
-      if(isCrypto){
-        if(o.expiry)s.key='Deribit '+o.expiry;
-        const rawPx=parseFloat(String(s.px).replace(/[$,]/g,''));
-        if(rawPx&&mpNum){
-          const gap=((mpNum-rawPx)/rawPx*100).toFixed(1);
-          const pxStr=rawPx>=1000?'$'+(rawPx/1000).toFixed(1)+'K':'$'+rawPx.toLocaleString(undefined,{maximumFractionDigits:0});
-          const mpStr=mpNum>=1000?'$'+(mpNum/1000).toFixed(0)+'K':'$'+mpNum.toLocaleString();
-          const gapStr=gap>0?'+'+gap+'%':gap+'%';
-          const rsiNote=s.rsi<=30?`RSI ${s.rsi} 과매도`:s.rsi>=70?`RSI ${s.rsi} 과매수`:`RSI ${s.rsi}`;
-          if(key==='BTC'){ s.arg=`현재가 ${pxStr}(${rsiNote}). 맥스페인 ${mpStr}는 현재가보다 ${gapStr} → 자석효과 분할 적기`; }
-          else { const dir=mpNum>rawPx?'<':'>'; s.arg=`현재가 ${dir} 맥스페인(${mpStr}, ${gapStr}) + ${rsiNote} = 분할 진입`; }
-        }
-      } else if(s.arg){ s.arg=rewriteFigures(s.arg,mpFmt,pcrStr); }
+      if(isCrypto&&o.expiry)s.key='Deribit '+o.expiry;
     });
     // OPT 데이터(맥스페인·PCR·괴리)
     if(typeof OPT!=='undefined'&&OPT[key]){ OPT[key].mp=mpNum; OPT[key].pcrOI=o.pcr; }
@@ -1426,17 +1469,6 @@ function applyOptions(opts){
       const match=isCrypto?(r.tk===key):(r.avSym===key);
       if(!match)return;
       r.mp=mpFmt; r.pcr=pcrStr;
-      if(isCrypto&&r.issue){
-        const rawPx=parseFloat(String(r.px).replace(/[$,]/g,''));
-        if(rawPx&&mpNum){
-          const gap=((mpNum-rawPx)/rawPx*100).toFixed(1);
-          const mpStr=mpNum>=1000?'$'+(mpNum/1000).toFixed(0)+'K':'$'+mpNum.toLocaleString();
-          const gapStr=gap>0?'+'+gap+'%':gap+'%';
-          r.issue=r.issue.replace(/맥스페인\s*\$[\d,KkBbMm.]+(\([^)]*\))?/g,`맥스페인 ${mpStr}(현재가 ${gapStr})`);
-        }
-      } else if(!isCrypto&&r.issue){ r.issue=rewriteFigures(r.issue,mpFmt,pcrStr); }
-      const ik=r.cgId||r.avSym||r.krCode;
-      if(ik&&r.issue){ document.querySelectorAll(`[data-issue="${ik}"]`).forEach(el=>{el.textContent=r.issue;el.title=r.issue;}); }
     })));
   });
   renderStable();
@@ -1602,6 +1634,7 @@ async function loadServerData(){
     if(d.meta&&d.meta.errors&&d.meta.errors.length)console.warn('[data.json 점검 필요]',d.meta.errors);
   }catch(e){ /* 로컬에서 열어 data.json 접근 불가한 경우 등 → 무시하고 기존 동작 */ }
 }
+renderCardDiag(); renderMacroDiag();   // 초기 진단(작성 시점 값)
 loadServerData();
 </script>
 
