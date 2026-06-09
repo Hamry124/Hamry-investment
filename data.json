@@ -1,6 +1,6 @@
 {
   "date": "2026-06-09",
-  "updated": "2026-06-09T21:51:37.089Z",
+  "updated": "2026-06-09T22:11:53.199Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 396500
     },
     "bitcoin": {
-      "price": 61769,
-      "chg": -3.07488
+      "price": 61695,
+      "chg": -2.56335
     },
     "ethereum": {
-      "price": 1650.12,
-      "chg": -3.3065
+      "price": 1647.12,
+      "chg": -2.69788
     },
     "ripple": {
-      "price": 1.14,
-      "chg": -4.00932
+      "price": 1.13,
+      "chg": -3.59091
     },
     "solana": {
-      "price": 64.96,
-      "chg": -4.17887
+      "price": 64.9,
+      "chg": -3.4547
     },
     "dogecoin": {
-      "price": 0.084745,
-      "chg": -2.9044
+      "price": 0.084705,
+      "chg": -2.51458
     },
     "chainlink": {
-      "price": 7.86,
-      "chg": -3.11642
+      "price": 7.84,
+      "chg": -2.60174
     },
     "ondo-finance": {
-      "price": 0.359009,
-      "chg": -4.26837
+      "price": 0.357156,
+      "chg": -3.84943
     },
     "aave": {
-      "price": 62.3,
-      "chg": -3.62426
+      "price": 62.12,
+      "chg": -3.14931
     },
     "filecoin": {
-      "price": 0.765352,
-      "chg": -2.94869
+      "price": 0.763687,
+      "chg": -2.23652
     },
     "NVDA": {
       "price": 208.19
@@ -119,6 +119,24 @@
     },
     "QQQ": {
       "price": 707.83
+    },
+    "MRVL": {
+      "price": 266.88
+    },
+    "GLW": {
+      "price": 173.94
+    },
+    "CIEN": {
+      "price": 439.34
+    },
+    "COHR": {
+      "price": 355.94
+    },
+    "LITE": {
+      "price": 821.76
+    },
+    "AAOI": {
+      "price": 162.88
     },
     "000660": {
       "price": 2215000
@@ -232,7 +250,7 @@
     "chainlink": {
       "ath": "-85%",
       "athAbs": 52.7,
-      "rsi": 31
+      "rsi": 30
     },
     "ondo-finance": {
       "ath": "-83%",
@@ -351,6 +369,36 @@
       "rsi": 71,
       "athAbs": 748.6500244140625,
       "ath": "-5%"
+    },
+    "MRVL": {
+      "rsi": 78,
+      "athAbs": 324.20001220703125,
+      "ath": "-18%"
+    },
+    "GLW": {
+      "rsi": 85,
+      "athAbs": 211.79,
+      "ath": "-18%"
+    },
+    "CIEN": {
+      "rsi": 71,
+      "athAbs": 1057,
+      "ath": "-58%"
+    },
+    "COHR": {
+      "rsi": 79,
+      "athAbs": 440,
+      "ath": "-19%"
+    },
+    "LITE": {
+      "rsi": 82,
+      "athAbs": 1085.6800537109375,
+      "ath": "-24%"
+    },
+    "AAOI": {
+      "rsi": 74,
+      "athAbs": 428.6315789473684,
+      "ath": "-62%"
     },
     "000660": {
       "rsi": 77,
@@ -509,6 +557,30 @@
     "QQQ": {
       "maxPain": 717,
       "pcr": 2.07
+    },
+    "MRVL": {
+      "maxPain": 262.5,
+      "pcr": 1.25
+    },
+    "GLW": {
+      "maxPain": 182.5,
+      "pcr": 0.91
+    },
+    "CIEN": {
+      "maxPain": 490,
+      "pcr": 0.84
+    },
+    "COHR": {
+      "maxPain": 390,
+      "pcr": 1.78
+    },
+    "LITE": {
+      "maxPain": 900,
+      "pcr": 1.43
+    },
+    "AAOI": {
+      "maxPain": 190,
+      "pcr": 1.17
     }
   },
   "indices": {
@@ -528,9 +600,9 @@
       "ath": "-6%"
     },
     "Brent 유가": {
-      "price": 91.83,
-      "rsi": 56,
-      "ath": "-38%"
+      "price": 92.5,
+      "rsi": 57,
+      "ath": "-37%"
     }
   },
   "macro": {
@@ -613,6 +685,30 @@
     },
     "PLTR": {
       "si": "3.31%",
+      "date": "05/15"
+    },
+    "MRVL": {
+      "si": "4.31%",
+      "date": "05/15"
+    },
+    "GLW": {
+      "si": "2.79%",
+      "date": "05/15"
+    },
+    "CIEN": {
+      "si": "5.05%",
+      "date": "05/15"
+    },
+    "COHR": {
+      "si": "5.20%",
+      "date": "05/15"
+    },
+    "LITE": {
+      "si": "13.02%",
+      "date": "05/15"
+    },
+    "AAOI": {
+      "si": "12.07%",
       "date": "05/15"
     }
   },
@@ -727,18 +823,38 @@
     "PLTR": {
       "per": "173.67배",
       "fper": "57.89배"
+    },
+    "MRVL": {
+      "per": "92.39배",
+      "fper": "61.90배"
+    },
+    "GLW": {
+      "per": "39.59배",
+      "fper": "24.63배"
+    },
+    "CIEN": {
+      "per": "138.83배",
+      "fper": "53.25배"
+    },
+    "COHR": {
+      "per": "160.63배",
+      "fper": "45.63배"
+    },
+    "LITE": {
+      "per": "151.43배",
+      "fper": "52.31배"
     }
   },
   "meta": {
     "cryptoCount": 9,
-    "usCount": 21,
+    "usCount": 27,
     "krCount": 24,
-    "pricesGot": 54,
-    "techGot": 54,
-    "optsGot": 16,
+    "pricesGot": 60,
+    "techGot": 60,
+    "optsGot": 22,
     "indicesGot": 4,
-    "siGot": 19,
-    "fundGot": 28,
+    "siGot": 25,
+    "fundGot": 33,
     "krSI": "수동(KRX 해외IP 차단)",
     "errors": []
   }
