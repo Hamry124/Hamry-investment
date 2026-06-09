@@ -305,7 +305,7 @@ async function fetchFX(errors) {
 
   let indices = {}, opts = {}, macro = {}, si = {}, fund = {};
   try { indices = (await fetchIndices(errors)) || {}; } catch (e) { errors.push('지수: '+e.message); }
-  const usOptSyms = us.filter(s => ['NVDA','CRCL','IREN','ASTS','RKLB','IONQ','MU','SNDK','TSLA','AMD','VRT','QQQ','COIN','PLTR'].includes(s));
+  const usOptSyms = us.filter(s => ['NVDA','CRCL','IREN','ASTS','RKLB','IONQ','MU','SNDK','TSLA','AMD','VRT','QQQ','COIN','PLTR','MRVL','GLW','CIEN','COHR','LITE','AAOI'].includes(s));
   try { opts = (await fetchOptions(usOptSyms, errors)) || {}; } catch (e) { errors.push('옵션: '+e.message); }
   try { macro = (await fetchFX(errors)) || {}; } catch (e) { errors.push('환율: '+e.message); }
   try { Object.assign(macro, (await fetchCPI(errors)) || {}); } catch (e) { errors.push('CPI: '+e.message); }

@@ -286,11 +286,12 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 .sg-main td{border-bottom:none!important;padding-bottom:5px}
 .sg-narr td{padding:0 12px 12px 14px!important;border-left:3px solid #BF9000;white-space:normal;word-break:keep-all;color:var(--muted);font-size:11.5px;line-height:1.6}
 .sg-narr-tag{display:inline-block;font-size:9px;font-weight:800;color:#1F3864;background:#eef2f7;border-radius:4px;padding:1px 6px;margin-right:7px;vertical-align:middle}
+.mkt-head td{background:linear-gradient(90deg,#1F3864,#2c4a7c)!important;color:#fff!important;font-weight:800;font-size:12px;letter-spacing:.3px;padding:7px 12px!important;border:none!important}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-09 · v4</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-09 · v6</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -316,7 +317,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-09 · v4 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-09 · v6 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -380,9 +381,9 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </div>
 
 <!-- S TABLE -->
-<div class="block-title"><span class="bt-num">★</span><h2 id="sgTitle">S등급 핵심 종목</h2><span class="bt-sub">자동평가 점수순 · 정량65+성장30+정성5</span></div>
+<div class="block-title"><span class="bt-num">★</span><h2 id="sgTitle">S등급 핵심 종목</h2><span class="bt-sub">시장별 점수 TOP 5 · 정량65+성장30+정성5</span></div>
 <div class="intro-card" style="margin-bottom:10px">
-  <p>전체 63종목을 단일 기준으로 자동 평가(정량 65: 저평가·맥스페인·PCR·RSI·SI / 성장성 30 / 정성 5: 지위·촉매)해 <b>S등급(종합 80점 이상)으로 산출된 종목만 점수 높은 순</b>으로 자동 리스트업한다. 카드·SCORE 섹션과 동일 기준이며, 데이터가 갱신되면 구성·순위가 자동 재평가된다. 맥스페인(Max Pain)은 기관 손실 최소화 주가, PCR(풋/콜 비율)은 시장 심리(&gt;1.0 공포 매수, &lt;0.7 과열 매도)다.</p>
+  <p>각 시장(미국·한국·크립토)에서 단일 기준(정량 65 + 성장 30 + 정성 5)으로 자동 평가한 <b>점수 상위 5종목</b>을 시장별로 표시한다. 등급(S≥80·A 70~79·B≤69)은 종목명 옆 배지로 함께 표기하며, 카드·SCORE 섹션과 동일 기준이다. 데이터가 갱신되면 순위·등급이 자동 재정렬된다. 맥스페인(Max Pain)은 기관 손실 최소화 주가, PCR(풋/콜 비율)은 시장 심리(&gt;1.0 공포 매수, &lt;0.7 과열 매도)다.</p>
 </div>
 <div class="tbl-wrap"><table class="dt" id="stable"></table></div>
 <div class="note" style="display:flex;flex-direction:column;gap:6px">
@@ -402,15 +403,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-09 · v4 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-09 · v6 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-09 · v4</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-09 · v6</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-03";
 const PUB_DATE="2026-06-09";  // 발행일
-const VERSION="v4";          // 버전 (수정 시 v# 증가)
+const VERSION="v6";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -549,6 +550,14 @@ const STOCKS={
    {g:"A",tk:"Palantir (PLTR)",px:"$136.88",ath:"-16%",mp:"N/A",pcr:"N/A",rsi:"68",per:"180배",fper:"60배",key:"Rule of 40 = 145%",issue:"Q1 매출 $1.63B(+85% YoY 역대최고)·美 상업 +133%·Rule of 40 = 145%로 소프트웨어 사상 최강. AIP를 운영형 AI 백본으로 정착, FY26 가이던스 상향, 단 극단 고평가",avSym:"PLTR"},
    {g:"B",tk:"Invesco QQQ",px:"$735.60",ath:"-3.3%",mp:"$711",pcr:"2.40",rsi:"-",per:"-",fper:"나스닥100 추종",key:"시장 헤지 지표",issue:"나스닥100 추종 ETF로 빅테크·AI 비중 집중. 시장 전체의 헤지 심리를 읽는 지표이자 핵심 벤치마크",optKey:"QQQ",avSym:"QQQ"},
    {g:"B",tk:"P10 (PPIH)",px:"$31.88",ath:"-5.9%",mp:"$30",pcr:"0.32",rsi:"-",per:"22배",fper:"20배",key:"소형 가치주",issue:"소형 사모펀드 가치주. 옵션 수급에 따른 변동성이 극대화되는 투기적 종목",optKey:"PPIH",avSym:"PX"},
+  ]},
+  {sector:"광통신 (데이터센터 인터커넥트)", desc:"AI 데이터센터의 진짜 병목은 '연산'이 아니라 '데이터 이동' — 전력의 약 60%가 비트 전송에 쓰인다. 로스·와트를 줄이는 광통신 밸류체인(소재→광원→모듈→DSP→시스템)이 AI 인프라의 혈관으로 재평가. NVIDIA가 6선에 직접 투자해 수직 장악(MRVL·COHR·LITE 각 ~$2B, GLW ~$3억).", rows:[
+   {g:"A",tk:"Marvell (MRVL)",px:"$288.85",ath:"-11%",mp:"N/A",pcr:"N/A",rsi:"56",per:"100배",fper:"67배",key:"PAM4 DSP·맞춤형 XPU",issue:"광신호를 디지털로 복원하는 PAM4 DSP와 하이퍼스케일러 맞춤형 XPU 설계의 과점적 두뇌. Celestial AI 인수로 포토닉 패브릭 기반 스케일업까지 확장, NVIDIA NVLink Fusion 공인 파트너·S&P500 편입. 데이터센터 편중과 거대 경쟁사 대비 투자 체력이 변수",optKey:"MRVL",avSym:"MRVL"},
+   {g:"A",tk:"Corning (GLW)",px:"$197.70",ath:"-7%",mp:"N/A",pcr:"N/A",rsi:"56",per:"45배",fper:"28배",key:"광섬유 원천 독과점",issue:"AI 네트워크 물리계층 — 빛이 지나는 길(광섬유)을 만드는 소재 독과점. 수십 년 축적한 소재 과학·대규모 생산능력이 복제 불가능한 해자이며, Amazon·Meta 다년 대형계약과 NVIDIA 광섬유 공장 투자로 수요 가시성 확보. 저변동+이익 급증의 균형(S 후보), 비AI 사업 경기 민감성이 희석 요인",optKey:"GLW",avSym:"GLW"},
+   {g:"A",tk:"Ciena (CIEN)",px:"$462.02",ath:"-27%",mp:"N/A",pcr:"N/A",rsi:"47",per:"146배",fper:"56배",key:"WaveLogic 6 단일파장 1.6T",issue:"데이터센터 간 장거리·대용량 전송(DCI)의 설계자. 단일 파장 1.6T 코히어런트(WaveLogic 6)로 같은 광섬유에 더 많은 데이터를 싣는 효율 경쟁을 주도. 현금흐름 안정형 중추로 멀티플 부담이 상대적으로 낮으나, 통신사 CAPEX 사이클·대형 프로젝트 인식 시점에 분기 실적 변동",optKey:"CIEN",avSym:"CIEN"},
+   {g:"B",tk:"Coherent (COHR)",px:"$390",ath:"-11%",mp:"N/A",pcr:"N/A",rsi:"60",per:"176배",fper:"50배",key:"800G·1.6T 트랜시버 1위",issue:"800G·1.6T 광트랜시버 세계 1위. 인듐인(InP) 소재부터 모듈까지 수직 계열화로 공급 안정성·원가를 동시에 확보, 다수 장기계약으로 수주 사실상 마감. NVIDIA 대규모 투자로 장기 가시성 확보, 단 합병 차입 부담과 고변동이 리스크",optKey:"COHR",avSym:"COHR"},
+   {g:"B",tk:"Lumentum (LITE)",px:"$895.40",ath:"-18%",mp:"N/A",pcr:"N/A",rsi:"55",per:"165배",fper:"57배",key:"VCSEL·EML·OCS 광원",issue:"광통신의 출발점인 '빛'을 만드는 광원 원천기업(VCSEL·EML). 광회선 스위치(OCS) 백로그로 신성장 축 확보, NVIDIA Spectrum-X 공급으로 모멘텀 강. 흑자 전환 국면의 이익 변동성과 차입 부담이 변수",optKey:"LITE",avSym:"LITE"},
+   {g:"B",tk:"Applied Opto (AAOI)",px:"$38",ath:"-62%",mp:"N/A",pcr:"N/A",rsi:"45",per:"적자",fper:"적자",key:"800G 턴어라운드",issue:"트랜시버를 자체 수직 계열로 생산하는 틈새 강자. 800G 양산 본격화로 FY 매출 가이드 10억 달러 이상 상향, 성공 시 레버리지가 가장 큰 턴어라운드 후보. 단 Microsoft·Oracle 등 소수 고객 집중과 반복 증자(ATM)에 따른 주식 희석이 핵심 리스크",optKey:"AAOI",avSym:"AAOI"},
   ]},
  ],
  crypto:[
@@ -810,6 +819,7 @@ function renderMacroDiag(){
 const EVALCFG={wQuant:0.65,wGrowth:0.30,wQual:0.05,wVal:0.6,wSig:0.4,S:80,A:70};  // 정량60+성장30+정성10 · 등급 임계값(편집 가능)
 // 성장성(정성 서사 그레이딩) 0~100 — 키(cgId/avSym/krCode) 또는 종목명
 const GROWTH={
+ "MRVL":88,"GLW":78,"CIEN":72,"COHR":84,"LITE":86,"AAOI":80,
  "000660":90,"005930":84,"373220":80,"006400":78,"096770":68,"066970":62,"003670":64,"247540":58,
  "329180":88,"042660":82,"010140":72,"012450":90,"064350":86,"079550":80,"034020":88,"267260":86,"052690":74,
  "207940":86,"128940":76,"068270":82,"009150":82,"011070":74,"011790":70,"001820":60,
@@ -841,7 +851,7 @@ function growthOf(r){
   return GROWTH[nt]!=null?GROWTH[nt]:62;
 }
 // 정성(지위·촉매) 0~100 — 기존 SCORE 5축의 지위·촉매에서 환산(편집 가능)
-const QUAL={"000660":98, "005930":95, "373220":78, "006400":75, "096770":65, "066970":48, "003670":52, "247540":42, "329180":78, "042660":72, "010140":62, "012450":85, "064350":65, "079550":75, "034020":90, "267260":75, "052690":62, "207940":85, "128940":70, "068270":70, "009150":78, "011070":72, "011790":52, "001820":45, "NVDA":100, "AMD":80, "ASML":92, "MU":75, "SNDK":55, "IREN":82, "VRT":80, "GEV":78, "CRWV":68, "NBIS":62, "ASTS":62, "RKLB":65, "TSLA":82, "CRCL":85, "COIN":75, "SMR":57, "OKLO":50, "IONQ":60, "INFQ":52, "PLTR":80, "QQQ":50, "PX":40, "bitcoin":95, "ethereum":90, "solana":80, "ripple":72, "dogecoin":48, "SUI":57, "chainlink":88, "ondo-finance":70, "Centrifuge (CFG)":55, "aave":88, "Hyperliquid (HYPE)":75, "Pendle (PENDLE)":62, "Morpho (MORPHO)":65, "Uniswap (UNI)":68, "filecoin":55, "zkSync (ZK)":52, "WLFI":38};
+const QUAL={"MRVL":88,"GLW":90,"CIEN":78,"COHR":82,"LITE":76,"AAOI":55,"000660":98, "005930":95, "373220":78, "006400":75, "096770":65, "066970":48, "003670":52, "247540":42, "329180":78, "042660":72, "010140":62, "012450":85, "064350":65, "079550":75, "034020":90, "267260":75, "052690":62, "207940":85, "128940":70, "068270":70, "009150":78, "011070":72, "011790":52, "001820":45, "NVDA":100, "AMD":80, "ASML":92, "MU":75, "SNDK":55, "IREN":82, "VRT":80, "GEV":78, "CRWV":68, "NBIS":62, "ASTS":62, "RKLB":65, "TSLA":82, "CRCL":85, "COIN":75, "SMR":57, "OKLO":50, "IONQ":60, "INFQ":52, "PLTR":80, "QQQ":50, "PX":40, "bitcoin":95, "ethereum":90, "solana":80, "ripple":72, "dogecoin":48, "SUI":57, "chainlink":88, "ondo-finance":70, "Centrifuge (CFG)":55, "aave":88, "Hyperliquid (HYPE)":75, "Pendle (PENDLE)":62, "Morpho (MORPHO)":65, "Uniswap (UNI)":68, "filecoin":55, "zkSync (ZK)":52, "WLFI":38};
 function qualOf(r){
   const k=r.cgId||r.avSym||r.krCode;
   if(k&&QUAL[k]!=null)return QUAL[k];
@@ -882,18 +892,16 @@ function signalCount(s){
   return {cnt:(A?1:0)+(B?1:0)+(C?1:0), hits};
 }
 function renderStable(){
-  const all=[];
-  ['kr','us','crypto'].forEach(mk=>((typeof STOCKS!=='undefined'&&STOCKS[mk])||[]).forEach(sec=>sec.rows.forEach(r=>all.push(r))));
-  const sList=all.map(r=>({r,sig:signalCount(r),e:evalScore(r)}))
-                 .filter(x=>x.e.grade==='S')
-                 .sort((a,b)=>b.e.sc-a.e.sc);
+  const markets=[{k:'kr',label:'\uD83C\uDDF0\uD83C\uDDF7 한국'},{k:'us',label:'\uD83C\uDDFA\uD83C\uDDF8 미국'},{k:'crypto',label:'\u20BF 크립토'}];
   const head=`<thead><tr><th>종목명</th><th>현재가</th><th>맥스페인</th><th>PCR</th><th>RSI</th><th>ATH대비</th><th>SI</th><th>핵심지표</th><th>매수 논거</th></tr></thead>`;
-  const body=sList.map(x=>{
-    const r=x.r, sig=x.sig, ev=x.e;
+  const gcol={S:{c:'#166534',b:'#dcfce7',br:'#86efac'},A:{c:'#1d4ed8',b:'#dbeafe',br:'#93c5fd'},B:{c:'#475569',b:'#eef2f7',br:'#cbd5e1'}};
+  const medal={S:'\uD83E\uDD47',A:'\uD83E\uDD48',B:'\uD83E\uDD49'};
+  function row(r,sig,ev){
     const sikey=r.avSym||r.krCode||'';
-    const si0=(r.si&&r.si!=='—'&&r.si!=='')?r.si:'—';
+    const si0=(r.si&&r.si!=='\u2014'&&r.si!=='')?r.si:'\u2014';
+    const g=gcol[ev.grade]||gcol.B;
     return `<tr class="sg-main ${sig.cnt>0?'hl'+sig.cnt:''}">
-    <td><span style="font-size:15px">🥇</span> <span class="tk-cell">${r.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:#86efac;background:#dcfce7;color:#166534" title="정량 ${ev.quantPt}(저평가 ${ev.v}·시그널 ${ev.sig}) · 성장 ${ev.growthPt} · 정성 ${ev.qualPt}">${ev.sc}점</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">▲${sig.cnt}</span>`:''}</td>
+    <td><span style="font-size:15px">${medal[ev.grade]}</span> <span class="tk-cell">${r.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:${g.br};background:${g.b};color:${g.c}" title="정량 ${ev.quantPt}(저평가 ${ev.v}·시그널 ${ev.sig}) · 성장 ${ev.growthPt} · 정성 ${ev.qualPt}">${ev.sc}점·${ev.grade}</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">\u25B2${sig.cnt}</span>`:''}</td>
     <td class="mono live" ${r.cgId?`data-cg="${r.cgId}"`:''} ${r.avSym?`data-av="${r.avSym}"`:''} ${r.krCode?`data-kr="${r.krCode}"`:''} data-px="1">${r.px}</td>
     <td class="mono" ${sikey?`data-mp="${sikey}"`:''} style="color:${r.mp==="N/A"?"var(--dim)":"var(--text)"}">${r.mp}</td>
     <td class="mono" ${sikey?`data-pcr="${sikey}"`:''} style="color:${pcrCol(r.pcr)};font-weight:700">${r.pcr}</td>
@@ -904,10 +912,18 @@ function renderStable(){
     <td style="white-space:nowrap">${diagPill(diagnose(r),false)}</td>
     </tr>
     <tr class="sg-narr ${sig.cnt>0?'hl'+sig.cnt:''}"><td colspan="9"><span class="sg-narr-tag">매수 논거</span>${r.issue||''}</td></tr>`;
-  }).join('');
-  const empty=`<tbody><tr><td colspan="9" style="text-align:center;color:var(--muted);padding:18px">현재 S등급으로 산출된 종목이 없습니다 (데이터·임계값 기준 자동 선별).</td></tr></tbody>`;
-  document.getElementById('stable').innerHTML=head+(sList.length?`<tbody>${body}</tbody>`:empty);
-  const t=document.getElementById('sgTitle'); if(t)t.textContent='S등급 자동 선별 '+sList.length+'종목 · 점수순';
+  }
+  let body='';
+  markets.forEach(function(m){
+    const secs=(typeof STOCKS!=='undefined'&&STOCKS[m.k])||[];
+    const rows=[]; secs.forEach(sec=>(sec.rows||[]).forEach(r=>rows.push(r)));
+    const top=rows.map(r=>({r,sig:signalCount(r),e:evalScore(r)})).sort((a,b)=>b.e.sc-a.e.sc).slice(0,5);
+    if(!top.length)return;
+    body+=`<tr class="mkt-head"><td colspan="9">${m.label} · 점수 TOP 5</td></tr>`;
+    body+=top.map(x=>row(x.r,x.sig,x.e)).join('');
+  });
+  document.getElementById('stable').innerHTML=head+`<tbody>${body}</tbody>`;
+  const t=document.getElementById('sgTitle'); if(t)t.textContent='시장별 점수 TOP 5 · 미국·한국·크립토';
 }
 renderStable();
 
