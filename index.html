@@ -282,11 +282,14 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 .eval-pill{display:inline-block;font-size:10.5px;font-weight:800;padding:1px 8px;border-radius:10px;border:1px solid;white-space:nowrap;vertical-align:middle}
 .eval-bd{color:#64748b;margin-left:7px;font-size:10px}
 .stk-eval{margin:8px 12px 0;padding:6px 10px;background:#fbfdff;border:1px solid #e2e8f0;border-left:3px solid #BF9000;border-radius:6px;font-size:11px;line-height:1.5}
+.sg-main td{border-bottom:none!important;padding-bottom:5px}
+.sg-narr td{padding:0 12px 12px 14px!important;border-left:3px solid #BF9000;white-space:normal;word-break:keep-all;color:var(--muted);font-size:11.5px;line-height:1.6}
+.sg-narr-tag{display:inline-block;font-size:9px;font-weight:800;color:#1F3864;background:#eef2f7;border-radius:4px;padding:1px 6px;margin-right:7px;vertical-align:middle}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-08 · v6</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-09 · v2</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -312,7 +315,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-08 · v6 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-09 · v2 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -398,15 +401,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-08 · v6 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-09 · v2 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-08 · v6</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-09 · v2</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-03";
-const PUB_DATE="2026-06-08";  // 발행일
-const VERSION="v6";          // 버전 (수정 시 v# 증가)
+const PUB_DATE="2026-06-09";  // 발행일
+const VERSION="v2";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -876,7 +879,7 @@ function renderStable(){
     const r=x.r, sig=x.sig, ev=x.e;
     const sikey=r.avSym||r.krCode||'';
     const si0=(r.si&&r.si!=='—'&&r.si!=='')?r.si:'—';
-    return `<tr class="${sig.cnt>0?'hl'+sig.cnt:''}">
+    return `<tr class="sg-main ${sig.cnt>0?'hl'+sig.cnt:''}">
     <td><span style="font-size:15px">🥇</span> <span class="tk-cell">${r.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:#86efac;background:#dcfce7;color:#166534" title="정량 ${ev.q}(저평가 ${ev.v}·시그널 ${ev.sig}) · 성장성 ${ev.g}">${ev.sc}점</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">▲${sig.cnt}</span>`:''}</td>
     <td class="mono live" ${r.cgId?`data-cg="${r.cgId}"`:''} ${r.avSym?`data-av="${r.avSym}"`:''} ${r.krCode?`data-kr="${r.krCode}"`:''} data-px="1">${r.px}</td>
     <td class="mono" ${sikey?`data-mp="${sikey}"`:''} style="color:${r.mp==="N/A"?"var(--dim)":"var(--text)"}">${r.mp}</td>
@@ -885,8 +888,9 @@ function renderStable(){
     <td class="mono" style="color:${athCol(r.ath)}">${r.ath}</td>
     <td class="mono" ${sikey?`data-si="${sikey}"`:''} style="color:${siCol(si0)}">${si0}</td>
     <td style="color:var(--cyan);font-weight:600">${r.key}</td>
-    <td style="color:var(--muted);max-width:340px;white-space:normal;word-break:keep-all">${diagPill(diagnose(r),false)} ${r.issue||''}</td>
-    </tr>`;
+    <td style="white-space:nowrap">${diagPill(diagnose(r),false)}</td>
+    </tr>
+    <tr class="sg-narr ${sig.cnt>0?'hl'+sig.cnt:''}"><td colspan="9"><span class="sg-narr-tag">매수 논거</span>${r.issue||''}</td></tr>`;
   }).join('');
   const empty=`<tbody><tr><td colspan="9" style="text-align:center;color:var(--muted);padding:18px">현재 S등급으로 산출된 종목이 없습니다 (데이터·임계값 기준 자동 선별).</td></tr></tbody>`;
   document.getElementById('stable').innerHTML=head+(sList.length?`<tbody>${body}</tbody>`:empty);
