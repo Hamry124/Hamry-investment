@@ -290,7 +290,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-09 · v3</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-09 · v4</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -316,7 +316,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-09 · v3 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-09 · v4 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -380,9 +380,9 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </div>
 
 <!-- S TABLE -->
-<div class="block-title"><span class="bt-num">★</span><h2 id="sgTitle">S등급 핵심 종목</h2><span class="bt-sub">자동평가 점수순 · 정량60+성장30+정성10</span></div>
+<div class="block-title"><span class="bt-num">★</span><h2 id="sgTitle">S등급 핵심 종목</h2><span class="bt-sub">자동평가 점수순 · 정량65+성장30+정성5</span></div>
 <div class="intro-card" style="margin-bottom:10px">
-  <p>전체 63종목을 단일 기준으로 자동 평가(정량 60: 저평가·맥스페인·PCR·RSI·SI / 성장성 30 / 정성 10: 지위·촉매)해 <b>S등급(종합 73점 이상)으로 산출된 종목만 점수 높은 순</b>으로 자동 리스트업한다. 카드·SCORE 섹션과 동일 기준이며, 데이터가 갱신되면 구성·순위가 자동 재평가된다. 맥스페인(Max Pain)은 기관 손실 최소화 주가, PCR(풋/콜 비율)은 시장 심리(&gt;1.0 공포 매수, &lt;0.7 과열 매도)다.</p>
+  <p>전체 63종목을 단일 기준으로 자동 평가(정량 65: 저평가·맥스페인·PCR·RSI·SI / 성장성 30 / 정성 5: 지위·촉매)해 <b>S등급(종합 80점 이상)으로 산출된 종목만 점수 높은 순</b>으로 자동 리스트업한다. 카드·SCORE 섹션과 동일 기준이며, 데이터가 갱신되면 구성·순위가 자동 재평가된다. 맥스페인(Max Pain)은 기관 손실 최소화 주가, PCR(풋/콜 비율)은 시장 심리(&gt;1.0 공포 매수, &lt;0.7 과열 매도)다.</p>
 </div>
 <div class="tbl-wrap"><table class="dt" id="stable"></table></div>
 <div class="note" style="display:flex;flex-direction:column;gap:6px">
@@ -402,15 +402,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-09 · v3 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-09 · v4 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-09 · v3</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-09 · v4</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-03";
 const PUB_DATE="2026-06-09";  // 발행일
-const VERSION="v3";          // 버전 (수정 시 v# 증가)
+const VERSION="v4";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -807,7 +807,7 @@ function renderMacroDiag(){
   el.innerHTML=`<b>⚙ 자동 진단</b>(데이터 기준) — ${parts.join(' · ')}. <b>종합:</b> ${verdict}`;
 }
 // ===== 자동 평가(그레이딩) 엔진: 정량지표 70%(저평가+맥스페인·PCR·RSI·SI) + 성장성 정성 30% =====
-const EVALCFG={wQuant:0.6,wGrowth:0.3,wQual:0.1,wVal:0.6,wSig:0.4,S:73,A:55};  // 정량60+성장30+정성10 · 등급 임계값(편집 가능)
+const EVALCFG={wQuant:0.65,wGrowth:0.30,wQual:0.05,wVal:0.6,wSig:0.4,S:80,A:70};  // 정량60+성장30+정성10 · 등급 임계값(편집 가능)
 // 성장성(정성 서사 그레이딩) 0~100 — 키(cgId/avSym/krCode) 또는 종목명
 const GROWTH={
  "000660":90,"005930":84,"373220":80,"006400":78,"096770":68,"066970":62,"003670":64,"247540":58,
@@ -852,19 +852,19 @@ function qualOf(r){
 function evalScore(r){
   const v=valScore(r), sig=sigScore(r), g=growthOf(r), ql=qualOf(r);
   const quant=Math.round(EVALCFG.wVal*v+EVALCFG.wSig*sig);   // 정량 원점수 0~100(저평가+시그널)
-  const quant60=Math.round(EVALCFG.wQuant*quant);            // 정량 반영분(0~60)
-  const growth30=Math.round(EVALCFG.wGrowth*g);              // 성장 반영분(0~30)
-  const qual10=Math.round(EVALCFG.wQual*ql);                 // 정성 반영분(0~10)
-  const sc=quant60+growth30+qual10;
+  const quantPt=Math.round(EVALCFG.wQuant*quant);            // 정량 반영분(0~60)
+  const growthPt=Math.round(EVALCFG.wGrowth*g);              // 성장 반영분(0~30)
+  const qualPt=Math.round(EVALCFG.wQual*ql);                 // 정성 반영분(0~10)
+  const sc=quantPt+growthPt+qualPt;
   const grade=sc>=EVALCFG.S?'S':sc>=EVALCFG.A?'A':'B';
-  return {v,sig,g,ql,quant,quant60,growth30,qual10,sc,grade};
+  return {v,sig,g,ql,quant,quantPt,growthPt,qualPt,sc,grade};
 }
 function evalKey(r){return String(r.cgId||r.avSym||r.krCode||r.tk||'').replace(/[^A-Za-z0-9가-힣]/g,'');}
 function evalBadge(r){
   const e=evalScore(r);
   const col=e.grade==='S'?'#166534':e.grade==='A'?'#1d4ed8':'#64748b';
   const bg=e.grade==='S'?'#dcfce7':e.grade==='A'?'#dbeafe':'#eef2f7';
-  return `<span class="eval-pill" style="background:${bg};color:${col};border-color:${col}55" title="저평가 ${e.v} · 시그널 ${e.sig} · 성장 ${e.g} · 정성 ${e.ql}">📊 종합 ${e.sc} → ${e.grade}등급</span><span class="eval-bd">정량 ${e.quant60} · 성장 ${e.growth30} · 정성 ${e.qual10}</span>`;
+  return `<span class="eval-pill" style="background:${bg};color:${col};border-color:${col}55" title="저평가 ${e.v} · 시그널 ${e.sig} · 성장 ${e.g} · 정성 ${e.ql}">📊 종합 ${e.sc} → ${e.grade}등급</span><span class="eval-bd">정량 ${e.quantPt} · 성장 ${e.growthPt} · 정성 ${e.qualPt}</span>`;
 }
 function renderEval(){
   ['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{
@@ -893,7 +893,7 @@ function renderStable(){
     const sikey=r.avSym||r.krCode||'';
     const si0=(r.si&&r.si!=='—'&&r.si!=='')?r.si:'—';
     return `<tr class="sg-main ${sig.cnt>0?'hl'+sig.cnt:''}">
-    <td><span style="font-size:15px">🥇</span> <span class="tk-cell">${r.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:#86efac;background:#dcfce7;color:#166534" title="정량 ${ev.quant60}(저평가 ${ev.v}·시그널 ${ev.sig}) · 성장 ${ev.growth30} · 정성 ${ev.qual10}">${ev.sc}점</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">▲${sig.cnt}</span>`:''}</td>
+    <td><span style="font-size:15px">🥇</span> <span class="tk-cell">${r.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:#86efac;background:#dcfce7;color:#166534" title="정량 ${ev.quantPt}(저평가 ${ev.v}·시그널 ${ev.sig}) · 성장 ${ev.growthPt} · 정성 ${ev.qualPt}">${ev.sc}점</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">▲${sig.cnt}</span>`:''}</td>
     <td class="mono live" ${r.cgId?`data-cg="${r.cgId}"`:''} ${r.avSym?`data-av="${r.avSym}"`:''} ${r.krCode?`data-kr="${r.krCode}"`:''} data-px="1">${r.px}</td>
     <td class="mono" ${sikey?`data-mp="${sikey}"`:''} style="color:${r.mp==="N/A"?"var(--dim)":"var(--text)"}">${r.mp}</td>
     <td class="mono" ${sikey?`data-pcr="${sikey}"`:''} style="color:${pcrCol(r.pcr)};font-weight:700">${r.pcr}</td>
@@ -1110,24 +1110,24 @@ function scoreSection(region){
       <td class="sc-tk">${r.tk}</td>
       <td style="text-align:center"><span class="same ${gc[e.grade]}">${e.grade}</span></td>
       <td class="num">${e.v}</td><td class="num">${e.sig}</td><td class="num">${e.g}</td><td class="num sep">${e.ql}</td>
-      <td class="num sep" style="font-weight:700">${e.quant60}</td>
-      <td class="num" style="font-weight:700">${e.growth30}</td>
-      <td class="num" style="font-weight:700">${e.qual10}</td>
+      <td class="num sep" style="font-weight:700">${e.quantPt}</td>
+      <td class="num" style="font-weight:700">${e.growthPt}</td>
+      <td class="num" style="font-weight:700">${e.qualPt}</td>
       <td class="num tot">${e.sc}</td>
-      <td style="min-width:120px"><div class="sbar"><div class="sbar-q" style="width:${e.quant60}%"></div><div class="sbar-g" style="width:${e.growth30}%"></div><div class="sbar-l" style="width:${e.qual10}%"></div></div></td>
+      <td style="min-width:120px"><div class="sbar"><div class="sbar-q" style="width:${e.quantPt}%"></div><div class="sbar-g" style="width:${e.growthPt}%"></div><div class="sbar-l" style="width:${e.qualPt}%"></div></div></td>
     </tr>`;
   }).join('');
-  return `<div class="block-title" style="margin-top:22px"><span class="bt-num">SCORE</span><h2>등급 스코어링 (정량 60 + 성장 30 + 정성 10)</h2><span class="bt-sub">카드·S표와 동일 기준 · 자동 산출</span></div>
+  return `<div class="block-title" style="margin-top:22px"><span class="bt-num">SCORE</span><h2>등급 스코어링 (정량 65 + 성장 30 + 정성 5)</h2><span class="bt-sub">카드·S표와 동일 기준 · 자동 산출</span></div>
   <div class="appendix">
-    <p class="score-intro">저평가·시그널(정량 60) + 성장성(30) + 지위·촉매(정성 10) = 100점으로 자동 채점. <b>S \u2265 73 · A 55~72 · B \u2264 54</b>. 데이터 갱신 시 자동 재평가되며 <b>카드·S표와 점수·등급이 일치</b>한다. 저평가·시그널·성장·정성 칸은 0~100 원점수, 정량·성장·정성 칸은 가중 반영분(합 = 총점)이다.</p>
+    <p class="score-intro">저평가·시그널(정량 65) + 성장성(30) + 지위·촉매(정성 5) = 100점으로 자동 채점. <b>S \u2265 80 · A 70~79 · B \u2264 69</b>. 데이터 갱신 시 자동 재평가되며 <b>카드·S표와 점수·등급이 일치</b>한다. 저평가·시그널·성장·정성 칸은 0~100 원점수, 정량·성장·정성 칸은 가중 반영분(합 = 총점)이다.</p>
     <div style="display:flex;gap:16px;align-items:center;font-size:10.5px;color:var(--muted);margin-bottom:8px;flex-wrap:wrap">
-      <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:9px;border-radius:3px;background:linear-gradient(90deg,#E8CC6A,#C9A227);display:inline-block"></span>정량 (60)</span>
+      <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:9px;border-radius:3px;background:linear-gradient(90deg,#E8CC6A,#C9A227);display:inline-block"></span>정량 (65)</span>
       <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:9px;border-radius:3px;background:linear-gradient(90deg,#34D399,#059669);display:inline-block"></span>성장 (30)</span>
-      <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:9px;border-radius:3px;background:linear-gradient(90deg,#3B82C4,#1E3A5F);display:inline-block"></span>정성 (10)</span>
+      <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:9px;border-radius:3px;background:linear-gradient(90deg,#3B82C4,#1E3A5F);display:inline-block"></span>정성 (5)</span>
       <span style="color:var(--dim)">· 막대는 100점 기준 비율</span>
     </div>
     <div class="tbl-wrap"><table class="score-tbl">
-    <thead><tr><th>종목명</th><th>등급</th><th style="color:#C9A227">저평가</th><th style="color:#C9A227">시그널</th><th style="color:#059669">성장</th><th class="sep" style="color:#1E3A5F">정성</th><th class="num sep" style="color:#C9A227">정량<br><span class="th-max">60</span></th><th style="color:#059669">성장<br><span class="th-max">30</span></th><th style="color:#1E3A5F">정성<br><span class="th-max">10</span></th><th>총점<br><span class="th-max">100</span></th><th style="text-align:left">점수 구성</th></tr></thead>
+    <thead><tr><th>종목명</th><th>등급</th><th style="color:#C9A227">저평가</th><th style="color:#C9A227">시그널</th><th style="color:#059669">성장</th><th class="sep" style="color:#1E3A5F">정성</th><th class="num sep" style="color:#C9A227">정량<br><span class="th-max">65</span></th><th style="color:#059669">성장<br><span class="th-max">30</span></th><th style="color:#1E3A5F">정성<br><span class="th-max">5</span></th><th>총점<br><span class="th-max">100</span></th><th style="text-align:left">점수 구성</th></tr></thead>
     <tbody>${body}</tbody></table></div>
   </div>`;
 }
