@@ -1,6 +1,6 @@
 {
-  "date": "2026-06-08",
-  "updated": "2026-06-08T22:26:18.576Z",
+  "date": "2026-06-09",
+  "updated": "2026-06-09T00:00:23.202Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 388500
     },
     "bitcoin": {
-      "price": 63335,
-      "chg": 0.5968
+      "price": 63078,
+      "chg": -0.27909
     },
     "ethereum": {
-      "price": 1694.29,
-      "chg": 1.20512
+      "price": 1690.08,
+      "chg": 0.18019
     },
     "ripple": {
-      "price": 1.18,
-      "chg": 1.83337
+      "price": 1.17,
+      "chg": 1.13779
     },
     "solana": {
-      "price": 67.13,
-      "chg": 1.06181
+      "price": 66.77,
+      "chg": 0.80059
     },
     "dogecoin": {
-      "price": 0.086867,
-      "chg": 0.98485
+      "price": 0.086279,
+      "chg": 0.26836
     },
     "chainlink": {
-      "price": 8.02,
-      "chg": 1.58504
+      "price": 7.99,
+      "chg": 1.08821
     },
     "ondo-finance": {
-      "price": 0.368646,
-      "chg": 6.40793
+      "price": 0.364265,
+      "chg": 4.39131
     },
     "aave": {
-      "price": 63.93,
-      "chg": -0.64105
+      "price": 63.35,
+      "chg": -0.3139
     },
     "filecoin": {
-      "price": 0.778217,
-      "chg": -0.62272
+      "price": 0.774046,
+      "chg": 0.40751
     },
     "NVDA": {
       "price": 208.64
@@ -209,7 +209,7 @@
     "bitcoin": {
       "ath": "-50%",
       "athAbs": 126080,
-      "rsi": 30
+      "rsi": 29
     },
     "ethereum": {
       "ath": "-66%",
@@ -232,7 +232,7 @@
     "chainlink": {
       "ath": "-85%",
       "athAbs": 52.7,
-      "rsi": 30
+      "rsi": 29
     },
     "ondo-finance": {
       "ath": "-83%",
@@ -445,14 +445,14 @@
   },
   "opts": {
     "BTC": {
-      "maxPain": 63500,
-      "pcr": 1.13,
-      "expiry": "9JUN26"
+      "maxPain": 63000,
+      "pcr": 2.77,
+      "expiry": "10JUN26"
     },
     "ETH": {
-      "maxPain": 1600,
-      "pcr": 1,
-      "expiry": "9JUN26"
+      "maxPain": 1675,
+      "pcr": 1.96,
+      "expiry": "10JUN26"
     },
     "NVDA": {
       "maxPain": 210,
@@ -491,8 +491,8 @@
       "pcr": 0.9
     },
     "TSLA": {
-      "maxPain": 405,
-      "pcr": 0.35
+      "maxPain": 412.5,
+      "pcr": 0.65
     },
     "COIN": {
       "maxPain": 162.5,
@@ -507,8 +507,8 @@
       "pcr": 0.54
     },
     "QQQ": {
-      "maxPain": 718,
-      "pcr": 1.33
+      "maxPain": 720,
+      "pcr": 1.7
     }
   },
   "indices": {
