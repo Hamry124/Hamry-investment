@@ -1,6 +1,6 @@
 {
   "date": "2026-06-09",
-  "updated": "2026-06-09T08:28:10.823Z",
+  "updated": "2026-06-09T11:03:29.538Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 396500
     },
     "bitcoin": {
-      "price": 62913,
-      "chg": -0.19122
+      "price": 62706,
+      "chg": -0.51926
     },
     "ethereum": {
-      "price": 1675.55,
-      "chg": 0.60297
+      "price": 1672.35,
+      "chg": 0.31976
     },
     "ripple": {
-      "price": 1.17,
-      "chg": 2.50537
+      "price": 1.16,
+      "chg": 1.30311
     },
     "solana": {
-      "price": 66.57,
-      "chg": 1.43396
+      "price": 66.36,
+      "chg": 0.47456
     },
     "dogecoin": {
-      "price": 0.085971,
-      "chg": 0.92893
+      "price": 0.085449,
+      "chg": -0.05059
     },
     "chainlink": {
-      "price": 7.9,
-      "chg": 0.29112
+      "price": 7.89,
+      "chg": 0.36118
     },
     "ondo-finance": {
-      "price": 0.370021,
-      "chg": 3.51721
+      "price": 0.36459,
+      "chg": 2.05349
     },
     "aave": {
-      "price": 62.7,
-      "chg": 0.1232
+      "price": 62.25,
+      "chg": -1.35342
     },
     "filecoin": {
-      "price": 0.770315,
-      "chg": 0.62863
+      "price": 0.766184,
+      "chg": -0.6593
     },
     "NVDA": {
       "price": 208.64
@@ -446,49 +446,49 @@
   "opts": {
     "BTC": {
       "maxPain": 63000,
-      "pcr": 2.59,
+      "pcr": 2.48,
       "expiry": "10JUN26"
     },
     "ETH": {
       "maxPain": 1675,
-      "pcr": 1.6,
+      "pcr": 1.72,
       "expiry": "10JUN26"
     },
     "NVDA": {
       "maxPain": 210,
-      "pcr": 0.63
+      "pcr": 0.62
     },
     "CRCL": {
-      "maxPain": 92,
-      "pcr": 0.56
+      "maxPain": 90,
+      "pcr": 0.52
     },
     "IREN": {
       "maxPain": 57,
-      "pcr": 3.95
+      "pcr": 2.22
     },
     "AMD": {
-      "maxPain": 485,
-      "pcr": 1.19
+      "maxPain": 487.5,
+      "pcr": 1.06
     },
     "MU": {
       "maxPain": 925,
-      "pcr": 2.41
+      "pcr": 2
     },
     "SNDK": {
-      "maxPain": 1590,
-      "pcr": 1.94
+      "maxPain": 1600,
+      "pcr": 1.74
     },
     "VRT": {
-      "maxPain": 320,
-      "pcr": 1.1
+      "maxPain": 315,
+      "pcr": 0.95
     },
     "ASTS": {
       "maxPain": 95,
-      "pcr": 0.7
+      "pcr": 0.74
     },
     "RKLB": {
-      "maxPain": 119,
-      "pcr": 0.9
+      "maxPain": 118,
+      "pcr": 0.79
     },
     "TSLA": {
       "maxPain": 407.5,
@@ -496,15 +496,15 @@
     },
     "COIN": {
       "maxPain": 162.5,
-      "pcr": 0.58
+      "pcr": 0.56
     },
     "IONQ": {
-      "maxPain": 56,
-      "pcr": 0.87
+      "maxPain": 57,
+      "pcr": 0.8
     },
     "PLTR": {
-      "maxPain": 141,
-      "pcr": 0.54
+      "maxPain": 140,
+      "pcr": 0.51
     },
     "QQQ": {
       "maxPain": 717,
@@ -528,7 +528,7 @@
       "ath": "-5%"
     },
     "Brent 유가": {
-      "price": 92.52,
+      "price": 92.33,
       "rsi": 57,
       "ath": "-37%"
     }
