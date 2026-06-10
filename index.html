@@ -294,7 +294,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-10 · v2</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-10 · v4</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -320,7 +320,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-10 · v2 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-10 · v4 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -352,18 +352,18 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <!-- EXEC SUMMARY -->
 <div class="block-title"><span class="bt-num">SUMMARY</span><h2>Executive Summary</h2><span class="bt-sub">두괄식 · 배경 / 진단 / 시장 환경</span></div>
 <div class="exec">
-  <div class="tldr"><span class="tchip" style="border-color:var(--green);color:var(--green)">🇰🇷 KOSPI 8,097 · V반등 +8.2% (고점比 -8%)</span><span class="tchip" style="border-color:var(--red);color:var(--red)">🇺🇸 Nasdaq 25,679 · 반도체 변동성</span><span class="tchip" style="border-color:var(--red);color:var(--red)">₿ BTC $62K · ATH -51% 극단공포</span><span class="tchip" style="border-color:var(--amber);color:var(--amber)">🛢 Brent $98 · 미·이란 충돌</span></div>
+  <div class="tldr"><span class="tchip" id="tldr-kospi" style="border-color:var(--red);color:var(--red)">🇰🇷 KOSPI 7,731 · 변동성 극심 구간</span><span class="tchip" id="tldr-nasdaq" style="border-color:var(--red);color:var(--red)">🇺🇸 Nasdaq 25,679 · 반도체 변동성</span><span class="tchip" id="tldr-btc" style="border-color:var(--red);color:var(--red)">₿ BTC $62,000 · ATH -51% 극단공포</span></div>
   <div class="row">
     <div>
       <h3>배경 (Background)</h3>
       <p>KOSPI는 5/26 사상 첫 8,000선을 돌파하고 6/1 종가 <b>8,788</b>·장중 8,874까지 치솟으며 시가총액 7천조를 처음 넘어섰다 — 이재명 정부 출범 1년 만에 약 +100% 폭등한 AI·반도체 슈퍼사이클 랠리였다. 그러나 6/3 Broadcom이 호실적에도 AI 매출 목표를 올리지 않으면서 '눈높이 과열' 경고가 현실화됐고, <b style="color:var(--red)">6/5 나스닥이 -4.18%(2025년 4월 이후 최악)로 급락하며 반도체에서 하루 새 약 1조 달러가 증발</b>했다(마이크론 -13%·AMD -12.6%·인텔 -9%·엔비디아 -6%).</p>
-      <p>충격은 6/8 <b>'검은 월요일'</b>로 번졌다. 코스피가 장중 8% 넘게 급락해 <b style="color:var(--red)">서킷브레이커가 발동</b>, 7,442까지 밀리며 시총 554조가 증발하고 삼성전자가 시총 11위로, SK하이닉스가 1조달러 클럽에서 이탈했다(종가 7,484). 방아쇠는 셋이다 — ① 5월 미국 고용 <b>+172K(예상 80K)</b> 서프라이즈로 국채금리가 급등해 <b style="color:var(--red)">Fed 금리인상 우려</b>가 부활했고(인하 기대 후퇴), ② 6/9 트럼프가 신규 對이란 공습을 시사하며 <b>유가가 급등</b>(Brent ~$98·WTI ~$96)했으며, ③ 달러 강세로 원/달러가 1,540원대로 올라섰다. <b style="color:var(--green)">그러나 6/9 코스피가 +8.18% V자 반등(8,097 마감)</b>하며 저점 7,442를 확인했다 — SK하이닉스 +15.9%·삼성전자 +9.0%, 고점 대비 낙폭은 -8%로 축소. 반면 <b style="color:var(--a)">광통신(옵티컬)은 6/2 젠슨 황의 언급과 NVIDIA의 $6.5B 직접 투자로 급락장 속 역주행 랠리</b>를 펼쳤다(MRVL·Flex S&P500 편입). BTC는 ATH 대비 약 -51%인 $62K 부근에서 6/5 청산 $1.5B·ETF 주간 -$2.7B를 겪었으나, 세일러의 추가 매수와 ETF 자금 복귀로 바닥 다지기 조짐. <b>CPI 6/11·FOMC 6/17</b>이 방향을 가를 분수령이다. 단기 변동성은 극대화됐지만 HBM 장기계약·AI capex 기반의 구조적 추세가 꺾인 것은 아니다.</p>
+      <p>충격은 6/8 <b>'검은 월요일'</b>로 번졌다. 코스피가 장중 8% 넘게 급락해 <b style="color:var(--red)">서킷브레이커가 발동</b>, 7,442까지 밀리며 시총 554조가 증발하고 삼성전자가 시총 11위로, SK하이닉스가 1조달러 클럽에서 이탈했다(종가 7,484). 방아쇠는 셋이다 — ① 5월 미국 고용 <b>+172K(예상 80K)</b> 서프라이즈로 국채금리가 급등해 <b style="color:var(--red)">Fed 금리인상 우려</b>가 부활했고(인하 기대 후퇴), ② 6/9 트럼프가 신규 對이란 공습을 시사하며 <b>유가가 급등</b>(Brent ~$98·WTI ~$96)했으며, ③ 달러 강세로 원/달러가 1,540원대로 올라섰다. <b style="color:var(--green)">그러나 6/9 코스피가 +8.18% V자 반등(8,097 마감)</b>하며 저점 7,442를 확인했다 — SK하이닉스 +15.9%·삼성전자 +9.0%, 고점 대비 낙폭을 -8%로 줄였다. 그러나 발행일인 6/10에도 美 CPI 경계·중동 긴장 속 <b style="color:var(--red)">-4.52% 재하락(7,730 마감, 매도 사이드카)</b>하며 '검은 수요일'을 기록 — 일중 ±5~8% 변동이 일상화된 극단 변동성 구간이다. 반면 <b style="color:var(--a)">광통신(옵티컬)은 6/2 젠슨 황의 언급과 NVIDIA의 $6.5B 직접 투자로 급락장 속 역주행 랠리</b>를 펼쳤다(MRVL·Flex S&P500 편입). BTC는 ATH 대비 약 -51%인 $62K 부근에서 6/5 청산 $1.5B·ETF 주간 -$2.7B를 겪었으나, 세일러의 추가 매수와 ETF 자금 복귀로 바닥 다지기 조짐. <b>CPI 6/11·FOMC 6/17</b>이 방향을 가를 분수령이다. 단기 변동성은 극대화됐지만 HBM 장기계약·AI capex 기반의 구조적 추세가 꺾인 것은 아니다.</p>
     </div>
     <div>
       <h3>핵심 진단 (Core Thesis)</h3>
       <ul class="thesis">
         <li><b>매크로</b> — AI·반도체 밸류 과열이 6/3 Broadcom 목표 미상향을 신호탄으로 터졌다. 5월 고용 서프라이즈(+172K)發 금리인상 우려 + 미·이란 충돌 재격화(Brent $98)가 겹쳐 위험자산 동반 조정. <b>CPI 6/11이 금리 경로의 분수령</b>. S&P 500 Shiller CAPE 40대는 강세장 후반부 경고 — 추격 금지·현금 비중 확대가 원칙.</li>
-        <li><b>한국</b> — 검은월요일(저점 7,442·종가 7,484) 다음날 <b style="color:var(--green)">+8.18% V자 반등으로 8,097 회복</b>(고점 8,788 대비 -8%) — SK하이닉스 +15.9%·삼성전자 +9.0%가 주도. 패닉 저점 확인 + HBM4 슈퍼사이클·NVDA 대비 3배 낮은 멀티플 유효 → '이익 가시성 대형주 분할'이 합리. 단 외국인 22거래일 연속 순매도·환율 1,540원대·변동성 극심이 단기 부담.</li>
+        <li><b>한국</b> — 검은월요일(저점 7,442) → 6/9 +8.18% V반등(8,097) → 6/10 검은 수요일 -4.52%(7,731, 매도 사이드카)로 일중 ±5~8% 변동이 일상화. 그러나 HBM4 슈퍼사이클·NVDA 대비 3배 낮은 멀티플은 유효 → 패닉 구간 '이익 가시성 대형주 분할'이 합리. 외국인 연속 순매도 vs 개인 저가 매수(6/10 3.5조), 환율 1,525원이 단기 변수.</li>
         <li><b>미국</b> — 사상최고(S&P 7,580·Nasdaq 26,973)에서 반도체發 급락으로 조정. 'AI 거품' vs '눌림목 매수' 진영 양분(Citi: 신규 숏 $14.7B vs 신규 롱 $4.78B). <b style="color:var(--a)">광통신은 NVIDIA $6.5B 투자로 역주행</b> — 옵티컬(MRVL·COHR·CIEN)이 반도체 조정의 헤지처로 부상. ATH 추격 금지, 매출 가시성 S등급만 선별.</li>
         <li><b>크립토</b> — BTC ATH 대비 -51%($62K)·ETH -66%($1.7K). 6/5 $60K 붕괴(2024년 이후 첫)·청산 $1.5B·ETF 주간 -$2.7B로 <b>공포탐욕지수 8(극단공포)</b>. 단 세일러(Strategy) 추가 매수·ETF 자금 복귀로 바닥 신호 + CLARITY Act 제도화 진행이 촉매. 극단 공포 + 규제 모멘텀 = 분할 매수 영역, $60K 사수·$68K 회복이 바닥 확인선.</li>
       </ul>
@@ -407,19 +407,19 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-10 · v2 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-10 · v4 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-10 · v2</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-10 · v4</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-09";
 const PUB_DATE="2026-06-10";  // 발행일
-const VERSION="v2";          // 버전 (수정 시 v# 증가)
+const VERSION="v4";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
-  {tk:"KOSPI",cgId:null,avSym:null,px:"8,097",rsi:48,ath:"-8%",opt:"watch",optTxt:"V자 반등·변동성 극심"},
+  {tk:"KOSPI",cgId:null,avSym:null,px:"7,731",rsi:42,ath:"-12%",opt:"watch",optTxt:"검은수요일 재하락·변동성 극심"},
   {tk:"S&P 500",cgId:null,avSym:null,px:"7,387",rsi:45,ath:"-3%",opt:"watch",optTxt:"숨고르기"},
   {tk:"Nasdaq",cgId:null,avSym:null,px:"25,679",rsi:42,ath:"-5%",opt:"watch",optTxt:"반도체 변동성"},
   {tk:"BTC",cgId:"bitcoin",avSym:null,px:"$62,000",rsi:32,ath:"-51%",opt:"buy",optTxt:"극단공포·바닥다지기"},
@@ -427,14 +427,14 @@ const IDXDATA=[
 
 // 상단 스트립 (지수 + 보조지표)
 const IDX=[
-  {l:"KOSPI",v:"8,097",x:"V반등 +8.18%",c:"var(--green)"},
-  {l:"S&P 500",v:"7,387",x:"숨고르기 -0.26%",c:"var(--amber)"},
-  {l:"Nasdaq",v:"25,679",x:"-0.97% 변동성",c:"var(--red)"},
+  {l:"KOSPI",v:"7,731",x:"검은수요일 -4.52%",c:"var(--red)"},
+  {l:"S&P 500",v:"7,387",x:"숨고르기",c:"var(--amber)"},
+  {l:"Nasdaq",v:"25,679",x:"반도체 변동성",c:"var(--red)"},
   {l:"BTC",v:"$62,000",x:"ATH -51% 극단공포",c:"var(--red)",cgId:"bitcoin"},
   {l:"코인베이스 프리미엄",id:"CBP",v:"—",x:"BTC · 로드 시 자동 계산",c:"var(--muted)"},
-  {l:"Brent 유가",v:"$98",x:"美·이란 충돌 급등",c:"var(--red)"},
+  {l:"Brent 유가",v:"$91",x:"美·이란 충돌",c:"var(--red)"},
   {l:"美 CPI",v:"3.8%",x:"6/11 발표 분수령",c:"var(--amber)"},
-  {l:"환율 USDKRW",v:"1,541원",x:"달러 강세",c:"var(--amber)"},
+  {l:"환율 USDKRW",v:"1,525원",x:"달러 강세",c:"var(--amber)"},
 ];
 
 // 옵션 신호 데이터 (전체 확장: 미국 13 + 크립토 8 + S등급 공통)
@@ -582,8 +582,9 @@ const STOCKS={
 
 
 const PARTS=[
- {id:"macro",ic:"🌐",name:"매크로",sub:"시황",intro:"5월 말 사상최고(KOSPI 8,788·S&P 7,580) 랠리가 6/3 Broadcom 목표 미상향을 기점으로 반전 — 6/5 나스닥 -4.18%·반도체 $1조 증발, 6/8 코스피 검은월요일 서킷브레이커(저점 7,442·종가 7,484). 그러나 6/9 코스피 +8.18% V자 반등(8,097)·美 반도체 ETF +6% 반등으로 패닉은 진정. 고용 서프라이즈發 금리인상 우려 + 미·이란 충돌(유가 $98)은 진행형 — CPI 6/11·FOMC 6/17이 분수령. 추격 금지·분할 매수·현금 20~30% 유지 원칙, NVIDIA가 떠받치는 광통신은 역주행 강세.",macro:true,idxTable:true,
+ {id:"macro",ic:"🌐",name:"매크로",sub:"시황",intro:"사상최고(6/1 KOSPI 8,788) → 6/5 나스닥 -4.18%·반도체 $1조 증발 → 6/8 검은월요일 서킷브레이커(저점 7,442) → 6/9 +8.18% V반등(8,097) → 6/10 검은 수요일 -4.52%(7,731·매도 사이드카). 고용 서프라이즈發 금리인상 우려 + 미·이란 충돌(유가 急등락)이 진행형이며 CPI 6/11·FOMC 6/17이 분수령. 일중 ±5~8% 변동 구간 — 추격 금지·분할 매수·현금 20~30% 유지, NVIDIA가 떠받치는 광통신만 역주행 강세.",macro:true,idxTable:true,
   events:[
+   {d:"06-10",dt:"6/10",txt:"<b>코스피 검은 수요일 — 매도 사이드카</b> — -4.52% 7,730 마감(장중 -6.86% 7,541), V반등 하루 만에 반납. 외국인·기관 동반 매도 3.6조 vs 개인 3.5조 저가 매수 — 美 CPI 대기·중동 긴장 고조",c:"red"},
    {d:"06-09",dt:"6/9",txt:"<b>코스피 +8.18% V자 반등</b> — 8,097 마감(저점 7,442 확인)·SK하이닉스 +15.9%·삼성전자 +9.0%, 전일 美 반도체 ETF +6% 반등 — 중동 완화 기대·낙폭과대 매수 유입",c:"green"},
    {d:"06-17",dt:"6/17",txt:"<b>FOMC</b> — Warsh Fed 첫 회의, 금리 경로 결정. 인플레 둔화 확인 시 반등 트리거 / 재가속 시 추가 조정 (분수령)",c:"amber"},
    {d:"06-11",dt:"6/11",txt:"<b>5월 美 CPI 발표</b> — 금리 인하·인상 경로의 분수령. 같은 날 월드컵 개막(미국)",c:"amber"},
@@ -806,7 +807,7 @@ function macroIdxTable(){
     </tr>`;
   }).join('')}
   </tbody></table></div>
-  <div class="note">KOSPI는 검은월요일(저점 7,442) 후 6/9 +8.18% V자 반등으로 8,097 회복(고점 대비 -8%), 美 증시는 반등 후 숨고르기. BTC는 ATH -51%·극단공포(F&G 8)에서 바닥 다지기 = 분할 매수 영역. ● 표시는 실시간 갱신.</div>
+  <div class="note">KOSPI는 검은월요일(7,442) → V반등(8,097) → 검은 수요일(-4.52%·7,731)로 일중 ±5~8% 롤러코스터, 美 증시는 반도체 변동성 지속. BTC는 ATH -51%·극단공포(F&G 8)에서 바닥 다지기 = 분할 매수 영역. ● 표시는 실시간 갱신.</div>
   </div>`;
 }
 
@@ -963,7 +964,7 @@ TABS.forEach((tab,i)=>{
       return h;
     })();
   } else {
-    const intros={kr:"검은월요일(6/8 서킷브레이커·저점 7,442) 다음날 +8.18% V자 반등으로 8,097 회복(고점比 -8%) — 6개 섹터를 현재가·밸류에이션·주봉 RSI로 정밀 점검. 변동성 극심 구간, 이익 가시성 대형주 분할이 합리. ※ 시세 기준: 삼성전자·SK하이닉스 6/9 종가, 기타 6/3.",
+    const intros={kr:"검은월요일(6/8) → V반등(6/9 +8.18%) → 검은 수요일(6/10 -4.52%·7,731) — 일중 ±5~8% 변동이 일상화된 구간. 6개 섹터를 현재가·밸류·주봉 RSI로 점검하며, 시세·RSI·ATH%·PER은 서버 자동갱신(Yahoo), SI·맥스페인은 수동 운영. 패닉 구간엔 이익 가시성 대형주 분할이 합리.",
       us:"사상최고(S&P 7,580) 후 반도체發 조정. AI 거품 우려 vs 눌림목 매수 양분 — 신설 광통신(NVIDIA $6.5B 투자)이 역주행 헤지처. ATH 추격 금지, NVDA·CRCL·IREN S등급 선별. 옵션은 맥스페인·PCR로 단기 타이밍 보조.",
       crypto:"BTC ATH -51%($62K)·6/5 $60K 붕괴 후 바닥 다지기. 4개 섹터. ETF 자금 복귀·세일러 매수 vs 극단공포(F&G 8). CLARITY 제도화가 촉매, ETF 자금 유입 여부로 종목 선별."};
     html2+=`<div class="intro-card"><span class="ic-tag">${tab.name} 개요</span><p style="color:#1d4ed8;font-weight:500">${intros[tab.id]}</p></div>`;
@@ -1350,6 +1351,16 @@ function syncRSIATH(text, rsi, ath){
   if(ath){ text=text.replace(/ATH\s*-?\d+%/g, 'ATH '+ath); }
   return text;
 }
+// TL;DR 칩을 상단 스트립 라이브 값과 자동 동기화(중복 표기 드리프트 방지)
+function syncTLDR(){
+  const g=id=>{const el=document.getElementById(id);return el?el.textContent.trim():null;};
+  const set=(id,t)=>{const el=document.getElementById(id);if(el)el.textContent=t;};
+  const k=g('idx-KOSPI'); if(k)set('tldr-kospi','🇰🇷 KOSPI '+k+' · 변동성 극심 구간');
+  const n=g('idx-Nasdaq'); if(n)set('tldr-nasdaq','🇺🇸 Nasdaq '+n+' · 반도체 변동성');
+  const b=g('idx-BTC');
+  const bi=(typeof IDXDATA!=='undefined')?IDXDATA.find(d=>d.cgId==='bitcoin'):null;
+  if(b)set('tldr-btc','₿ BTC '+b+(bi&&bi.ath?(' · ATH '+bi.ath+' 극단공포'):''));
+}
 // 모든 종목(한국 포함)의 카드 서술에서 RSI·ATH 수치를 실시간 값과 일치
 function applyNarrativeSync(){
   renderStable();
@@ -1360,6 +1371,7 @@ function applyNarrativeSync(){
     if(r.issue!==before){ const ik=r.cgId||r.avSym||r.krCode; if(ik) document.querySelectorAll(`[data-issue="${ik}"]`).forEach(el=>{el.textContent=r.issue;el.title=r.issue;}); }
   })));
   renderCardDiag(); renderMacroDiag(); renderEval();   // 데이터 반영 후 자동 재진단·재평가
+  syncTLDR();
 }
 function applyOptions(opts){
   if(!opts||!Object.keys(opts).length)return;
@@ -1413,6 +1425,13 @@ function applyIndices(indices){
     // 상단 스트립
     const id='idx-'+name.replace(/[^A-Za-z0-9]/g,'');
     const el=document.getElementById(id); if(el){el.textContent=pxStr;el.setAttribute('data-live','1');}
+    // 부가 라벨(.ix)도 ATH·RSI 라이브 값으로 자동 생성(정적 문구 드리프트 방지)
+    const ixEl=el?el.parentNode.querySelector('.ix'):null;
+    if(ixEl&&(d.ath||d.rsi!=null)){
+      const parts=[]; if(d.ath)parts.push('ATH '+d.ath); if(d.rsi!=null)parts.push('RSI '+d.rsi);
+      ixEl.textContent=parts.join(' · ');
+      ixEl.style.color=d.rsi!=null?rsiCol(d.rsi):(d.ath?athCol(d.ath):'');
+    }
     // IDXDATA 표(지수명 키)
     document.querySelectorAll(`[data-idxpx="${name}"]`).forEach(c=>{c.textContent=pxStr;c.setAttribute('data-live','1');});
     if(d.rsi!=null)document.querySelectorAll(`[data-idxrsi="${name}"]`).forEach(c=>{c.textContent=d.rsi;c.style.color=rsiCol(d.rsi);});
@@ -1461,7 +1480,16 @@ function applyTech(tech){
       if(tech[key].ath)r.ath=tech[key].ath;
     }
   })));
-  // 3) IDXDATA 배열 갱신
+  // 3) BTC 상단 스트립 부가 라벨 자동 갱신
+  if(tech['bitcoin']){
+    const bEl=document.getElementById('idx-BTC');
+    const bIx=bEl?bEl.parentNode.querySelector('.ix'):null;
+    if(bIx){ const t=tech['bitcoin']; const ps=[];
+      if(t.ath)ps.push('ATH '+t.ath); if(typeof t.rsi==='number')ps.push('RSI '+t.rsi);
+      if(ps.length){ bIx.textContent=ps.join(' · '); bIx.style.color=(typeof t.rsi==='number')?rsiCol(t.rsi):'var(--red)'; }
+    }
+  }
+  // 4) IDXDATA 배열 갱신
   (typeof IDXDATA!=='undefined'?IDXDATA:[]).forEach(d=>{ if(d.cgId&&tech[d.cgId]){
     if(typeof tech[d.cgId].rsi==='number')d.rsi=tech[d.cgId].rsi;
     if(tech[d.cgId].ath)d.ath=tech[d.cgId].ath;
