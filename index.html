@@ -294,7 +294,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-10 · v1</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-10 · v2</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -320,7 +320,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-10 · v1 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-10 · v2 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -407,15 +407,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-10 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-10 · v2 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-10 · v1</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-10 · v2</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-09";
 const PUB_DATE="2026-06-10";  // 발행일
-const VERSION="v1";          // 버전 (수정 시 v# 증가)
+const VERSION="v2";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -431,6 +431,7 @@ const IDX=[
   {l:"S&P 500",v:"7,387",x:"숨고르기 -0.26%",c:"var(--amber)"},
   {l:"Nasdaq",v:"25,679",x:"-0.97% 변동성",c:"var(--red)"},
   {l:"BTC",v:"$62,000",x:"ATH -51% 극단공포",c:"var(--red)",cgId:"bitcoin"},
+  {l:"코인베이스 프리미엄",id:"CBP",v:"—",x:"BTC · 로드 시 자동 계산",c:"var(--muted)"},
   {l:"Brent 유가",v:"$98",x:"美·이란 충돌 급등",c:"var(--red)"},
   {l:"美 CPI",v:"3.8%",x:"6/11 발표 분수령",c:"var(--amber)"},
   {l:"환율 USDKRW",v:"1,541원",x:"달러 강세",c:"var(--amber)"},
@@ -612,7 +613,7 @@ function athCol(a){const n=parseFloat(a);if(n<=-50)return"var(--red)";if(n===0)r
 function optBadge(o){if(!o)return"";if(o.v==="buy")return`<span class="opt-badge ob-buy">✅ 매수가능</span>`;if(o.v==="sell")return`<span class="opt-badge ob-sell">⚠️ 과열</span>`;return`<span class="opt-badge ob-watch">⚡ 관망</span>`;}
 
 // 상단 스트립
-document.getElementById('idx').innerHTML=IDX.map(o=>`<div class="ic"><div class="il">${o.l}</div><div class="iv ${o.cgId?'live':''}" ${o.cgId?`data-cg="${o.cgId}"`:''} id="idx-${o.l.replace(/[^A-Za-z0-9]/g,'')}">${o.v}</div><div class="ix" style="color:${o.c}">${o.x}</div></div>`).join('');
+document.getElementById('idx').innerHTML=IDX.map(o=>`<div class="ic"><div class="il">${o.l}</div><div class="iv ${o.cgId?'live':''}" ${o.cgId?`data-cg="${o.cgId}"`:''} id="idx-${(o.id||o.l).replace(/[^A-Za-z0-9]/g,'')}">${o.v}</div><div class="ix" style="color:${o.c}">${o.x}</div></div>`).join('');
 
 // S등급 표
 // 매수 시그널 하이라이팅: 숫자 파싱 + 조건 개수
@@ -1057,6 +1058,38 @@ function markLiveCells(prices){
   });
 }
 
+// 코인베이스 프리미엄: Coinbase BTC-USD − Binance BTC-USDT (폴백 OKX) · 브라우저(한국 IP)에서 계산
+async function fetchCBPremium(){
+  const cb=await fetch('https://api.coinbase.com/v2/prices/BTC-USD/spot').then(r=>r.json());
+  const c=Number(cb&&cb.data&&cb.data.amount);
+  let b=NaN, src='Binance';
+  try{
+    const bn=await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT').then(r=>r.json());
+    b=Number(bn&&bn.price);
+  }catch(e){}
+  if(!b||isNaN(b)){
+    const ok=await fetch('https://www.okx.com/api/v5/market/ticker?instId=BTC-USDT').then(r=>r.json());
+    b=Number(ok&&ok.data&&ok.data[0]&&ok.data[0].last); src='OKX';
+  }
+  if(!c||!b) throw new Error('CBP 소스 실패');
+  const gapUsd=c-b, gapPct=gapUsd/b*100;
+  return {cb:c,bn:b,gapUsd,gapPct,src};
+}
+function applyCBPremium(d){
+  const el=document.getElementById('idx-CBP'); if(!el)return;
+  const sign=d.gapPct>=0?'+':'';
+  el.textContent=sign+d.gapPct.toFixed(2)+'%';
+  el.setAttribute('data-live','1');
+  const ix=el.parentNode&&el.parentNode.querySelector('.ix');
+  if(ix){
+    const usd=(d.gapUsd>=0?'+$':'-$')+Math.abs(d.gapUsd).toFixed(0);
+    let txt,col;
+    if(d.gapPct>=0.05){txt=usd+' · 美 기관 매수 우위';col='var(--green)';}
+    else if(d.gapPct<=-0.05){txt=usd+' · 美 기관 매도 우위';col='var(--red)';}
+    else {txt=usd+' · 중립';col='var(--amber)';}
+    ix.textContent=txt+(d.src==='OKX'?' (OKX)':''); ix.style.color=col;
+  }
+}
 async function fetchCrypto(){
   // CoinGecko 무료 공개 API (키 불필요, CORS 허용)
   const ids=["bitcoin","ethereum","solana","ripple","chainlink","aave","ondo-finance","uniswap","dogecoin","filecoin"];
@@ -1239,6 +1272,7 @@ async function runUpdate(force){
     const c=await fetchCrypto();
     Object.assign(prices,c); if(Object.keys(c).length){ok=true;} msg.push(`크립토 ${Object.keys(c).length}종`);
   }catch(e){ msg.push("크립토 실패("+e.message+")"); }
+  try{ const cbp=await fetchCBPremium(); applyCBPremium(cbp); msg.push("CB프리미엄 "+(cbp.gapPct>=0?"+":"")+cbp.gapPct.toFixed(2)+"%"); }catch(e){ msg.push("CB프리미엄 실패"); }
   try{
     opts=await fetchOptions();
     if(Object.keys(opts).length){ ok=true; msg.push(`옵션 ${Object.keys(opts).length}종(Deribit)`); }
@@ -1504,6 +1538,9 @@ async function loadServerData(){
 }
 renderCardDiag(); renderMacroDiag(); renderEval();   // 초기 진단·평가(작성 시점 값)
 loadServerData();
+// 코인베이스 프리미엄: 로드 즉시 1회 + 5분 주기 자동 갱신
+fetchCBPremium().then(applyCBPremium).catch(()=>{});
+setInterval(()=>fetchCBPremium().then(applyCBPremium).catch(()=>{}),300000);
 </script>
 
 </body>
