@@ -1,6 +1,6 @@
 {
-  "date": "2026-06-12",
-  "updated": "2026-06-12T23:11:47.581Z",
+  "date": "2026-06-13",
+  "updated": "2026-06-13T02:45:24.327Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,40 +22,40 @@
       "price": 400000
     },
     "bitcoin": {
-      "price": 63433,
-      "chg": 0.15873
+      "price": 63628,
+      "chg": 0.18178
     },
     "ethereum": {
-      "price": 1660.47,
-      "chg": -0.65384
+      "price": 1667.64,
+      "chg": -0.37735
     },
     "ripple": {
       "price": 1.13,
-      "chg": -0.8429
+      "chg": -0.93259
     },
     "solana": {
-      "price": 66.59,
-      "chg": -0.13791
+      "price": 67.05,
+      "chg": 0.04268
     },
     "dogecoin": {
-      "price": 0.086157,
-      "chg": -0.03461
+      "price": 0.086594,
+      "chg": 0.30209
     },
     "chainlink": {
-      "price": 7.83,
-      "chg": -0.74026
+      "price": 7.91,
+      "chg": -0.00584
     },
     "ondo-finance": {
-      "price": 0.354006,
-      "chg": -2.70066
+      "price": 0.356509,
+      "chg": -3.05604
     },
     "aave": {
-      "price": 64.16,
-      "chg": 0.09547
+      "price": 65.26,
+      "chg": 1.17271
     },
     "filecoin": {
-      "price": 0.745603,
-      "chg": -1.53604
+      "price": 0.760784,
+      "chg": 0.0096
     },
     "NVDA": {
       "price": 205.19
@@ -232,12 +232,12 @@
     "ethereum": {
       "ath": "-66%",
       "athAbs": 4946.05,
-      "rsi": 25
+      "rsi": 23
     },
     "ripple": {
       "ath": "-69%",
       "athAbs": 3.65,
-      "rsi": 23
+      "rsi": 22
     },
     "solana": {
       "ath": "-77%",
@@ -273,17 +273,17 @@
       "ath": "-13%"
     },
     "AMD": {
-      "rsi": 79,
+      "rsi": 82,
       "athAbs": 548.6823529411765,
       "ath": "-7%"
     },
     "ASML": {
-      "rsi": 78,
+      "rsi": 79,
       "athAbs": 1931.4588235294118,
       "ath": "-4%"
     },
     "MU": {
-      "rsi": 94,
+      "rsi": 96,
       "athAbs": 1089.2900390625,
       "ath": "-10%"
     },
@@ -303,7 +303,7 @@
       "ath": "-20%"
     },
     "GEV": {
-      "rsi": 56,
+      "rsi": 57,
       "athAbs": 1181.95,
       "ath": "-20%"
     },
@@ -343,7 +343,7 @@
       "ath": "-64%"
     },
     "SMR": {
-      "rsi": 38,
+      "rsi": 37,
       "athAbs": 57.42,
       "ath": "-83%"
     },
@@ -373,12 +373,12 @@
       "ath": "-4%"
     },
     "MRVL": {
-      "rsi": 84,
+      "rsi": 85,
       "athAbs": 324.20001220703125,
       "ath": "-14%"
     },
     "GLW": {
-      "rsi": 90,
+      "rsi": 92,
       "athAbs": 211.79,
       "ath": "-15%"
     },
@@ -398,17 +398,17 @@
       "ath": "-15%"
     },
     "AAOI": {
-      "rsi": 84,
+      "rsi": 86,
       "athAbs": 428.6315789473684,
       "ath": "-61%"
     },
     "000660": {
-      "rsi": 81,
+      "rsi": 82,
       "athAbs": 2407000,
       "ath": "-11%"
     },
     "005930": {
-      "rsi": 79,
+      "rsi": 82,
       "athAbs": 370000,
       "ath": "-13%"
     },
@@ -423,7 +423,7 @@
       "ath": "-66%"
     },
     "066970": {
-      "rsi": 52,
+      "rsi": 51,
       "athAbs": 635909,
       "ath": "-79%"
     },
@@ -433,12 +433,12 @@
       "ath": "-73%"
     },
     "042660": {
-      "rsi": 57,
+      "rsi": 58,
       "athAbs": 564918.875,
       "ath": "-80%"
     },
     "010140": {
-      "rsi": 60,
+      "rsi": 61,
       "athAbs": 42212.6484375,
       "ath": "-36%"
     },
@@ -458,12 +458,12 @@
       "ath": "-31%"
     },
     "034020": {
-      "rsi": 60,
+      "rsi": 61,
       "athAbs": 151594.765625,
       "ath": "-39%"
     },
     "052690": {
-      "rsi": 59,
+      "rsi": 60,
       "athAbs": 198000,
       "ath": "-24%"
     },
@@ -496,99 +496,99 @@
   "opts": {
     "BTC": {
       "maxPain": 63500,
-      "pcr": 1.77,
-      "expiry": "13JUN26"
+      "pcr": 1.55,
+      "expiry": "14JUN26"
     },
     "ETH": {
-      "maxPain": 1675,
-      "pcr": 1.13,
-      "expiry": "13JUN26"
+      "maxPain": 1650,
+      "pcr": 0.68,
+      "expiry": "14JUN26"
     },
     "NVDA": {
       "maxPain": 205,
-      "pcr": 0.57
+      "pcr": 0.79
     },
     "AMD": {
-      "maxPain": 480,
-      "pcr": 0.94
+      "maxPain": 260,
+      "pcr": 1.06
     },
     "MU": {
-      "maxPain": 920,
-      "pcr": 1.88
+      "maxPain": 500,
+      "pcr": 1.41
     },
     "SNDK": {
-      "maxPain": 1665,
-      "pcr": 1.79
+      "maxPain": 1250,
+      "pcr": 1.64
     },
     "IREN": {
-      "maxPain": 56,
-      "pcr": 1.54
+      "maxPain": 50,
+      "pcr": 1.5
     },
     "VRT": {
-      "maxPain": 300,
-      "pcr": 0.75
+      "maxPain": 265,
+      "pcr": 1.38
     },
     "ASTS": {
-      "maxPain": 93,
-      "pcr": 0.5
+      "maxPain": 85,
+      "pcr": 0.4
     },
     "RKLB": {
-      "maxPain": 114,
-      "pcr": 0.72
+      "maxPain": 100,
+      "pcr": 0.73
     },
     "TSLA": {
       "maxPain": 400,
-      "pcr": 0.57
+      "pcr": 0.77
     },
     "CRCL": {
-      "maxPain": 84,
-      "pcr": 0.4
+      "maxPain": 95,
+      "pcr": 0.56
     },
     "COIN": {
-      "maxPain": 160,
-      "pcr": 0.62
+      "maxPain": 167.5,
+      "pcr": 0.41
     },
     "IONQ": {
-      "maxPain": 56,
-      "pcr": 0.82
+      "maxPain": 53,
+      "pcr": 1.29
     },
     "PLTR": {
-      "maxPain": 134,
-      "pcr": 0.53
+      "maxPain": 130,
+      "pcr": 0.72
     },
     "QQQ": {
-      "maxPain": 710,
-      "pcr": 1.41
+      "maxPain": 713,
+      "pcr": 2.17
     },
     "MRVL": {
-      "maxPain": 255,
-      "pcr": 1.16
+      "maxPain": 162.5,
+      "pcr": 1.19
     },
     "GLW": {
-      "maxPain": 177.5,
-      "pcr": 0.79
+      "maxPain": 170,
+      "pcr": 0.84
     },
     "CIEN": {
-      "maxPain": 455,
-      "pcr": 0.66
+      "maxPain": 430,
+      "pcr": 0.91
     },
     "COHR": {
-      "maxPain": 375,
-      "pcr": 1.56
+      "maxPain": 300,
+      "pcr": 0.92
     },
     "LITE": {
-      "maxPain": 897.5,
-      "pcr": 1.36
+      "maxPain": 780,
+      "pcr": 1.1
     },
     "AAOI": {
-      "maxPain": 185,
-      "pcr": 1.1
+      "maxPain": 100,
+      "pcr": 0.54
     }
   },
   "indices": {
     "KOSPI": {
       "price": 8123.62,
-      "rsi": 75,
+      "rsi": 77,
       "ath": "-9%"
     },
     "S&P 500": {
