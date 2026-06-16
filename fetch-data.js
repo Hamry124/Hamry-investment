@@ -176,7 +176,11 @@ async function deribitOption(cur) {
   if (!keys.length) throw new Error('만기 없음');
   const now = Date.now();
   const near = keys.find(k=>expKey(k)>now) || keys[0];
-  return { ...maxPainOf(exp[near]), expiry: near };
+  const front = maxPainOf(exp[near]);
+  const all = []; keys.forEach(k => { if (expKey(k) > now) all.push(...exp[k]); });
+  const total = all.length ? maxPainOf(all) : front;
+  return { maxPain: front.maxPain, pcr: front.pcr,
+           maxPainTotal: total.maxPain, pcrTotal: total.pcr, expiry: near };
 }
 // CBOE 옵션 심볼: ROOT + YYMMDD + C/P + strike*1000(8자리)
 async function cboeOption(sym) {
@@ -195,7 +199,17 @@ async function cboeOption(sym) {
   const todayYY = new Date().toISOString().slice(2,10).replace(/-/g,'');
   const near = keys.find(k => k >= todayYY) || keys[0];
   if (!near) throw new Error('만기 파싱 실패');
-  return maxPainOf(exp[near]);
+  // ① 가장 가까운 만기(Front-month) — 단기 추세 판단용(주가 급등 시 왜곡 적음)
+  const front = maxPainOf(exp[near]);
+  // ② 전체 미결제약정(Total OI) — 장기 균형 가격(MM 헷지성 장기물 포함)
+  const all = [];
+  keys.forEach(k => { if (k >= todayYY) all.push(...exp[k]); });   // 만기 지난 건 제외
+  const total = all.length ? maxPainOf(all) : front;
+  // 만기일 포맷: YYMMDD → M/D
+  const expM = parseInt(near.slice(2,4),10), expD = parseInt(near.slice(4,6),10);
+  return { maxPain: front.maxPain, pcr: front.pcr,
+           maxPainTotal: total.maxPain, pcrTotal: total.pcr,
+           expiry: `${expM}/${expD}` };
 }
 async function fetchOptions(usOptSyms, errors) {
   const out = {};
