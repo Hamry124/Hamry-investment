@@ -92,13 +92,14 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .gdist{display:inline-block;margin-left:8px;font-size:10.5px;font-weight:800;color:var(--navy);background:rgba(31,56,100,.07);border-radius:999px;padding:3px 9px}
 /* TABLE */
 .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--card);box-shadow:var(--shadow)}
-table.dt{width:100%;border-collapse:collapse;font-size:11.5px;min-width:720px}
-table.dt th{text-align:left;color:var(--muted);font-weight:700;padding:11px 9px;border-bottom:1px solid var(--border);font-size:9px;text-transform:uppercase;letter-spacing:.6px;background:var(--card2);white-space:nowrap}
-table.dt td{padding:10px 9px;border-bottom:1px solid var(--border);white-space:nowrap}
+table.dt{width:100%;border-collapse:collapse;font-size:11px;min-width:0;table-layout:fixed}
+table.dt th{text-align:left;color:var(--muted);font-weight:700;padding:8px 5px;border-bottom:1px solid var(--border);font-size:8.5px;letter-spacing:.3px;background:var(--card2);white-space:nowrap}
+table.dt td{padding:7px 5px;border-bottom:1px solid var(--border);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 table.dt tr:last-child td{border-bottom:none}
 table.dt tbody tr{transition:background .12s}
 table.dt tbody tr:hover{background:var(--card2)}
 .tk-cell{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--navy)}
+@media(max-width:600px){table.dt{font-size:10px}table.dt td{padding:6px 3px}.mkt-colhead td{font-size:8.5px!important;padding:4px 3px!important}}
 .gtag{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;border-radius:5px;font-size:10px;font-weight:800;color:#fff}
 .gtag.gs{background:#C9A227}.gtag.ga{background:var(--navy)}.gtag.gb{background:#64748b}
 /* 매수 시그널 하이라이팅 (연노랑 3단계) */
@@ -303,11 +304,12 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 .mkt-buy td{color:var(--blue);background:rgba(29,78,216,.06)}
 .mkt-sell td{color:var(--red);background:rgba(220,38,38,.06)}
 .mkt-head td{background:linear-gradient(90deg,#1F3864,#2c4a7c)!important;color:#fff!important;font-weight:800;font-size:12px;letter-spacing:.3px;padding:7px 12px!important;border:none!important}
+.mkt-colhead td{background:#2c4a7c!important;color:#cdd8ec!important;font-weight:700;font-size:10px;letter-spacing:.2px;padding:4px 12px!important;border:none!important;border-bottom:2px solid #1F3864!important;white-space:nowrap}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-16 · v6</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-16 · v8</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -333,7 +335,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-16 · v6 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-16 · v8 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -423,15 +425,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-16 · v6 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-16 · v8 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-16 · v6</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-16 · v8</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-16";
 const PUB_DATE="2026-06-16";  // 발행일
-const VERSION="v6";          // 버전 (수정 시 v# 증가)
+const VERSION="v8";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -817,6 +819,8 @@ function signalCount(s){
 function renderStable(){
   const markets=[{k:'kr',label:'\uD83C\uDDF0\uD83C\uDDF7 한국'},{k:'us',label:'\uD83C\uDDFA\uD83C\uDDF8 미국'},{k:'crypto',label:'\u20BF 크립토'}];
   const head=`<thead><tr><th>종목명</th><th>현재가</th><th>맥스페인</th><th>PCR</th><th>RSI</th><th>ATH대비</th><th>SI</th><th>핵심지표</th><th>매수 논거</th></tr></thead>`;
+  // 각 시장 구분 라인 아래에 반복 표시할 컬럼 헤더(스크롤 시 데이터 구분 유지)
+  const colHead=`<tr class="mkt-colhead"><td>종목</td><td style="text-align:right">현재가</td><td style="text-align:right">맥스페인</td><td style="text-align:right">PCR</td><td style="text-align:right">RSI</td><td style="text-align:right">ATH</td><td style="text-align:right">SI</td><td style="text-align:right">진단</td></tr>`;
   const gcol={S:{c:'#166534',b:'#dcfce7',br:'#86efac'},A:{c:'#1d4ed8',b:'#dbeafe',br:'#93c5fd'},B:{c:'#475569',b:'#eef2f7',br:'#cbd5e1'}};
   const medal={S:'\uD83E\uDD47',A:'\uD83E\uDD48',B:'\uD83E\uDD49'};
   function row(r,sig,ev){
@@ -824,17 +828,16 @@ function renderStable(){
     const si0=(r.si&&r.si!=='\u2014'&&r.si!=='')?r.si:'\u2014';
     const g=gcol[ev.grade]||gcol.B;
     return `<tr class="sg-main ${sig.cnt>0?'hl'+sig.cnt:''}">
-    <td><span style="font-size:15px">${medal[ev.grade]}</span> <span class="tk-cell">${r.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:${g.br};background:${g.b};color:${g.c}" title="가중합 ${ev.got}/${ev.max} → ${ev.sc}점">${ev.sc}점·${ev.grade}</span>${ev.siPct!=null?`<span class="si-chip" title="공매도비율">SI ${ev.siPct}%</span>`:''}${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">\u25B2${sig.cnt}</span>`:''}</td>
-    <td class="mono live" ${r.cgId?`data-cg="${r.cgId}"`:''} ${r.avSym?`data-av="${r.avSym}"`:''} ${r.krCode?`data-kr="${r.krCode}"`:''} data-px="1">${r.px}</td>
-    <td class="mono" ${sikey?`data-mp="${sikey}"`:''} style="color:${r.mp==="N/A"?"var(--dim)":"var(--text)"}">${r.mp}</td>
-    <td class="mono" ${sikey?`data-pcr="${sikey}"`:''} style="color:${pcrCol(r.pcr)};font-weight:700">${r.pcr}</td>
-    <td class="mono" style="color:${rsiCol(r.rsi)}">${r.rsi}</td>
-    <td class="mono" style="color:${athCol(r.ath)}">${r.ath}</td>
-    <td class="mono" ${sikey?`data-si="${sikey}"`:''} style="color:${siCol(si0)}">${si0}</td>
-    <td style="color:var(--cyan);font-weight:600">${r.key}</td>
-    <td style="white-space:nowrap">${diagPill(diagnose(r),false)}</td>
+    <td style="white-space:normal;line-height:1.45"><span style="font-size:13px">${medal[ev.grade]}</span> <span class="tk-cell" style="font-size:11.5px">${r.tk}</span> <span class="eval-pill" style="font-size:8.5px;padding:0 4px;border-color:${g.br};background:${g.b};color:${g.c}" title="가중합 ${ev.got}/${ev.max}">${ev.sc}·${ev.grade}</span>${sig.cnt>0?`<span class="hl-badge" style="font-size:8px" title="${sig.hits.join(' · ')}">\u25B2${sig.cnt}</span>`:''}${ev.siPct!=null?`<span class="si-chip" style="font-size:8px" title="공매도비율">SI ${ev.siPct}%</span>`:''}</td>
+    <td class="mono live" style="text-align:right" ${r.cgId?`data-cg="${r.cgId}"`:''} ${r.avSym?`data-av="${r.avSym}"`:''} ${r.krCode?`data-kr="${r.krCode}"`:''} data-px="1">${r.px}</td>
+    <td class="mono" ${sikey?`data-mp="${sikey}"`:''} style="text-align:right;color:${r.mp==="N/A"?"var(--dim)":"var(--text)"}">${r.mp}</td>
+    <td class="mono" ${sikey?`data-pcr="${sikey}"`:''} style="text-align:right;color:${pcrCol(r.pcr)};font-weight:700">${r.pcr}</td>
+    <td class="mono" style="text-align:right;color:${rsiCol(r.rsi)}">${r.rsi}</td>
+    <td class="mono" style="text-align:right;color:${athCol(r.ath)}">${r.ath}</td>
+    <td class="mono" ${sikey?`data-si="${sikey}"`:''} style="text-align:right;color:${siCol(si0)};font-size:9.5px">${si0}</td>
+    <td style="white-space:normal;text-align:right;font-size:9px">${diagPill(diagnose(r),false)}</td>
     </tr>
-    <tr class="sg-narr ${sig.cnt>0?'hl'+sig.cnt:''}"><td colspan="9"><span class="sg-narr-tag">매수 논거</span>${r.issue||''}</td></tr>`;
+    <tr class="sg-narr ${sig.cnt>0?'hl'+sig.cnt:''}"><td colspan="8"><span class="sg-narr-tag">${r.key||'논거'}</span>${r.issue||''}</td></tr>`;
   }
   let body='';
   markets.forEach(function(m){
@@ -844,13 +847,15 @@ function renderStable(){
     if(!ranked.length)return;
     const buy=ranked.slice(0,3);
     const sell=ranked.slice(-3).reverse();
-    body+=`<tr class="mkt-head"><td colspan="9">${m.label}</td></tr>`;
-    body+=`<tr class="mkt-sub mkt-buy"><td colspan="9">📈 매수 우위 TOP 3 (종합점수 상위)</td></tr>`;
+    body+=`<tr class="mkt-head"><td colspan="8">${m.label}</td></tr>`;
+    body+=colHead;
+    body+=`<tr class="mkt-sub mkt-buy"><td colspan="8">📈 매수 우위 TOP 3</td></tr>`;
     body+=buy.map(x=>row(x.r,x.sig,x.e)).join('');
-    body+=`<tr class="mkt-sub mkt-sell"><td colspan="9">📉 매도·관망 TOP 3 (종합점수 하위)</td></tr>`;
+    body+=`<tr class="mkt-sub mkt-sell"><td colspan="8">📉 매도·관망 TOP 3</td></tr>`;
     body+=sell.map(x=>row(x.r,x.sig,x.e)).join('');
   });
-  document.getElementById('stable').innerHTML=head+`<tbody>${body}</tbody>`;
+  document.getElementById('stable').innerHTML=`<colgroup>
+    <col style="width:23%"><col style="width:13%"><col style="width:12%"><col style="width:9%"><col style="width:8%"><col style="width:10%"><col style="width:9%"><col style="width:16%"></colgroup><tbody>${body}</tbody>`;
   const t=document.getElementById('sgTitle'); if(t)t.textContent='시장별 매수·매도 TOP 3';
   const _gd=document.getElementById('gradeDist');
   if(_gd){const c={S:0,A:0,B:0};['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{c[evalScore(r).grade]++;})));_gd.textContent=`현재 분포 — S ${c.S} · A ${c.A} · B ${c.B}`;}
