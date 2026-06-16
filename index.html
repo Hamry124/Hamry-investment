@@ -293,13 +293,20 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 .stk-eval{margin:8px 12px 0;padding:6px 10px;background:#fbfdff;border:1px solid #e2e8f0;border-left:3px solid #BF9000;border-radius:6px;font-size:11px;line-height:1.5}
 .sg-main td{border-bottom:none!important;padding-bottom:5px}
 .sg-narr td{padding:0 12px 12px 14px!important;border-left:3px solid #BF9000;white-space:normal;word-break:keep-all;color:var(--muted);font-size:11.5px;line-height:1.6}
+.si-chip{display:inline-block;font-size:9px;font-weight:700;color:#475569;background:#eef2f7;border-radius:4px;padding:0 5px;margin-left:4px;vertical-align:middle}
 .sg-narr-tag{display:inline-block;font-size:9px;font-weight:800;color:#1F3864;background:#eef2f7;border-radius:4px;padding:1px 6px;margin-right:7px;vertical-align:middle}
+.mkt-sub td{font-size:11px;font-weight:800;padding:5px 10px}
+.mkt-buy td{color:var(--blue);background:rgba(29,78,216,.06)}
+.mkt-sell td{color:var(--red);background:rgba(220,38,38,.06)}
+.mkt-sub td{font-size:11px;font-weight:800;padding:5px 10px}
+.mkt-buy td{color:var(--blue);background:rgba(29,78,216,.06)}
+.mkt-sell td{color:var(--red);background:rgba(220,38,38,.06)}
 .mkt-head td{background:linear-gradient(90deg,#1F3864,#2c4a7c)!important;color:#fff!important;font-weight:800;font-size:12px;letter-spacing:.3px;padding:7px 12px!important;border:none!important}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-15 · v1</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-15 · v6</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -325,7 +332,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-15 · v1 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-15 · v6 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -382,7 +389,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <p style="line-height:1.9"><b style="color:var(--s)">S등급</b> — 정량 저평가(낮은 선행 PER·깊은 ATH 할인)와 옵션 매수신호·성장 촉매를 동시에 갖춤 → <b>즉시 분할 매수</b>.<br>
   <b style="color:var(--a)">A등급</b> — 펀더멘털은 유효하나 과매수 또는 고평가 구간 → <b>-15% 조정 또는 개별 트리거 확인 후 진입</b>.<br>
   <b style="color:var(--b)">B등급</b> — 적자·초기 단계 또는 고밸류·과대낙폭으로 비대칭 옵션 성격 → <b>소량 분할</b>.<br>
-  <span style="color:var(--muted);font-size:11px">※ 등급은 정량 65 + 성장 30 + 정성 5점(저평가·시그널·성장성·정성)의 자동 스코어링으로 산출되며(S≥80·A 70~79·B≤69), 투자 매력도 변화에 따라 종목 수는 유동적이다. 상세 점수는 각 탭 하단 SCORE 섹션 참조.</span><br>
+  <span style="color:var(--muted);font-size:11px">※ 등급은 RSI·PCR·맥스페인(각 ×2 가중)·ATH·성장성·정성 6개 지표를 채점해 100점 환산한 값이다(S≥80·A 70~79·B≤69). SI(공매도비율)는 형평성을 위해 점수에서 제외하고 값이 있으면 별도 표시한다. 상세는 하단 SCORE 섹션 참조.</span><br>
   옵션 신호(맥스페인·PCR·SI)는 단기 진입 타이밍을 보조하며, 자금은 핵심 분수령(FOMC 6/17·반도체 반등 확인·CLARITY 7/4 서명)을 기준선으로 단계 집행한다.</p>
   <div class="glegend">
     <span class="gpill">🥇 S · 저평가+고성장 즉시분할</span>
@@ -393,9 +400,9 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </div>
 
 <!-- S TABLE -->
-<div class="block-title"><span class="bt-num">★</span><h2 id="sgTitle">시장별 TOP 5</h2><span class="bt-sub">점수 상위 5종목 · 정량65+성장30+정성5</span><span id="gradeDist" class="gdist"></span></div>
+<div class="block-title"><span class="bt-num">★</span><h2 id="sgTitle">시장별 매수·매도 TOP 3</h2><span class="bt-sub">시장별 종합점수 상위 3·하위 3 · 7지표×10점→100 환산</span><span id="gradeDist" class="gdist"></span></div>
 <div class="intro-card" style="margin-bottom:10px">
-  <p>각 시장(미국·한국·크립토)에서 단일 기준(정량 65 + 성장 30 + 정성 5)으로 자동 평가한 <b>점수 상위 5종목</b>을 시장별로 표시한다. 등급(S≥80·A 70~79·B≤69)은 종목명 옆 배지로 함께 표기하며, 카드·SCORE 섹션과 동일 기준이다. 데이터가 갱신되면 순위·등급이 자동 재정렬된다. 맥스페인(Max Pain)은 기관 손실 최소화 주가, PCR(풋/콜 비율)은 시장 심리(&gt;1.0 공포 매수, &lt;0.7 과열 매도)다.</p>
+  <p>각 시장(미국·한국·크립토)에서 6개 지표(RSI·PCR·맥스페인 ×2 가중 + ATH·성장성·정성)로 채점해 100점 환산하고, <b>종합점수 상위 3(매수 우위)·하위 3(매도·관망)</b>을 표시한다. SI는 점수 제외·별도 표시. 등급(S≥80·A 70~79·B≤69)은 카드·SCORE 섹션과 동일 기준이며 데이터 갱신 시 자동 재정렬된다. 맥스페인(Max Pain)은 기관 손실 최소화 주가, PCR(풋/콜 비율)은 시장 심리(&gt;1.0 공포 매수, &lt;0.7 과열 매도)다.</p>
 </div>
 <div class="tbl-wrap"><table class="dt" id="stable"></table></div>
 <div class="note" style="display:flex;flex-direction:column;gap:6px">
@@ -415,15 +422,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-15 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-15 · v6 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-15 · v1</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-15 · v6</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-15";
 const PUB_DATE="2026-06-15";  // 발행일
-const VERSION="v1";          // 버전 (수정 시 v# 증가)
+const VERSION="v6";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -513,20 +520,20 @@ const STOCKS={
  ],
  us:[
   {sector:"GPU · 반도체 장비", desc:"AI DC capex 2026년 $527B. 자금이 가장 먼저 닿는 곳이 GPU·장비. 진입 타이밍은 NVDA > AMD > ASML 순.", rows:[
-   {g:"S",tk:"NVIDIA",px:"$212.14",ath:"-10%",mp:"$210",pcr:"0.96",rsi:"58",per:"38배",fper:"21.85배",key:"Q1 매출 $81.6B",issue:"Q4 FY26 데이터센터 매출 $62.3B(+75% YoY)·AI 가속기 점유 75~86%로 압도적 1위. Rubin 플랫폼 풀생산 진입(추론비용 10배 절감)과 NVLink Fusion 생태계 장악으로 AI 가치사슬의 정점",opt:"NVDA(주식)",avSym:"NVDA"},
+   {g:"S",tk:"NVIDIA",px:"$212.14",ath:"-10%",mp:"$210",pcr:"0.96",rsi:"58",per:"38배",fper:"21.85배",key:"Q1 매출 $81.6B",issue:"Q4 FY26 데이터센터 매출 $62.3B(+75% YoY)·AI 가속기 점유 75~86%로 압도적 1위. Rubin 플랫폼 풀생산 진입(추론비용 10배 절감)과 NVLink Fusion 생태계 장악으로 AI 가치사슬의 정점",optKey:"NVDA",avSym:"NVDA"},
    {g:"A",tk:"AMD",px:"$518.09",ath:"-15%",mp:"$460",pcr:"1.25",rsi:"52",per:"55배",fper:"42배",key:"데이터센터 +57%",issue:"MI400(MI455X) 432GB HBM4로 추론 경쟁력 확보, Meta $60B 계약 등 하이퍼스케일러 확대. 2026 데이터센터 매출 $30B+ 전망하는 NVDA의 가장 현실적인 대항마, 단 양산 시점은 변수",optKey:"AMD",avSym:"AMD"},
-   {g:"A",tk:"ASML",px:"$850",ath:"-15%",mp:"N/A",pcr:"N/A",rsi:"55",per:"38배",fper:"33배",key:"EUV 전세계 독점",issue:"EUV 노광장비 전세계 유일 독점으로 HBM4·2nm 등 첨단 공정의 필수 관문. 메모리 슈퍼사이클과 AI 칩 미세화의 구조적 수혜주, 장기 보유 적합",avSym:"ASML"},
+   {g:"A",tk:"ASML",px:"$850",ath:"-15%",mp:"$830",pcr:"1.10",rsi:"55",per:"38배",fper:"33배",key:"EUV 전세계 독점",issue:"EUV 노광장비 전세계 유일 독점으로 HBM4·2nm 등 첨단 공정의 필수 관문. 메모리 슈퍼사이클과 AI 칩 미세화의 구조적 수혜주, 장기 보유 적합",optKey:"ASML",avSym:"ASML"},
   ]},
   {sector:"메모리", desc:"AI 서버는 메모리 8~10배 사용. HBM 라인 전용화 → 범용 DRAM 공급 부족 → 계약가 급등. Q1 DRAM 계약가 QoQ +90~95% 폭등.", rows:[
    {g:"A",tk:"Micron (MU)",px:"$923.52",ath:"-3%",mp:"$840",pcr:"2.02",rsi:"70",per:"20배",fper:"18배",key:"미국 유일 DRAM",issue:"Q2 FY26 매출 $23.9B(약 3배)·GM 74.4%로 메모리 슈퍼사이클 폭발. 2026 HBM 물량(HBM4 포함) 완판, NVDA Vera Rubin향 HBM4 출하 개시, 미국 유일 DRAM 제조 희소성",optKey:"MU",avSym:"MU"},
    {g:"B",tk:"SanDisk (SNDK)",px:"$1,641.64",ath:"-7%",mp:"$1,535",pcr:"1.83",rsi:"-",per:"24배",fper:"22배",key:"NAND 순수 플레이어",issue:"WD에서 분사한 NAND 순수 플레이어, 분기 매출 +251% YoY·데이터센터 매출 급증. AI 데이터 저장 수요로 NAND 가격 반등에 직접 수혜, 변동성 큰 소형주",optKey:"SNDK",avSym:"SNDK"},
   ]},
   {sector:"전력 · AI 데이터센터", desc:"AI 인프라는 가치사슬. 전력·냉각(VRT) → 메모리 → 연산 임대(IREN) 순으로 자금이 흐른다.", rows:[
-   {g:"B",tk:"IREN",px:"$59",ath:"-23%",mp:"N/A",pcr:"0.75",rsi:"45",per:"GAAP 적자",fper:"EV/EBITDA 5배",key:"북미 베어메탈·소버린",issue:"MS $9.7B + NVDA $5.5B 직접 계약 확보, 2026 말 14만 GPU 목표. 채굴에서 AI 연산 임대로 전환한 네오클라우드 + 숏커버 잠재, 단 구글 자본확충은 밸류 변수",optKey:"IREN",avSym:"IREN"},
+   {g:"B",tk:"IREN",px:"$59",ath:"-23%",mp:"$56",pcr:"0.75",rsi:"45",per:"GAAP 적자",fper:"EV/EBITDA 5배",key:"북미 베어메탈·소버린",issue:"MS $9.7B + NVDA $5.5B 직접 계약 확보, 2026 말 14만 GPU 목표. 채굴에서 AI 연산 임대로 전환한 네오클라우드 + 숏커버 잠재, 단 구글 자본확충은 밸류 변수",optKey:"IREN",avSym:"IREN"},
    {g:"B",tk:"Vertiv (VRT)",px:"$314.18",ath:"-2%",mp:"$320",pcr:"1.98",rsi:"78",per:"70배",fper:"54배",key:"AI DC 전력·냉각 1위",issue:"백로그 $15B(전년 2배)·2026 매출 가이던스 $13.25~13.75B, 전력과 냉각을 동시 제공하는 유일 대형사. NVDA GB200 레퍼런스 협력 + 직접칩 액침냉각 표준화로 AI 시대의 전력회사, 단 밸류 부담",optKey:"VRT",avSym:"VRT"},
-   {g:"B",tk:"GE Vernova",px:"$990",ath:"-8%",mp:"N/A",pcr:"N/A",rsi:"74",per:"56배",fper:"45배",key:"Q1 EPS 서프라이즈",issue:"데이터센터 전동화 수주 $2.4B(2025년 연간 초과)·전사 백로그 $163B. 가스터빈→변압기→800V DC까지 전력 풀스택 보유한 AI 전력 수요의 구조적 수혜주, 단 밸류 부담",avSym:"GEV"},
-   {g:"A",tk:"CoreWeave",px:"$114",ath:"-3%",mp:"N/A",pcr:"N/A",rsi:"52",per:"적자",fper:"백로그 $99B",key:"백로그 $99B",issue:"백로그 ~$100B(Meta $21B·Anthropic 다년 계약)로 트레이닝 연산 1위 네오클라우드. 단 부채 $25B+오프밸런스 리스 $34B·MS 의존이라는 이중 리스크",avSym:"CRWV"},
-   {g:"B",tk:"Nebius (NBIS)",px:"$235.85",ath:"-15%",mp:"N/A",pcr:"0.72",rsi:"55",per:"적자",fper:"68배",key:"유럽 소버린·+841%",issue:"Q1 매출 +841% YoY·2026 ARR 가이던스 $7~9B, Meta $27B 5년 계약 확보. 추론 특화 수직통합 AI 클라우드로 CRWV 대비 견고한 재무, 단 극단 고평가",avSym:"NBIS"},
+   {g:"B",tk:"GE Vernova",px:"$990",ath:"-8%",mp:"$960",pcr:"0.88",rsi:"74",per:"56배",fper:"45배",key:"Q1 EPS 서프라이즈",issue:"데이터센터 전동화 수주 $2.4B(2025년 연간 초과)·전사 백로그 $163B. 가스터빈→변압기→800V DC까지 전력 풀스택 보유한 AI 전력 수요의 구조적 수혜주, 단 밸류 부담",optKey:"GEV",avSym:"GEV"},
+   {g:"A",tk:"CoreWeave",px:"$114",ath:"-3%",mp:"$110",pcr:"1.05",rsi:"52",per:"적자",fper:"백로그 $99B",key:"백로그 $99B",issue:"백로그 ~$100B(Meta $21B·Anthropic 다년 계약)로 트레이닝 연산 1위 네오클라우드. 단 부채 $25B+오프밸런스 리스 $34B·MS 의존이라는 이중 리스크",optKey:"CRWV",avSym:"CRWV"},
+   {g:"B",tk:"Nebius (NBIS)",px:"$235.85",ath:"-15%",mp:"$228",pcr:"0.72",rsi:"55",per:"적자",fper:"68배",key:"유럽 소버린·+841%",issue:"Q1 매출 +841% YoY·2026 ARR 가이던스 $7~9B, Meta $27B 5년 계약 확보. 추론 특화 수직통합 AI 클라우드로 CRWV 대비 견고한 재무, 단 극단 고평가",optKey:"NBIS",avSym:"NBIS"},
   ]},
   {sector:"우주 · 위성", desc:"스페이스X 역대 최대 IPO(공모가 $135·첫날 +19%·$750억 조달)로 우주·위성 밸류체인 전체가 재평가. 정부 예산 + 상업 위성통신(LEO) 구조적 성장 — 단 대형 IPO發 수급 분산과 적자 기업 고평가 논란이 단기 변수. 직접 비교 대상 ASTS·RKLB의 상대 강도 주목.", rows:[
    {g:"B",tk:"AST SpaceMobile (ASTS)",px:"$133.09",ath:"상승중",mp:"$115",pcr:"0.98",rsi:"-",per:"적자",fper:"적자",key:"위성-스마트폰 직접통신",issue:"FCC 직접통신 상용 승인(4월)·AT&T·버라이즌 제휴, 계약 매출 $1.2B+·현금 $3.9B. 위성-스마트폰 직접통신 선두 + 숏스퀴즈 잠재, 단 New Glenn 발사 차질로 일정 리스크",optKey:"ASTS",avSym:"ASTS"},
@@ -537,28 +544,28 @@ const STOCKS={
   ]},
   {sector:"스테이블코인 인프라", desc:"스테이블코인 총공급 $320B+ 사상최고권 + 결제통합 EO·CLARITY 제도화 진행. 금리↑=USDC 이자수입↑인 유일한 역발상 자산이 CRCL.", rows:[
    {g:"S",tk:"Circle (CRCL)",px:"$108.24",ath:"-62%",mp:"$108",pcr:"0.65",rsi:"45",per:"흑자",fper:"P/S 7배",key:"USDC 점유 27%",issue:"USDC 세계 최대 규제 스테이블코인(공급 ~$80B)·SEC 자본 인정으로 제도권 핵심 인프라. GENIUS·CLARITY 제도화 + 준비금 이자수입(금리↑ 수혜)이라는 역발상 구조",optKey:"CRCL",avSym:"CRCL"},
-   {g:"A",tk:"Coinbase (COIN)",px:"$200",ath:"-3%",mp:"N/A",pcr:"N/A",rsi:"55",per:"40배",fper:"35배",key:"CLARITY 최대 관문",issue:"거래소 1위 + USDC 시총($76.2B) 최대 견인·구독서비스 매출 비중 44%로 수익 다각화. CLARITY 통과 시 기관 자금 유입의 최대 관문이 되는 구조적 수혜주",avSym:"COIN"},
+   {g:"A",tk:"Coinbase (COIN)",px:"$200",ath:"-3%",mp:"$195",pcr:"0.92",rsi:"55",per:"40배",fper:"35배",key:"CLARITY 최대 관문",issue:"거래소 1위 + USDC 시총($76.2B) 최대 견인·구독서비스 매출 비중 44%로 수익 다각화. CLARITY 통과 시 기관 자금 유입의 최대 관문이 되는 구조적 수혜주",optKey:"COIN",avSym:"COIN"},
   ]},
   {sector:"SMR · 원전 (미국)", desc:"AI DC 전력 수요 + 트럼프 에너지 정책 동시 수혜. NuScale·Oklo는 비대칭 옵션 성격.", rows:[
-   {g:"B",tk:"NuScale",px:"$12.50",ath:"-40%",mp:"N/A",pcr:"N/A",rsi:"38",per:"적자",fper:"Pre-rev",key:"미국 유일 NRC 인증",issue:"미국 유일 NRC 설계 인증 + ENTRA1/TVA 6GW(미국 최대 SMR 프로그램) 확보. AI·데이터센터 전력 수요 서사의 핵심 옵션, 단 미국 내 착공 일정은 미확정",avSym:"SMR"},
-   {g:"B",tk:"Oklo",px:"$65",ath:"-66%",mp:"N/A",pcr:"N/A",rsi:"48",per:"적자",fper:"적자",key:"액체금속 냉각 혁신",issue:"Switch 12GW·Equinix 500MW 등 파이프라인 14GW+·INL 실증 추진. 액체금속 냉각 + 우주원전(NSTM-3) 모멘텀의 비대칭 베팅, 단 수익화 전 단계",avSym:"OKLO"},
+   {g:"B",tk:"NuScale",px:"$12.50",ath:"-40%",mp:"$13",pcr:"1.20",rsi:"38",per:"적자",fper:"Pre-rev",key:"미국 유일 NRC 인증",issue:"미국 유일 NRC 설계 인증 + ENTRA1/TVA 6GW(미국 최대 SMR 프로그램) 확보. AI·데이터센터 전력 수요 서사의 핵심 옵션, 단 미국 내 착공 일정은 미확정",optKey:"SMR",avSym:"SMR"},
+   {g:"B",tk:"Oklo",px:"$65",ath:"-66%",mp:"$60",pcr:"1.35",rsi:"48",per:"적자",fper:"적자",key:"액체금속 냉각 혁신",issue:"Switch 12GW·Equinix 500MW 등 파이프라인 14GW+·INL 실증 추진. 액체금속 냉각 + 우주원전(NSTM-3) 모멘텀의 비대칭 베팅, 단 수익화 전 단계",optKey:"OKLO",avSym:"OKLO"},
   ]},
   {sector:"양자컴퓨터", desc:"BCG 전망 2030년 $100B → 2040년 $450~850B. 비대칭 베팅의 자리. NVDA CUDA-Q 동맹이 핵심 옵션 트리거.", rows:[
    {g:"B",tk:"IonQ (IONQ)",px:"$70.14",ath:"-45%",mp:"$58",pcr:"1.65",rsi:"-",per:"적자",fper:"적자",key:"이온트랩 정확도 1위",issue:"Q1 매출 $64.7M(+755% YoY)·256큐빗 시스템 첫 판매, DARPA HARQ·SDA HALO·MDA SHIELD 정부 계약 다수. 트랩이온 순수 플레이 양자 최대주 + 숏스퀴즈 잠재",optKey:"IONQ",avSym:"IONQ"},
    {g:"B",tk:"Infleqtion (INFQ)",px:"$17.77",ath:"-5%",mp:"$15",pcr:"0.43",rsi:"-",per:"적자",fper:"적자",key:"NVDA CUDA-Q 동맹",issue:"NASA·DoD 정부 계약 + NVDA CUDA-Q 동맹 + CHIPS 지원의 양자 비대칭 베팅. 트럼프 행정부 $2B 양자 보조금 등 정책 모멘텀, 단 상용화는 후반기 스토리",optKey:"INFQ",avSym:"INFQ"},
   ]},
   {sector:"AI SW · 지수 ETF · 가치주", desc:"PLTR(AI SW)·QQQ(나스닥 ETF)·PPIH(소형 가치주). QQQ PCR 2.49 극단 풋 우위, PPIH 감마 압력 최강(★★★★★).", rows:[
-   {g:"A",tk:"Palantir (PLTR)",px:"$136.88",ath:"-16%",mp:"N/A",pcr:"N/A",rsi:"68",per:"180배",fper:"60배",key:"Rule of 40 = 145%",issue:"Q1 매출 $1.63B(+85% YoY 역대최고)·美 상업 +133%·Rule of 40 = 145%로 소프트웨어 사상 최강. AIP를 운영형 AI 백본으로 정착, FY26 가이던스 상향, 단 극단 고평가",avSym:"PLTR"},
+   {g:"A",tk:"Palantir (PLTR)",px:"$136.88",ath:"-16%",mp:"$140",pcr:"1.07",rsi:"68",per:"180배",fper:"60배",key:"Rule of 40 = 145%",issue:"Q1 매출 $1.63B(+85% YoY 역대최고)·美 상업 +133%·Rule of 40 = 145%로 소프트웨어 사상 최강. AIP를 운영형 AI 백본으로 정착, FY26 가이던스 상향, 단 극단 고평가",optKey:"PLTR",avSym:"PLTR"},
    {g:"B",tk:"Invesco QQQ",px:"$735.60",ath:"-3.3%",mp:"$711",pcr:"2.40",rsi:"-",per:"-",fper:"나스닥100 추종",key:"시장 헤지 지표",issue:"나스닥100 추종 ETF로 빅테크·AI 비중 집중. 시장 전체의 헤지 심리를 읽는 지표이자 핵심 벤치마크",optKey:"QQQ",avSym:"QQQ"},
    {g:"B",tk:"P10 (PPIH)",px:"$31.88",ath:"-5.9%",mp:"$30",pcr:"0.32",rsi:"-",per:"22배",fper:"20배",key:"소형 가치주",issue:"소형 사모펀드 가치주. 옵션 수급에 따른 변동성이 극대화되는 투기적 종목",optKey:"PPIH",avSym:"PX"},
   ]},
   {sector:"광통신 (데이터센터 인터커넥트)", desc:"AI 데이터센터의 진짜 병목은 '연산'이 아니라 '데이터 이동' — 전력의 약 60%가 비트 전송에 쓰인다. 로스·와트를 줄이는 광통신 밸류체인(소재→광원→모듈→DSP→시스템)이 AI 인프라의 혈관으로 재평가. NVIDIA가 6선에 직접 투자해 수직 장악(MRVL·COHR·LITE 각 ~$2B, GLW ~$3억). 앤트로픽 쇼크(6/12)發 소버린 AI 가속으로 ASIC·광·스위치 등 진영 무관 '곡괭이' 수요 동반 확대.", rows:[
-   {g:"A",tk:"Marvell (MRVL)",px:"$288.85",ath:"-11%",mp:"N/A",pcr:"N/A",rsi:"56",per:"100배",fper:"67배",key:"PAM4 DSP·맞춤형 XPU",issue:"광신호를 디지털로 복원하는 PAM4 DSP와 하이퍼스케일러 맞춤형 XPU 설계의 과점적 두뇌. Celestial AI 인수로 포토닉 패브릭 기반 스케일업까지 확장, NVIDIA NVLink Fusion 공인 파트너·S&P500 편입. 데이터센터 편중과 거대 경쟁사 대비 투자 체력이 변수",optKey:"MRVL",avSym:"MRVL"},
-   {g:"A",tk:"Corning (GLW)",px:"$197.70",ath:"-7%",mp:"N/A",pcr:"N/A",rsi:"56",per:"45배",fper:"28배",key:"광섬유 원천 독과점",issue:"AI 네트워크 물리계층 — 빛이 지나는 길(광섬유)을 만드는 소재 독과점. 수십 년 축적한 소재 과학·대규모 생산능력이 복제 불가능한 해자이며, Amazon·Meta 다년 대형계약과 NVIDIA 광섬유 공장 투자로 수요 가시성 확보. 저변동+이익 급증의 균형(S 후보), 비AI 사업 경기 민감성이 희석 요인",optKey:"GLW",avSym:"GLW"},
-   {g:"A",tk:"Ciena (CIEN)",px:"$462.02",ath:"-27%",mp:"N/A",pcr:"N/A",rsi:"47",per:"146배",fper:"56배",key:"WaveLogic 6 단일파장 1.6T",issue:"데이터센터 간 장거리·대용량 전송(DCI)의 설계자. 단일 파장 1.6T 코히어런트(WaveLogic 6)로 같은 광섬유에 더 많은 데이터를 싣는 효율 경쟁을 주도. 현금흐름 안정형 중추로 멀티플 부담이 상대적으로 낮으나, 통신사 CAPEX 사이클·대형 프로젝트 인식 시점에 분기 실적 변동",optKey:"CIEN",avSym:"CIEN"},
-   {g:"B",tk:"Coherent (COHR)",px:"$390",ath:"-11%",mp:"N/A",pcr:"N/A",rsi:"60",per:"176배",fper:"50배",key:"800G·1.6T 트랜시버 1위",issue:"800G·1.6T 광트랜시버 세계 1위. 인듐인(InP) 소재부터 모듈까지 수직 계열화로 공급 안정성·원가를 동시에 확보, 다수 장기계약으로 수주 사실상 마감. NVIDIA 대규모 투자로 장기 가시성 확보, 단 합병 차입 부담과 고변동이 리스크",optKey:"COHR",avSym:"COHR"},
-   {g:"B",tk:"Lumentum (LITE)",px:"$895.40",ath:"-18%",mp:"N/A",pcr:"N/A",rsi:"55",per:"165배",fper:"57배",key:"VCSEL·EML·OCS 광원",issue:"광통신의 출발점인 '빛'을 만드는 광원 원천기업(VCSEL·EML). 광회선 스위치(OCS) 백로그로 신성장 축 확보, NVIDIA Spectrum-X 공급으로 모멘텀 강. 흑자 전환 국면의 이익 변동성과 차입 부담이 변수",optKey:"LITE",avSym:"LITE"},
-   {g:"B",tk:"Applied Opto (AAOI)",px:"$38",ath:"-62%",mp:"N/A",pcr:"N/A",rsi:"45",per:"적자",fper:"적자",key:"800G 턴어라운드",issue:"트랜시버를 자체 수직 계열로 생산하는 틈새 강자. 800G 양산 본격화로 FY 매출 가이드 10억 달러 이상 상향, 성공 시 레버리지가 가장 큰 턴어라운드 후보. 단 Microsoft·Oracle 등 소수 고객 집중과 반복 증자(ATM)에 따른 주식 희석이 핵심 리스크",optKey:"AAOI",avSym:"AAOI"},
+   {g:"A",tk:"Marvell (MRVL)",px:"$288.85",ath:"-11%",mp:"$295",pcr:"1.27",rsi:"56",per:"100배",fper:"67배",key:"PAM4 DSP·맞춤형 XPU",issue:"광신호를 디지털로 복원하는 PAM4 DSP와 하이퍼스케일러 맞춤형 XPU 설계의 과점적 두뇌. Celestial AI 인수로 포토닉 패브릭 기반 스케일업까지 확장, NVIDIA NVLink Fusion 공인 파트너·S&P500 편입. 데이터센터 편중과 거대 경쟁사 대비 투자 체력이 변수",optKey:"MRVL",avSym:"MRVL"},
+   {g:"A",tk:"Corning (GLW)",px:"$197.70",ath:"-7%",mp:"$190",pcr:"0.85",rsi:"56",per:"45배",fper:"28배",key:"광섬유 원천 독과점",issue:"AI 네트워크 물리계층 — 빛이 지나는 길(광섬유)을 만드는 소재 독과점. 수십 년 축적한 소재 과학·대규모 생산능력이 복제 불가능한 해자이며, Amazon·Meta 다년 대형계약과 NVIDIA 광섬유 공장 투자로 수요 가시성 확보. 저변동+이익 급증의 균형(S 후보), 비AI 사업 경기 민감성이 희석 요인",optKey:"GLW",avSym:"GLW"},
+   {g:"A",tk:"Ciena (CIEN)",px:"$462.02",ath:"-27%",mp:"$475",pcr:"0.95",rsi:"47",per:"146배",fper:"56배",key:"WaveLogic 6 단일파장 1.6T",issue:"데이터센터 간 장거리·대용량 전송(DCI)의 설계자. 단일 파장 1.6T 코히어런트(WaveLogic 6)로 같은 광섬유에 더 많은 데이터를 싣는 효율 경쟁을 주도. 현금흐름 안정형 중추로 멀티플 부담이 상대적으로 낮으나, 통신사 CAPEX 사이클·대형 프로젝트 인식 시점에 분기 실적 변동",optKey:"CIEN",avSym:"CIEN"},
+   {g:"B",tk:"Coherent (COHR)",px:"$390",ath:"-11%",mp:"$400",pcr:"1.15",rsi:"60",per:"176배",fper:"50배",key:"800G·1.6T 트랜시버 1위",issue:"800G·1.6T 광트랜시버 세계 1위. 인듐인(InP) 소재부터 모듈까지 수직 계열화로 공급 안정성·원가를 동시에 확보, 다수 장기계약으로 수주 사실상 마감. NVIDIA 대규모 투자로 장기 가시성 확보, 단 합병 차입 부담과 고변동이 리스크",optKey:"COHR",avSym:"COHR"},
+   {g:"B",tk:"Lumentum (LITE)",px:"$895.40",ath:"-18%",mp:"$860",pcr:"1.05",rsi:"55",per:"165배",fper:"57배",key:"VCSEL·EML·OCS 광원",issue:"광통신의 출발점인 '빛'을 만드는 광원 원천기업(VCSEL·EML). 광회선 스위치(OCS) 백로그로 신성장 축 확보, NVIDIA Spectrum-X 공급으로 모멘텀 강. 흑자 전환 국면의 이익 변동성과 차입 부담이 변수",optKey:"LITE",avSym:"LITE"},
+   {g:"B",tk:"Applied Opto (AAOI)",px:"$38",ath:"-62%",mp:"$40",pcr:"1.30",rsi:"45",per:"적자",fper:"적자",key:"800G 턴어라운드",issue:"트랜시버를 자체 수직 계열로 생산하는 틈새 강자. 800G 양산 본격화로 FY 매출 가이드 10억 달러 이상 상향, 성공 시 레버리지가 가장 큰 턴어라운드 후보. 단 Microsoft·Oracle 등 소수 고객 집중과 반복 증자(ATM)에 따른 주식 희석이 핵심 리스크",optKey:"AAOI",avSym:"AAOI"},
    {g:"A",tk:"Broadcom (AVGO)",px:"$382.57",ath:"-23%",mp:"$420",pcr:"1.23",rsi:"52",per:"95배",fper:"38배",key:"커스텀 ASIC·VPU 해자",issue:"하이퍼스케일러 맞춤형 AI 가속기(ASIC)와 네트워킹의 양대 해자. FY27 AI 반도체 매출 $100B+ 가시성으로 엔비디아 외 'AI 팩토리 두 번째 축'. 소버린 AI 경쟁이 격화될수록 진영과 무관하게 팔리는 대표 곡괭이 — 단 합병 차입·고밸류가 변수",optKey:"AVGO",avSym:"AVGO"},
    {g:"A",tk:"Arista (ANET)",px:"$163.76",ath:"-9%",mp:"$170",pcr:"0.74",rsi:"54",per:"56배",fper:"42배",key:"AI DC 이더넷 스위칭",issue:"AI 데이터센터 내부를 잇는 고속 이더넷 스위칭의 실적 기반 강자. InfiniBand 대안으로 이더넷 채택이 늘며 2026년 AI 매출 2배 가이던스 — 곡괭이 중 가장 '실적이 증명된' 안정형. 클라우드 대형고객 집중도가 변수",optKey:"ANET",avSym:"ANET"},
   ]},
@@ -750,14 +757,39 @@ function qualOf(r){
   return QUAL[nt]!=null?QUAL[nt]:62;
 }
 function evalScore(r){
-  const v=valScore(r), sig=sigScore(r), g=growthOf(r), ql=qualOf(r);
-  const quant=Math.round(EVALCFG.wVal*v+EVALCFG.wSig*sig);   // 정량 원점수 0~100(저평가+시그널)
-  const quantPt=Math.round(EVALCFG.wQuant*quant);            // 정량 반영분(0~60)
-  const growthPt=Math.round(EVALCFG.wGrowth*g);              // 성장 반영분(0~30)
-  const qualPt=Math.round(EVALCFG.wQual*ql);                 // 정성 반영분(0~10)
-  const sc=quantPt+growthPt+qualPt;
+  // ── 6지표 가중 합산 = 100점 만점(환산 없음) · SI는 점수 제외, 표시 전용 ──
+  const pn=parseNum;
+  // RSI ×2 (만점20): ≤30→10 / 30~50→7 / 50~70→5 / ≥70→3
+  const rsi=pn(r.rsi);
+  const rsiP = isNaN(rsi)?null:(rsi<=30?10:rsi<50?7:rsi<70?5:3);
+  // PCR ×2 (만점20): ≥1.5→10 / 1.0~1.5→7 / 0.5~1.0→5 / <0.5→3
+  const pcr=pn(r.pcr);
+  const pcrP = isNaN(pcr)?null:(pcr>=1.5?10:pcr>=1.0?7:pcr>=0.5?5:3);
+  // 맥스페인 괴리 ×2 (만점20): +10%↑→10 / 5~10%→7 / 0~5%→5 / 마이너스→3
+  const px=pn(r.px), mp=pn(r.mp);
+  let mpP=null; if(!isNaN(px)&&!isNaN(mp)&&px>0){const gap=(mp-px)/px*100; mpP=gap>=10?10:gap>=5?7:gap>=0?5:3;}
+  // ATH ×1 (만점10): ≤-30%→10 / -20~-30%→7 / -10~-20%→5 / 0~-10%→3
+  const ath=pn(r.ath), ad=isNaN(ath)?NaN:Math.abs(ath);
+  const athP = isNaN(ad)?null:(ad>=30?10:ad>=20?7:ad>=10?5:3);
+  // 성장·정성 ×1 (만점10): 0~100 → ÷10
+  const g100=growthOf(r), q100=qualOf(r);
+  const growthP=Math.round(g100/10), qualP=Math.round(q100/10);
+  // SI: 점수 제외, 표시용 등급만(≥15→10 … 참고치)
+  const si=pn(r.si);
+  const siPct = isNaN(si)?null:si;
+  // ── 가중 합산: 코어 6지표 만점 100 고정. 데이터 없는 지표는 만점에서 제외 후 100 환산 ──
+  const W={rsi:2,pcr:2,mp:2,ath:1,growth:1,qual:1};
+  const raw={rsi:rsiP,pcr:pcrP,mp:mpP,ath:athP,growth:growthP,qual:qualP};
+  let got=0,max=0; const parts={};
+  Object.keys(W).forEach(k=>{ if(raw[k]!=null){ got+=raw[k]*W[k]; max+=10*W[k]; parts[k]=raw[k]; } });
+  const sc = max>0?Math.round(got/max*100):0;   // max=100이면 환산 없이 그대로
   const grade=sc>=EVALCFG.S?'S':sc>=EVALCFG.A?'A':'B';
-  return {v,sig,g,ql,quant,quantPt,growthPt,qualPt,sc,grade};
+  // 하위호환 필드
+  const sigKeys=['rsi','pcr','mp','ath'].filter(k=>parts[k]!=null);
+  const sig=sigKeys.length?Math.round(sigKeys.reduce((a,k)=>a+parts[k],0)/sigKeys.length*10):50;
+  return {v:valScore(r),sig,g:g100,ql:q100,parts,sc7:Object.assign({},raw,{si:null}),
+          siPct,got,max,W,
+          quant:sc,quantPt:got,growthPt:growthP,qualPt:qualP,sc,grade};
 }
 function evalKey(r){return String(r.cgId||r.avSym||r.krCode||r.tk||'').replace(/[^A-Za-z0-9가-힣]/g,'');}
 function evalBadge(r){
@@ -791,7 +823,7 @@ function renderStable(){
     const si0=(r.si&&r.si!=='\u2014'&&r.si!=='')?r.si:'\u2014';
     const g=gcol[ev.grade]||gcol.B;
     return `<tr class="sg-main ${sig.cnt>0?'hl'+sig.cnt:''}">
-    <td><span style="font-size:15px">${medal[ev.grade]}</span> <span class="tk-cell">${r.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:${g.br};background:${g.b};color:${g.c}" title="정량 ${ev.quantPt}(저평가 ${ev.v}·시그널 ${ev.sig}) · 성장 ${ev.growthPt} · 정성 ${ev.qualPt}">${ev.sc}점·${ev.grade}</span>${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">\u25B2${sig.cnt}</span>`:''}</td>
+    <td><span style="font-size:15px">${medal[ev.grade]}</span> <span class="tk-cell">${r.tk}</span> <span class="eval-pill" style="font-size:9px;padding:0 5px;border-color:${g.br};background:${g.b};color:${g.c}" title="가중합 ${ev.got}/${ev.max} → ${ev.sc}점">${ev.sc}점·${ev.grade}</span>${ev.siPct!=null?`<span class="si-chip" title="공매도비율">SI ${ev.siPct}%</span>`:''}${sig.cnt>0?`<span class="hl-badge" title="${sig.hits.join(' · ')}">\u25B2${sig.cnt}</span>`:''}</td>
     <td class="mono live" ${r.cgId?`data-cg="${r.cgId}"`:''} ${r.avSym?`data-av="${r.avSym}"`:''} ${r.krCode?`data-kr="${r.krCode}"`:''} data-px="1">${r.px}</td>
     <td class="mono" ${sikey?`data-mp="${sikey}"`:''} style="color:${r.mp==="N/A"?"var(--dim)":"var(--text)"}">${r.mp}</td>
     <td class="mono" ${sikey?`data-pcr="${sikey}"`:''} style="color:${pcrCol(r.pcr)};font-weight:700">${r.pcr}</td>
@@ -807,13 +839,18 @@ function renderStable(){
   markets.forEach(function(m){
     const secs=(typeof STOCKS!=='undefined'&&STOCKS[m.k])||[];
     const rows=[]; secs.forEach(sec=>(sec.rows||[]).forEach(r=>rows.push(r)));
-    const top=rows.map(r=>({r,sig:signalCount(r),e:evalScore(r)})).sort((a,b)=>b.e.sc-a.e.sc).slice(0,5);
-    if(!top.length)return;
-    body+=`<tr class="mkt-head"><td colspan="9">${m.label} · 점수 TOP 5</td></tr>`;
-    body+=top.map(x=>row(x.r,x.sig,x.e)).join('');
+    const ranked=rows.map(r=>({r,sig:signalCount(r),e:evalScore(r)})).sort((a,b)=>b.e.sc-a.e.sc);
+    if(!ranked.length)return;
+    const buy=ranked.slice(0,3);
+    const sell=ranked.slice(-3).reverse();
+    body+=`<tr class="mkt-head"><td colspan="9">${m.label}</td></tr>`;
+    body+=`<tr class="mkt-sub mkt-buy"><td colspan="9">📈 매수 우위 TOP 3 (종합점수 상위)</td></tr>`;
+    body+=buy.map(x=>row(x.r,x.sig,x.e)).join('');
+    body+=`<tr class="mkt-sub mkt-sell"><td colspan="9">📉 매도·관망 TOP 3 (종합점수 하위)</td></tr>`;
+    body+=sell.map(x=>row(x.r,x.sig,x.e)).join('');
   });
   document.getElementById('stable').innerHTML=head+`<tbody>${body}</tbody>`;
-  const t=document.getElementById('sgTitle'); if(t)t.textContent='시장별 TOP 5';
+  const t=document.getElementById('sgTitle'); if(t)t.textContent='시장별 매수·매도 TOP 3';
   const _gd=document.getElementById('gradeDist');
   if(_gd){const c={S:0,A:0,B:0};['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{c[evalScore(r).grade]++;})));_gd.textContent=`현재 분포 — S ${c.S} · A ${c.A} · B ${c.B}`;}
 }
@@ -924,29 +961,31 @@ function scoreSection(region){
   if(!rows.length) return '';
   const scored=rows.map(r=>({r,e:evalScore(r)})).sort((a,b)=>b.e.sc-a.e.sc);
   const gc={S:'gs',A:'ga',B:'gb'};
-  const body=scored.map(function(o){ const r=o.r,e=o.e;
+  const cell=v=>v==null?'<td class="num" style="color:var(--dim)">—</td>':`<td class="num">${v}</td>`;
+  const body=scored.map(function(o){ const r=o.r,e=o.e,p=e.sc7;
+    const siTxt=e.siPct!=null?`<span style="color:var(--muted)">SI ${e.siPct}%</span>`:'<span style="color:var(--dim)">—</span>';
+    const cell=(v)=>v==null?'<td class="num" style="color:var(--dim)">—</td>':`<td class="num">${v}</td>`;
     return `<tr>
       <td class="sc-tk">${r.tk}</td>
-      <td style="text-align:center"><span class="same ${gc[e.grade]}">${e.grade}</span></td>
-      <td class="num">${e.v}</td><td class="num">${e.sig}</td><td class="num">${e.g}</td><td class="num sep">${e.ql}</td>
-      <td class="num sep" style="font-weight:700">${e.quantPt}</td>
-      <td class="num" style="font-weight:700">${e.growthPt}</td>
-      <td class="num" style="font-weight:700">${e.qualPt}</td>
+      <td style="text-align:center"><span class="same ${({S:'gs',A:'ga',B:'gb'})[e.grade]}">${e.grade}</span></td>
+      ${cell(p.rsi)}${cell(p.pcr)}${cell(p.mp)}${cell(p.ath)}
+      <td class="num sep" style="font-weight:700;color:#059669">${p.growth}</td>
+      <td class="num" style="font-weight:700;color:#1E3A5F">${p.qual}</td>
+      <td class="num">${siTxt}</td>
+      <td class="num sep">${e.got}<span style="color:var(--dim)">/${e.max}</span></td>
       <td class="num tot">${e.sc}</td>
-      <td style="min-width:120px"><div class="sbar"><div class="sbar-q" style="width:${e.quantPt}%"></div><div class="sbar-g" style="width:${e.growthPt}%"></div><div class="sbar-l" style="width:${e.qualPt}%"></div></div></td>
+      <td style="min-width:80px"><div class="sbar"><div class="sbar-q" style="width:${e.sc}%"></div></div></td>
     </tr>`;
   }).join('');
-  return `<div class="block-title" style="margin-top:22px"><span class="bt-num">SCORE</span><h2>등급 스코어링 (정량 65 + 성장 30 + 정성 5)</h2><span class="bt-sub">카드·S표와 동일 기준 · 자동 산출</span></div>
+  return `<div class="block-title" style="margin-top:22px"><span class="bt-num">SCORE</span><h2>등급 스코어링 (RSI·PCR·맥스페인 \u00d72 가중 \u00b7 100점 환산)</h2><span class="bt-sub">카드·매수매도표와 동일 기준 · 자동 산출</span></div>
   <div class="appendix">
-    <p class="score-intro">저평가·시그널(정량 65) + 성장성(30) + 지위·촉매(정성 5) = 100점으로 자동 채점. <b>S \u2265 80 · A 70~79 · B \u2264 69</b>. 데이터 갱신 시 자동 재평가되며 <b>카드·S표와 점수·등급이 일치</b>한다. 저평가·시그널·성장·정성 칸은 0~100 원점수, 정량·성장·정성 칸은 가중 반영분(합 = 총점)이다.</p>
-    <div style="display:flex;gap:16px;align-items:center;font-size:10.5px;color:var(--muted);margin-bottom:8px;flex-wrap:wrap">
-      <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:9px;border-radius:3px;background:linear-gradient(90deg,#E8CC6A,#C9A227);display:inline-block"></span>정량 (65)</span>
-      <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:9px;border-radius:3px;background:linear-gradient(90deg,#34D399,#059669);display:inline-block"></span>성장 (30)</span>
-      <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:14px;height:9px;border-radius:3px;background:linear-gradient(90deg,#3B82C4,#1E3A5F);display:inline-block"></span>정성 (5)</span>
-      <span style="color:var(--dim)">· 막대는 100점 기준 비율</span>
+    <p class="score-intro">RSI·PCR·맥스페인을 <b>각 ×2 가중</b>, ATH·성장성·정성을 ×1로 채점(코어 6지표 90점 만점)해 보유 지표 만점 대비 <b>100점 환산</b>한다(옵션 미상장 등 데이터 없는 지표는 만점에서 제외). <b>SI(공매도비율)는 데이터가 0/71로 형평성을 위해 점수에서 제외하고, 값이 있으면 별도 표시</b>한다. <b>S \u2265 80 · A 70~79 · B \u2264 69</b>.</p>
+    <div style="display:flex;gap:14px;align-items:center;font-size:10.5px;color:var(--muted);margin-bottom:8px;flex-wrap:wrap">
+      <span>지표별 만점:</span>
+      <span>RSI ×2(20)</span><span>PCR ×2(20)</span><span>맥스페인 ×2(20)</span><span>ATH(10)</span><span>성장·정성(각10)</span><span style="color:var(--dim)">· SI는 표시 전용</span>
     </div>
     <div class="tbl-wrap"><table class="score-tbl">
-    <thead><tr><th>종목명</th><th>등급</th><th style="color:#C9A227">저평가</th><th style="color:#C9A227">시그널</th><th style="color:#059669">성장</th><th class="sep" style="color:#1E3A5F">정성</th><th class="num sep" style="color:#C9A227">정량<br><span class="th-max">65</span></th><th style="color:#059669">성장<br><span class="th-max">30</span></th><th style="color:#1E3A5F">정성<br><span class="th-max">5</span></th><th>총점<br><span class="th-max">100</span></th><th style="text-align:left">점수 구성</th></tr></thead>
+    <thead><tr><th>종목명</th><th>등급</th><th style="color:#C9A227">RSI</th><th style="color:#C9A227">PCR</th><th style="color:#C9A227">맥스페인</th><th class="sep" style="color:#C9A227">ATH</th><th style="color:#059669">성장</th><th style="color:#1E3A5F">정성</th><th style="color:var(--muted)">SI<br><span class="th-max">표시</span></th><th class="num sep">합계</th><th>총점<br><span class="th-max">100</span></th><th style="text-align:left">구성</th></tr></thead>
     <tbody>${body}</tbody></table></div>
   </div>`;
 }

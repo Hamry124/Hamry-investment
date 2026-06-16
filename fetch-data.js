@@ -56,6 +56,8 @@ function num(s) { const n = parseFloat(String(s).replace(/[$,원배%\s]/g,'')); 
 function parseSymbols(html) {
   const cg = [...new Set([...html.matchAll(/cgId:\s*"([^"]+)"/g)].map(m=>m[1]))];
   const us = [...new Set([...html.matchAll(/avSym:\s*"([^"]+)"/g)].map(m=>m[1]))];
+  // 옵션 수집용 심볼: optKey 우선(없으면 avSym). CBOE 티커가 시세 티커와 다른 종목 대응.
+  const usOpt = [...new Set([...html.matchAll(/optKey:\s*"([^"]+)"/g)].map(m=>m[1]))];
   const kr = [];
   const seedAthPct = {}, fund = {};               // fund: key→{px,per,fper} (EPS 시드용)
   for (const line of html.split('\n')) {
@@ -76,7 +78,7 @@ function parseSymbols(html) {
       if (fper) fund[key].fper = fper[1];
     }
   }
-  return { cg, us, kr, seedAthPct, fund };
+  return { cg,  us, usOpt, kr, seedAthPct, fund };
 }
 
 /* ── 크립토 (CoinGecko) ─────────────────────────────────────────── */
@@ -290,7 +292,7 @@ async function fetchFX(errors) {
   let html;
   try { html = fs.readFileSync(HTML_FILE, 'utf8'); }
   catch (e) { console.error('[skip] ' + HTML_FILE + ' 읽기 실패 — 직전 data.json 유지:', e.message); return; }
-  const { cg, kr, seedAthPct, fund: fundSeed } = parseSymbols(html);
+  const { cg, kr, seedAthPct, fund: fundSeed, usOpt } = parseSymbols(html);
   // Yahoo에서 조회되지 않는 티커 제외(예: PX — 정확한 거래소 티커 확인 시 매핑 추가)
   const YAHOO_SKIP = ['PX'];
   const us = parseSymbols(html).us.filter(s => !YAHOO_SKIP.includes(s));
@@ -305,7 +307,9 @@ async function fetchFX(errors) {
 
   let indices = {}, opts = {}, macro = {}, si = {}, fund = {};
   try { indices = (await fetchIndices(errors)) || {}; } catch (e) { errors.push('지수: '+e.message); }
-  const usOptSyms = us.filter(s => ['NVDA','CRCL','IREN','ASTS','RKLB','IONQ','MU','SNDK','TSLA','AMD','VRT','QQQ','COIN','PLTR','MRVL','GLW','CIEN','COHR','LITE','AAOI'].includes(s));
+  // 옵션 수집 대상 = HTML의 optKey 전체(없으면 avSym). CBOE에 체인 없으면 개별 skip.
+  // 종목 추가 시 목록 수정 불필요 — optKey/avSym만 있으면 자동 확장.
+  const usOptSyms = (usOpt && usOpt.length) ? usOpt.slice() : us.slice();
   try { opts = (await fetchOptions(usOptSyms, errors)) || {}; } catch (e) { errors.push('옵션: '+e.message); }
   try { macro = (await fetchFX(errors)) || {}; } catch (e) { errors.push('환율: '+e.message); }
   try { Object.assign(macro, (await fetchCPI(errors)) || {}); } catch (e) { errors.push('CPI: '+e.message); }
