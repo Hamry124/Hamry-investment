@@ -199,7 +199,8 @@ async function cboeOption(sym) {
 }
 async function fetchOptions(usOptSyms, errors) {
   const out = {};
-  for (const cur of ['BTC','ETH']) { try { out[cur] = await deribitOption(cur); } catch (e) { errors.push(`옵션 ${cur}: ${e.message}`); } }
+  // Deribit 옵션 지원 통화(BTC·ETH·SOL·XRP). 미지원 알트코인은 옵션 시장이 없어 자동 skip.
+  for (const cur of ['BTC','ETH','SOL','XRP']) { try { out[cur] = await deribitOption(cur); } catch (e) { errors.push(`옵션 ${cur}: ${e.message}`); } }
   for (const sym of usOptSyms) {
     try { out[sym] = await cboeOption(sym); } catch (e) { errors.push(`옵션 ${sym}(CBOE): ${e.message}`); }
     await sleep(200);
