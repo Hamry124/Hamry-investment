@@ -160,18 +160,21 @@ async function fetchIndices(errors) {
 
 /* ── 옵션: BTC/ETH(Deribit) + 미국 개별주(CBOE) ────────────────── */
 const MONTHS = {JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
-function maxPainOf(opts) { // opts: [{strike,type:'C'/'P',oi}]
+function maxPainOf(opts) { // opts: [{strike,type:'C'/'P',oi,vol?}]
   const strikes = [...new Set(opts.map(o=>o.strike))].sort((a,b)=>a-b);
   let minPain = Infinity, mp = strikes[0];
   for (const S of strikes) { let pain=0; for (const o of opts){ if(o.type==='C'&&S>o.strike)pain+=(S-o.strike)*o.oi; if(o.type==='P'&&S<o.strike)pain+=(o.strike-S)*o.oi; } if(pain<minPain){minPain=pain;mp=S;} }
-  let callOI=0,putOI=0; opts.forEach(o=>o.type==='C'?callOI+=o.oi:putOI+=o.oi);
-  return { maxPain: mp, pcr: callOI>0 ? +(putOI/callOI).toFixed(2) : 0 };
+  let callOI=0,putOI=0,callVol=0,putVol=0;
+  opts.forEach(o=>{ if(o.type==='C'){callOI+=o.oi;callVol+=(o.vol||0);} else {putOI+=o.oi;putVol+=(o.vol||0);} });
+  return { maxPain: mp,
+           pcr: callOI>0 ? +(putOI/callOI).toFixed(2) : 0,
+           pcrVol: callVol>0 ? +(putVol/callVol).toFixed(2) : 0 };
 }
 function expKey(s){ const m=s.match(/(\d+)([A-Z]+)(\d+)/); return new Date(2000+ +m[3], MONTHS[m[2]], +m[1]).getTime(); }
 async function deribitOption(cur) {
   const j = await getJSON(`https://www.deribit.com/api/v2/public/get_book_summary_by_currency?currency=${cur}&kind=option`);
   const exp = {};
-  for (const o of (j.result||[])) { const m=o.instrument_name.match(/^[A-Z]+-(\d+[A-Z]+\d+)-(\d+)-([CP])$/); if(!m)continue; (exp[m[1]]=exp[m[1]]||[]).push({strike:+m[2],type:m[3],oi:o.open_interest||0}); }
+  for (const o of (j.result||[])) { const m=o.instrument_name.match(/^[A-Z]+-(\d+[A-Z]+\d+)-(\d+)-([CP])$/); if(!m)continue; (exp[m[1]]=exp[m[1]]||[]).push({strike:+m[2],type:m[3],oi:o.open_interest||0,vol:o.volume||0}); }
   const keys = Object.keys(exp).sort((a,b)=>expKey(a)-expKey(b));
   if (!keys.length) throw new Error('만기 없음');
   const now = Date.now();
@@ -179,7 +182,7 @@ async function deribitOption(cur) {
   const front = maxPainOf(exp[near]);
   const all = []; keys.forEach(k => { if (expKey(k) > now) all.push(...exp[k]); });
   const total = all.length ? maxPainOf(all) : front;
-  return { maxPain: front.maxPain, pcr: front.pcr,
+  return { maxPain: front.maxPain, pcr: front.pcr, pcrVol: front.pcrVol,
            maxPainTotal: total.maxPain, pcrTotal: total.pcr, expiry: near };
 }
 // CBOE 옵션 심볼: ROOT + YYMMDD + C/P + strike*1000(8자리)
@@ -193,7 +196,7 @@ async function cboeOption(sym) {
     const m = String(o.option).match(/^[A-Z]+(\d{6})([CP])(\d{8})$/);
     if (!m) continue;
     const e = m[1], type = m[2], strike = parseInt(m[3],10)/1000;
-    (exp[e]=exp[e]||[]).push({ strike, type, oi: o.open_interest||0 });
+    (exp[e]=exp[e]||[]).push({ strike, type, oi: o.open_interest||0, vol: o.volume||0 });
   }
   const keys = Object.keys(exp).sort();
   const todayYY = new Date().toISOString().slice(2,10).replace(/-/g,'');
@@ -207,7 +210,7 @@ async function cboeOption(sym) {
   const total = all.length ? maxPainOf(all) : front;
   // 만기일 포맷: YYMMDD → M/D
   const expM = parseInt(near.slice(2,4),10), expD = parseInt(near.slice(4,6),10);
-  return { maxPain: front.maxPain, pcr: front.pcr,
+  return { maxPain: front.maxPain, pcr: front.pcr, pcrVol: front.pcrVol,
            maxPainTotal: total.maxPain, pcrTotal: total.pcr,
            expiry: `${expM}/${expD}` };
 }
