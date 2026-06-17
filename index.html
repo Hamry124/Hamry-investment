@@ -117,6 +117,7 @@ table.dt tbody tr.hl3:hover{background:#fcd34d}
 /* 1행: 메달 + 종목명 + 이슈(한 줄) */
 .stk-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
 .stk-medal{font-size:16px;flex-shrink:0;line-height:1.2}
+.stk-keytag{display:inline-block;font-size:10.5px;font-weight:700;color:#1d4ed8;background:#eff4ff;border:1px solid #c7d7fb;border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:middle;white-space:nowrap}
 .stk-nm{font-size:13.5px;font-weight:700;color:var(--navy);flex-shrink:0;white-space:nowrap}
 .stk-obadge{font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.3px;flex-shrink:0}
 .stk-issue{display:block;font-size:11.5px;color:#1d4ed8;font-weight:500;line-height:1.55;white-space:normal;word-break:keep-all;overflow-wrap:anywhere;margin:0 0 9px}
@@ -309,7 +310,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-16 · v9</div>
+<div class="corner-ver" id="cornerVer">발행 2026-06-16 · v10</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -335,7 +336,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-16 · v9 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-06-16 · v10 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -425,15 +426,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div id="panels"></div>
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-16 · v9 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-16 · v10 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-16 · v9</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-16 · v10</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-06-16";
 const PUB_DATE="2026-06-16";  // 발행일
-const VERSION="v9";          // 버전 (수정 시 v# 증가)
+const VERSION="v10";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -935,6 +936,7 @@ function stkCard(r){
       <span class="stk-medal" data-medal="${ek}">${MEDAL[evalScore(r).grade]}</span>
       <span class="stk-nm">${r.tk}</span>
       ${optBadgeByKey(r)}
+      ${r.key?`<span class="stk-keytag">${r.key}</span>`:''}
     </div>
     <div class="stk-issue" ${tkey?`data-issue="${tkey}"`:''}>${r.issue}</div>
     <div class="stk-metrics">
@@ -946,7 +948,6 @@ function stkCard(r){
       <div class="stk-m"><div class="ml">SI</div><div class="mv" ${tkey?`data-si="${tkey}"`:''} style="color:${siCol(r.si)}">${r.si||'—'}</div></div>
       <div class="stk-m"><div class="ml">PER</div><div class="mv" ${tkey?`data-per="${tkey}"`:''} style="color:var(--muted)">${r.per}</div></div>
       <div class="stk-m"><div class="ml">선행PER</div><div class="mv" ${tkey?`data-fper="${tkey}"`:''} style="color:${r.fper.includes('배')&&parseFloat(r.fper)<10?'var(--green)':'var(--text)'}">${r.fper}</div></div>
-      <div class="stk-m keycol"><div class="ml">핵심지표</div><div class="mv">${r.key}</div></div>
     </div>
     <div class="stk-eval" data-eval="${ek}">${evalBadge(r)}</div>
     <div class="stk-diag" data-diag="${tkey}">${diagPill(diagnose(r),true)}</div>
