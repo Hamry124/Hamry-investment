@@ -1,6 +1,6 @@
 {
   "date": "2026-06-24",
-  "updated": "2026-06-24T10:17:50.659Z",
+  "updated": "2026-06-24T13:15:22.575Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 365500
     },
     "bitcoin": {
-      "price": 62520,
-      "chg": 0.25557
+      "price": 61962,
+      "chg": -0.23323
     },
     "ethereum": {
-      "price": 1663.57,
-      "chg": 0.61793
+      "price": 1653.32,
+      "chg": 0.17412
     },
     "ripple": {
-      "price": 1.096,
-      "chg": -0.66906
+      "price": 1.082,
+      "chg": -1.57916
     },
     "solana": {
-      "price": 69.11,
-      "chg": 0.29607
+      "price": 68.78,
+      "chg": -0.03298
     },
     "hyperliquid": {
-      "price": 62.19,
-      "chg": -0.69851
+      "price": 61.16,
+      "chg": -2.6621
     },
     "dogecoin": {
-      "price": 0.078696,
-      "chg": -0.52065
+      "price": 0.077678,
+      "chg": -1.89002
     },
     "chainlink": {
-      "price": 7.6,
-      "chg": 0.74331
+      "price": 7.53,
+      "chg": -0.50497
     },
     "sui": {
-      "price": 0.69852,
-      "chg": 1.08685
+      "price": 0.689144,
+      "chg": -1.74678
     },
     "world-liberty-financial": {
-      "price": 0.058682,
-      "chg": 2.06786
+      "price": 0.057827,
+      "chg": 0.93644
     },
     "uniswap": {
-      "price": 2.9,
-      "chg": 1.47378
+      "price": 2.87,
+      "chg": 0.13617
     },
     "ondo-finance": {
-      "price": 0.304662,
-      "chg": -2.76144
+      "price": 0.300696,
+      "chg": -3.26332
     },
     "aave": {
-      "price": 72.6,
-      "chg": 0.76914
+      "price": 75.79,
+      "chg": 5.08669
     },
     "filecoin": {
-      "price": 0.77619,
-      "chg": 3.21505
+      "price": 0.761608,
+      "chg": 0.7218
     },
     "pendle": {
-      "price": 1.26,
-      "chg": -3.04592
+      "price": 1.25,
+      "chg": -4.01318
     },
     "zksync": {
-      "price": 0.01084164,
-      "chg": -0.53932
+      "price": 0.01068512,
+      "chg": -1.9484
     },
     "centrifuge": {
-      "price": 0.210019,
-      "chg": -1.88358
+      "price": 0.209715,
+      "chg": -2.04556
     },
     "NVDA": {
       "price": 200.04
@@ -259,27 +259,27 @@
       "ath": "-42%"
     },
     "bitcoin": {
-      "ath": "-50%",
+      "ath": "-51%",
       "athAbs": 126080,
-      "rsi": 40
+      "rsi": 39
     },
     "ethereum": {
-      "ath": "-66%",
+      "ath": "-67%",
       "athAbs": 4946.05,
-      "rsi": 37
+      "rsi": 36
     },
     "ripple": {
       "ath": "-70%",
       "athAbs": 3.65,
-      "rsi": 31
+      "rsi": 30
     },
     "solana": {
-      "ath": "-76%",
+      "ath": "-77%",
       "athAbs": 293.31,
       "rsi": 38
     },
     "hyperliquid": {
-      "ath": "-19%",
+      "ath": "-20%",
       "athAbs": 76.7
     },
     "dogecoin": {
@@ -297,7 +297,7 @@
       "athAbs": 5.35
     },
     "world-liberty-financial": {
-      "ath": "-82%",
+      "ath": "-83%",
       "athAbs": 0.331336
     },
     "uniswap": {
@@ -309,7 +309,7 @@
       "athAbs": 2.14
     },
     "aave": {
-      "ath": "-89%",
+      "ath": "-88%",
       "athAbs": 661.69,
       "rsi": 23
     },
@@ -640,10 +640,10 @@
     },
     "GEV": {
       "maxPain": 1047.5,
-      "pcr": 2.17,
+      "pcr": 2.08,
       "pcrVol": 1.43,
-      "maxPainTotal": 910,
-      "pcrTotal": 1.25,
+      "maxPainTotal": 920,
+      "pcrTotal": 1.28,
       "expiry": "6/26"
     },
     "CRWV": {
@@ -728,10 +728,10 @@
     },
     "INFQ": {
       "maxPain": 15,
-      "pcr": 0.38,
+      "pcr": 0.39,
       "pcrVol": 0.06,
       "maxPainTotal": 15,
-      "pcrTotal": 0.36,
+      "pcrTotal": 0.35,
       "expiry": "7/17"
     },
     "PLTR": {
@@ -768,10 +768,10 @@
     },
     "GLW": {
       "maxPain": 190,
-      "pcr": 0.9,
+      "pcr": 0.92,
       "pcrVol": 0.69,
       "maxPainTotal": 160,
-      "pcrTotal": 0.8,
+      "pcrTotal": 0.82,
       "expiry": "6/26"
     },
     "CIEN": {
@@ -848,9 +848,9 @@
       "ath": "-6%"
     },
     "Brent 유가": {
-      "price": 75.86,
+      "price": 74.07,
       "rsi": 49,
-      "ath": "-49%"
+      "ath": "-50%"
     }
   },
   "macro": {
