@@ -1,6 +1,6 @@
 {
   "date": "2026-06-30",
-  "updated": "2026-06-30T10:51:44.170Z",
+  "updated": "2026-06-30T12:35:46.944Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 362000
     },
     "bitcoin": {
-      "price": 59244,
-      "chg": -1.27512
+      "price": 58735,
+      "chg": -2.719
     },
     "ethereum": {
-      "price": 1582.8,
-      "chg": 0.39917
+      "price": 1561.35,
+      "chg": -1.66048
     },
     "ripple": {
-      "price": 1.041,
-      "chg": -1.00014
+      "price": 1.03,
+      "chg": -2.88376
     },
     "solana": {
-      "price": 73.55,
-      "chg": 0.48683
+      "price": 72.55,
+      "chg": -1.83656
     },
     "hyperliquid": {
-      "price": 65.64,
-      "chg": 3.42836
+      "price": 64.74,
+      "chg": 0.58804
     },
     "dogecoin": {
-      "price": 0.072418,
-      "chg": -0.54444
+      "price": 0.070095,
+      "chg": -4.6925
     },
     "chainlink": {
-      "price": 7.27,
-      "chg": -0.66178
+      "price": 7.18,
+      "chg": -2.51787
     },
     "sui": {
-      "price": 0.694322,
-      "chg": 0.65151
+      "price": 0.681773,
+      "chg": -2.17257
     },
     "world-liberty-financial": {
-      "price": 0.059054,
-      "chg": 1.28003
+      "price": 0.057827,
+      "chg": -1.46849
     },
     "uniswap": {
-      "price": 2.83,
-      "chg": -4.1257
+      "price": 2.78,
+      "chg": -6.41914
     },
     "ondo-finance": {
-      "price": 0.311219,
-      "chg": -0.78765
+      "price": 0.305836,
+      "chg": -2.84971
     },
     "aave": {
-      "price": 89.31,
-      "chg": -3.16809
+      "price": 87.54,
+      "chg": -6.21441
     },
     "filecoin": {
-      "price": 0.733629,
-      "chg": 1.72968
+      "price": 0.711727,
+      "chg": -2.08801
     },
     "pendle": {
-      "price": 1.33,
-      "chg": 1.57992
+      "price": 1.29,
+      "chg": -2.09013
     },
     "zksync": {
-      "price": 0.01000426,
-      "chg": -0.55327
+      "price": 0.00986716,
+      "chg": -2.97591
     },
     "centrifuge": {
-      "price": 0.19521,
-      "chg": -4.23163
+      "price": 0.191512,
+      "chg": -6.52353
     },
     "NVDA": {
       "price": 194.97
@@ -261,7 +261,7 @@
     "bitcoin": {
       "ath": "-53%",
       "athAbs": 126080,
-      "rsi": 40
+      "rsi": 39
     },
     "ethereum": {
       "ath": "-68%",
@@ -269,17 +269,17 @@
       "rsi": 38
     },
     "ripple": {
-      "ath": "-71%",
+      "ath": "-72%",
       "athAbs": 3.65,
-      "rsi": 35
+      "rsi": 34
     },
     "solana": {
       "ath": "-75%",
       "athAbs": 293.31,
-      "rsi": 46
+      "rsi": 45
     },
     "hyperliquid": {
-      "ath": "-14%",
+      "ath": "-16%",
       "athAbs": 76.7
     },
     "dogecoin": {
@@ -297,7 +297,7 @@
       "athAbs": 5.35
     },
     "world-liberty-financial": {
-      "ath": "-82%",
+      "ath": "-83%",
       "athAbs": 0.331336
     },
     "uniswap": {
@@ -305,11 +305,11 @@
       "athAbs": 44.92
     },
     "ondo-finance": {
-      "ath": "-85%",
+      "ath": "-86%",
       "athAbs": 2.14
     },
     "aave": {
-      "ath": "-86%",
+      "ath": "-87%",
       "athAbs": 661.69,
       "rsi": 23
     },
@@ -318,7 +318,7 @@
       "athAbs": 236.84
     },
     "pendle": {
-      "ath": "-82%",
+      "ath": "-83%",
       "athAbs": 7.5
     },
     "zksync": {
@@ -767,11 +767,11 @@
       "expiry": "7/2"
     },
     "GLW": {
-      "maxPain": 200,
-      "pcr": 0.69,
+      "maxPain": 220,
+      "pcr": 0.81,
       "pcrVol": 0.68,
-      "maxPainTotal": 160,
-      "pcrTotal": 0.8,
+      "maxPainTotal": 165,
+      "pcrTotal": 0.83,
       "expiry": "7/2"
     },
     "CIEN": {
@@ -848,9 +848,9 @@
       "ath": "-5%"
     },
     "Brent 유가": {
-      "price": 73.96,
+      "price": 74.54,
       "rsi": 49,
-      "ath": "-50%"
+      "ath": "-49%"
     }
   },
   "macro": {
@@ -1042,35 +1042,35 @@
       "fper": "20.08배"
     },
     "AMD": {
-      "per": "54.22배",
-      "fper": "41.40배"
+      "per": "55.67배",
+      "fper": "42.51배"
     },
     "ASML": {
       "per": "84.19배",
       "fper": "73.11배"
     },
     "MU": {
-      "per": "21.05배",
-      "fper": "18.95배"
+      "per": "18.87배",
+      "fper": "16.98배"
     },
     "SNDK": {
-      "per": "23.35배",
-      "fper": "21.40배"
+      "per": "21.07배",
+      "fper": "19.32배"
     },
     "VRT": {
-      "per": "68.89배",
-      "fper": "53.14배"
+      "per": "65.91배",
+      "fper": "50.85배"
     },
     "GEV": {
       "per": "62.36배",
       "fper": "50.11배"
     },
     "NBIS": {
-      "fper": "68.28배"
+      "fper": "69.10배"
     },
     "TSLA": {
-      "per": "95.16배",
-      "fper": "75.13배"
+      "per": "104.33배",
+      "fper": "82.37배"
     },
     "COIN": {
       "per": "30.33배",
@@ -1081,12 +1081,12 @@
       "fper": "50.72배"
     },
     "MRVL": {
-      "per": "89.92배",
-      "fper": "60.25배"
+      "per": "98.84배",
+      "fper": "66.23배"
     },
     "GLW": {
-      "per": "61.24배",
-      "fper": "38.11배"
+      "per": "50.47배",
+      "fper": "31.40배"
     },
     "CIEN": {
       "per": "151.34배",
