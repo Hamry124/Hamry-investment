@@ -63,6 +63,26 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .block-title .bt-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#fff;background:var(--cyan);padding:4px 9px;border-radius:6px}
 .block-title h2{font-size:18px;font-weight:800;letter-spacing:-.3px;color:var(--navy)}
 .block-title .bt-sub{font-size:11px;color:var(--muted);margin-left:auto;font-weight:500}
+.opt-guide{background:linear-gradient(135deg,#f4f7fc,#eef2f9);border:1px solid #dbe3f0;border-radius:12px;margin-bottom:14px;overflow:hidden}
+.opt-guide summary{cursor:pointer;padding:13px 16px;font-size:13.5px;color:var(--navy);list-style:none;display:flex;align-items:center;gap:8px;user-select:none}
+.opt-guide summary::-webkit-details-marker{display:none}
+.og-sum-icon{font-size:16px}
+.og-sum-hint{font-size:10.5px;color:var(--muted);font-weight:500;margin-left:auto}
+.opt-guide[open] .og-sum-hint::after{content:" (접기)"}
+.og-body{padding:0 16px 16px}
+.og-intro{font-size:12px;line-height:1.7;color:#3d4456;background:var(--card);border-radius:9px;padding:11px 13px;margin-bottom:12px;border:1px solid var(--border)}
+.og-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media(max-width:640px){.og-grid{grid-template-columns:1fr}}
+.og-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:10px 12px}
+.og-card.og-key{border-color:#bcd0f0;background:linear-gradient(135deg,#fbfdff,#f3f8ff)}
+.og-h{display:flex;align-items:baseline;gap:8px;margin-bottom:5px;flex-wrap:wrap}
+.og-n{font-size:13px;font-weight:800;color:var(--navy)}
+.og-meta{font-size:9px;color:var(--dim);font-weight:600}
+.og-b{font-size:11px;line-height:1.6;color:#454c5e}
+.og-cheat{margin-top:12px;background:linear-gradient(135deg,#1e293b,#27364d);border-radius:9px;padding:12px 14px}
+.og-cheat-h{font-size:12px;font-weight:800;color:#fbbf24;margin-bottom:5px}
+.og-cheat-b{font-size:11.5px;line-height:1.65;color:#e2e8f0}
+.og-cheat-b b{color:#fff}
 
 /* EXEC */
 .exec{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
@@ -214,6 +234,16 @@ table.dt tbody tr.hl3:hover{background:#fcd34d}
 .gp-bar{height:5px;background:#e8ebf2;border-radius:3px;overflow:hidden;margin:4px 0 5px}
 .gp-fill{height:100%;border-radius:3px}
 .gp-desc{font-size:9.5px;line-height:1.45;color:#4a5266}
+.gp-weather{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid;border-left-width:3px;border-radius:7px;padding:6px 9px;margin-bottom:8px}
+.gpw-icon{font-size:14px}
+.gpw-label{font-size:11.5px;font-weight:800;white-space:nowrap}
+.gpw-desc{font-size:9px;color:var(--muted);line-height:1.35}
+.gp-vol{margin-left:auto;font-size:8.5px;font-weight:800;padding:2px 7px;border-radius:6px;white-space:nowrap}
+.gp-vol-매우큼{background:#fde8e8;color:#c0392b}
+.gp-vol-큼{background:#fdecdc;color:#d35400}
+.gp-vol-중상{background:#fef6e0;color:#b8860b}
+.gp-vol-중간{background:#e8f0fb;color:#2c5aa0}
+.gp-vol-경보{background:#1e293b;color:#fbbf24}
 .mpbar{position:relative;height:36px;background:var(--card);border:1px solid var(--border);border-radius:7px;margin:10px 0 4px}
 .mpt{position:absolute;top:50%;left:8%;right:8%;height:3px;border-radius:2px;transform:translateY(-50%);background:linear-gradient(90deg,var(--red),var(--amber),var(--green))}
 .mpd{position:absolute;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;border:2px solid var(--card);z-index:2}
@@ -402,6 +432,27 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <div class="nav" id="nav"></div>
 <div id="panels"></div>
 
+<!-- OPTION GUIDE -->
+<div class="block-title"><span class="bt-num">GUIDE</span><h2>옵션 지표 읽는 법</h2><span class="bt-sub">맥스페인·PCR·넷GEX·감마플립 — 초보 가이드</span></div>
+<details class="opt-guide">
+<summary><span class="og-sum-icon">📘</span> <b>이 지표들, 30초에 이해하기</b> <span class="og-sum-hint">— 클릭해서 펼치기</span></summary>
+<div class="og-body">
+  <div class="og-intro">이 대시보드는 <b>큰손들의 베팅 지도</b>이자 <b>단기 변동성 일기예보</b>입니다. 옵션은 미래에 정해진 가격으로 사거나(콜·상승 베팅) 팔(풋·하락 베팅) 권리이고, 큰손들이 어느 가격에 얼마나 베팅했는지를 보면 단기 흐름이 가늠됩니다. <b style="color:var(--red)">단, 화면의 '적극 매수'는 '공매도가 많다'는 뜻일 뿐 안전 신호가 아닙니다</b> — 오히려 변동성이 가장 큰 종목이라는 신호에 가깝습니다.</div>
+  <div class="og-grid">
+    <div class="og-card"><div class="og-h"><span class="og-n">맥스페인</span><span class="og-meta">Max Pain · 약한 자석</span></div><div class="og-b">옵션 만기일에 <b>옵션 산 사람들이 가장 많이 손해 보는 주가</b>(=큰손에게 가장 이득). 만기가 가까우면 주가가 이쪽으로 슬슬 끌리는 <b>약한 중력</b>이 생깁니다. 현재가보다 위면 약한 상방, 아래면 약한 하방.</div></div>
+    <div class="og-card"><div class="og-h"><span class="og-n">PCR</span><span class="og-meta">풋콜 비율 · 우산 vs 선글라스</span></div><div class="og-b">풋(하락 베팅)÷콜(상승 베팅). <b>우산(풋)을 더 챙겼나, 선글라스(콜)를 더 챙겼나</b>. 0.7 미만은 콜 우위(상승 기대, 너무 낮으면 과열), 1.0 초과는 풋 우위. <b>함정 — 우량주의 높은 PCR은 '공포'보다 '보험'</b>인 경우가 많습니다.</div></div>
+    <div class="og-card"><div class="og-h"><span class="og-n">숏 비율</span><span class="og-meta">공매도 잔고 · 압축 용수철</span></div><div class="og-b">빌려서 미리 판 비율 = 하락 베팅 규모. <b>압축된 용수철</b>처럼, 주가가 오르면 급히 되사서(숏 스퀴즈·급등) 위로 크게 튕기지만 <b>내리면 하락도 가속하는 양날의 칼</b>. 숏스퀴즈 점수 = 숏 비율×4.</div></div>
+    <div class="og-card og-key"><div class="og-h"><span class="og-n">넷 GEX</span><span class="og-meta">넷 감마 익스포저 · 자동차 서스펜션 · 가장 중요</span></div><div class="og-b">딜러가 위험을 막으려 주식을 어느 방향으로 사고팔지의 총합. <b><span style="color:var(--blue)">플러스(+)=완충 모드</span></b>(오르면 팔고 내리면 사서 변동성↓·잔잔), <b><span style="color:var(--red)">마이너스(−)=가속 모드</span></b>(오르면 더 사고 내리면 더 팔아 변동성↑·거친 바다). 예) QQQ −$9.93억 = 시장 전체 큰 파도 경보.</div></div>
+    <div class="og-card og-key"><div class="og-h"><span class="og-n">감마플립</span><span class="og-meta">제로 감마 · 해수면</span></div><div class="og-b"><b>잔잔한 바다와 거친 바다를 가르는 해수면</b>. 가격이 플립 <b><span style="color:var(--blue)">위면 안정</span></b>(딜러가 진정), <b><span style="color:var(--red)">아래면 불안정</span></b>(딜러가 증폭), <b><span style="color:var(--amber)">바로 근처면 칼날 위</span></b>(성질이 순식간에 뒤집히는 변곡점).</div></div>
+    <div class="og-card"><div class="og-h"><span class="og-n">갭 / 판정</span><span class="og-meta">맥스페인 거리 · 신호등</span></div><div class="og-b"><b>갭</b>은 현재가→맥스페인 거리(%). 음수(−)면 주가가 옵션 포지션을 추월 = 과열 신호. <b>판정</b>의 '적극 매수'는 공매도 많다는 자동 분류일 뿐, <b>실적 평가도 매수 추천도 아닙니다</b>.</div></div>
+  </div>
+  <div class="og-cheat">
+    <div class="og-cheat-h">🎯 한 장 치트시트 — 가장 간단한 요약</div>
+    <div class="og-cheat-b"><b>넷GEX 마이너스(−) + 가격이 감마플립 아래 + 프리마켓 마이너스</b> → <b style="color:var(--red)">오늘은 거친 바다, 멀미 조심</b>. 평소보다 작게·천천히. 그리고 <b>실적(펀더멘털)과 옵션 신호는 다른 축</b> — 실적 강한 종목(MU)과 옵션 신호 센 종목(NBIS)은 서로 다른 이야기, 섞어서 보지 마세요.</div>
+  </div>
+</div>
+</details>
+
 <!-- S TABLE -->
 <div class="block-title"><span class="bt-num">★</span><h2 id="sgTitle">시장별 매수·매도 TOP 3</h2><span class="bt-sub">시장별 종합점수 상위 3·하위 3 · 7지표×10점→100 환산</span><span id="gradeDist" class="gdist"></span></div>
 <div class="intro-card" style="margin-bottom:10px">
@@ -456,22 +507,22 @@ const IDX=[
 
 // 옵션 신호 데이터 (전체 확장: 미국 13 + 크립토 8 + S등급 공통)
 const OPT={
-  NBIS:{mp:270,gap:9.3,pcrOI:2.06,pcrV:1.1,si:25.2,sqS:100,sqSstar:"★★★★★",sqG:40,sqGstar:"★★",sl:"$231.3",sup:"$244.2",t1:"$270",t2:"$297",v:"watch",vt:"관망",netGex:-18,gexStr:"−$18M",flip:"below",flipKo:"플립 아래(불안정)"},
-  MRVL:{mp:285,gap:6.3,pcrOI:1.49,pcrV:0.9,si:4.5,sqS:18,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$253",sup:"$267",t1:"$285",t2:"$313.5",v:"watch",vt:"관망",netGex:-17,gexStr:"−$17M",flip:"below",flipKo:"플립 아래(불안정)"},
-  GLW:{mp:200,gap:-9.5,pcrOI:0.97,pcrV:0.95,si:3.0,sqS:12,sqSstar:"☆",sqG:40,sqGstar:"★★",sl:"$205",sup:"$217",t1:"$200",t2:"$220",v:"hot",vt:"과열주의",netGex:11,gexStr:"+$11M",flip:"above",flipKo:"플립 위(안정)"},
- ASTS:{mp:115,gap:-13.59,pcrOI:0.98,pcrV:0.47,si:20.21,sqS:80.84,sqSstar:"★★★★",sqG:70,sqGstar:"★★★★",sl:"$119.78",sup:"$126.44",t1:"$115",t2:"$126.5",v:"watch",vt:"관망",netGex:-2,gexStr:"−$2M",flip:"below",flipKo:"플립 아래(불안정)"},
- RKLB:{mp:129,gap:-12.86,pcrOI:1.43,pcrV:0.83,si:5.85,sqS:23.4,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$133.23",sup:"$140.63",t1:"$129",t2:"$141.9",v:"watch",vt:"관망",netGex:-3,gexStr:"−$3M",flip:"below",flipKo:"플립 아래(불안정)"},
- CRCL:{mp:108,gap:-0.22,pcrOI:0.65,pcrV:0.72,si:9.71,sqS:38.84,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$97.42",sup:"$102.83",t1:"$108",t2:"$118.8",v:"watch",vt:"관망",netGex:-2,gexStr:"−$2M",flip:"below",flipKo:"플립 아래(불안정)"},
- IREN:{mp:58,gap:-9.45,pcrOI:1.49,pcrV:0.81,si:15.71,sqS:62.84,sqSstar:"★★★",sqG:40,sqGstar:"★★",sl:"$57.64",sup:"$60.85",t1:"$58",t2:"$63.8",v:"watch",vt:"관망",netGex:-18,gexStr:"−$18M",flip:"below",flipKo:"플립 아래(불안정)"},
+  NBIS:{mp:270,gap:9.3,pcrOI:2.06,pcrV:1.1,si:25.2,sqS:100,sqSstar:"★★★★★",sqG:40,sqGstar:"★★",sl:"$231.3",sup:"$244.2",t1:"$270",t2:"$297",v:"watch",vt:"관망",netGex:-18,gexStr:"−$18M",flip:"below",flipKo:"플립 아래(불안정)",char:"변동성 끝판왕",vol:"매우큼"},
+  MRVL:{mp:285,gap:6.3,pcrOI:1.49,pcrV:0.9,si:4.5,sqS:18,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$253",sup:"$267",t1:"$285",t2:"$313.5",v:"watch",vt:"관망",netGex:-17,gexStr:"−$17M",flip:"below",flipKo:"플립 아래(불안정)",char:"테마 부품주",vol:"중간"},
+  GLW:{mp:200,gap:-9.5,pcrOI:0.97,pcrV:0.95,si:3.0,sqS:12,sqSstar:"☆",sqG:40,sqGstar:"★★",sl:"$205",sup:"$217",t1:"$200",t2:"$220",v:"hot",vt:"과열주의",netGex:11,gexStr:"+$11M",flip:"above",flipKo:"플립 위(안정)",char:"과열 주의",vol:"중상"},
+ ASTS:{mp:115,gap:-13.59,pcrOI:0.98,pcrV:0.47,si:20.21,sqS:80.84,sqSstar:"★★★★",sqG:70,sqGstar:"★★★★",sl:"$119.78",sup:"$126.44",t1:"$115",t2:"$126.5",v:"watch",vt:"관망",netGex:-2,gexStr:"−$2M",flip:"below",flipKo:"플립 아래(불안정)",char:"스퀴즈 후보",vol:"매우큼"},
+ RKLB:{mp:129,gap:-12.86,pcrOI:1.43,pcrV:0.83,si:5.85,sqS:23.4,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$133.23",sup:"$140.63",t1:"$129",t2:"$141.9",v:"watch",vt:"관망",netGex:-3,gexStr:"−$3M",flip:"below",flipKo:"플립 아래(불안정)",char:"실속형",vol:"중간"},
+ CRCL:{mp:108,gap:-0.22,pcrOI:0.65,pcrV:0.72,si:9.71,sqS:38.84,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$97.42",sup:"$102.83",t1:"$108",t2:"$118.8",v:"watch",vt:"관망",netGex:-2,gexStr:"−$2M",flip:"below",flipKo:"플립 아래(불안정)",char:"테마형",vol:"중간"},
+ IREN:{mp:58,gap:-9.45,pcrOI:1.49,pcrV:0.81,si:15.71,sqS:62.84,sqSstar:"★★★",sqG:40,sqGstar:"★★",sl:"$57.64",sup:"$60.85",t1:"$58",t2:"$63.8",v:"watch",vt:"관망",netGex:-18,gexStr:"−$18M",flip:"below",flipKo:"플립 아래(불안정)",char:"양방향 화약고",vol:"큼"},
  IONQ:{mp:58,gap:-17.31,pcrOI:1.65,pcrV:1.09,si:20.14,sqS:80.56,sqSstar:"★★★★",sqG:40,sqGstar:"★★",sl:"$62.83",sup:"$66.63",t1:"$58",t2:"$77",v:"watch",vt:"관망"},
  INFQ:{mp:15,gap:-15.59,pcrOI:0.43,pcrV:0.37,si:3.3,sqS:13.2,sqSstar:"★",sqG:70,sqGstar:"★★★★",sl:"$15.93",sup:"$16.88",t1:"$15",t2:"$17.5",v:"sell",vt:"과열 주의"},
- SNDK:{mp:1535,gap:-6.5,pcrOI:1.83,pcrV:1.35,si:6.25,sqS:25,sqSstar:"★",sqG:40,sqGstar:"★",sl:"$1477",sup:"$1560",t1:"$1535",t2:"$1689",v:"watch",vt:"관망",netGex:28,gexStr:"+$28M",flip:"above",flipKo:"플립 위(안정)"},
- MU:{mp:840,gap:-9.04,pcrOI:2.02,pcrV:1.28,si:3.14,sqS:12.6,sqSstar:"★",sqG:70,sqGstar:"★★★",sl:"$830",sup:"$877",t1:"$840",t2:"$1016",v:"sell",vt:"과열 주의",netGex:65,gexStr:"+$65M",flip:"above",flipKo:"플립 위(안정)"},
+ SNDK:{mp:1535,gap:-6.5,pcrOI:1.83,pcrV:1.35,si:6.25,sqS:25,sqSstar:"★",sqG:40,sqGstar:"★",sl:"$1477",sup:"$1560",t1:"$1535",t2:"$1689",v:"watch",vt:"관망",netGex:28,gexStr:"+$28M",flip:"above",flipKo:"플립 위(안정)",char:"급등 후 종목",vol:"중상"},
+ MU:{mp:840,gap:-9.04,pcrOI:2.02,pcrV:1.28,si:3.14,sqS:12.6,sqSstar:"★",sqG:70,sqGstar:"★★★",sl:"$830",sup:"$877",t1:"$840",t2:"$1016",v:"sell",vt:"과열 주의",netGex:65,gexStr:"+$65M",flip:"above",flipKo:"플립 위(안정)",char:"펀더멘털 대장",vol:"중간"},
  TSLA:{mp:430,gap:-2.74,pcrOI:0.78,pcrV:0.73,si:2.58,sqS:10.3,sqSstar:"☆",sqG:60,sqGstar:"★★",sl:"$397.89",sup:"$420",t1:"$430",t2:"$473",v:"watch",vt:"관망",netGex:-87,gexStr:"−$87M",flip:"boundary",flipKo:"플립 경계(변곡점)"},
- AMD:{mp:460,gap:-11.21,pcrOI:1.25,pcrV:1.06,si:2.75,sqS:11,sqSstar:"☆",sqG:60,sqGstar:"★★★",sl:"$486",sup:"$513",t1:"$460",t2:"$570",v:"sell",vt:"과열 주의",netGex:-41,gexStr:"−$41M",flip:"boundary",flipKo:"플립 경계(변곡점)"},
- VRT:{mp:320,gap:1.82,pcrOI:1.98,pcrV:1.03,si:3.6,sqS:14.4,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$291",sup:"$307",t1:"$320",t2:"$353",v:"watch",vt:"관망",netGex:-4,gexStr:"−$4M",flip:"boundary",flipKo:"플립 경계(변곡점)"},
+ AMD:{mp:460,gap:-11.21,pcrOI:1.25,pcrV:1.06,si:2.75,sqS:11,sqSstar:"☆",sqG:60,sqGstar:"★★★",sl:"$486",sup:"$513",t1:"$460",t2:"$570",v:"sell",vt:"과열 주의",netGex:-41,gexStr:"−$41M",flip:"boundary",flipKo:"플립 경계(변곡점)",char:"변곡점",vol:"중간"},
+ VRT:{mp:320,gap:1.82,pcrOI:1.98,pcrV:1.03,si:3.6,sqS:14.4,sqSstar:"★",sqG:40,sqGstar:"★★",sl:"$291",sup:"$307",t1:"$320",t2:"$353",v:"watch",vt:"관망",netGex:-4,gexStr:"−$4M",flip:"boundary",flipKo:"플립 경계(변곡점)",char:"인프라 핵심주",vol:"중간"},
  PPIH:{mp:30,gap:-5.9,pcrOI:0.32,pcrV:0.28,si:1.39,sqS:5.6,sqSstar:"☆",sqG:90,sqGstar:"★★★★★",sl:"$28.69",sup:"$30.29",t1:"$30",t2:"$33",v:"sell",vt:"과열 주의"},
- QQQ:{mp:711,gap:-3.34,pcrOI:2.40,pcrV:1.58,si:0,sqS:0,sqSstar:"☆",sqG:40,sqGstar:"★",sl:"$662",sup:"$699",t1:"$711",t2:"$782",v:"watch",vt:"관망",netGex:-993,gexStr:"−$993M",flip:"below",flipKo:"플립 아래(불안정)"},
+ QQQ:{mp:711,gap:-3.34,pcrOI:2.40,pcrV:1.58,si:0,sqS:0,sqSstar:"☆",sqG:40,sqGstar:"★",sl:"$662",sup:"$699",t1:"$711",t2:"$782",v:"watch",vt:"관망",netGex:-993,gexStr:"−$993M",flip:"below",flipKo:"플립 아래(불안정)",char:"시장 바로미터",vol:"경보"},
  // 크립토 옵션 (Deribit 기준)
  BTC:{mp:72000,gap:7.6,pcrOI:1.15,pcrV:1.08,si:0,sqS:0,sqSstar:"☆",sqG:28,sqGstar:"★",sl:"$62,000",sup:"$65,000",t1:"$72,000",t2:"$77,000",v:"buy",vt:"과매도 매수"},
  ETH:{mp:2050,gap:-2.93,pcrOI:0.94,pcrV:0.88,si:0,sqS:0,sqSstar:"☆",sqG:35,sqGstar:"★",sl:"$1,820",sup:"$1,920",t1:"$2,050",t2:"$2,300",v:"watch",vt:"관망"},
@@ -915,8 +966,17 @@ function gammaPanel(o){
   const fm = flipMap[o.flip] || flipMap['boundary'];
   // GEX 강도 바(절대값 로그 스케일, QQQ -993M 같은 거대값 대응)
   const mag = Math.min(100, Math.log10(Math.abs(o.netGex)+1)/Math.log10(1000)*100);
+  // 날씨 비유: 넷GEX 부호 + 플립 위치로 "바다 상태" 판정
+  const rough = (neg && o.flip!=='above');
+  const weather = rough
+    ? {icon:'🌊', label:'거친 바다', col:'var(--red)', desc:'변동성 증폭 — 위·아래로 크게 출렁'}
+    : (o.flip==='boundary'
+      ? {icon:'⚠️', label:'칼날 위', col:'var(--amber)', desc:'변곡점 — 성질이 순식간에 뒤집힘'}
+      : {icon:'🌤️', label:'잔잔한 바다', col:'var(--blue)', desc:'변동성 억제 — 박스권 소화'});
+  const volBadge = o.vol ? `<span class="gp-vol gp-vol-${o.vol}">변동성 ${o.vol}</span>` : '';
   return `<div class="gamma-panel">
-    <div class="gp-head"><span class="gp-tag">⚡ 감마 구조</span><span class="gp-sub">딜러 헤지 방향 · 변동성 체제</span></div>
+    <div class="gp-head"><span class="gp-tag">⚡ 감마 구조</span><span class="gp-sub">딜러 헤지 방향 · 변동성 체제</span>${volBadge}</div>
+    <div class="gp-weather" style="border-color:${weather.col}"><span class="gpw-icon">${weather.icon}</span><span class="gpw-label" style="color:${weather.col}">${weather.label}</span><span class="gpw-desc">${weather.desc}${o.char?' · '+o.char:''}</span></div>
     <div class="gp-grid">
       <div class="gp-cell">
         <div class="gpl">넷 감마(GEX)</div>
