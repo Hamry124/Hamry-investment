@@ -1,6 +1,6 @@
 {
   "date": "2026-07-04",
-  "updated": "2026-07-04T21:52:44.562Z",
+  "updated": "2026-07-04T22:52:26.697Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 362500
     },
     "bitcoin": {
-      "price": 63234,
-      "chg": 0.86817
+      "price": 63139,
+      "chg": 0.964
     },
     "ethereum": {
-      "price": 1788.14,
-      "chg": 1.4837
+      "price": 1781.93,
+      "chg": 1.49988
     },
     "ripple": {
-      "price": 1.17,
-      "chg": 3.03829
+      "price": 1.16,
+      "chg": 2.86123
     },
     "solana": {
-      "price": 81.93,
-      "chg": -0.63598
+      "price": 81.78,
+      "chg": -0.53805
     },
     "hyperliquid": {
-      "price": 69.88,
-      "chg": -1.5288
+      "price": 69.91,
+      "chg": -1.35076
     },
     "dogecoin": {
-      "price": 0.078165,
-      "chg": 0.38163
+      "price": 0.077825,
+      "chg": 0.29711
     },
     "chainlink": {
-      "price": 8.05,
-      "chg": 0.94963
+      "price": 8.01,
+      "chg": 0.84042
     },
     "sui": {
-      "price": 0.772142,
-      "chg": -0.1032
+      "price": 0.767783,
+      "chg": 0.03799
     },
     "uniswap": {
-      "price": 3.24,
-      "chg": -0.36472
+      "price": 3.21,
+      "chg": -0.12079
     },
     "world-liberty-financial": {
-      "price": 0.057466,
-      "chg": 0.77539
+      "price": 0.057364,
+      "chg": 0.65389
     },
     "ondo-finance": {
-      "price": 0.33785,
-      "chg": 0.73394
+      "price": 0.336642,
+      "chg": 0.70575
     },
     "aave": {
-      "price": 89.35,
-      "chg": 2.08355
+      "price": 88.69,
+      "chg": 1.39447
     },
     "filecoin": {
-      "price": 0.803698,
-      "chg": -0.44965
+      "price": 0.798053,
+      "chg": -0.5771
     },
     "pendle": {
       "price": 1.47,
-      "chg": -1.33245
+      "chg": -0.67801
     },
     "zksync": {
-      "price": 0.01065874,
-      "chg": -2.08588
+      "price": 0.01059041,
+      "chg": -3.04228
     },
     "centrifuge": {
-      "price": 0.202042,
-      "chg": 0.47266
+      "price": 0.200363,
+      "chg": -0.23101
     },
     "NVDA": {
       "price": 194.83
@@ -309,7 +309,7 @@
       "athAbs": 2.14
     },
     "aave": {
-      "ath": "-86%",
+      "ath": "-87%",
       "athAbs": 661.69,
       "rsi": 23
     },
