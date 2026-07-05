@@ -1,6 +1,6 @@
 {
   "date": "2026-07-05",
-  "updated": "2026-07-05T15:09:02.365Z",
+  "updated": "2026-07-05T17:01:13.296Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 362500
     },
     "bitcoin": {
-      "price": 62844,
-      "chg": 0.26639
+      "price": 62593,
+      "chg": -0.34675
     },
     "ethereum": {
-      "price": 1777.11,
-      "chg": 0.16616
+      "price": 1771.41,
+      "chg": -0.43925
     },
     "ripple": {
-      "price": 1.14,
-      "chg": -3.0363
+      "price": 1.13,
+      "chg": -3.31917
     },
     "solana": {
-      "price": 81.43,
-      "chg": -0.44473
+      "price": 81.03,
+      "chg": -1.40135
     },
     "hyperliquid": {
-      "price": 69.62,
-      "chg": -1.43251
+      "price": 69.21,
+      "chg": -1.47741
     },
     "dogecoin": {
-      "price": 0.077118,
-      "chg": -0.76931
+      "price": 0.076973,
+      "chg": -1.9503
     },
     "chainlink": {
-      "price": 7.98,
-      "chg": -0.46988
+      "price": 7.95,
+      "chg": -1.65224
     },
     "sui": {
-      "price": 0.756818,
-      "chg": -1.0189
+      "price": 0.753712,
+      "chg": -1.83835
     },
     "uniswap": {
       "price": 3.15,
-      "chg": -2.61535
+      "chg": -2.90414
     },
     "world-liberty-financial": {
-      "price": 0.060071,
-      "chg": 6.46655
+      "price": 0.059557,
+      "chg": 5.5763
     },
     "ondo-finance": {
-      "price": 0.329465,
-      "chg": -1.18722
+      "price": 0.32694,
+      "chg": -3.62534
     },
     "aave": {
-      "price": 89.43,
-      "chg": 0.22321
+      "price": 89.08,
+      "chg": -0.25701
     },
     "filecoin": {
-      "price": 0.78721,
-      "chg": -1.87649
+      "price": 0.784633,
+      "chg": -2.84847
     },
     "pendle": {
-      "price": 1.42,
-      "chg": -4.57731
+      "price": 1.41,
+      "chg": -4.59789
     },
     "zksync": {
-      "price": 0.01066654,
-      "chg": 0.0747
+      "price": 0.01057941,
+      "chg": -1.22716
     },
     "centrifuge": {
-      "price": 0.200428,
-      "chg": 0.12547
+      "price": 0.199355,
+      "chg": -0.80026
     },
     "NVDA": {
       "price": 194.83
@@ -276,10 +276,10 @@
     "solana": {
       "ath": "-72%",
       "athAbs": 293.31,
-      "rsi": 50
+      "rsi": 49
     },
     "hyperliquid": {
-      "ath": "-9%",
+      "ath": "-10%",
       "athAbs": 76.7
     },
     "dogecoin": {
