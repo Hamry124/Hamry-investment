@@ -1,6 +1,6 @@
 {
   "date": "2026-07-07",
-  "updated": "2026-07-07T10:21:00.237Z",
+  "updated": "2026-07-07T13:14:00.173Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 332000
     },
     "bitcoin": {
-      "price": 63381,
-      "chg": 0.93394
+      "price": 63253,
+      "chg": 2.58829
     },
     "ethereum": {
-      "price": 1781.57,
-      "chg": 0.93141
+      "price": 1775.46,
+      "chg": 2.26429
     },
     "ripple": {
-      "price": 1.13,
-      "chg": -1.08444
+      "price": 1.12,
+      "chg": 1.00972
     },
     "solana": {
-      "price": 81.32,
-      "chg": 1.36941
+      "price": 81.25,
+      "chg": 2.26065
     },
     "hyperliquid": {
-      "price": 71.74,
-      "chg": 2.05591
+      "price": 71.78,
+      "chg": 4.21389
     },
     "dogecoin": {
-      "price": 0.074983,
-      "chg": -2.41556
+      "price": 0.074577,
+      "chg": -0.30186
     },
     "chainlink": {
-      "price": 7.93,
-      "chg": 0.22873
+      "price": 7.9,
+      "chg": 1.62608
     },
     "sui": {
-      "price": 0.74283,
-      "chg": 0.39473
+      "price": 0.738391,
+      "chg": 2.11317
     },
     "uniswap": {
-      "price": 3.17,
-      "chg": 1.16587
+      "price": 3.16,
+      "chg": 2.52816
     },
     "world-liberty-financial": {
-      "price": 0.060388,
-      "chg": 4.22797
+      "price": 0.06068,
+      "chg": 5.73684
     },
     "ondo-finance": {
-      "price": 0.332263,
-      "chg": 0.84755
+      "price": 0.332762,
+      "chg": 2.24926
     },
     "aave": {
-      "price": 94.07,
-      "chg": 3.19647
+      "price": 92.51,
+      "chg": 2.51632
     },
     "filecoin": {
-      "price": 0.784827,
-      "chg": 0.42681
+      "price": 0.782593,
+      "chg": 2.41841
     },
     "pendle": {
-      "price": 1.46,
-      "chg": 6.32349
+      "price": 1.5,
+      "chg": 8.0122
     },
     "zksync": {
-      "price": 0.01119903,
-      "chg": 6.88155
+      "price": 0.01125694,
+      "chg": 5.2687
     },
     "centrifuge": {
-      "price": 0.192916,
-      "chg": -1.99053
+      "price": 0.192968,
+      "chg": 0.60557
     },
     "NVDA": {
       "price": 195.55
@@ -266,7 +266,7 @@
     "ethereum": {
       "ath": "-64%",
       "athAbs": 4946.05,
-      "rsi": 47
+      "rsi": 46
     },
     "ripple": {
       "ath": "-69%",
@@ -318,7 +318,7 @@
       "athAbs": 236.84
     },
     "pendle": {
-      "ath": "-81%",
+      "ath": "-80%",
       "athAbs": 7.5
     },
     "zksync": {
@@ -566,6 +566,22 @@
     }
   },
   "opts": {
+    "BTC": {
+      "maxPain": 28,
+      "pcr": 0.53,
+      "pcrVol": 0.06,
+      "maxPainTotal": 28,
+      "pcrTotal": 0.3,
+      "expiry": "7/17"
+    },
+    "ETH": {
+      "maxPain": 14.5,
+      "pcr": 0.22,
+      "pcrVol": 0.11,
+      "maxPainTotal": 16,
+      "pcrTotal": 0.24,
+      "expiry": "7/10"
+    },
     "NVDA": {
       "maxPain": 195,
       "pcr": 1.03,
@@ -751,11 +767,11 @@
       "expiry": "7/10"
     },
     "GLW": {
-      "maxPain": 220,
-      "pcr": 1.1,
+      "maxPain": 215,
+      "pcr": 0.77,
       "pcrVol": 0.36,
       "maxPainTotal": 170,
-      "pcrTotal": 0.9,
+      "pcrTotal": 0.87,
       "expiry": "7/10"
     },
     "CIEN": {
@@ -806,22 +822,6 @@
       "pcrTotal": 0.94,
       "expiry": "7/10"
     },
-    "BTC": {
-      "maxPain": 28,
-      "pcr": 0.53,
-      "pcrVol": 0.06,
-      "maxPainTotal": 28,
-      "pcrTotal": 0.3,
-      "expiry": "7/17"
-    },
-    "ETH": {
-      "maxPain": 14.5,
-      "pcr": 0.22,
-      "pcrVol": 0.11,
-      "maxPainTotal": 16,
-      "pcrTotal": 0.24,
-      "expiry": "7/10"
-    },
     "SOL": {
       "maxPain": 2.5,
       "pcr": 0.02,
@@ -848,7 +848,7 @@
       "ath": "-4%"
     },
     "Brent 유가": {
-      "price": 72.72,
+      "price": 72.78,
       "rsi": 48,
       "ath": "-51%"
     }
@@ -1121,10 +1121,8 @@
     "fundGot": 35,
     "krSI": "수동(KRX 해외IP 차단)",
     "errors": [
-      "옵션 BTC: HTTP 503",
-      "옵션 ETH: HTTP 503",
-      "옵션 SOL: HTTP 503",
-      "옵션 XRP: HTTP 503",
+      "옵션 SOL: 만기 없음",
+      "옵션 XRP: 만기 없음",
       "옵션 XRP(CBOE): HTTP 403"
     ]
   }
