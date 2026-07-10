@@ -1,6 +1,6 @@
 {
   "date": "2026-07-10",
-  "updated": "2026-07-10T20:18:03.113Z",
+  "updated": "2026-07-10T21:55:50.381Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 326000
     },
     "bitcoin": {
-      "price": 63784,
-      "chg": 0.96202
+      "price": 63968,
+      "chg": 1.20149
     },
     "ethereum": {
-      "price": 1791.48,
-      "chg": 2.67163
+      "price": 1793.18,
+      "chg": 2.70751
     },
     "ripple": {
       "price": 1.1,
-      "chg": 0.85221
+      "chg": 0.64209
     },
     "solana": {
-      "price": 77.84,
-      "chg": -0.19483
+      "price": 77.91,
+      "chg": -0.06555
     },
     "hyperliquid": {
-      "price": 67.03,
-      "chg": -0.10425
+      "price": 67.22,
+      "chg": -0.10551
     },
     "dogecoin": {
-      "price": 0.074112,
-      "chg": 1.54064
+      "price": 0.07406,
+      "chg": 1.06613
     },
     "chainlink": {
-      "price": 7.91,
-      "chg": 1.96599
+      "price": 7.94,
+      "chg": 2.34221
     },
     "sui": {
-      "price": 0.736794,
-      "chg": 2.64566
+      "price": 0.739326,
+      "chg": 2.95031
     },
     "uniswap": {
-      "price": 3.53,
-      "chg": 5.18793
+      "price": 3.56,
+      "chg": 4.36913
     },
     "world-liberty-financial": {
-      "price": 0.058067,
-      "chg": -0.10581
+      "price": 0.057988,
+      "chg": -0.54618
     },
     "ondo-finance": {
-      "price": 0.325738,
-      "chg": 2.51927
+      "price": 0.327296,
+      "chg": 3.33225
     },
     "aave": {
-      "price": 96.65,
-      "chg": 6.47961
+      "price": 97.26,
+      "chg": 7.33544
     },
     "filecoin": {
-      "price": 0.788522,
-      "chg": 0.99091
+      "price": 0.791123,
+      "chg": 1.07543
     },
     "pendle": {
       "price": 1.51,
-      "chg": -0.95766
+      "chg": -1.3003
     },
     "zksync": {
-      "price": 0.01056536,
-      "chg": 0.11188
+      "price": 0.01067306,
+      "chg": 1.42508
     },
     "centrifuge": {
-      "price": 0.1901,
-      "chg": -0.50872
+      "price": 0.191291,
+      "chg": 0.53443
     },
     "NVDA": {
       "price": 210.96
@@ -131,7 +131,7 @@
       "price": 159.07
     },
     "SMR": {
-      "price": 9.025
+      "price": 9.04
     },
     "OKLO": {
       "price": 48.85
@@ -152,7 +152,7 @@
       "price": 235.81
     },
     "GLW": {
-      "price": 190.85
+      "price": 190.89
     },
     "CIEN": {
       "price": 460.72
@@ -239,12 +239,12 @@
       "ath": "-30%"
     },
     "247540": {
-      "rsi": 34,
+      "rsi": 36,
       "athAbs": 584000,
       "ath": "-67%"
     },
     "267260": {
-      "rsi": 45,
+      "rsi": 44,
       "athAbs": 1430000,
       "ath": "-40%"
     },
@@ -254,7 +254,7 @@
       "ath": "-34%"
     },
     "373220": {
-      "rsi": 41,
+      "rsi": 40,
       "athAbs": 629000,
       "ath": "-48%"
     },
@@ -279,7 +279,7 @@
       "rsi": 48
     },
     "hyperliquid": {
-      "ath": "-13%",
+      "ath": "-12%",
       "athAbs": 76.7
     },
     "dogecoin": {
@@ -601,7 +601,7 @@
     "ASML": {
       "maxPain": 1795,
       "pcr": 1.49,
-      "pcrVol": 1.16,
+      "pcrVol": 1.13,
       "maxPainTotal": 1640,
       "pcrTotal": 1.3,
       "expiry": "7/10"
@@ -633,7 +633,7 @@
     "VRT": {
       "maxPain": 312.5,
       "pcr": 2.1,
-      "pcrVol": 0.63,
+      "pcrVol": 0.61,
       "maxPainTotal": 260,
       "pcrTotal": 1.05,
       "expiry": "7/10"
@@ -721,7 +721,7 @@
     "IONQ": {
       "maxPain": 46,
       "pcr": 1.51,
-      "pcrVol": 0.79,
+      "pcrVol": 0.83,
       "maxPainTotal": 50,
       "pcrTotal": 1.04,
       "expiry": "7/10"
@@ -769,7 +769,7 @@
     "GLW": {
       "maxPain": 200,
       "pcr": 0.63,
-      "pcrVol": 1.15,
+      "pcrVol": 1.16,
       "maxPainTotal": 170,
       "pcrTotal": 0.89,
       "expiry": "7/10"
@@ -785,7 +785,7 @@
     "COHR": {
       "maxPain": 332.5,
       "pcr": 1.1,
-      "pcrVol": 1.22,
+      "pcrVol": 1.23,
       "maxPainTotal": 330,
       "pcrTotal": 1.12,
       "expiry": "7/10"
@@ -848,7 +848,7 @@
       "ath": "-3%"
     },
     "Brent 유가": {
-      "price": 75.99,
+      "price": 76,
       "rsi": 50,
       "ath": "-48%"
     }
@@ -1085,7 +1085,7 @@
       "fper": "56.23배"
     },
     "GLW": {
-      "per": "37.67배",
+      "per": "37.68배",
       "fper": "23.44배"
     },
     "CIEN": {
