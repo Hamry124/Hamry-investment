@@ -1,6 +1,6 @@
 {
   "date": "2026-07-11",
-  "updated": "2026-07-11T09:21:34.077Z",
+  "updated": "2026-07-11T10:58:51.844Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 326000
     },
     "bitcoin": {
-      "price": 64197,
-      "chg": -0.14614
+      "price": 64122,
+      "chg": -0.38444
     },
     "ethereum": {
-      "price": 1797.8,
-      "chg": 0.7514
+      "price": 1796.81,
+      "chg": 0.02138
     },
     "ripple": {
       "price": 1.11,
-      "chg": -0.24549
+      "chg": -0.57533
     },
     "solana": {
-      "price": 78.11,
-      "chg": -1.12875
+      "price": 77.99,
+      "chg": -1.78707
     },
     "hyperliquid": {
       "price": 66.78,
-      "chg": -2.73953
+      "chg": -2.99068
     },
     "dogecoin": {
-      "price": 0.074288,
-      "chg": 0.31518
+      "price": 0.074455,
+      "chg": 0.0472
     },
     "chainlink": {
-      "price": 7.99,
-      "chg": 0.75929
+      "price": 7.98,
+      "chg": 0.03947
     },
     "sui": {
-      "price": 0.745749,
-      "chg": 2.49767
+      "price": 0.738918,
+      "chg": -0.87263
     },
     "uniswap": {
-      "price": 3.54,
-      "chg": 0.61263
+      "price": 3.58,
+      "chg": -0.15495
     },
     "world-liberty-financial": {
-      "price": 0.05817,
-      "chg": 0.6136
+      "price": 0.057986,
+      "chg": 0.14865
     },
     "ondo-finance": {
-      "price": 0.332367,
-      "chg": 3.45927
+      "price": 0.33124,
+      "chg": 1.84186
     },
     "aave": {
-      "price": 96.23,
-      "chg": 1.59906
+      "price": 96.98,
+      "chg": 0.07646
     },
     "filecoin": {
-      "price": 0.792754,
-      "chg": -0.00439
+      "price": 0.789554,
+      "chg": -1.17131
     },
     "pendle": {
-      "price": 1.56,
-      "chg": 1.22775
+      "price": 1.57,
+      "chg": 1.5409
     },
     "zksync": {
-      "price": 0.01078406,
-      "chg": 1.35553
+      "price": 0.01069804,
+      "chg": 0.59471
     },
     "centrifuge": {
-      "price": 0.192159,
-      "chg": -0.4353
+      "price": 0.19142,
+      "chg": -1.3211
     },
     "NVDA": {
       "price": 210.96
@@ -305,7 +305,7 @@
       "athAbs": 0.331336
     },
     "ondo-finance": {
-      "ath": "-84%",
+      "ath": "-85%",
       "athAbs": 2.14
     },
     "aave": {
@@ -569,7 +569,7 @@
     "BTC": {
       "maxPain": 28,
       "pcr": 0.54,
-      "pcrVol": 0.14,
+      "pcrVol": 0.15,
       "maxPainTotal": 28,
       "pcrTotal": 0.31,
       "expiry": "7/17"
