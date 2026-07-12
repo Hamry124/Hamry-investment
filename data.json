@@ -1,6 +1,6 @@
 {
   "date": "2026-07-12",
-  "updated": "2026-07-12T02:04:13.164Z",
+  "updated": "2026-07-12T05:50:40.706Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 326000
     },
     "bitcoin": {
-      "price": 64075,
-      "chg": 0.15334
+      "price": 63930,
+      "chg": -0.27718
     },
     "ethereum": {
-      "price": 1804.79,
-      "chg": 0.87465
+      "price": 1803.57,
+      "chg": 0.36849
     },
     "ripple": {
-      "price": 1.098,
-      "chg": -0.45491
+      "price": 1.094,
+      "chg": -1.02015
     },
     "solana": {
-      "price": 76.76,
-      "chg": -0.99168
+      "price": 76.45,
+      "chg": -1.71789
     },
     "hyperliquid": {
-      "price": 67.27,
-      "chg": 0.53662
+      "price": 67.14,
+      "chg": 0.93309
     },
     "dogecoin": {
-      "price": 0.07329,
-      "chg": -1.03412
+      "price": 0.073095,
+      "chg": -1.65827
     },
     "chainlink": {
-      "price": 7.96,
-      "chg": -0.00991
+      "price": 7.98,
+      "chg": -0.11554
     },
     "sui": {
-      "price": 0.729867,
-      "chg": -0.32159
+      "price": 0.732141,
+      "chg": -2.17842
     },
     "uniswap": {
-      "price": 3.66,
-      "chg": 4.72377
+      "price": 3.64,
+      "chg": 3.59522
     },
     "world-liberty-financial": {
-      "price": 0.058068,
-      "chg": 0.08746
+      "price": 0.05742,
+      "chg": -1.4817
     },
     "ondo-finance": {
-      "price": 0.325991,
-      "chg": -0.66038
+      "price": 0.325617,
+      "chg": -0.5763
     },
     "aave": {
-      "price": 98.74,
-      "chg": 4.08896
+      "price": 98.79,
+      "chg": 3.77273
     },
     "filecoin": {
-      "price": 0.779316,
-      "chg": -1.04094
+      "price": 0.788953,
+      "chg": 0.1766
     },
     "pendle": {
       "price": 1.53,
-      "chg": 0.3099
+      "chg": -1.20419
     },
     "zksync": {
-      "price": 0.01057169,
-      "chg": -1.16612
+      "price": 0.01056642,
+      "chg": -1.24402
     },
     "centrifuge": {
-      "price": 0.183034,
-      "chg": -4.25333
+      "price": 0.182929,
+      "chg": -4.63825
     },
     "NVDA": {
       "price": 210.96
@@ -301,7 +301,7 @@
       "athAbs": 44.92
     },
     "world-liberty-financial": {
-      "ath": "-82%",
+      "ath": "-83%",
       "athAbs": 0.331336
     },
     "ondo-finance": {
