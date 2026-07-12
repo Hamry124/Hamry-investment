@@ -17,6 +17,28 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1200px;margin:0 auto;padding:20px 14px 60px}
+/* ===== 넓은 화면(태블릿·갤럭시 폴드 펼침) 최적화 ===== */
+@media(min-width:1000px){
+  .wrap{max-width:1400px;padding:24px 32px 60px}
+  /* 섹터 종목 카드 2열 그리드 (닫힌 카드만 나란히, 펼치면 자연스럽게 확장) */
+  .scards{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:start}
+  /* 펼쳐진(open) 카드는 2열 전체 폭 사용 — 상세 데이터가 넓게 보이도록 */
+  .scard.open{grid-column:1 / -1}
+  /* 옵션 가이드 3열 */
+  .og-grid{grid-template-columns:1fr 1fr 1fr}
+  /* 여백·폰트 확대 */
+  .exec{padding:24px 28px}
+  .intro-card{padding:16px 20px}
+  /* 긴 매크로/개요 단락은 가독 폭(약 82자)으로 제한해 눈이 편하게 */
+  .intro-card p, .exec .exec-body p{max-width:82ch}
+  body{font-size:15px}
+}
+@media(min-width:1500px){
+  .wrap{max-width:1600px}
+  /* 초광폭에서 종목 카드 3열 */
+  .scards{grid-template-columns:1fr 1fr 1fr}
+  .scard.open{grid-column:1 / -1}
+}
 .mono{font-family:'JetBrains Mono',monospace}
 
 /* HEADER */
@@ -352,7 +374,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-06-30 · v1</div>
+<div class="corner-ver" id="cornerVer">발행 2026-07-12 · v1</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -378,7 +400,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-06-30 · v1 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-07-12 · v1 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -410,7 +432,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 <!-- EXEC SUMMARY -->
 <div class="block-title"><span class="bt-num">SUMMARY</span><h2>Executive Summary</h2><span class="bt-sub">두괄식 · 배경 / 진단 / 시장 환경</span></div>
 <div class="exec">
-  <div class="tldr"><span class="tchip" id="tldr-kospi">🇰🇷 KOSPI · 글로벌 반도체 매도 동조</span><span class="tchip" id="tldr-nasdaq">🇺🇸 Nasdaq 25,298 · 주간 -4.6% 5연속 하락</span><span class="tchip" id="tldr-btc">₿ BTC $60,170 · 호르무즈 개방·유가 급락</span></div>
+  <div class="tldr"><span class="tchip" id="tldr-kospi">🇰🇷 KOSPI · 글로벌 반도체 매도 동조</span><span class="tchip" id="tldr-nasdaq">🇺🇸 Nasdaq 25,833 · 주간 -4.6% 5연속 하락</span><span class="tchip" id="tldr-btc">₿ BTC $60,170 · 호르무즈 개방·유가 급락</span></div>
   <div class="row">
     <div>
       <h3>배경 (Background)</h3>
@@ -419,8 +441,9 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
       <p><b class="ph">③ 검은 월요일 → V반등 → 이틀 급락 (6/8~11)</b><br>6/8 코스피 장중 -8% <b>서킷브레이커</b>(저점 7,442·종가 7,484)에 시총 554조 증발 — 방아쇠는 ① 고용 서프라이즈(+172K)發 금리인상 우려 ② 호르무즈 아파치 헬기 격추發 유가 급등 ③ 환율 1,540원대.<br>6/9 <b style="color:var(--blue)">+8.18% V반등(8,097)</b> → 6/10 <b style="color:var(--red)">'검은 수요일' -4.52%(7,730·매도 사이드카)</b> → 6/11은 장중 7,900~7,613 널뛰기 끝에 +0.43%(7,764) 마감 — 일중 ±5~8% 변동이 일상화된 구간이며, VKOSPI(공포지수)는 사상 최고권이다(단일종목 레버리지 ETF가 변동성 증폭 요인).</p>
       <p><b class="ph">④ 인플레와 중동 — 종전 타결로 리스크 해소 (6/10~14)</b><br>5월 CPI는 <b>헤드라인 +4.2%</b>(3년 최고·에너지 기여 60%) vs <b>근원 +0.2% 예상 하회</b>로 갈렸고, 뒤이은 <b>PPI +6.5%</b>는 유가發 인플레가 도매 파이프라인에 들어왔음을 확인시켰다. 美의 이란 남부 보복 공습·이란 재보복 선언까지 겹치며 6/10 나스닥은 -2%대 하락 — <b style="color:var(--red)">호르무즈 봉쇄가 최대 꼬리 리스크</b>다.<br>이어 <b style="color:var(--blue)">6/14 종전 합의가 타결</b>되며 3개월 중동전이 종식 — 호르무즈 즉시 개방으로 <b style="color:var(--blue)">브렌트유가 $87(3월 이후 최저)까지 급락</b>, 인플레·금리 부담을 덜며 위험자산에 최대 호재다. 핵 검증체제는 후속 과제. 초점은 FOMC 6/17(동결 우세).<br><b>광통신은 NVIDIA $6.5B 투자로 역주행</b>, BTC는 $60K 붕괴 후 반등 시도. 변동성은 극대화됐지만 HBM 장기계약·AI capex의 구조적 추세는 유효하다.</p>
       <p><b class="ph">⑤ 앤트로픽 쇼크와 소버린 AI (6/12~14)</b><br>6/12 美 상무부가 앤트로픽 최상위 모델(Fable 5·Mythos 5)에 <b style="color:var(--red)">수출통제를 내려 전 세계 접속이 중단</b>됐다 — 상용 프런티어 모델에 수출통제를 적용한 첫 사례다(Opus 등 타 모델은 정상). '외국 빅테크 AI 의존 = 하루아침에 끊길 수 있다'는 인식이 각국에 각인되며 <b style="color:var(--blue)">소버린 AI(자국 AI 주권) 수요가 구조적으로 가속</b>됐다. 수혜는 둘로 갈린다 — 데이터에 관여하지 않는 중립 인프라 <b>네오클라우드(IREN·NBIS)</b>, 그리고 진영을 가리지 않고 팔리는 <b>'필수 장비'(GPU·ASIC·HBM·광·스위치 — NVDA·AVGO·MRVL·ANET·MU·SK하이닉스)</b>. 인식 변화는 접속 복구 여부와 무관하게 남는다.</p>
-      <p><b class="ph">⑥ 6월 4주 — 마이크론 서프라이즈 vs AI 비용 우려 (6/22~26)</b><br><b style="color:var(--blue)">마이크론이 메모리 슈퍼사이클을 입증</b>했다 — Q3 매출 $41.46B(4배 YoY·예상 $35.8B 상회)·EPS $25.11·Q4 가이던스 $50B로 시간외 +15~17%. 그러나 나스닥은 <b style="color:var(--red)">5거래일 연속 하락(주간 -4.6%·25,298)</b> — AI 데이터센터 capex 비용 우려, 오픈AI IPO 연기설(스페이스X 부진), SK하이닉스 $30B 美 상장(메모리 공급 부담)이 겹쳤다. 다우는 <b style="color:var(--blue)">주간 +0.6% 신고가</b>(방어주 순환매)로 AI 외 종목 로테이션이 진행됐다. <b>옵션 감마 구조가 결정적 신호</b> — QQQ 넷GEX <b style="color:var(--red)">−$9.93억(플립 아래)</b>로 지수 전체가 변동성 증폭·하락 가속에 취약. 숏 비율 높은 종목(NBIS·ASTS·IREN)의 적극매수 시그널은 펀더멘털이 아니라 변동성이 크다는 뜻이며, 리스크오프에선 양방향 베팅으로 읽어야 한다.</p>
-      <p><b class="ph">⑦ 6월 5주 — 현재 (6/29~7/3)</b><br>독립기념일(7/4) 휴장으로 단축 거래주. <b>7/3 비농업고용(NFP)</b>이 최대 변수 — 6월 고용이 5월 17.2만에서 둔화 전망, 케빈 워시 연준의 금리 경로에 직결. AI capex 비용 우려·오픈AI IPO 연기설 여진 속 방어주 로테이션 지속 여부 주목. 스페이스X 7/6 나스닥100 편입 예정. VIX 18.4·BTC $60K·WTI $69(호르무즈 개방)·금 $4,096.</p>
+      <p><b class="ph">⑥ 6월 4주 — 마이크론 서프라이즈 vs AI 비용 우려 (6/22~26)</b><br><b style="color:var(--blue)">마이크론이 메모리 슈퍼사이클을 입증</b>했다 — Q3 매출 $41.46B(4배 YoY·예상 $35.8B 상회)·EPS $25.11·Q4 가이던스 $50B로 시간외 +15~17%. 그러나 나스닥은 <b style="color:var(--red)">5거래일 연속 하락(주간 -4.6%·25,833)</b> — AI 데이터센터 capex 비용 우려, 오픈AI IPO 연기설(스페이스X 부진), SK하이닉스 $30B 美 상장(메모리 공급 부담)이 겹쳤다. 다우는 <b style="color:var(--blue)">주간 +0.6% 신고가</b>(방어주 순환매)로 AI 외 종목 로테이션이 진행됐다. <b>옵션 감마 구조가 결정적 신호</b> — QQQ 넷GEX <b style="color:var(--red)">−$9.93억(플립 아래)</b>로 지수 전체가 변동성 증폭·하락 가속에 취약. 숏 비율 높은 종목(NBIS·ASTS·IREN)의 적극매수 시그널은 펀더멘털이 아니라 변동성이 크다는 뜻이며, 리스크오프에선 양방향 베팅으로 읽어야 한다.</p>
+      <p><b class="ph">⑦ 6월 5주 — 현재 (6/29~7/3)</b><br>독립기념일(7/4) 휴장으로 단축 거래주. <b>7/3 비농업고용(NFP)</b>이 최대 변수 — 6월 고용이 5월 17.2만에서 둔화 전망, 케빈 워시 연준의 금리 경로에 직결. AI capex 비용 우려·오픈AI IPO 연기설 여진 속 방어주 로테이션 지속 여부 주목. 6월 고용이 5월 17.2만에서 <b style="color:var(--red)">5.7만(예상 11.3만 대폭 하회)</b>으로 3개월 과열 종료 — <b>7월 금리인상 확률 20% 미만으로 급락</b>했다. 케빈 워시의 워시 룰(선제 안내 폐지·시장 구제 없음)에 따라 이는 인하 약속이 아니라 인상 차단이라는 안도로 해석됐다. 다우는 <b style="color:var(--blue)">사상 최고 52,900(주간 +2%)</b>이나 <b style="color:var(--red)">반도체 대량 청산(SOX -5.44%)</b> — 샌디스크 -14%·테슬라 -7.3%(인도량 48만대 서프라이즈에도).</p>
+      <p><b class="ph">⑧ 7월 2주 — 현재: SK하이닉스 상장·중동 재점화 (7/6~10)</b><br><b style="color:var(--blue)">SK하이닉스 나스닥 데뷔(7/10)가 하이라이트</b> — $265억 조달로 <b>외국기업 사상 최대 IPO</b>, 공모가 $149→시초 $170(+17%)·종가 +13%. NVDA +3.5% 동반 강세로 AI 메모리 수요 재확인. 단 마이크론은 경쟁 우려로 약세 — 같은 메모리라도 승자가 갈렸다. <b style="color:var(--red)">美·이란 휴전 종료(7/8) 선언 후 공습 재개</b>로 브렌트 $76·WTI $71 반등·호르무즈 통행량 정상의 13%. 메타 주간 +15%(BofA: AI capex가 예상의 절반). <b style="color:var(--blue)">다우 53,000 돌파 신고가·나스닥 주간 +1.5% 반등</b>. S&P 어닝 +24% YoY 전망으로 실적시즌 개막 — 다음 주 워시 하원 증언·주요 빅테크 실적이 방향타.</p>
     </div>
 
   </div>
@@ -473,21 +496,21 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-06-30 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-12 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-06-30 · v1</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-12 · v1</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
-const BASE_DATE="2026-06-30";
-const PUB_DATE="2026-06-30";  // 발행일
+const BASE_DATE="2026-07-12";
+const PUB_DATE="2026-07-12";  // 발행일
 const VERSION="v1";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
   {tk:"KOSPI",cgId:null,avSym:null,px:"7,764",rsi:43,ath:"-12%",opt:"watch",optTxt:"변동성 극심·반등 시도"},
   {tk:"S&P 500",cgId:null,avSym:null,px:"7,394",rsi:46,ath:"-3%",opt:"watch",optTxt:"협상 기대 급반등"},
-  {tk:"Nasdaq",cgId:null,avSym:null,px:"25,298",rsi:44,ath:"-5%",opt:"watch",optTxt:"협상 기대 급반등"},
+  {tk:"Nasdaq",cgId:null,avSym:null,px:"25,833",rsi:44,ath:"-5%",opt:"watch",optTxt:"협상 기대 급반등"},
   {tk:"BTC",cgId:"bitcoin",avSym:null,px:"$62,000",rsi:32,ath:"-51%",opt:"buy",optTxt:"극단공포·바닥다지기"},
 ];
 
@@ -495,7 +518,7 @@ const IDXDATA=[
 const IDX=[
   {l:"KOSPI",v:"7,764",x:"+0.43% 반등 마감",c:"var(--muted)"},
   {l:"S&P 500",v:"7,394",x:"급반등 +1.75%",c:"var(--muted)"},
-  {l:"Nasdaq",v:"25,298",x:"급반등 +2.54%",c:"var(--muted)"},
+  {l:"Nasdaq",v:"25,833",x:"급반등 +2.54%",c:"var(--muted)"},
   {l:"BTC",v:"$62,000",x:"ATH -51% 극단공포",c:"var(--muted)",cgId:"bitcoin"},
   {l:"공포·탐욕",id:"FNG",v:"—",x:"로드 시 자동",c:"var(--muted)"},
   {l:"BTC 도미넌스",id:"BTCD",v:"—",x:"로드 시 자동",c:"var(--muted)"},
@@ -536,7 +559,7 @@ const OPT={
 const STOCKS={
  kr:[
   {sector:"반도체", desc:"NVDA $81.6B 서프라이즈로 HBM 수요 재확인. 6/3~5 AI·반도체 급락 조정에도 HBM 장기공급계약 기반 슈퍼사이클은 지속(월가 삼성전자 목표가 85만원 상향). SK하이닉스·삼성전자는 글로벌 AI주 중 최저 멀티플.", rows:[
-   {g:"S",tk:"SK하이닉스",px:"2,215,000원",ath:"-5%",mp:"N/A",pcr:"0.92*",rsi:"58",per:"9.2배",fper:"6.79배",key:"HBM 점유 57%",issue:"HBM3E 독점 공급으로 Q1 영업이익률 72%(NVDA 추월)를 기록한 메모리 슈퍼사이클 절대 강자. 캐시 우드가 \u2018AI 혁명의 심장\u2019으로 지목, HBM4 완판·양산 가속으로 NVDA향 차세대 메모리 선점. 12개월 선행 PER 5~6배로 글로벌 동종 대비 저평가",krCode:"000660"},
+   {g:"S",tk:"SK하이닉스",px:"2,215,000원",ath:"-5%",mp:"N/A",pcr:"0.92*",rsi:"58",per:"9.2배",fper:"6.79배",key:"HBM 점유 57%",issue:"HBM3E 독점 공급으로 Q1 영업이익률 72%(NVDA 추월)를 기록한 메모리 슈퍼사이클 절대 강자. 7/10 나스닥 데뷔로 외국기업 사상 최대 $265억 IPO(+13%)·美 자본시장 직접 편입. HBM4 완판·양산 가속으로 NVDA향 차세대 메모리 선점, 곽노정 CEO는 메모리 부족이 2030년 이후까지 지속 전망. 12개월 선행 PER 5~6배로 글로벌 동종 대비 저평가",krCode:"000660"},
    {g:"S",tk:"삼성전자",px:"322,000원",ath:"-4%",mp:"285,000원",pcr:"0.88",rsi:"60",per:"11.5배",fper:"6.77배",key:"Q1 매출 133.87조",issue:"Q1 영업이익 57.2조(YoY +756%)로 분기 매출 100조+영업이익 50조를 한국 기업 최초 동시 돌파. HBM3E의 NVDA 퀄 통과에 더해 테슬라 AI6 칩 165억 달러(22.8조원) 파운드리 계약·AMD HBM4 동맹으로 메모리·파운드리 이중 레버리지. 테일러 2나노 양산 2027 하반기가 실적 변곡점",krCode:"005930"},
   ]},
   {sector:"이차전지", desc:"EV 단일 슈퍼사이클 종료 후 삼중 역풍. 그러나 휴머노이드 상용화·북미 AI DC ESS 수요·전고체 양산 3가지 구조 변화가 동시 발생했다.", rows:[
@@ -579,22 +602,22 @@ const STOCKS={
    {g:"A",tk:"ASML",px:"$850",ath:"-15%",mp:"$830",pcr:"1.10",per:"38배",fper:"33배",rsi:"55",key:"EUV 전세계 독점",issue:"EUV 노광장비 전세계 유일 독점으로 HBM4·2nm 등 첨단 공정의 필수 관문. 메모리 슈퍼사이클과 AI 칩 미세화의 구조적 수혜주, 장기 보유 적합",optKey:"ASML",avSym:"ASML"},
   ]},
   {sector:"메모리", desc:"AI 서버는 메모리 8~10배 사용. HBM 라인 전용화 → 범용 DRAM 공급 부족 → 계약가 급등. Q1 DRAM 계약가 QoQ +90~95% 폭등.", rows:[
-   {g:"A",tk:"Micron (MU)",px:"$1,214",ath:"-3%",mp:"$1,090",pcr:"2.05",per:"20배",fper:"18배",rsi:"62",key:"미국 유일 DRAM",issue:"Q2 FY26 매출 $23.9B(약 3배)·GM 74.4%로 메모리 슈퍼사이클 폭발. 2026 HBM 물량(HBM4 포함) 완판, NVDA Vera Rubin향 HBM4 출하 개시, 미국 유일 DRAM 제조 희소성",si:"3.7",optKey:"MU",avSym:"MU"},
-   {g:"B",tk:"SanDisk (SNDK)",px:"$2,335",ath:"-7%",mp:"$2,045",pcr:"1.98",per:"24배",fper:"22배",rsi:"58",key:"NAND 순수 플레이어",issue:"WD에서 분사한 NAND 순수 플레이어, 분기 매출 +251% YoY·데이터센터 매출 급증. AI 데이터 저장 수요로 NAND 가격 반등에 직접 수혜, 변동성 큰 소형주",si:"7.5",optKey:"SNDK",avSym:"SNDK"},
+   {g:"A",tk:"Micron (MU)",px:"$1,150",ath:"-3%",mp:"$1,090",pcr:"2.05",per:"20배",fper:"18배",rsi:"62",key:"미국 유일 DRAM",issue:"Q2 FY26 매출 $23.9B(약 3배)·GM 74.4%로 메모리 슈퍼사이클 폭발. 2026 HBM 물량(HBM4 포함) 완판, NVDA Vera Rubin향 HBM4 출하 개시, 미국 유일 DRAM 제조 희소성",si:"3.7",optKey:"MU",avSym:"MU"},
+   {g:"B",tk:"SanDisk (SNDK)",px:"$2,050",ath:"-7%",mp:"$2,045",pcr:"1.98",per:"24배",fper:"22배",rsi:"58",key:"NAND 순수 플레이어",issue:"WD에서 분사한 NAND 순수 플레이어, 분기 매출 +251% YoY·데이터센터 매출 급증. AI 데이터 저장 수요로 NAND 가격 반등에 직접 수혜, 변동성 큰 소형주",si:"7.5",optKey:"SNDK",avSym:"SNDK"},
   ]},
   {sector:"전력 · AI 데이터센터", desc:"AI 인프라는 가치사슬. 전력·냉각(VRT) → 메모리 → 연산 임대(IREN) 순으로 자금이 흐른다.", rows:[
    {g:"B",tk:"IREN",px:"$48",ath:"-23%",mp:"$53",pcr:"2.30",per:"GAAP 적자",fper:"EV/EBITDA 5배",rsi:"45",key:"북미 베어메탈·소버린",issue:"MS $9.7B + NVDA $5.5B 직접 계약 확보, 2026 말 14만 GPU 목표. 채굴에서 AI 연산 임대로 전환한 네오클라우드 + 숏커버 잠재, 단 구글 자본확충은 밸류 변수",si:"19.7",optKey:"IREN",avSym:"IREN"},
    {g:"B",tk:"Vertiv (VRT)",px:"$326",ath:"-2%",mp:"$320",pcr:"1.64",per:"70배",fper:"54배",rsi:"55",key:"AI DC 전력·냉각 1위",issue:"백로그 $15B(전년 2배)·2026 매출 가이던스 $13.25~13.75B, 전력과 냉각을 동시 제공하는 유일 대형사. NVDA GB200 레퍼런스 협력 + 직접칩 액침냉각 표준화로 AI 시대의 전력회사, 단 밸류 부담",si:"4.0",optKey:"VRT",avSym:"VRT"},
    {g:"B",tk:"GE Vernova",px:"$990",ath:"-8%",mp:"$960",pcr:"0.88",per:"56배",fper:"45배",rsi:"74",key:"Q1 EPS 서프라이즈",issue:"데이터센터 전동화 수주 $2.4B(2025년 연간 초과)·전사 백로그 $163B. 가스터빈→변압기→800V DC까지 전력 풀스택 보유한 AI 전력 수요의 구조적 수혜주, 단 밸류 부담",optKey:"GEV",avSym:"GEV"},
    {g:"A",tk:"CoreWeave",px:"$114",ath:"-3%",mp:"$110",pcr:"1.05",per:"적자",fper:"백로그 $99B",rsi:"52",key:"백로그 $99B",issue:"백로그 ~$100B(Meta $21B·Anthropic 다년 계약)로 트레이닝 연산 1위 네오클라우드. 단 부채 $25B+오프밸런스 리스 $34B·MS 의존이라는 이중 리스크",optKey:"CRWV",avSym:"CRWV"},
-   {g:"B",tk:"Nebius (NBIS)",px:"$257",ath:"-15%",mp:"$270",pcr:"2.06",per:"적자",fper:"68배",rsi:"55",key:"유럽 소버린·+841%",issue:"Q1 매출 +841% YoY·2026 ARR 가이던스 $7~9B, Meta $27B 5년 계약 확보. 추론 특화 수직통합 AI 클라우드로 CRWV 대비 견고한 재무, 단 극단 고평가",si:"25.2",optKey:"NBIS",avSym:"NBIS"},
+   {g:"B",tk:"Nebius (NBIS)",px:"$225",ath:"-15%",mp:"$270",pcr:"2.06",per:"적자",fper:"68배",rsi:"55",key:"유럽 소버린·+841%",issue:"Q1 매출 +841% YoY·2026 ARR 가이던스 $7~9B, Meta $27B 5년 계약 확보. 추론 특화 수직통합 AI 클라우드로 CRWV 대비 견고한 재무, 단 극단 고평가",si:"25.2",optKey:"NBIS",avSym:"NBIS"},
   ]},
   {sector:"우주 · 위성", desc:"스페이스X 역대 최대 IPO(공모가 $135·첫날 +19%·$750억 조달)로 우주·위성 밸류체인 전체가 재평가. 정부 예산 + 상업 위성통신(LEO) 구조적 성장 — 단 대형 IPO發 수급 분산과 적자 기업 고평가 논란이 단기 변수. 직접 비교 대상 ASTS·RKLB의 상대 강도 주목.", rows:[
    {g:"B",tk:"AST SpaceMobile (ASTS)",px:"$66",ath:"상승중",mp:"$71",pcr:"0.43",rsi:"-",per:"적자",fper:"적자",key:"위성-스마트폰 직접통신",issue:"FCC 직접통신 상용 승인(4월)·AT&T·버라이즌 제휴, 계약 매출 $1.2B+·현금 $3.9B. 위성-스마트폰 직접통신 선두 + 숏스퀴즈 잠재, 단 New Glenn 발사 차질로 일정 리스크",optKey:"ASTS",avSym:"ASTS"},
    {g:"B",tk:"Rocket Lab (RKLB)",px:"$81",ath:"상승중",mp:"$90",pcr:"0.58",per:"적자",fper:"적자",rsi:"58",key:"소형 발사체 1위",issue:"백로그 $2.2B(1Q 36개 신규 발사 수주)·FY25 매출 $601.8M(+38%)로 SpaceX 다음 가는 발사체 2위. Electron 흥행 + Neutron 중형 발사체 데뷔 임박이 멀티플 동력",si:"6.0",optKey:"RKLB",avSym:"RKLB"},
   ]},
   {sector:"EV · 자율주행", desc:"신규 편입. 휴머노이드·로보택시 서사. TSLA는 한국 이차전지(LG엔솔·삼성SDI) 4680 공급과 직결된다.", rows:[
-   {g:"B",tk:"Tesla (TSLA)",px:"$375",ath:"-2.7%",mp:"$380",pcr:"0.86",per:"95배",fper:"75배",rsi:"48",key:"옵티머스·로보택시",issue:"로보택시 무인 운행을 댈러스·휴스턴으로 확대, 옵티머스 Q2 프리몬트 양산 개시(2026 5만~10만대 목표). 한국 이차전지(LG엔솔·삼성SDI) 4680 공급과 직결, 단 규제·실행·$25B 캐펙스 리스크",si:"3.0",optKey:"TSLA",avSym:"TSLA"},
+   {g:"B",tk:"Tesla (TSLA)",px:"$360",ath:"-2.7%",mp:"$380",pcr:"0.86",per:"95배",fper:"75배",rsi:"48",key:"옵티머스·로보택시",issue:"로보택시 무인 운행을 댈러스·휴스턴으로 확대, 옵티머스 Q2 프리몬트 양산 개시(2026 5만~10만대 목표). 한국 이차전지(LG엔솔·삼성SDI) 4680 공급과 직결, 단 규제·실행·$25B 캐펙스 리스크",si:"3.0",optKey:"TSLA",avSym:"TSLA"},
   ]},
   {sector:"스테이블코인 인프라", desc:"스테이블코인 총공급 $320B+ 사상최고권 + 결제통합 EO·CLARITY 제도화 진행. 금리↑=USDC 이자수입↑인 유일한 역발상 자산이 CRCL.", rows:[
    {g:"S",tk:"Circle (CRCL)",px:"$69",ath:"-62%",mp:"$75",pcr:"0.50",per:"흑자",fper:"P/S 7배",rsi:"50",key:"USDC 점유 27%",issue:"USDC 세계 최대 규제 스테이블코인(공급 ~$80B)·SEC 자본 인정으로 제도권 핵심 인프라. GENIUS·CLARITY 제도화 + 준비금 이자수입(금리↑ 수혜)이라는 역발상 구조",si:"11.9",optKey:"CRCL",avSym:"CRCL"},
@@ -615,7 +638,7 @@ const STOCKS={
   ]},
   {sector:"광통신 (데이터센터 인터커넥트)", desc:"AI 데이터센터의 진짜 핵심 관문은 '연산'이 아니라 '데이터 이동' — 전력의 약 60%가 비트 전송에 쓰인다. 로스·와트를 줄이는 광통신 밸류체인(소재→광원→모듈→DSP→시스템)이 AI 인프라의 혈관으로 재평가. NVIDIA가 6선에 직접 투자해 수직 장악(MRVL·COHR·LITE 각 ~$2B, GLW ~$3억). 앤트로픽 쇼크(6/12)發 소버린 AI 가속으로 ASIC·광·스위치 등 진영 무관 '필수 장비' 수요 동반 확대.", rows:[
    {g:"A",tk:"Marvell (MRVL)",px:"$281",ath:"-11%",mp:"$285",pcr:"1.49",per:"100배",fper:"67배",rsi:"55",key:"PAM4 DSP·맞춤형 XPU",issue:"광신호를 디지털로 복원하는 PAM4 DSP와 하이퍼스케일러 맞춤형 XPU 설계의 과점적 두뇌. Celestial AI 인수로 포토닉 패브릭 기반 스케일업까지 확장, NVIDIA NVLink Fusion 공인 파트너·S&P500 편입. 데이터센터 편중과 거대 경쟁사 대비 투자 체력이 변수",si:"4.5",optKey:"MRVL",avSym:"MRVL"},
-   {g:"A",tk:"Corning (GLW)",px:"$228",ath:"-7%",mp:"$200",pcr:"0.97",per:"45배",fper:"28배",rsi:"60",key:"광섬유 원천 독과점",issue:"AI 네트워크 물리계층 — 빛이 지나는 길(광섬유)을 만드는 소재 독과점. 수십 년 축적한 소재 과학·대규모 생산능력이 복제 불가능한 해자이며, Amazon·Meta 다년 대형계약과 NVIDIA 광섬유 공장 투자로 수요 가시성 확보. 저변동+이익 급증의 균형(S 후보), 비AI 사업 경기 민감성이 희석 요인",si:"3.0",optKey:"GLW",avSym:"GLW"},
+   {g:"A",tk:"Corning (GLW)",px:"$205",ath:"-7%",mp:"$200",pcr:"0.97",per:"45배",fper:"28배",rsi:"60",key:"광섬유 원천 독과점",issue:"AI 네트워크 물리계층 — 빛이 지나는 길(광섬유)을 만드는 소재 독과점. 수십 년 축적한 소재 과학·대규모 생산능력이 복제 불가능한 해자이며, Amazon·Meta 다년 대형계약과 NVIDIA 광섬유 공장 투자로 수요 가시성 확보. 저변동+이익 급증의 균형(S 후보), 비AI 사업 경기 민감성이 희석 요인",si:"3.0",optKey:"GLW",avSym:"GLW"},
    {g:"A",tk:"Ciena (CIEN)",px:"$462.02",ath:"-27%",mp:"$475",pcr:"0.95",per:"146배",fper:"56배",rsi:"47",key:"WaveLogic 6 단일파장 1.6T",issue:"데이터센터 간 장거리·대용량 전송(DCI)의 설계자. 단일 파장 1.6T 코히어런트(WaveLogic 6)로 같은 광섬유에 더 많은 데이터를 싣는 효율 경쟁을 주도. 현금흐름 안정형 중추로 멀티플 부담이 상대적으로 낮으나, 통신사 CAPEX 사이클·대형 프로젝트 인식 시점에 분기 실적 변동",optKey:"CIEN",avSym:"CIEN"},
    {g:"B",tk:"Coherent (COHR)",px:"$390",ath:"-11%",mp:"$400",pcr:"1.15",per:"176배",fper:"50배",rsi:"60",key:"800G·1.6T 트랜시버 1위",issue:"800G·1.6T 광트랜시버 세계 1위. 인듐인(InP) 소재부터 모듈까지 수직 계열화로 공급 안정성·원가를 동시에 확보, 다수 장기계약으로 수주 사실상 마감. NVIDIA 대규모 투자로 장기 가시성 확보, 단 합병 차입 부담과 고변동이 리스크",optKey:"COHR",avSym:"COHR"},
    {g:"B",tk:"Lumentum (LITE)",px:"$895.40",ath:"-18%",mp:"$860",pcr:"1.05",per:"165배",fper:"57배",rsi:"55",key:"VCSEL·EML·OCS 광원",issue:"광통신의 출발점인 '빛'을 만드는 광원 원천기업(VCSEL·EML). 광회선 스위치(OCS) 백로그로 신성장 축 확보, NVIDIA Spectrum-X 공급으로 모멘텀 강. 흑자 전환 국면의 이익 변동성과 차입 부담이 변수",optKey:"LITE",avSym:"LITE"},
@@ -655,13 +678,13 @@ const STOCKS={
 
 
 const PARTS=[
- {id:"macro",ic:"🌐",name:"매크로",sub:"시황",intro:"사상최고(6/1 KOSPI 8,788) → 6/5 나스닥 -4.18%·반도체 $1조 증발 → 6/8 검은월요일 서킷브레이커(저점 7,442) → 6/9 +8.18% V반등(8,097) → 6/10 검은 수요일 -4.52%(7,730) → 6/11 +0.43%(7,764) 반등 마감. 6/12 트럼프 '공습 취소·합의 임박'發 뉴욕 급반등(나스닥 +2.54%)·유가 급락으로 완화 기대 부상. 고용 서프라이즈發 금리인상 우려 + 미·이란 교전 격화(아파치 격추→美 보복 공습→이란 재보복 선언, 호르무즈 리스크)가 진행형이며 5월 CPI는 헤드라인 4.2%(유가發) vs 근원 +0.2% 안정으로 갈려 6/14 美·이란 종전 합의 타결(호르무즈 즉시 개방)·브렌트유 $87 급락으로 중동 리스크 해소, FOMC 6/17(동결 우세)이 다음 분수령. 일중 ±5~8% 변동 구간 — 추격 금지·분할 매수·현금 20~30% 유지, NVIDIA가 떠받치는 광통신만 역주행 강세. 6/12 앤트로픽 쇼크(Fable·Mythos 수출통제)는 소버린 AI 수요를 구조적으로 가속 — 네오클라우드(IREN·NBIS)·필수 장비(AVGO·ANET) 수혜. 캐시 우드는 6/5 코스피 급락을 \u2018건전한 조정\u2019으로 평가하며 한국 AI·로봇·원전 다변화 강조. 케빈 워시 신임 연준 의장 첫 FOMC는 동결 유력이나, 유가發 인플레로 인하 지연 관측. 6월 4주 나스닥 -4.6%(5거래일 연속 하락)·VIX 18.4·BTC $60K·WTI $69(호르무즈 개방)·금 $4,096. 마이크론 호실적에도 AI 인프라 비용·오픈AI IPO 연기설로 반도체 약세, 방어주·다우 신고가 로테이션.",macro:true,idxTable:true,
+ {id:"macro",ic:"🌐",name:"매크로",sub:"시황",intro:"사상최고(6/1 KOSPI 8,788) → 6/5 나스닥 -4.18%·반도체 $1조 증발 → 6/8 검은월요일 서킷브레이커(저점 7,442) → 6/9 +8.18% V반등(8,097) → 6/10 검은 수요일 -4.52%(7,730) → 6/11 +0.43%(7,764) 반등 마감. 6/12 트럼프 '공습 취소·합의 임박'發 뉴욕 급반등(나스닥 +2.54%)·유가 급락으로 완화 기대 부상. 고용 서프라이즈發 금리인상 우려 + 미·이란 교전 격화(아파치 격추→美 보복 공습→이란 재보복 선언, 호르무즈 리스크)가 진행형이며 5월 CPI는 헤드라인 4.2%(유가發) vs 근원 +0.2% 안정으로 갈려 6/14 美·이란 종전 합의 타결(호르무즈 즉시 개방)·브렌트유 $87 급락으로 중동 리스크 해소, FOMC 6/17(동결 우세)이 다음 분수령. 일중 ±5~8% 변동 구간 — 추격 금지·분할 매수·현금 20~30% 유지, NVIDIA가 떠받치는 광통신만 역주행 강세. 6/12 앤트로픽 쇼크(Fable·Mythos 수출통제)는 소버린 AI 수요를 구조적으로 가속 — 네오클라우드(IREN·NBIS)·필수 장비(AVGO·ANET) 수혜. 캐시 우드는 6/5 코스피 급락을 \u2018건전한 조정\u2019으로 평가하며 한국 AI·로봇·원전 다변화 강조. 케빈 워시 신임 연준 의장 첫 FOMC는 동결 유력이나, 유가發 인플레로 인하 지연 관측. 7월 고용 쇼크(6월 NFP 5.7만)로 금리인상 확률 20% 미만·다우 53K 신고가. SK하이닉스 나스닥 데뷔($265억 사상 최대 외국 IPO, +13%)로 AI 메모리 재확인, 단 마이크론 경쟁 약세로 승자 차별화. 美·이란 휴전 종료(7/8)로 유가 반등(WTI $71). 실적시즌 개막(S&P +24% YoY 전망)·워시 하원 증언이 방향타.",macro:true,idxTable:true,
   events:[
-   {d:"06-30",dt:"이번 주",txt:"<b>6월 5주 (6/29~7/3) — 7월 고용·홀리데이 단축장</b><br>독립기념일(7/4) 휴장으로 단축 거래주. <b>7/3 비농업고용(NFP) 발표</b>가 최대 변수 — 6월 고용이 5월 17.2만에서 둔화 전망, 케빈 워시 연준의 금리 경로에 직결. AI capex 비용 우려·오픈AI IPO 연기설 여진 속 방어주·다우로의 로테이션 지속 여부 주목. 스페이스X 7/6 나스닥100 편입 예정",c:"amber"},
-   {d:"06-26",dt:"6월 4주",txt:"<b>6월 4주 (6/22~26) — 마이크론 서프라이즈 vs AI 비용 우려</b><br><b>마이크론 메모리 슈퍼사이클 입증</b> — Q3 매출 $41.46B(4배 YoY)·EPS $25.11·Q4 가이던스 $50B로 시간외 +15~17%. 그러나 나스닥은 <b>5거래일 연속 하락(주간 -4.6%·25,298)</b> — AI 데이터센터 capex 비용·오픈AI IPO 연기설·SK하이닉스 $30B 美 상장이 겹침. 다우는 주간 +0.6% 신고가(방어주 순환매). 옵션 감마상 QQQ 넷GEX −$9.93억(플립 아래)로 지수 전체 변동성 취약. 스페이스X 러셀1000 편입",c:"red"},
-   {d:"06-19",dt:"6월 3주",txt:"<b>6월 3주 (6/15~19) — 케빈 워시 첫 FOMC·한국 다변화</b><br><b>케빈 워시 신임 연준 의장 첫 FOMC(6/16-17) 동결</b>(시장 97% 반영) — 과거 매파였으나 'AI 생산성 혁명' 지지로 비둘기 전환 평가, 단 유가發 인플레로 인하 지연 관측. 캐시 우드 '한국은 AI 공급망의 심장' — 테슬라·삼성 165억 달러 AI6 파운드리 동맹 재조명. 로봇·원자력·바이오 다변화 축 제시",c:"green"},
-   {d:"06-12",dt:"6월 2주",txt:"<b>6월 2주 (6/8~12) — 앤트로픽 쇼크·중동 변동성·IPO 러시</b><br><b>앤트로픽 쇼크</b>: 美 상무부가 Fable 5·Mythos 5 수출통제로 전 세계 접속 중단 → 소버린 AI 수요 구조적 가속(네오클라우드 IREN·NBIS 수혜). 중동: 美·이란 종전 합의로 호르무즈 개방·브렌트 $87 급락. 코스피 검은월요일 서킷브레이커 후 V자 반등. 스페이스X IPO 역대 최대(첫날 +19%). 5월 CPI +4.2%·PPI +6.5% 인플레 재가속",c:"amber"},
-   {d:"06-05",dt:"6월 1주",txt:"<b>6월 1주 (6/1~5) — 반도체 급락·AI 거품 경고</b><br>Broadcom Q2 AI목표 미상향이 방아쇠 — <b>6/5 나스닥 -4.18%·반도체 $1.3조 증발</b>(NVDA 일시 $5조 붕괴). 5월 고용 서프라이즈로 금리 부담. 젠슨 황 광통신 언급+NVIDIA $6.5B 투자로 광통신 테마 부상. CLARITY Act 본회의 상정. AI 종목 '완벽한 가격' 경계감 확산",c:"red"},
+   {d:"07-12",dt:"이번 주",txt:"<b>7월 2주 (7/6~10) — SK하이닉스 상장·중동 재점화·실적시즌 개막</b><br><b>SK하이닉스 나스닥 데뷔(7/10)</b>: $265억 조달로 <b>외국기업 사상 최대 IPO</b>, 공모가 $149→시초 $170(+17%)·종가 +13%. NVDA +3.5% 동반 강세로 AI 메모리 수요 재확인, 단 마이크론은 경쟁 우려로 약세. <b>美·이란 휴전 '종료'(7/8)</b> 선언 후 공습 재개 — 브렌트 $76·WTI $71, 호르무즈 통행량 정상의 13%. 메타 주간 +15%(BofA: AI capex 예상의 절반). 다우 53,000 돌파 신고가·나스닥 주간 +1.5% 반등. S&P 어닝 +24% YoY 전망으로 실적시즌 개막",c:"green"},
+   {d:"07-03",dt:"7월 1주",txt:"<b>7월 1주 (6/29~7/3) — 고용 쇼크가 금리인상 차단·반도체 대량 청산</b><br><b>6월 비농업고용 5.7만(예상 11.3만 대폭 하회)</b>·실업률 4.2%로 3개월 과열 종료 → <b>7월 금리인상 확률 20% 미만으로 급락</b>(인상 차단이 안도 랠리 촉발). 케빈 워시 '워시 룰' — 선제 안내 폐지, 데이터를 보라·시장 구제 없다. 다우 사상 최고 52,900(주간 +2%)이나 <b>반도체 대량 청산(SOX -5.44%)</b>: 샌디스크 -14%·테슬라 -7.3%(인도량 48만대 서프라이즈에도). AI 밸류에이션 재평가·방어주 로테이션 심화. 독립기념일(7/4) 휴장",c:"amber"},
+   {d:"06-26",dt:"6월 4주",txt:"<b>6월 4주 (6/22~26) — 마이크론 서프라이즈 vs AI 비용 우려</b><br>마이크론 메모리 슈퍼사이클 입증(매출 $41.46B·4배 YoY·Q4 $50B, +15~17%)에도 나스닥 5거래일 연속 하락(-4.6%). AI capex 비용·오픈AI IPO 연기설·SK하이닉스 상장 예고가 반도체 압박. 다우 방어주 순환매 신고가. QQQ 넷GEX −$9.93억(플립 아래) 변동성 취약",c:"red"},
+   {d:"06-19",dt:"6월 3주",txt:"<b>6월 3주 (6/15~19) — 케빈 워시 첫 FOMC·한국 다변화</b><br>케빈 워시 신임 연준 의장 첫 FOMC(6/16-17) 동결. 과거 매파였으나 'AI 생산성 혁명' 지지로 비둘기 전환 평가. 캐시 우드 '한국은 AI 공급망의 심장' — 테슬라·삼성 165억 달러 AI6 파운드리 동맹, 로봇·원전·바이오 다변화 축 제시",c:"green"},
+   {d:"06-12",dt:"6월 2주",txt:"<b>6월 2주 (6/8~12) — 앤트로픽 쇼크·중동 변동성</b><br>앤트로픽 쇼크: 美 상무부 Fable 5·Mythos 5 수출통제로 소버린 AI 수요 구조적 가속(IREN·NBIS 수혜). 코스피 검은월요일 서킷브레이커 후 V자 반등. 스페이스X IPO 역대 최대. 5월 CPI +4.2% 인플레 재가속",c:"amber"},
   ]},
 ];
 
@@ -1122,7 +1145,7 @@ TABS.forEach((tab,i)=>{
           `<div style="font-size:13px;line-height:1.5;color:var(--text)">${badge?`<span style="display:inline-block;font-size:10px;font-weight:800;color:#fff;background:var(--navy);border-radius:4px;padding:1px 6px;margin-right:6px">${dd(e)}</span>`:''}<span style="color:var(--muted);font-weight:700;margin-right:4px">(${e.dt})</span>${title}</div>`+
           (body?`<div style="font-size:12.3px;line-height:1.6;color:var(--muted);margin-top:3px">${body}</div>`:'')+`</div>`;
       };
-      let h=`<div class="sector"><div class="sector-head"><span class="sh-num">EVT</span><h4>주차별 핵심 이벤트 (6/30 기준)</h4></div>`;
+      let h=`<div class="sector"><div class="sector-head"><span class="sh-num">EVT</span><h4>주차별 핵심 이벤트 (7/12 기준)</h4></div>`;
       h+=`<div style="display:flex;gap:10px;flex-wrap:wrap;margin:2px 0 9px;font-size:11px;color:var(--muted)"><span>좌측 바 기준 —</span><span>🔴 위험·조정</span><span>🔵 호재</span><span>🟠 중립·관망</span></div>`;
       if(upc.length) h+=`<div style="font-size:11px;font-weight:800;color:var(--navy);margin:4px 0 6px">📅 예정 이벤트</div><div style="display:flex;flex-direction:column;gap:7px;margin-bottom:12px">${upc.map(e=>item(e,true)).join('')}</div>`;
       h+=`<div style="font-size:11px;font-weight:800;color:var(--muted);margin:4px 0 6px">지난 이벤트 (최신순)</div><div style="display:flex;flex-direction:column;gap:7px">${past.map(e=>item(e,false)).join('')}</div></div>`;
@@ -1130,7 +1153,7 @@ TABS.forEach((tab,i)=>{
     })();
   } else {
     const intros={kr:"검은월요일(6/8) → V반등(6/9) → 검은 수요일(6/10) → 6/11 +0.43%(7,764) 반등 마감 — 일중 ±5~8% 변동·VKOSPI 사상 최고권. 6개 섹터를 현재가·밸류·주봉 RSI로 점검하며, 시세·RSI·ATH%·PER은 서버 자동갱신(장중 10분 주기), SI·맥스페인은 수동 운영. 패닉 구간엔 이익 가시성 대형주 분할이 합리.",
-      us:"나스닥 주간 -4.6%·5거래일 연속 하락(25,298)으로 AI capex 비용 우려가 시장 지배. 마이크론 어닝 서프라이즈(매출 $41.5B·4배 YoY, Q4 가이던스 $50B, +15~17%)에도 SK하이닉스 $30B 美 상장·오픈AI IPO 연기설이 메모리·반도체에 자금 압박. 다우는 주간 +0.6%(방어주 순환매)로 신고가 — AI 외 종목으로의 로테이션이 주간 핵심. <b>옵션 감마 구조상 QQQ 넷GEX −$9.93억(플립 아래) = 지수 전체가 변동성 증폭·하락 가속에 취약</b>. ATH 추격 금지·사이즈 축소가 거시 신호. 옵션은 맥스페인·PCR·감마로 단기 타이밍 보조.",
+      us:"7월 고용 쇼크(6월 NFP 5.7만·예상 11.3만 하회)로 금리인상 확률이 20% 미만으로 급락, 안도 랠리 속 다우 53,000 돌파 신고가. SK하이닉스 나스닥 데뷔(7/10·$265억 외국기업 사상 최대 IPO, +13%)로 AI 메모리 수요 재확인·NVDA +3.5%, 단 마이크론은 경쟁 우려 약세. 美·이란 휴전 종료(7/8)로 유가 반등(WTI $71). 실적시즌 개막(S&P +24% YoY 전망)이 방향타. <b>메모리도 승자가 갈리는 국면 — 같은 반도체라도 AI 근접도로 차별화</b>. ATH 추격 금지·실적 확인 후 분할. 옵션은 맥스페인·PCR·감마로 단기 타이밍 보조.",
       crypto:"BTC ATH -51%($62K)·공포탐욕 극단공포에서 바닥 다지기 — 4개 섹터(L1·RWA·DeFi·AI/정치자산) 17종. 상단 칩의 공포·탐욕지수·BTC 도미넌스·코인베이스 프리미엄으로 시장 심리를 실시간 확인. 극단 공포 + CLARITY 제도화가 분할 매수 논거, 알트는 도미넌스 하락 전환이 신호. 시세·RSI·ATH%는 CoinGecko 자동 갱신. 옵션(맥스페인·PCR)은 Deribit 상장 4종(BTC·ETH·SOL·XRP)만 자동 수집되며, 그 외 알트코인은 옵션 시장이 없어 RSI·ATH·성장·정성 4지표로 평가한다."};
     html2+=`<div class="intro-card"><span class="ic-tag">${tab.name} 개요</span><p style="color:#1d4ed8;font-weight:500">${intros[tab.id]}</p></div>`;
     STOCKS[tab.id].forEach((sec,si)=>{ html2+=sectorTable(sec,i,si); });
