@@ -159,6 +159,20 @@ table.dt tbody tr.hl3:hover{background:#fcd34d}
 /* 1행: 메달 + 종목명 + 이슈(한 줄) */
 .stk-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
 .stk-medal{font-size:16px;flex-shrink:0;line-height:1.2}
+
+.axis-panel{margin-top:8px;background:linear-gradient(135deg,#f8fafd,#f1f5fa);border:1px solid #dde5f0;border-radius:9px;padding:9px 11px;width:100%;box-sizing:border-box}
+.ax-head{font-size:10.5px;font-weight:800;color:#1e3a5f;margin-bottom:7px}
+.ax-row{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:10px}
+.ax-row.ax-na{opacity:.5}
+.ax-lbl{width:82px;flex-shrink:0;font-weight:700;color:#475569}
+.ax-bar{width:70px;flex-shrink:0;height:7px;background:#e5e9f0;border-radius:4px;overflow:hidden}
+.ax-fill{height:100%;border-radius:4px;transition:width .4s}
+.ax-val{width:24px;flex-shrink:0;text-align:right;font-weight:800;font-family:'JetBrains Mono',monospace;font-size:10.5px}
+.ax-note{font-size:8.5px;color:var(--muted);line-height:1.3;flex:1}
+.km-row{margin-top:8px;padding-top:8px;border-top:1px dashed #d4dcea;display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.km-title{font-size:9px;font-weight:800;color:#475569;margin-right:2px}
+.km-badge{font-size:9.5px;font-weight:700;padding:2px 8px;border:1.5px solid;border-radius:6px;background:#fff;white-space:nowrap}
+@media(max-width:560px){.ax-note{display:none}.ax-lbl{width:70px}}
 .stk-keytag{display:inline-block;font-size:10.5px;font-weight:700;color:#1d4ed8;background:#eff4ff;border:1px solid #c7d7fb;border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:middle;white-space:nowrap}
 .stk-nm{font-size:13.5px;font-weight:700;color:var(--navy);flex-shrink:0;white-space:nowrap}
 .stk-obadge{font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.3px;flex-shrink:0}
@@ -374,7 +388,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-07-12 · v1</div>
+<div class="corner-ver" id="cornerVer">발행 2026-07-13 · v1</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -400,7 +414,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-07-12 · v1 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-07-13 · v1 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -471,7 +485,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   </div>
   <div class="og-cheat">
     <div class="og-cheat-h">🎯 한 장 치트시트 — 가장 간단한 요약</div>
-    <div class="og-cheat-b"><b>넷GEX 마이너스(−) + 가격이 감마플립 아래 + 프리마켓 마이너스</b> → <b style="color:var(--red)">오늘은 거친 바다, 멀미 조심</b>. 평소보다 작게·천천히. 그리고 <b>실적(펀더멘털)과 옵션 신호는 다른 축</b> — 실적 강한 종목(MU)과 옵션 신호 센 종목(NBIS)은 서로 다른 이야기, 섞어서 보지 마세요.</div>
+    <div class="og-cheat-b"><b>넷GEX 마이너스(−) + 가격이 감마플립 아래 + 프리마켓 마이너스</b> → <b style="color:var(--red)">오늘은 거친 바다, 멀미 조심</b>. 평소보다 작게·천천히.<br><br><b style="color:#fbbf24">🎯 다축 분석(컨플루언스)</b> — 각 종목 카드를 펼치면 <b>4개 축</b>이 바(bar)로 표시됩니다: <b>📈가격</b>(RSI·ATH 위치)·<b>🏛️펀더멘털</b>(성장·정성)·<b>⚙️옵션수급</b>(PCR·맥스페인·숏스퀴즈)·<b>⚡감마변동성</b>(넷GEX·플립). <b>여러 축이 같은 방향(높은 점수)으로 겹칠 때가 신뢰도 최고</b>입니다. 예로 NBIS는 펀더멘털·옵션수급은 높지만 감마축이 낮아 = 좋은 회사지만 변동성이 크다는 뜻. <b>실적·가격·옵션·변동성은 서로 다른 축</b>이니 섞지 말고 각각 확인하세요. 넷GEX·맥스페인·피보나치 골든포켓은 카드에 <b>주요 가격지표</b>로 별도 표기됩니다.</div>
   </div>
 </div>
 </details>
@@ -496,14 +510,14 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-12 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-13 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-12 · v1</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-13 · v1</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
-const BASE_DATE="2026-07-12";
-const PUB_DATE="2026-07-12";  // 발행일
+const BASE_DATE="2026-07-13";
+const PUB_DATE="2026-07-13";  // 발행일
 const VERSION="v1";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
@@ -809,6 +823,83 @@ function qualOf(r){
   const nt=String(r.tk||'').replace(/\s*\(.*\)\s*/,'').trim();
   return QUAL[nt]!=null?QUAL[nt]:62;
 }
+
+// ═══════════════════════════════════════════════════════════
+// 다축 지표 스코어링 (기술적 지표 분석 가이드 반영)
+// 4개 분석 축: 가격 · 펀더멘탈 · 옵션수급 · 감마변동성
+// 각 축 0~100, 컨플루언스(겹침) 관점으로 종합
+// ═══════════════════════════════════════════════════════════
+function axisScores(r){
+  const pn=parseNum;
+  const opt=(r.optKey&&typeof OPT!=='undefined'&&OPT[r.optKey])?OPT[r.optKey]:{};
+
+  // ── ① 가격 축: RSI(모멘텀) + ATH위치(낙폭 여력) ──
+  const rsi=pn(r.rsi), ath=pn(r.ath);
+  let priceParts=[], priceNote=[];
+  if(!isNaN(rsi)){ const p=rsi<=30?100:rsi<40?85:rsi<50?70:rsi<60?55:rsi<70?40:25; priceParts.push(p);
+    priceNote.push(rsi<=30?'과매도 반등여력':rsi>=70?'과매수 주의':'중립'); }
+  if(!isNaN(ath)){ const ad=Math.abs(ath); const p=ad>=50?100:ad>=30?80:ad>=20?60:ad>=10?45:30; priceParts.push(p);
+    priceNote.push(ad>=30?'깊은 조정(낙폭여력)':ad<=10?'고점근접':'중간'); }
+  const priceScore=priceParts.length?Math.round(priceParts.reduce((a,b)=>a+b,0)/priceParts.length):null;
+
+  // ── ② 펀더멘탈 축: 성장 + 정성(기업 체력) ──
+  const g=growthOf(r), q=qualOf(r);
+  const fundScore=Math.round(g*0.6+q*0.4);
+  const fundNote=fundScore>=75?'우량·고성장':fundScore>=55?'견조':'취약/초기';
+
+  // ── ③ 옵션수급 축: PCR + 맥스페인 괴리 + 숏스퀴즈 ──
+  let optParts=[], optNote=[];
+  const pcr=pn(r.pcr);
+  if(!isNaN(pcr)){ const p=pcr>=1.5?100:pcr>=1.2?80:pcr>=1.0?65:pcr>=0.7?50:pcr>=0.5?40:25; optParts.push(p);
+    optNote.push(pcr>=1.2?'풋우위(공포/보험)':pcr<0.7?'콜우위(과열가능)':'균형'); }
+  const px=pn(r.px), mp=pn(r.mp);
+  if(!isNaN(px)&&!isNaN(mp)&&px>0){ const gap=(mp-px)/px*100; const p=gap>=10?100:gap>=5?80:gap>=0?60:gap>=-5?40:20; optParts.push(p);
+    optNote.push(gap>=5?'맥스페인 상방':gap<=-5?'맥스페인 하방(과열)':'근접'); }
+  if(opt.sqS!=null){ const p=opt.sqS>=70?90:opt.sqS>=50?70:opt.sqS>=30?50:35; optParts.push(p);
+    optNote.push(opt.sqS>=70?'숏스퀴즈 연료많음(양날)':'숏 보통'); }
+  const optScore=optParts.length?Math.round(optParts.reduce((a,b)=>a+b,0)/optParts.length):null;
+
+  // ── ④ 감마변동성 축: 넷GEX + 감마플립(변동성 체제) ──
+  let gammaScore=null, gammaNote=[];
+  if(opt.netGex!=null){
+    // 넷GEX 양수(안정)=높은 점수, 음수(불안정)=낮은 점수. 단 방향이 아니라 '안정성' 척도
+    const neg=opt.netGex<0;
+    // 플립 위(안정)면 가점, 아래(불안정)면 감점, 경계는 중립
+    const flipScore=opt.flip==='above'?85:opt.flip==='below'?30:opt.flip==='boundary'?50:50;
+    const gexStable=neg?35:80; // 음수는 변동성 증폭(불안정), 양수는 억제(안정)
+    gammaScore=Math.round((flipScore+gexStable)/2);
+    gammaNote.push(neg?'가속모드(거친바다)':'완충모드(잔잔)');
+    gammaNote.push(opt.flip==='above'?'플립 위(안정)':opt.flip==='below'?'플립 아래(불안정)':'플립 경계(변곡)');
+  }
+
+  return {
+    price:{score:priceScore, note:priceNote.join('·')},
+    fund:{score:fundScore, note:fundNote},
+    option:{score:optScore, note:optNote.join('·')},
+    gamma:{score:gammaScore, note:gammaNote.join('·')},
+    // 주요 가격지표(별도 표기용)
+    keyMetrics:{
+      netGex:opt.gexStr||null, flip:opt.flipKo||null,
+      maxPain:!isNaN(mp)?(mp>=1000?'$'+mp.toLocaleString():'$'+mp):null,
+      maxPainGap:(!isNaN(px)&&!isNaN(mp)&&px>0)?((mp-px)/px*100).toFixed(1)+'%':null,
+      fib:fibZone(r)
+    }
+  };
+}
+
+// 피보나치 되돌림 구간 추정 (ATH·현재가 기반 간이 계산)
+function fibZone(r){
+  const pn=parseNum; const ath=pn(r.ath);
+  if(isNaN(ath))return null;
+  const ad=Math.abs(ath); // ATH 대비 낙폭 %
+  // 낙폭을 되돌림으로 환산: 0%=고점(0 되돌림), 100%=전저점
+  // 골든포켓(38.2~61.8%)이 매수 관심
+  if(ad>=61.8)return {zone:'심층('+ad.toFixed(0)+'%)', gold:false, note:'61.8% 아래 깊은 되돌림'};
+  if(ad>=38.2)return {zone:'골든포켓('+ad.toFixed(0)+'%)', gold:true, note:'38.2~61.8% 매수 관심구간'};
+  if(ad>=23.6)return {zone:'얕은('+ad.toFixed(0)+'%)', gold:false, note:'23.6~38.2% 얕은 되돌림'};
+  return {zone:'고점권('+ad.toFixed(0)+'%)', gold:false, note:'고점 근접'};
+}
+
 function evalScore(r){
   // ── 6지표 가중 합산 = 100점 만점(환산 없음) · SI는 점수 제외, 표시 전용 ──
   const pn=parseNum;
@@ -849,7 +940,32 @@ function evalBadge(r){
   const e=evalScore(r);
   const col=e.grade==='S'?'#8a6d1a':e.grade==='A'?'#1e3a5f':'#64748b';
   const bg=e.grade==='S'?'#f7f0da':e.grade==='A'?'#e8edf5':'#eef2f7';
-  return `<span class="eval-pill" style="background:${bg};color:${col};border-color:${col}55" title="저평가 ${e.v} · 시그널 ${e.sig} · 성장 ${e.g} · 정성 ${e.ql}">📊 종합 ${e.sc} → ${e.grade}등급</span><span class="eval-bd">정량 ${e.quantPt} · 성장 ${e.growthPt} · 정성 ${e.qualPt}</span>`;
+  const axisHtml=axisPanel(r);
+  return `<span class="eval-pill" style="background:${bg};color:${col};border-color:${col}55" title="저평가 ${e.v} · 시그널 ${e.sig} · 성장 ${e.g} · 정성 ${e.ql}">📊 종합 ${e.sc} → ${e.grade}등급</span><span class="eval-bd">정량 ${e.quantPt} · 성장 ${e.growthPt} · 정성 ${e.qualPt}</span>${axisHtml}`;
+}
+
+// 4축 스코어 패널 + 주요 가격지표(넷GEX·맥스페인·피보나치 별도 표기)
+function axisPanel(r){
+  const a=axisScores(r);
+  const axisColor=v=>v==null?'var(--dim)':v>=70?'#059669':v>=50?'#0891b2':v>=35?'#d97706':'#dc2626';
+  const bar=(label,obj,icon)=>{
+    if(obj.score==null)return `<div class="ax-row ax-na"><span class="ax-lbl">${icon} ${label}</span><span class="ax-val">N/A</span></div>`;
+    return `<div class="ax-row"><span class="ax-lbl">${icon} ${label}</span><div class="ax-bar"><div class="ax-fill" style="width:${obj.score}%;background:${axisColor(obj.score)}"></div></div><span class="ax-val" style="color:${axisColor(obj.score)}">${obj.score}</span><span class="ax-note">${obj.note||''}</span></div>`;
+  };
+  // 주요 가격지표 배지 (넷GEX·맥스페인·피보나치)
+  const km=a.keyMetrics; let keyBadges='';
+  if(km.netGex){ const neg=km.netGex.includes('\u2212'); keyBadges+=`<span class="km-badge" style="border-color:${neg?'#dc2626':'#1d4ed8'};color:${neg?'#dc2626':'#1d4ed8'}">넷GEX ${km.netGex}${km.flip?' · '+km.flip:''}</span>`; }
+  if(km.maxPain){ keyBadges+=`<span class="km-badge" style="border-color:#0891b2;color:#0891b2">맥스페인 ${km.maxPain}${km.maxPainGap?'('+km.maxPainGap+')':''}</span>`; }
+  if(km.fib){ keyBadges+=`<span class="km-badge" style="border-color:${km.fib.gold?'#C9A227':'#94a3b8'};color:${km.fib.gold?'#a8841f':'#64748b'}" title="${km.fib.note}">피보 ${km.fib.zone}${km.fib.gold?' ★':''}</span>`; }
+
+  return `<div class="axis-panel">
+    <div class="ax-head">🎯 다축 분석 — 컨플루언스</div>
+    ${bar('가격',a.price,'📈')}
+    ${bar('펀더멘탈',a.fund,'🏛️')}
+    ${bar('옵션수급',a.option,'⚙️')}
+    ${bar('감마변동성',a.gamma,'⚡')}
+    ${keyBadges?`<div class="km-row"><span class="km-title">주요 가격지표</span>${keyBadges}</div>`:''}
+  </div>`;
 }
 function renderEval(){
   ['kr','us','crypto'].forEach(mk=>(STOCKS[mk]||[]).forEach(sec=>sec.rows.forEach(r=>{
