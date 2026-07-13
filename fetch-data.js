@@ -174,7 +174,7 @@ function expKey(s){ const m=s.match(/(\d+)([A-Z]+)(\d+)/); return new Date(2000+
 async function deribitOption(cur) {
   const j = await getJSON(`https://www.deribit.com/api/v2/public/get_book_summary_by_currency?currency=${cur}&kind=option`);
   const exp = {};
-  for (const o of (j.result||[])) { const m=o.instrument_name.match(/^[A-Z]+-(\d+[A-Z]+\d+)-(\d+)-([CP])$/); if(!m)continue; (exp[m[1]]=exp[m[1]]||[]).push({strike:+m[2],type:m[3],oi:o.open_interest||0,vol:o.volume||0}); }
+  for (const o of (j.result||[])) { const m=o.instrument_name.match(/^[A-Z]+(?:_USDC)?-(\d+[A-Z]+\d+)-(\d+(?:d\d+)?)-([CP])$/); if(!m)continue; const strike=parseFloat(m[2].replace("d",".")); (exp[m[1]]=exp[m[1]]||[]).push({strike,type:m[3],oi:o.open_interest||0,vol:o.volume||0}); }
   const keys = Object.keys(exp).sort((a,b)=>expKey(a)-expKey(b));
   if (!keys.length) throw new Error('만기 없음');
   const now = Date.now();
