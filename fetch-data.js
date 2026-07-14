@@ -171,7 +171,7 @@ function maxPainOf(opts) { // opts: [{strike,type:'C'/'P',oi,vol?}]
            pcrVol: callVol>0 ? +(putVol/callVol).toFixed(2) : 0 };
 }
 function expKey(s){ const m=s.match(/(\d+)([A-Z]+)(\d+)/); return new Date(2000+ +m[3], MONTHS[m[2]], +m[1]).getTime(); }
-async function deribitOption(cur) {
+async function deribitOption(cur, curPx) {
   const j = await getJSON(`https://www.deribit.com/api/v2/public/get_book_summary_by_currency?currency=${cur}&kind=option`);
   const exp = {};
   for (const o of (j.result||[])) { const m=o.instrument_name.match(/^[A-Z]+(?:_USDC)?-(\d+[A-Z]+\d+)-(\d+(?:d\d+)?)-([CP])$/); if(!m)continue; const strike=parseFloat(m[2].replace("d",".")); (exp[m[1]]=exp[m[1]]||[]).push({strike,type:m[3],oi:o.open_interest||0,vol:o.volume||0}); }
@@ -182,6 +182,13 @@ async function deribitOption(cur) {
   const front = maxPainOf(exp[near]);
   const all = []; keys.forEach(k => { if (expKey(k) > now) all.push(...exp[k]); });
   const total = all.length ? maxPainOf(all) : front;
+  // ★ 검증: 맥스페인이 현재가 대비 비상식적(40~250% 벗어남)이면 파싱 오류로 간주, 폐기
+  if (curPx && curPx > 0) {
+    const ratio = front.maxPain / curPx;
+    if (ratio < 0.4 || ratio > 2.5) {
+      throw new Error(`맥스페인 이상치 ${front.maxPain}(현재가 ${curPx} 대비 ${(ratio*100).toFixed(0)}%) — 파싱 오류 의심, 폐기`);
+    }
+  }
   return { maxPain: front.maxPain, pcr: front.pcr, pcrVol: front.pcrVol,
            maxPainTotal: total.maxPain, pcrTotal: total.pcr, expiry: near };
 }
@@ -214,10 +221,15 @@ async function cboeOption(sym) {
            maxPainTotal: total.maxPain, pcrTotal: total.pcr,
            expiry: `${expM}/${expD}` };
 }
-async function fetchOptions(usOptSyms, errors) {
+async function fetchOptions(usOptSyms, errors, cryptoPx) {
   const out = {};
+  // 통화→CoinGecko id 매핑(현재가 검증용)
+  const CG_MAP = { BTC:'bitcoin', ETH:'ethereum', SOL:'solana', XRP:'ripple' };
   // Deribit 옵션 지원 통화(BTC·ETH·SOL·XRP). 미지원 알트코인은 옵션 시장이 없어 자동 skip.
-  for (const cur of ['BTC','ETH','SOL','XRP']) { try { out[cur] = await deribitOption(cur); } catch (e) { errors.push(`옵션 ${cur}: ${e.message}`); } }
+  for (const cur of ['BTC','ETH','SOL','XRP']) {
+    const px = (cryptoPx && cryptoPx[CG_MAP[cur]]) ? cryptoPx[CG_MAP[cur]].price : null;
+    try { out[cur] = await deribitOption(cur, px); } catch (e) { errors.push(`옵션 ${cur}: ${e.message}`); }
+  }
   for (const sym of usOptSyms) {
     try { out[sym] = await cboeOption(sym); } catch (e) { errors.push(`옵션 ${sym}(CBOE): ${e.message}`); }
     await sleep(200);
@@ -328,7 +340,7 @@ async function fetchFX(errors) {
   // 옵션 수집 대상 = HTML의 optKey 전체(없으면 avSym). CBOE에 체인 없으면 개별 skip.
   // 종목 추가 시 목록 수정 불필요 — optKey/avSym만 있으면 자동 확장.
   const usOptSyms = (usOpt && usOpt.length) ? usOpt.slice() : us.slice();
-  try { opts = (await fetchOptions(usOptSyms, errors)) || {}; } catch (e) { errors.push('옵션: '+e.message); }
+  try { opts = (await fetchOptions(usOptSyms, errors, prices)) || {}; } catch (e) { errors.push('옵션: '+e.message); }
   try { macro = (await fetchFX(errors)) || {}; } catch (e) { errors.push('환율: '+e.message); }
   try { Object.assign(macro, (await fetchCPI(errors)) || {}); } catch (e) { errors.push('CPI: '+e.message); }
   try { Object.assign(si, (await fetchSI_US(us, errors)) || {}); } catch (e) { errors.push('US SI: '+e.message); }
