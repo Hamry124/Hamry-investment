@@ -144,7 +144,7 @@ async function fetchEquities(usSyms, krCodes, seedAthPct, prevTech, errors) {
 }
 
 /* ── 상단 지수 + IDXDATA (Yahoo) ───────────────────────────────── */
-const INDEX_MAP = { 'KOSPI':'^KS11', 'S&P 500':'^GSPC', 'Nasdaq':'^IXIC', 'Brent 유가':'BZ=F' };
+const INDEX_MAP = { 'S&P 500':'^GSPC', 'Nasdaq':'^IXIC', 'KOSPI':'^KS11', 'KOSDAQ':'^KQ11', 'WTI 유가':'CL=F', 'Brent 유가':'BZ=F' };
 async function fetchIndices(errors) {
   const out = {};
   for (const [name, ySym] of Object.entries(INDEX_MAP)) {
@@ -317,6 +317,16 @@ async function fetchFX(errors) {
   return {};
 }
 
+/* ── 공포·탐욕 지수 (서버에서 수집, CORS 제약 없음) ──────────────── */
+async function fetchFNG(errors) {
+  try {
+    const j = await getJSON('https://api.alternative.me/fng/?limit=1');
+    const d = j && j.data && j.data[0];
+    if (d && d.value != null) return { fng: Number(d.value), fngCls: d.value_classification };
+  } catch (e) { errors.push(`공포탐욕: ${e.message}`); }
+  return {};
+}
+
 /* ============================ 메인 ================================= */
 (async () => {
   let html;
@@ -342,6 +352,7 @@ async function fetchFX(errors) {
   const usOptSyms = (usOpt && usOpt.length) ? usOpt.slice() : us.slice();
   try { opts = (await fetchOptions(usOptSyms, errors, prices)) || {}; } catch (e) { errors.push('옵션: '+e.message); }
   try { macro = (await fetchFX(errors)) || {}; } catch (e) { errors.push('환율: '+e.message); }
+  try { Object.assign(macro, (await fetchFNG(errors)) || {}); } catch (e) { errors.push('공포탐욕: '+e.message); }
   try { Object.assign(macro, (await fetchCPI(errors)) || {}); } catch (e) { errors.push('CPI: '+e.message); }
   try { Object.assign(si, (await fetchSI_US(us, errors)) || {}); } catch (e) { errors.push('US SI: '+e.message); }
   // 한국 SI: KRX가 해외(GitHub) IP를 WAF 차단(응답 "LOGOUT")하여 자동 수집 불가 → 수동 운영
