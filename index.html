@@ -388,7 +388,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-07-14 · v1</div>
+<div class="corner-ver" id="cornerVer">발행 2026-07-14 · v2</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -414,7 +414,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-07-14 · v1 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-07-14 · v2 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -510,36 +510,39 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-14 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-14 · v2 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-14 · v1</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-14 · v2</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-07-14";
 const PUB_DATE="2026-07-14";  // 발행일
-const VERSION="v1";          // 버전 (수정 시 v# 증가)
+const VERSION="v2";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
-  {tk:"KOSPI",cgId:null,avSym:null,px:"7,764",rsi:43,ath:"-12%",opt:"watch",optTxt:"변동성 극심·반등 시도"},
-  {tk:"S&P 500",cgId:null,avSym:null,px:"7,394",rsi:46,ath:"-3%",opt:"watch",optTxt:"협상 기대 급반등"},
-  {tk:"Nasdaq",cgId:null,avSym:null,px:"25,833",rsi:44,ath:"-5%",opt:"watch",optTxt:"협상 기대 급반등"},
+  {tk:"S&P 500",cgId:null,avSym:null,px:"7,483",rsi:46,ath:"-1%",opt:"watch",optTxt:"실적시즌 개막"},
+  {tk:"Nasdaq",cgId:null,avSym:null,px:"25,833",rsi:44,ath:"-5%",opt:"watch",optTxt:"주간 +1.5% 반등"},
+  {tk:"KOSPI",cgId:null,avSym:null,px:"7,764",rsi:43,ath:"-12%",opt:"watch",optTxt:"SK하이닉스 상장 훈풍"},
+  {tk:"KOSDAQ",cgId:null,avSym:null,px:"794",rsi:38,ath:"-20%",opt:"watch",optTxt:"반도체 조정·연중 최저권"},
   {tk:"BTC",cgId:"bitcoin",avSym:null,px:"$62,000",rsi:32,ath:"-51%",opt:"buy",optTxt:"극단공포·바닥다지기"},
 ];
 
 // 상단 스트립 (지수 + 보조지표)
 const IDX=[
-  {l:"KOSPI",v:"7,764",x:"+0.43% 반등 마감",c:"var(--muted)"},
-  {l:"S&P 500",v:"7,394",x:"급반등 +1.75%",c:"var(--muted)"},
-  {l:"Nasdaq",v:"25,833",x:"급반등 +2.54%",c:"var(--muted)"},
+  {l:"S&P 500",v:"7,483",x:"실적시즌 개막 +0.2%",c:"var(--muted)"},
+  {l:"Nasdaq",v:"25,833",x:"주간 +1.5% 반등",c:"var(--muted)"},
+  {l:"KOSPI",v:"7,764",x:"SK하이닉스 상장 훈풍",c:"var(--muted)"},
+  {l:"KOSDAQ",v:"794",x:"반도체 조정·연중 최저권",c:"var(--muted)"},
   {l:"BTC",v:"$62,000",x:"ATH -51% 극단공포",c:"var(--muted)",cgId:"bitcoin"},
   {l:"공포·탐욕",id:"FNG",v:"—",x:"로드 시 자동",c:"var(--muted)"},
   {l:"BTC 도미넌스",id:"BTCD",v:"—",x:"로드 시 자동",c:"var(--muted)"},
   {l:"코인베이스 프리미엄",id:"CBP",v:"—",x:"BTC · 로드 시 자동 계산",c:"var(--muted)"},
-  {l:"Brent 유가",v:"$87",x:"종전 타결·3월來 최저",c:"var(--muted)"},
+  {l:"WTI 유가",v:"$71",x:"중동 재점화·반등",c:"var(--muted)"},
+  {l:"Brent 유가",v:"$76",x:"휴전 종료·공급 우려",c:"var(--muted)"},
   {l:"美 CPI",v:"4.2%",x:"5월 헤드라인 4.2%·근원 안정",c:"var(--muted)"},
-  {l:"환율 USDKRW",v:"1,517원",x:"원화 강세 전환",c:"var(--muted)"},
+  {l:"환율 USDKRW",v:"1,494원",x:"원화 강세 전환",c:"var(--muted)"},
 ];
 
 // 옵션 신호 데이터 (전체 확장: 미국 13 + 크립토 8 + S등급 공통)
@@ -1363,11 +1366,22 @@ function markLiveCells(prices){
   });
 }
 
-// 공포·탐욕 지수: alternative.me 무료 API(브라우저 CORS 허용)
+// 공포·탐욕 지수: alternative.me 무료 API + 실패 시 CORS 프록시 폴백
 async function fetchFNG(){
-  const j=await fetch('https://api.alternative.me/fng/?limit=1').then(r=>r.json());
-  const d=j&&j.data&&j.data[0]; if(!d) throw new Error('FNG');
-  return {val:Number(d.value), cls:d.value_classification};
+  // 1차: 직접 호출
+  try{
+    const j=await fetch('https://api.alternative.me/fng/?limit=1',{cache:'no-store'}).then(r=>r.json());
+    const d=j&&j.data&&j.data[0];
+    if(d&&d.value!=null) return {val:Number(d.value), cls:d.value_classification};
+  }catch(e){}
+  // 2차: CORS 프록시 폴백(직접 호출이 CORS/혼합콘텐츠로 막힐 때)
+  try{
+    const url=encodeURIComponent('https://api.alternative.me/fng/?limit=1');
+    const j=await fetch('https://corsproxy.io/?'+url,{cache:'no-store'}).then(r=>r.json());
+    const d=j&&j.data&&j.data[0];
+    if(d&&d.value!=null) return {val:Number(d.value), cls:d.value_classification};
+  }catch(e){}
+  throw new Error('FNG 소스 실패');
 }
 function applyFNG(d){
   const el=document.getElementById('idx-FNG'); if(!el)return;
@@ -1774,6 +1788,10 @@ function applyMacro(macro){
   }
   if(macro.cpi){
     const el=document.getElementById('idx-CPI'); if(el){el.textContent=macro.cpi;el.setAttribute('data-live','1');}
+  }
+  // 공포·탐욕: 서버 수집값 우선 적용(클라이언트 직접호출 폴백보다 안정적)
+  if(macro.fng!=null){
+    applyFNG({val:Number(macro.fng), cls:macro.fngCls||''});
   }
 }
 
