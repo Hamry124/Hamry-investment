@@ -1,6 +1,6 @@
 {
   "date": "2026-07-17",
-  "updated": "2026-07-17T11:18:28.437Z",
+  "updated": "2026-07-17T13:13:33.060Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 334000
     },
     "bitcoin": {
-      "price": 63025,
-      "chg": -1.63334
+      "price": 62780,
+      "chg": -1.97835
     },
     "ethereum": {
-      "price": 1832.75,
-      "chg": -2.65896
+      "price": 1812.21,
+      "chg": -3.31038
     },
     "ripple": {
-      "price": 1.084,
-      "chg": -2.02388
+      "price": 1.073,
+      "chg": -2.57596
     },
     "solana": {
-      "price": 74.65,
-      "chg": -1.84555
+      "price": 73.83,
+      "chg": -2.78282
     },
     "hyperliquid": {
-      "price": 60.33,
-      "chg": -8.17092
+      "price": 59.56,
+      "chg": -9.06944
     },
     "dogecoin": {
-      "price": 0.071858,
-      "chg": -1.71528
+      "price": 0.071364,
+      "chg": -2.09682
     },
     "chainlink": {
-      "price": 8.17,
-      "chg": -3.08654
+      "price": 8.07,
+      "chg": -3.81423
     },
     "sui": {
-      "price": 0.73421,
-      "chg": -0.81245
+      "price": 0.724767,
+      "chg": -2.28389
     },
     "uniswap": {
-      "price": 3.49,
-      "chg": -6.0145
-    },
-    "ondo-finance": {
-      "price": 0.379049,
-      "chg": 1.99337
+      "price": 3.46,
+      "chg": -5.24046
     },
     "world-liberty-financial": {
-      "price": 0.056957,
-      "chg": -1.98346
+      "price": 0.056909,
+      "chg": -1.82368
+    },
+    "ondo-finance": {
+      "price": 0.369455,
+      "chg": -3.14772
     },
     "aave": {
-      "price": 90.44,
-      "chg": -4.17059
+      "price": 90.17,
+      "chg": -4.19027
     },
     "filecoin": {
-      "price": 0.767642,
-      "chg": -0.97845
+      "price": 0.760205,
+      "chg": -1.66911
     },
     "pendle": {
-      "price": 1.53,
-      "chg": -3.66655
+      "price": 1.51,
+      "chg": -3.61135
     },
     "zksync": {
-      "price": 0.00962622,
-      "chg": -4.17593
+      "price": 0.0094376,
+      "chg": -6.78629
     },
     "centrifuge": {
-      "price": 0.179266,
-      "chg": -1.04569
+      "price": 0.178344,
+      "chg": -2.25415
     },
     "NVDA": {
       "price": 207.4
@@ -261,25 +261,25 @@
     "bitcoin": {
       "ath": "-50%",
       "athAbs": 126080,
-      "rsi": 48
+      "rsi": 47
     },
     "ethereum": {
       "ath": "-63%",
       "athAbs": 4946.05,
-      "rsi": 50
+      "rsi": 49
     },
     "ripple": {
-      "ath": "-70%",
+      "ath": "-71%",
       "athAbs": 3.65,
       "rsi": 38
     },
     "solana": {
       "ath": "-75%",
       "athAbs": 293.31,
-      "rsi": 47
+      "rsi": 46
     },
     "hyperliquid": {
-      "ath": "-21%",
+      "ath": "-22%",
       "athAbs": 76.7
     },
     "dogecoin": {
@@ -288,7 +288,7 @@
       "rsi": 34
     },
     "chainlink": {
-      "ath": "-84%",
+      "ath": "-85%",
       "athAbs": 52.7,
       "rsi": 26
     },
@@ -300,13 +300,13 @@
       "ath": "-92%",
       "athAbs": 44.92
     },
-    "ondo-finance": {
-      "ath": "-82%",
-      "athAbs": 2.14
-    },
     "world-liberty-financial": {
       "ath": "-83%",
       "athAbs": 0.331336
+    },
+    "ondo-finance": {
+      "ath": "-83%",
+      "athAbs": 2.14
     },
     "aave": {
       "ath": "-86%",
@@ -767,11 +767,11 @@
       "expiry": "7/17"
     },
     "GLW": {
-      "maxPain": 187.5,
-      "pcr": 1.02,
+      "maxPain": 180,
+      "pcr": 0.81,
       "pcrVol": 1.3,
-      "maxPainTotal": 170,
-      "pcrTotal": 0.96,
+      "maxPainTotal": 165,
+      "pcrTotal": 1,
       "expiry": "7/17"
     },
     "CIEN": {
@@ -853,22 +853,20 @@
       "ath": "-36%"
     },
     "WTI 유가": {
-      "price": 80.13,
-      "rsi": 53,
-      "ath": "-46%"
+      "price": 80.79,
+      "rsi": 54,
+      "ath": "-45%"
     },
     "Brent 유가": {
-      "price": 85.91,
-      "rsi": 53,
-      "ath": "-42%"
+      "price": 86.78,
+      "rsi": 54,
+      "ath": "-41%"
     }
   },
   "macro": {
     "usdkrw": 1479,
     "fng": 27,
-    "fngCls": "Fear",
-    "cpi": "3.5%",
-    "cpiDate": "2026-06"
+    "fngCls": "Fear"
   },
   "si": {
     "NVDA": {
@@ -1135,7 +1133,8 @@
     "errors": [
       "옵션 SOL: 만기 없음",
       "옵션 XRP: 만기 없음",
-      "옵션 XRP(CBOE): HTTP 403"
+      "옵션 XRP(CBOE): HTTP 403",
+      "CPI(BLS): This operation was aborted"
     ]
   }
 }
