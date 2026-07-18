@@ -31,6 +31,27 @@ async function getJSON(url, opts = {}, timeoutMs = 20000) {
 }
 
 /* ── 공통 계산 ──────────────────────────────────────────────────── */
+/* ── 차트 기술 축(기술적 지표 분석 가이드 Part I): 이평 배열·장기선·MACD → 0~100 ── */
+function emaSeries(arr, n){ const k=2/(n+1); let e=arr[0]; const out=[e]; for(let i=1;i<arr.length;i++){ e=arr[i]*k+e*(1-k); out.push(e); } return out; }
+function chartTech(closes, wS, wL){
+  if(!closes || closes.length < wL+5) return null;
+  const last=closes[closes.length-1];
+  const sma=n=>closes.slice(-n).reduce((a,b)=>a+b,0)/n;
+  const maS=sma(wS), maL=sma(wL);
+  const aligned=last>maS&&maS>maL, inverted=last<maS&&maS<maL; // 정배열/역배열
+  const e12=emaSeries(closes,12), e26=emaSeries(closes,26);
+  const macd=e12.map((v,i)=>v-e26[i]);
+  const sig=emaSeries(macd,9);
+  const h=macd[macd.length-1]-sig[sig.length-1];
+  const hPrev=macd[macd.length-2]-sig[sig.length-2];
+  let sc=50;
+  sc+=aligned?25:inverted?-25:0;   // ① 이평 정배열(+)/역배열(−)
+  sc+=last>maL?15:-15;             // ② 장기선 위/아래(존버 주의 원칙)
+  sc+=h>0?10:-10;                  // ③ MACD 히스토그램 부호
+  sc+=h>hPrev?5:-5;                // ④ 히스토그램 개선/악화
+  return { chart: Math.max(0,Math.min(100,sc)), trend: aligned?'up':inverted?'down':'side' };
+}
+
 function weeklyRSI(closes, period = 14) {
   closes = closes.filter(v => v != null && !isNaN(v));
   if (closes.length < period + 1) return null;
@@ -96,6 +117,7 @@ async function fetchCrypto(cgIds) {
       const daily = (mc.prices||[]).map(p=>p[1]); const weekly=[];
       for (let i=daily.length-1;i>=0;i-=7) weekly.unshift(daily[i]);
       const rsi = weeklyRSI(weekly); if (rsi != null) tech[id].rsi = rsi;
+      const ct = chartTech(daily, 20, 60); if (ct) { tech[id].chart = ct.chart; tech[id].trend = ct.trend; }
     } catch (e) {}
     await sleep(1300);
   }
@@ -112,7 +134,7 @@ async function yahooChart(ySym) {
   const closes = (q.close||[]).filter(v=>v!=null);
   const highs = (q.high||[]).filter(v=>v!=null);
   const athHigh = highs.length ? Math.max(...highs, r.meta.fiftyTwoWeekHigh||0) : (r.meta.fiftyTwoWeekHigh||0);
-  return { price, rsi: weeklyRSI(closes), high: athHigh };
+  return { price, rsi: weeklyRSI(closes), high: athHigh, closes };
 }
 
 // 미국주식: 심볼 그대로. 한국주식: .KS(코스피) 우선, 실패 시 .KQ(코스닥)
@@ -122,6 +144,7 @@ async function fetchEquities(usSyms, krCodes, seedAthPct, prevTech, errors) {
     if (r.price != null) prices[key] = { price: r.price };
     const t = {};
     if (r.rsi != null) t.rsi = r.rsi;
+    const ct = chartTech(r.closes, 10, 30); if (ct) { t.chart = ct.chart; t.trend = ct.trend; }
     let athAbs = (prevTech[key]&&prevTech[key].athAbs) || null;
     if (!athAbs && r.price != null && seedAthPct[key] != null) athAbs = r.price/(1+seedAthPct[key]/100);
     if (r.high > (athAbs||0)) athAbs = r.high;
