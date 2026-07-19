@@ -1,6 +1,6 @@
 {
   "date": "2026-07-19",
-  "updated": "2026-07-19T17:53:48.868Z",
+  "updated": "2026-07-19T18:58:50.971Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 334000
     },
     "bitcoin": {
-      "price": 64539,
-      "chg": 0.20123
+      "price": 64325,
+      "chg": -0.23159
     },
     "ethereum": {
-      "price": 1867.28,
-      "chg": 0.93985
+      "price": 1857.5,
+      "chg": 0.09705
     },
     "ripple": {
-      "price": 1.094,
-      "chg": 0.19032
+      "price": 1.091,
+      "chg": 0.08371
     },
     "solana": {
-      "price": 75.96,
-      "chg": 0.89605
+      "price": 75.6,
+      "chg": 0.54432
     },
     "hyperliquid": {
-      "price": 60.94,
-      "chg": 1.92993
+      "price": 60.57,
+      "chg": 1.15005
     },
     "dogecoin": {
-      "price": 0.072266,
-      "chg": -0.14263
+      "price": 0.071939,
+      "chg": -0.45877
     },
     "chainlink": {
-      "price": 8.33,
-      "chg": 0.45953
+      "price": 8.31,
+      "chg": -0.07981
     },
     "sui": {
-      "price": 0.746718,
-      "chg": 1.0099
+      "price": 0.744206,
+      "chg": 0.6778
     },
     "uniswap": {
-      "price": 3.49,
-      "chg": -1.17532
+      "price": 3.47,
+      "chg": -1.53483
     },
     "world-liberty-financial": {
-      "price": 0.057202,
-      "chg": -0.28264
+      "price": 0.057638,
+      "chg": 1.08412
     },
     "ondo-finance": {
-      "price": 0.346088,
-      "chg": 0.42005
+      "price": 0.344792,
+      "chg": -0.58601
     },
     "aave": {
-      "price": 89.31,
-      "chg": 0.25319
+      "price": 88.75,
+      "chg": -0.62692
     },
     "filecoin": {
-      "price": 0.717036,
-      "chg": -4.27358
+      "price": 0.714569,
+      "chg": -4.48196
     },
     "pendle": {
       "price": 1.54,
-      "chg": 1.61759
+      "chg": 1.126
     },
     "zksync": {
-      "price": 0.00927655,
-      "chg": -1.52321
+      "price": 0.00922261,
+      "chg": -2.37975
     },
     "centrifuge": {
-      "price": 0.168363,
-      "chg": 1.60979
+      "price": 0.16753,
+      "chg": 1.50846
     },
     "NVDA": {
       "price": 202.81
@@ -273,7 +273,7 @@
     "bitcoin": {
       "ath": "-49%",
       "athAbs": 126080,
-      "rsi": 50,
+      "rsi": 49,
       "chart": 40,
       "trend": "side"
     },
@@ -329,7 +329,7 @@
       "athAbs": 2.14
     },
     "aave": {
-      "ath": "-86%",
+      "ath": "-87%",
       "athAbs": 661.69,
       "rsi": 23
     },
@@ -338,7 +338,7 @@
       "athAbs": 236.84
     },
     "pendle": {
-      "ath": "-79%",
+      "ath": "-80%",
       "athAbs": 7.5
     },
     "zksync": {
@@ -981,8 +981,8 @@
     "usdkrw": 1485,
     "fng": 28,
     "fngCls": "Fear",
-    "kimchi": -0.9,
-    "kimchiKrw": -833622,
+    "kimchi": -0.8,
+    "kimchiKrw": -811020,
     "cpi": "3.5%",
     "cpiDate": "2026-06"
   },
