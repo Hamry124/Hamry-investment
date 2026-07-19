@@ -350,6 +350,56 @@ async function fetchFNG(errors) {
   return {};
 }
 
+/* ── BTC 도미넌스 (CoinGecko global) ──────────────────────────── */
+async function fetchDominance(errors) {
+  try {
+    const j = await getJSON('https://api.coingecko.com/api/v3/global');
+    const d = j && j.data && j.data.market_cap_percentage && j.data.market_cap_percentage.btc;
+    if (d != null) return { btcDom: Math.round(d * 10) / 10 };
+  } catch (e) { errors.push(`도미넌스: ${e.message}`); }
+  return {};
+}
+
+/* ── 김치 프리미엄 (업비트 KRW vs 바이낸스 USD × 환율) ──────────── */
+async function fetchKimchi(usdkrw, errors) {
+  try {
+    const up = await getJSON('https://api.upbit.com/v1/ticker?markets=KRW-BTC');
+    const krw = up && up[0] && up[0].trade_price;
+    let usd = null;
+    try { const bn = await getJSON('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT'); usd = Number(bn && bn.price); } catch(e){}
+    if (!usd) { const ok = await getJSON('https://www.okx.com/api/v5/market/ticker?instId=BTC-USDT'); usd = Number(ok && ok.data && ok.data[0] && ok.data[0].last); }
+    const fx = usdkrw || 1400;
+    if (krw && usd && fx) {
+      const fair = usd * fx;
+      return { kimchi: Math.round((krw / fair - 1) * 1000) / 10, kimchiKrw: Math.round(krw - fair) };
+    }
+  } catch (e) { errors.push(`김프: ${e.message}`); }
+  return {};
+}
+
+/* ── 알트시즌 인덱스 (Top50 90일 수익률 vs BTC) ────────────────── */
+async function fetchAltseason(errors) {
+  try {
+    const arr = await getJSON('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=60&page=1&price_change_percentage=90d');
+    if (!Array.isArray(arr) || !arr.length) return {};
+    const STABLE = new Set(['USDT','USDC','DAI','FDUSD','TUSD','USDD','FRAX','PYUSD','USDE','BUIDL','USDS','USD1']);
+    const EXCL = /^(tether|usd-coin|dai|first-digital-usd|true-usd|usdd|frax|paypal-usd|ethena-usde|wrapped-|staked-|coinbase-wrapped|lombard-|binance-peg|bridged-)/;
+    const btc = arr.find(c => c.symbol && c.symbol.toLowerCase() === 'btc');
+    if (!btc || btc.price_change_percentage_90d_in_currency == null) return {};
+    const btcRet = btc.price_change_percentage_90d_in_currency;
+    const alts = arr.filter(c => {
+      const sym = (c.symbol||'').toUpperCase(), id = (c.id||'').toLowerCase();
+      if (sym === 'BTC') return false;
+      if (STABLE.has(sym) || EXCL.test(id)) return false;
+      return c.price_change_percentage_90d_in_currency != null;
+    }).slice(0, 50);
+    if (!alts.length) return {};
+    const beat = alts.filter(c => c.price_change_percentage_90d_in_currency > btcRet).length;
+    return { altseason: Math.round(beat / alts.length * 100), altBeat: beat, altTotal: alts.length };
+  } catch (e) { errors.push(`알트시즌: ${e.message}`); }
+  return {};
+}
+
 /* ============================ 메인 ================================= */
 (async () => {
   let html;
@@ -376,6 +426,9 @@ async function fetchFNG(errors) {
   try { opts = (await fetchOptions(usOptSyms, errors, prices)) || {}; } catch (e) { errors.push('옵션: '+e.message); }
   try { macro = (await fetchFX(errors)) || {}; } catch (e) { errors.push('환율: '+e.message); }
   try { Object.assign(macro, (await fetchFNG(errors)) || {}); } catch (e) { errors.push('공포탐욕: '+e.message); }
+  try { Object.assign(macro, (await fetchDominance(errors)) || {}); } catch (e) { errors.push('도미넌스: '+e.message); }
+  try { Object.assign(macro, (await fetchKimchi(macro.usdkrw, errors)) || {}); } catch (e) { errors.push('김프: '+e.message); }
+  try { Object.assign(macro, (await fetchAltseason(errors)) || {}); } catch (e) { errors.push('알트시즌: '+e.message); }
   try { Object.assign(macro, (await fetchCPI(errors)) || {}); } catch (e) { errors.push('CPI: '+e.message); }
   try { Object.assign(si, (await fetchSI_US(us, errors)) || {}); } catch (e) { errors.push('US SI: '+e.message); }
   // 한국 SI: KRX가 해외(GitHub) IP를 WAF 차단(응답 "LOGOUT")하여 자동 수집 불가 → 수동 운영
