@@ -30,6 +30,25 @@ async function getJSON(url, opts = {}, timeoutMs = 20000) {
   } finally { clearTimeout(t); }
 }
 
+/* CoinGecko 전용: 429/403/5xx 백오프 재시도 (키리스 공유 IP 레이트리밋 대응) */
+async function cgGET(url, tries = 4) {
+  let lastErr;
+  for (let i = 0; i < tries; i++) {
+    try { return await getJSON(url); }
+    catch (e) {
+      lastErr = e;
+      const m = /HTTP (\d+)/.exec(e.message || '');
+      const code = m ? Number(m[1]) : 0;
+      if (i < tries - 1 && (code === 429 || code === 403 || code >= 500 || code === 0)) {
+        await sleep(2500 * Math.pow(2, i)); // 2.5s → 5s → 10s
+        continue;
+      }
+      throw e;
+    }
+  }
+  throw lastErr;
+}
+
 /* ── 공통 계산 ──────────────────────────────────────────────────── */
 /* ── 차트 기술 축(기술적 지표 분석 가이드 Part I): 이평 배열·장기선·MACD → 0~100 ── */
 function emaSeries(arr, n){ const k=2/(n+1); let e=arr[0]; const out=[e]; for(let i=1;i<arr.length;i++){ e=arr[i]*k+e*(1-k); out.push(e); } return out; }
@@ -353,10 +372,15 @@ async function fetchFNG(errors) {
 /* ── BTC 도미넌스 (CoinGecko global) ──────────────────────────── */
 async function fetchDominance(errors) {
   try {
-    const j = await getJSON('https://api.coingecko.com/api/v3/global');
+    const j = await cgGET('https://api.coingecko.com/api/v3/global');
     const d = j && j.data && j.data.market_cap_percentage && j.data.market_cap_percentage.btc;
     if (d != null) return { btcDom: Math.round(d * 10) / 10 };
-  } catch (e) { errors.push(`도미넌스: ${e.message}`); }
+  } catch (e) { errors.push(`도미넌스(CG): ${e.message}`); }
+  try { // 폴백: CoinPaprika(다른 호스트·키리스·CORS 허용)
+    const j = await getJSON('https://api.coinpaprika.com/v1/global');
+    const d = j && j.bitcoin_dominance_percentage;
+    if (d != null) return { btcDom: Math.round(Number(d) * 10) / 10 };
+  } catch (e) { errors.push(`도미넌스(PP): ${e.message}`); }
   return {};
 }
 
@@ -380,7 +404,7 @@ async function fetchKimchi(usdkrw, errors) {
 /* ── 알트시즌 인덱스 (Top50 90일 수익률 vs BTC) ────────────────── */
 async function fetchAltseason(errors) {
   try {
-    const arr = await getJSON('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=60&page=1&price_change_percentage=90d');
+    const arr = await cgGET('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=60&page=1&price_change_percentage=90d');
     if (!Array.isArray(arr) || !arr.length) return {};
     const STABLE = new Set(['USDT','USDC','DAI','FDUSD','TUSD','USDD','FRAX','PYUSD','USDE','BUIDL','USDS','USD1']);
     const EXCL = /^(tether|usd-coin|dai|first-digital-usd|true-usd|usdd|frax|paypal-usd|ethena-usde|wrapped-|staked-|coinbase-wrapped|lombard-|binance-peg|bridged-)/;
@@ -436,6 +460,10 @@ async function fetchAltseason(errors) {
 
   // 직전 ATH(athAbs) 보존: 이번에 못 받은 종목도 전고점 유지
   for (const k in prevTech) { if(!tech[k])tech[k]={}; ['athAbs','ath','rsi'].forEach(f=>{ if(tech[k][f]==null && prevTech[k][f]!=null) tech[k][f]=prevTech[k][f]; }); }
+
+  // 직전 거시값 보존: 이번에 못 받은 crypto 구조지표는 전값 유지(카드 공백 방지)
+  const prevMacro = prev.macro || {};
+  ['btcDom','altseason','altBeat','altTotal'].forEach(f => { if (macro[f] == null && prevMacro[f] != null) macro[f] = prevMacro[f]; });
 
   const out = {
     date: new Date().toISOString().slice(0,10), updated: new Date().toISOString(), phase: 2,

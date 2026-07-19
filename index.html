@@ -215,7 +215,8 @@ table.dt tbody tr.hl3:hover{background:#fcd34d}
 /* PANELS */
 .pn{display:none}.pn.a{display:block;animation:fu .3s ease}
 .intro-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:14px 16px;margin-bottom:14px;box-shadow:var(--shadow)}
-.intro-card p{font-size:13px;color:#3d4456;line-height:1.75}
+.intro-card p{font-size:13px;color:#3d4456;line-height:1.75;margin:0}
+.intro-card p+p{margin-top:10px}
 .intro-card .ic-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--cyan);text-transform:uppercase;margin-bottom:6px}
 
 /* SECTOR */
@@ -388,7 +389,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-07-18 · v4</div>
+<div class="corner-ver" id="cornerVer">발행 2026-07-19 · v1</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -414,7 +415,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-07-18 · v4 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-07-19 · v1 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -511,15 +512,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-18 · v4 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-19 · v1 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-18 · v4</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-19 · v1</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-07-18";
-const PUB_DATE="2026-07-18";  // 발행일
-const VERSION="v4";          // 버전 (수정 시 v# 증가)
+const PUB_DATE="2026-07-19";  // 발행일
+const VERSION="v1";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -698,7 +699,7 @@ const STOCKS={
 
 
 const PARTS=[
- {id:"macro",ic:"🌐",name:"매크로",sub:"시황",intro:"사상최고(6/1 KOSPI 8,788) → 6/5 나스닥 -4.18%·반도체 $1조 증발 → 6/8 검은월요일 서킷브레이커(저점 7,442) → 6/9 +8.18% V반등(8,097) → 6/10 검은 수요일 -4.52%(7,730) → 6/11 +0.43%(7,764) 반등 마감. 6/12 트럼프 '공습 취소·합의 임박'發 뉴욕 급반등(나스닥 +2.54%)·유가 급락으로 완화 기대 부상. 고용 서프라이즈發 금리인상 우려 + 미·이란 교전 격화(아파치 격추→美 보복 공습→이란 재보복 선언, 호르무즈 리스크)가 진행형이며 5월 CPI는 헤드라인 4.2%(유가發) vs 근원 +0.2% 안정으로 갈려 6/14 美·이란 종전 합의 타결(호르무즈 즉시 개방)·브렌트유 $87 급락으로 중동 리스크 해소, FOMC 6/17(동결 우세)이 다음 분수령. 일중 ±5~8% 변동 구간 — 추격 금지·분할 매수·현금 20~30% 유지, NVIDIA가 떠받치는 광통신만 역주행 강세. 6/12 앤트로픽 쇼크(Fable·Mythos 수출통제)는 소버린 AI 수요를 구조적으로 가속 — 네오클라우드(IREN·NBIS)·필수 장비(AVGO·ANET) 수혜. 캐시 우드는 6/5 코스피 급락을 \u2018건전한 조정\u2019으로 평가하며 한국 AI·로봇·원전 다변화 강조. 케빈 워시 신임 연준 의장 첫 FOMC는 동결 유력이나, 유가發 인플레로 인하 지연 관측. 7월 고용 쇼크(6월 NFP 5.7만)로 금리인상 확률 20% 미만·다우 53K 신고가. SK하이닉스 나스닥 데뷔($265억 사상 최대 외국 IPO, +13%)로 AI 메모리 재확인, 단 마이크론 경쟁 약세로 승자 차별화. 美·이란 휴전 종료(7/8)로 유가 반등(WTI $71). 실적시즌 개막(S&P +24% YoY 전망). 7월 3주: 6월 CPI 3.5% 서프라이즈 쿨링에도 워시 매파 유지(9월 인상 프라이싱), SOX -20% 베어마켓·Moonshot AI 쇼크로 나스닥 주간 -2.9%, WTI $80 돌파. 다음 주 하이퍼스케일러 어닝이 분기점.",macro:true,idxTable:true,
+ {id:"macro",ic:"🌐",name:"매크로",sub:"시황",intro:"사상최고(6/1 KOSPI 8,788) → 6/5 나스닥 -4.18%·반도체 $1조 증발 → 6/8 검은월요일 서킷브레이커(저점 7,442) → 6/9 +8.18% V반등(8,097) → 6/10 검은 수요일 -4.52%(7,730) → 6/11 +0.43%(7,764) 반등 마감.\n\n6/12 트럼프 '공습 취소·합의 임박'發 뉴욕 급반등(나스닥 +2.54%)·유가 급락으로 완화 기대 부상. 고용 서프라이즈發 금리인상 우려 + 미·이란 교전 격화(아파치 격추→美 보복 공습→이란 재보복 선언, 호르무즈 리스크)가 진행형이며 5월 CPI는 헤드라인 4.2%(유가發) vs 근원 +0.2% 안정으로 갈려 6/14 美·이란 종전 합의 타결(호르무즈 즉시 개방)·브렌트유 $87 급락으로 중동 리스크 해소, FOMC 6/17(동결 우세)이 다음 분수령.\n\n일중 ±5~8% 변동 구간 — 추격 금지·분할 매수·현금 20~30% 유지, NVIDIA가 떠받치는 광통신만 역주행 강세. 6/12 앤트로픽 쇼크(Fable·Mythos 수출통제)는 소버린 AI 수요를 구조적으로 가속 — 네오클라우드(IREN·NBIS)·필수 장비(AVGO·ANET) 수혜. 캐시 우드는 6/5 코스피 급락을 \u2018건전한 조정\u2019으로 평가하며 한국 AI·로봇·원전 다변화 강조. 케빈 워시 신임 연준 의장 첫 FOMC는 동결 유력이나, 유가發 인플레로 인하 지연 관측.\n\n7월 고용 쇼크(6월 NFP 5.7만)로 금리인상 확률 20% 미만·다우 53K 신고가. SK하이닉스 나스닥 데뷔($265억 사상 최대 외국 IPO, +13%)로 AI 메모리 재확인, 단 마이크론 경쟁 약세로 승자 차별화. 美·이란 휴전 종료(7/8)로 유가 반등(WTI $71). 실적시즌 개막(S&P +24% YoY 전망).\n\n7월 3주: 6월 CPI 3.5% 서프라이즈 쿨링에도 워시 매파 유지(9월 인상 프라이싱), SOX -20% 베어마켓·Moonshot AI 쇼크로 나스닥 주간 -2.9%, WTI $80 돌파. 다음 주 하이퍼스케일러 어닝이 분기점.",macro:true,idxTable:true,
   events:[
    {d:"07-17",dt:"이번 주",txt:"<b>7월 3주 (7/13~17) — CPI 서프라이즈 쿨링에도 반도체 베어마켓</b><br><b>6월 CPI 3.5%(예상 3.8% 하회)</b> — 월간 -0.4%로 2020년 4월 이후 최대 하락(가솔린 -9.7%)·근원 2.6%. 케빈 워시는 첫 의회 증언(7/14)에서 \u2018미션 완수로 보는 견해는 내 것이 아니다\u2019라며 매파 유지, 시장은 9월 인상 프라이싱. <b>반도체 SOX 고점 대비 -20% 베어마켓 진입</b>(2025년 4월 관세 붕괴 이후 최악 주간·마이크론 급락) + <b>중국 Moonshot AI 쇼크(7/17)</b>: 세계 최강 오픈소스 모델 공개로 美 AI 프리미엄 훼손 우려. 나스닥 주간 -2.9%(25,520)·S&P -1.5%·다우 -1%. 중동 격화로 <b>WTI $80 돌파</b>·금 $4,019. 넷플릭스 어닝 쇼크. 다음 주 알파벳 등 하이퍼스케일러 어닝이 반도체 시험대 — 밸류에이션 리셋 vs AI 사이클 종말의 분기점",c:"red"},
    {d:"07-12",dt:"7월 2주",txt:"<b>7월 2주 (7/6~10) — SK하이닉스 상장·중동 재점화·실적시즌 개막</b><br><b>SK하이닉스 나스닥 데뷔(7/10)</b>: $265억 조달로 <b>외국기업 사상 최대 IPO</b>, 공모가 $149→시초 $170(+17%)·종가 +13%. NVDA +3.5% 동반 강세로 AI 메모리 수요 재확인, 단 마이크론은 경쟁 우려로 약세. <b>美·이란 휴전 '종료'(7/8)</b> 선언 후 공습 재개 — 브렌트 $76·WTI $71, 호르무즈 통행량 정상의 13%. 메타 주간 +15%(BofA: AI capex 예상의 절반). 다우 53,000 돌파 신고가·나스닥 주간 +1.5% 반등. S&P 어닝 +24% YoY 전망으로 실적시즌 개막",c:"green"},
@@ -1259,6 +1260,7 @@ const TABS=[
   {id:'crypto',ic:'₿',name:'크립토',sub:STOCKS.crypto.length+'섹터'},
 ];
 
+function introP(s){return String(s).split(/\n{2,}/).map(function(p){p=p.trim();return p?('<p>'+p+'</p>'):'';}).join('');}
 TABS.forEach((tab,i)=>{
   const btn=document.createElement('button');
   btn.className='nb'+(i===0?' a':'');
@@ -1274,7 +1276,7 @@ TABS.forEach((tab,i)=>{
 
   let html2=`<div class="pn${i===0?' a':''}" id="pn-${tab.id}">`;
   if(tab.id==='macro'){
-    html2+=`<div class="intro-card"><span class="ic-tag">매크로 개요</span><p>${MACRO.intro}</p></div>`;
+    html2+=`<div class="intro-card"><span class="ic-tag">매크로 개요</span>${introP(MACRO.intro)}</div>`;
     html2+=macroIdxTable();
       html2+=(function(){
       const yr=PUB_DATE.slice(0,4);
@@ -1299,10 +1301,10 @@ TABS.forEach((tab,i)=>{
       return h;
     })();
   } else {
-    const intros={kr:"검은월요일(6/8) → V반등(6/9) → 검은 수요일(6/10) → 6/11 +0.43%(7,764) 반등 마감 — 일중 ±5~8% 변동·VKOSPI 사상 최고권. 6개 섹터를 현재가·밸류·주봉 RSI로 점검하며, 시세·RSI·ATH%·PER은 서버 자동갱신(장중 10분 주기), SI·맥스페인은 수동 운영. 패닉 구간엔 이익 가시성 대형주 분할이 합리.",
-      us:"반도체가 시장을 지배한 한 주 — SOX 고점 대비 -20% 베어마켓 진입(2025년 4월 이후 최악), 마이크론 급락에 중국 Moonshot AI 쇼크(세계 최강 오픈모델)로 美 AI 프리미엄 훼손 우려까지. 6월 CPI 3.5% 서프라이즈 쿨링에도 워시 매파 유지·9월 인상 프라이싱. 나스닥 주간 -2.9%(25,520)·다우 -1%, WTI $80 돌파·금 $4,019 리스크오프. <b>다음 주 알파벳 등 하이퍼스케일러 어닝이 밸류에이션 리셋 vs AI 사이클 훼손의 분기점</b>. 감마 구조상 지수 플립 아래(변동성 증폭) — ATH 추격 금지·실적 확인 후 분할. 옵션은 맥스페인·PCR·감마로 단기 타이밍 보조.",
-      crypto:"BTC $64K·도미넌스 56.7%로 중동 재점화(휴전 종료) 속 $64K선 방어, 시총 $2.26조. 극단 공포에서 벗어나 바닥 다지기 — 4개 섹터(L1·RWA·DeFi·AI/정치자산) 17종. 극단 공포 + CLARITY 제도화가 분할 매수 논거, 알트는 도미넌스 하락 전환이 신호. SOL은 $77 저항 돌파 시 $125 목표(반 데 포페). 시세·RSI·ATH%는 CoinGecko 자동 갱신. 옵션(맥스페인·PCR)은 Deribit 상장 4종(BTC·ETH·SOL·XRP)만 자동 수집되며, 그 외 알트코인은 옵션 시장이 없어 RSI·ATH·성장·정성 4지표로 평가한다."};
-    html2+=`<div class="intro-card"><span class="ic-tag">${tab.name} 개요</span><p style="color:#1d4ed8;font-weight:500">${intros[tab.id]}</p></div>`;
+    const intros={kr:"검은월요일(6/8) → V반등(6/9) → 검은 수요일(6/10) → 6/11 +0.43%(7,764) 반등 마감 — 일중 ±5~8% 변동·VKOSPI 사상 최고권.\n\n6개 섹터를 현재가·밸류·주봉 RSI로 점검하며, 시세·RSI·ATH%·PER은 서버 자동갱신(장중 10분 주기), SI·맥스페인은 수동 운영.\n\n패닉 구간엔 이익 가시성 대형주 분할이 합리.",
+      us:"반도체가 시장을 지배한 한 주 — SOX 고점 대비 -20% 베어마켓 진입(2025년 4월 이후 최악), 마이크론 급락에 중국 Moonshot AI 쇼크(세계 최강 오픈모델)로 美 AI 프리미엄 훼손 우려까지.\n\n6월 CPI 3.5% 서프라이즈 쿨링에도 워시 매파 유지·9월 인상 프라이싱. 나스닥 주간 -2.9%(25,520)·다우 -1%, WTI $80 돌파·금 $4,019 리스크오프.\n\n<b>다음 주 알파벳 등 하이퍼스케일러 어닝이 밸류에이션 리셋 vs AI 사이클 훼손의 분기점</b>.\n\n감마 구조상 지수 플립 아래(변동성 증폭) — ATH 추격 금지·실적 확인 후 분할. 옵션은 맥스페인·PCR·감마로 단기 타이밍 보조.",
+      crypto:"BTC $64K·도미넌스 56.7%로 중동 재점화(휴전 종료) 속 $64K선 방어, 시총 $2.26조.\n\n극단 공포에서 벗어나 바닥 다지기 — 4개 섹터(L1·RWA·DeFi·AI/정치자산) 17종.\n\n극단 공포 + CLARITY 제도화가 분할 매수 논거, 알트는 도미넌스 하락 전환이 신호. SOL은 $77 저항 돌파 시 $125 목표(반 데 포페).\n\n시세·RSI·ATH%는 CoinGecko 자동 갱신. 옵션(맥스페인·PCR)은 Deribit 상장 4종(BTC·ETH·SOL·XRP)만 자동 수집되며, 그 외 알트코인은 옵션 시장이 없어 RSI·ATH·성장·정성 4지표로 평가한다."};
+    html2+=`<div class="intro-card"><span class="ic-tag">${tab.name} 개요</span>${introP(intros[tab.id])}</div>`;
     STOCKS[tab.id].forEach((sec,si)=>{ html2+=sectorTable(sec,i,si); });
     html2+=scoreSection(tab.id);
   }
@@ -1426,9 +1428,16 @@ async function fetchJSONcors(url){
   throw new Error('fetch 실패');
 }
 async function fetchBTCD(){
-  const j=await fetchJSONcors('https://api.coingecko.com/api/v3/global');
-  const p=j&&j.data&&j.data.market_cap_percentage&&j.data.market_cap_percentage.btc;
-  if(p==null) throw new Error('BTCD'); return {pct:p};
+  // 1차: CoinGecko global (직접 → corsproxy)
+  try{
+    const j=await fetchJSONcors('https://api.coingecko.com/api/v3/global');
+    const p=j&&j.data&&j.data.market_cap_percentage&&j.data.market_cap_percentage.btc;
+    if(p!=null) return {pct:p};
+  }catch(e){}
+  // 2차 폴백: CoinPaprika (CORS 허용·다른 호스트)
+  const j=await fetch('https://api.coinpaprika.com/v1/global',{cache:'no-store'}).then(r=>r.json());
+  const p=j&&j.bitcoin_dominance_percentage;
+  if(p==null) throw new Error('BTCD'); return {pct:Number(p)};
 }
 function applyBTCD(d){
   const el=document.getElementById('idx-BTCD'); if(!el)return;
