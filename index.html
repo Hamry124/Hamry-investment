@@ -108,8 +108,13 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 
 /* EXEC */
 .exec{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
-.exec .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:760px){.exec .row{grid-template-columns:1fr}}
+.exec .row{display:block}
+/* 폴드 펼침·와이드: 배경 단락을 2단 컬럼으로 흘려 넓은 폭을 활용(제목은 전폭) */
+@media(min-width:1000px){
+  .exec .row>div{columns:2;column-gap:36px}
+  .exec .row>div>h3{column-span:all;margin-bottom:11px}
+  .exec .row>div>p{break-inside:avoid}
+}
 .exec h3{font-size:13px;font-weight:700;color:var(--cyan);margin-bottom:7px;display:flex;align-items:center;gap:6px}
 .exec h3::before{content:'';width:5px;height:14px;background:var(--cyan);border-radius:2px}
 .exec p{font-size:12px;color:#4a5266;line-height:1.65;margin-bottom:10px}
@@ -389,7 +394,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-07-19 · v3</div>
+<div class="corner-ver" id="cornerVer">발행 2026-07-19 · v4</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -415,7 +420,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-07-19 · v3 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-07-19 · v4 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -512,15 +517,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-19 · v3 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-19 · v4 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-19 · v3</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-19 · v4</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-07-18";
 const PUB_DATE="2026-07-19";  // 발행일
-const VERSION="v3";          // 버전 (수정 시 v# 증가)
+const VERSION="v4";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
