@@ -389,7 +389,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 </head>
 <body>
 <div class="wrap">
-<div class="corner-ver" id="cornerVer">발행 2026-07-19 · v2</div>
+<div class="corner-ver" id="cornerVer">발행 2026-07-19 · v3</div>
 <div class="header">
   <div class="header-emblem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
 <defs>
@@ -415,7 +415,7 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
   <div class="eyebrow">Hamry Investment Research</div>
   <h1>2030 프로젝트</h1>
   <div class="sub">매크로 · 한국주식 · 미국주식 · 크립토 · 옵션 플로우 통합 대시보드</div>
-  <div class="ver" id="verBadge">발행 2026-07-19 · v2 · 데이터 로딩 중…</div>
+  <div class="ver" id="verBadge">발행 2026-07-19 · v3 · 데이터 로딩 중…</div>
 </div>
 <div class="hr-line"></div>
 
@@ -512,15 +512,15 @@ table.score-tbl .num.sep{border-left:1px solid var(--border)}
 
 
 <div class="disclaimer">⚠️ 본 자료는 정보 공유 목적의 분석 자료이며 투자 자문이 아닙니다. 실시간 갱신값은 참고용이며 실제 체결가와 다를 수 있습니다. 실제 투자 전 공인 재무 자문사와 상담하시기 바랍니다. 최종 판단과 책임은 본인에게 있습니다.</div>
-<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-19 · v2 · 데이터 기준 한국·미국·크립토 6/3</span></div>
+<div class="signature">Analysis by Hamry<span class="sig-sub">2030 프로젝트 · 발행 2026-07-19 · v3 · 데이터 기준 한국·미국·크립토 6/3</span></div>
 
 </div>
-<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-19 · v2</span></div>
+<div class="fixed-sig" id="fixedSig">Analysis by Hamry<span class="fs-sub">2030 프로젝트 · 발행 2026-07-19 · v3</span></div>
 <script>
 // ===================== 기준 데이터 (분석 시점 2026-05-29) =====================
 const BASE_DATE="2026-07-18";
 const PUB_DATE="2026-07-19";  // 발행일
-const VERSION="v2";          // 버전 (수정 시 v# 증가)
+const VERSION="v3";          // 버전 (수정 시 v# 증가)
 
 // 지수 (4대) — 매크로 탭 표 + 상단 스트립 공용
 const IDXDATA=[
@@ -651,8 +651,9 @@ const STOCKS={
    {g:"B",tk:"IonQ (IONQ)",px:"$70.14",ath:"-45%",mp:"$58",pcr:"1.65",rsi:"-",per:"적자",fper:"적자",key:"이온트랩 정확도 1위",issue:"Q1 매출 $64.7M(+755% YoY)·256큐빗 시스템 첫 판매, DARPA HARQ·SDA HALO·MDA SHIELD 정부 계약 다수. 트랩이온 순수 플레이 양자 최대주 + 숏스퀴즈 잠재",optKey:"IONQ",avSym:"IONQ"},
    {g:"B",tk:"Infleqtion (INFQ)",px:"$14.82",ath:"-5%",mp:"$18",pcr:"0.67",per:"적자",fper:"적자",rsi:"42",key:"NVDA CUDA-Q 동맹",issue:"NASA·DoD 정부 계약 + NVDA CUDA-Q 동맹 + CHIPS 지원의 양자 비대칭 베팅. 트럼프 행정부 $2B 양자 보조금 등 정책 모멘텀, 단 상용화는 후반기 스토리",si:"2.14",optKey:"INFQ",avSym:"INFQ"},
   ]},
-  {sector:"AI SW · 지수 ETF · 가치주", desc:"PLTR(AI SW)·QQQ(나스닥 ETF)·PPIH(소형 가치주). QQQ PCR 2.49 극단 풋 우위, PPIH 감마 압력 최강(★★★★★).", rows:[
+  {sector:"AI SW · 지수 ETF · 가치주", desc:"PLTR(AI SW)·BAH(정부·국방 AI/사이버 가치주). PLTR 극단 고평가 성장주 vs BAH PER 9배 저평가 반등 후보의 대비 구도.", rows:[
    {g:"A",tk:"Palantir (PLTR)",px:"$136.88",ath:"-16%",mp:"$140",pcr:"1.07",per:"180배",fper:"60배",rsi:"68",key:"Rule of 40 = 145%",issue:"Q1 매출 $1.63B(+85% YoY 역대최고)·美 상업 +133%·Rule of 40 = 145%로 소프트웨어 사상 최강. AIP를 운영형 AI 백본으로 정착, FY26 가이던스 상향, 단 극단 고평가",optKey:"PLTR",avSym:"PLTR"},
+   {g:"B",tk:"Booz Allen (BAH)",px:"$65.21",ath:"-66%",mp:"N/A",pcr:"N/A",per:"9.4배",fper:"12.6배",rsi:"45",key:"AI·사이버 국방 컨설팅",issue:"정부·국방 대상 AI·사이버 컨설팅 대표주. 연방 예산 삭감(정부효율화) 우려로 큰 폭 조정, FY2026 매출 -6%·순이익 -9% 감익. 단 트레일링 PER 9배 저평가 구간이며, FY2027 순차 개선 가이드와 OpenAI·엔비디아 협업이 반등 논거. 7/24 실적이 분수령",optKey:"BAH",avSym:"BAH"},
   ]},
   {sector:"광통신 (데이터센터 인터커넥트)", desc:"AI 데이터센터의 진짜 핵심 관문은 '연산'이 아니라 '데이터 이동' — 전력의 약 60%가 비트 전송에 쓰인다. 로스·와트를 줄이는 광통신 밸류체인(소재→광원→모듈→DSP→시스템)이 AI 인프라의 혈관으로 재평가. NVIDIA가 6선에 직접 투자해 수직 장악(MRVL·COHR·LITE 각 ~$2B, GLW ~$3억). 앤트로픽 쇼크(6/12)發 소버린 AI 가속으로 ASIC·광·스위치 등 진영 무관 '필수 장비' 수요 동반 확대.", rows:[
    {g:"A",tk:"Marvell (MRVL)",px:"$281",ath:"-11%",mp:"$285",pcr:"1.49",per:"100배",fper:"67배",rsi:"55",key:"PAM4 DSP·맞춤형 XPU",issue:"광신호를 디지털로 복원하는 PAM4 DSP와 하이퍼스케일러 맞춤형 XPU 설계의 과점적 두뇌. Celestial AI 인수로 포토닉 패브릭 기반 스케일업까지 확장, NVIDIA NVLink Fusion 공인 파트너·S&P500 편입. 데이터센터 편중과 거대 경쟁사 대비 투자 체력이 변수",si:"4.5",optKey:"MRVL",avSym:"MRVL"},
@@ -789,7 +790,7 @@ const GROWTH={"AVGO":82,"ANET":80,"sui":66,"centrifuge":72,"hyperliquid":90,"pen
  "329180":88,"042660":82,"010140":72,"012450":90,"064350":86,"079550":80,"034020":88,"267260":86,"052690":74,
  "207940":86,"128940":76,"068270":82,"009150":82,"011070":74,"011790":70,"001820":60,
  "NVDA":95,"AMD":86,"ASML":82,"MU":88,"SNDK":74,"IREN":76,"VRT":88,"GEV":86,"CRWV":72,"NBIS":80,
- "ASTS":80,"RKLB":82,"TSLA":84,"CRCL":86,"COIN":84,"SMR":72,"OKLO":70,"IONQ":84,"INFQ":68,"PLTR":88,"QQQ":60,"PX":40,
+ "ASTS":80,"RKLB":82,"TSLA":84,"CRCL":86,"COIN":84,"SMR":72,"OKLO":70,"IONQ":84,"INFQ":68,"PLTR":88,"BAH":52,"QQQ":60,"PX":40,
  "bitcoin":82,"ethereum":80,"solana":78,"ripple":70,"dogecoin":55,"chainlink":80,"ondo-finance":78,"aave":76,"filecoin":55,
  "SUI":66,"Centrifuge (CFG)":60,"Hyperliquid (HYPE)":82,"Pendle (PENDLE)":68,"Morpho (MORPHO)":70,"Uniswap (UNI)":72,"zkSync (ZK)":50,"WLFI":48
 };
@@ -816,7 +817,7 @@ function growthOf(r){
   return GROWTH[nt]!=null?GROWTH[nt]:62;
 }
 // 정성(지위·촉매) 0~100 — 기존 SCORE 5축의 지위·촉매에서 환산(편집 가능)
-const QUAL={"AVGO":90,"ANET":85,"sui":57,"centrifuge":70,"hyperliquid":85,"pendle":74,"morpho-token":72,"uniswap":80,"zksync":55,"world-liberty-financial":38,"MRVL":88,"GLW":90,"CIEN":78,"COHR":82,"LITE":76,"AAOI":55,"000660":98, "005930":95, "373220":78, "006400":75, "096770":65, "066970":48, "003670":52, "247540":42, "329180":78, "042660":72, "010140":62, "012450":85, "064350":65, "079550":75, "034020":90, "267260":75, "052690":62, "207940":85, "128940":70, "068270":70, "009150":78, "011070":72, "011790":52, "001820":45, "NVDA":100, "AMD":80, "ASML":92, "MU":75, "SNDK":55, "IREN":82, "VRT":80, "GEV":78, "CRWV":68, "NBIS":82, "ASTS":62, "RKLB":65, "TSLA":82, "CRCL":85, "COIN":75, "SMR":57, "OKLO":50, "IONQ":60, "INFQ":52, "PLTR":80, "QQQ":50, "PX":40, "bitcoin":95, "ethereum":90, "solana":80, "ripple":72, "dogecoin":48, "SUI":57, "chainlink":88, "ondo-finance":70, "Centrifuge (CFG)":55, "aave":88, "Hyperliquid (HYPE)":75, "Pendle (PENDLE)":62, "Morpho (MORPHO)":65, "Uniswap (UNI)":68, "filecoin":55, "zkSync (ZK)":52, "WLFI":38};
+const QUAL={"AVGO":90,"ANET":85,"sui":57,"centrifuge":70,"hyperliquid":85,"pendle":74,"morpho-token":72,"uniswap":80,"zksync":55,"world-liberty-financial":38,"MRVL":88,"GLW":90,"CIEN":78,"COHR":82,"LITE":76,"AAOI":55,"000660":98, "005930":95, "373220":78, "006400":75, "096770":65, "066970":48, "003670":52, "247540":42, "329180":78, "042660":72, "010140":62, "012450":85, "064350":65, "079550":75, "034020":90, "267260":75, "052690":62, "207940":85, "128940":70, "068270":70, "009150":78, "011070":72, "011790":52, "001820":45, "NVDA":100, "AMD":80, "ASML":92, "MU":75, "SNDK":55, "IREN":82, "VRT":80, "GEV":78, "CRWV":68, "NBIS":82, "ASTS":62, "RKLB":65, "TSLA":82, "CRCL":85, "COIN":75, "SMR":57, "OKLO":50, "IONQ":60, "INFQ":52, "PLTR":80, "BAH":72, "QQQ":50, "PX":40, "bitcoin":95, "ethereum":90, "solana":80, "ripple":72, "dogecoin":48, "SUI":57, "chainlink":88, "ondo-finance":70, "Centrifuge (CFG)":55, "aave":88, "Hyperliquid (HYPE)":75, "Pendle (PENDLE)":62, "Morpho (MORPHO)":65, "Uniswap (UNI)":68, "filecoin":55, "zkSync (ZK)":52, "WLFI":38};
 function qualOf(r){
   const k=r.cgId||r.avSym||r.krCode;
   if(k&&QUAL[k]!=null)return QUAL[k];
