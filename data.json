@@ -1,89 +1,89 @@
 {
-  "date": "2026-07-22",
-  "updated": "2026-07-22T23:57:37.626Z",
+  "date": "2026-07-23",
+  "updated": "2026-07-23T02:27:02.763Z",
   "phase": 2,
   "prices": {
     "128940": {
-      "price": 369000
+      "price": 379500
     },
     "207940": {
-      "price": 1372000
+      "price": 1402000
     },
     "247540": {
       "price": 194000
     },
     "267260": {
-      "price": 795000
+      "price": 847000
     },
     "329180": {
-      "price": 464500
+      "price": 487500
     },
     "373220": {
-      "price": 321000
+      "price": 333500
     },
     "bitcoin": {
-      "price": 66010,
-      "chg": -0.74732
+      "price": 65698,
+      "chg": -1.02549
     },
     "ethereum": {
-      "price": 1931.17,
-      "chg": 0.15051
+      "price": 1923.63,
+      "chg": -0.43251
     },
     "ripple": {
       "price": 1.14,
-      "chg": -0.07649
+      "chg": -0.74481
     },
     "solana": {
-      "price": 77.85,
-      "chg": -0.29489
+      "price": 77.55,
+      "chg": -1.03886
     },
     "hyperliquid": {
-      "price": 59.36,
-      "chg": -2.32359
+      "price": 58.58,
+      "chg": -3.75725
     },
     "dogecoin": {
-      "price": 0.072912,
-      "chg": -0.50456
+      "price": 0.072643,
+      "chg": -1.33538
     },
     "chainlink": {
-      "price": 8.62,
-      "chg": -0.29684
+      "price": 8.6,
+      "chg": -1.28512
     },
     "sui": {
-      "price": 0.76348,
-      "chg": -0.97873
+      "price": 0.759507,
+      "chg": -1.40799
     },
     "uniswap": {
       "price": 3.78,
-      "chg": 1.72402
+      "chg": 2.15698
     },
     "ondo-finance": {
-      "price": 0.413012,
-      "chg": 3.44511
+      "price": 0.403931,
+      "chg": 0.72708
     },
     "world-liberty-financial": {
-      "price": 0.056212,
-      "chg": -1.06245
+      "price": 0.053384,
+      "chg": -6.52197
     },
     "aave": {
-      "price": 97.3,
-      "chg": 1.91224
+      "price": 97.96,
+      "chg": 0.86235
     },
     "filecoin": {
-      "price": 0.761733,
-      "chg": -0.84638
+      "price": 0.753885,
+      "chg": -2.41145
     },
     "pendle": {
-      "price": 1.63,
-      "chg": 1.36437
+      "price": 1.61,
+      "chg": -1.56192
     },
     "zksync": {
-      "price": 0.00961108,
-      "chg": 1.33162
+      "price": 0.00954915,
+      "chg": -0.52547
     },
     "centrifuge": {
-      "price": 0.185236,
-      "chg": 1.20771
+      "price": 0.18221,
+      "chg": -2.3189
     },
     "NVDA": {
       "price": 212.06
@@ -164,71 +164,71 @@
       "price": 829.7
     },
     "000660": {
-      "price": 1830000
+      "price": 1888000
     },
     "005930": {
-      "price": 260500
+      "price": 268500
     },
     "006400": {
-      "price": 419000
+      "price": 434500
     },
     "096770": {
-      "price": 118400
+      "price": 126100
     },
     "066970": {
-      "price": 82400
+      "price": 85200
     },
     "003670": {
-      "price": 141100
+      "price": 144300
     },
     "042660": {
-      "price": 83900
+      "price": 86500
     },
     "010140": {
-      "price": 21600
+      "price": 22950
     },
     "012450": {
-      "price": 891000
+      "price": 959000
     },
     "064350": {
-      "price": 155800
+      "price": 165800
     },
     "079550": {
-      "price": 667000
+      "price": 734000
     },
     "034020": {
-      "price": 69200
+      "price": 71600
     },
     "052690": {
-      "price": 90400
+      "price": 94200
     },
     "068270": {
-      "price": 170100
+      "price": 173300
     },
     "009150": {
-      "price": 1345000
+      "price": 1419000
     },
     "011070": {
-      "price": 647000
+      "price": 666000
     },
     "011790": {
-      "price": 79700
+      "price": 84100
     }
   },
   "tech": {
     "128940": {
-      "rsi": 49,
+      "rsi": 50,
       "chart": 50,
       "trend": "side",
       "athAbs": 823333,
-      "ath": "-55%"
+      "ath": "-54%"
     },
     "207940": {
-      "rsi": 45,
-      "chart": 20,
+      "rsi": 46,
+      "chart": 30,
       "trend": "side",
       "athAbs": 1987000,
-      "ath": "-31%"
+      "ath": "-29%"
     },
     "247540": {
       "rsi": 33,
@@ -238,56 +238,56 @@
       "ath": "-67%"
     },
     "267260": {
-      "rsi": 42,
+      "rsi": 45,
       "chart": 5,
       "trend": "down",
       "athAbs": 1430000,
-      "ath": "-44%"
+      "ath": "-41%"
     },
     "329180": {
-      "rsi": 38,
-      "chart": 0,
+      "rsi": 41,
+      "chart": 5,
       "trend": "down",
       "athAbs": 765000,
-      "ath": "-39%"
+      "ath": "-36%"
     },
     "373220": {
-      "rsi": 40,
+      "rsi": 42,
       "chart": 5,
       "trend": "down",
       "athAbs": 629000,
-      "ath": "-49%"
+      "ath": "-47%"
     },
     "bitcoin": {
       "ath": "-48%",
       "athAbs": 126080,
-      "rsi": 46,
+      "rsi": 47,
       "chart": 70,
       "trend": "side"
     },
     "ethereum": {
       "ath": "-61%",
       "athAbs": 4946.05,
-      "rsi": 48,
+      "rsi": 49,
       "chart": 95,
       "trend": "up"
     },
     "ripple": {
       "ath": "-69%",
       "athAbs": 3.65,
-      "rsi": 38,
+      "rsi": 39,
       "chart": 50,
       "trend": "side"
     },
     "solana": {
-      "ath": "-73%",
+      "ath": "-74%",
       "athAbs": 293.31,
-      "rsi": 44,
+      "rsi": 45,
       "chart": 60,
       "trend": "side"
     },
     "hyperliquid": {
-      "ath": "-23%",
+      "ath": "-24%",
       "athAbs": 76.7
     },
     "dogecoin": {
@@ -313,7 +313,7 @@
       "athAbs": 2.14
     },
     "world-liberty-financial": {
-      "ath": "-83%",
+      "ath": "-84%",
       "athAbs": 0.331336
     },
     "aave": {
@@ -326,7 +326,7 @@
       "athAbs": 236.84
     },
     "pendle": {
-      "ath": "-78%",
+      "ath": "-79%",
       "athAbs": 7.5
     },
     "zksync": {
@@ -409,7 +409,7 @@
     },
     "ASTS": {
       "rsi": 43,
-      "chart": 0,
+      "chart": 5,
       "trend": "down",
       "athAbs": 133.86000061035156,
       "ath": "-54%"
@@ -436,7 +436,7 @@
       "ath": "-78%"
     },
     "COIN": {
-      "rsi": 44,
+      "rsi": 43,
       "chart": 50,
       "trend": "side",
       "athAbs": 444.65,
@@ -472,7 +472,7 @@
     },
     "PLTR": {
       "rsi": 44,
-      "chart": 0,
+      "chart": 5,
       "trend": "down",
       "athAbs": 207.52000427246094,
       "ath": "-40%"
@@ -520,32 +520,32 @@
       "ath": "-24%"
     },
     "000660": {
-      "rsi": 67,
+      "rsi": 68,
       "chart": 95,
       "trend": "up",
       "athAbs": 2987000,
-      "ath": "-39%"
+      "ath": "-37%"
     },
     "005930": {
       "rsi": 67,
       "chart": 95,
       "trend": "up",
       "athAbs": 374500,
-      "ath": "-30%"
+      "ath": "-28%"
     },
     "006400": {
-      "rsi": 51,
+      "rsi": 52,
       "chart": 70,
       "trend": "side",
       "athAbs": 828000,
-      "ath": "-49%"
+      "ath": "-48%"
     },
     "096770": {
-      "rsi": 50,
+      "rsi": 51,
       "chart": 100,
       "trend": "up",
       "athAbs": 310181.78125,
-      "ath": "-62%"
+      "ath": "-59%"
     },
     "066970": {
       "rsi": 44,
@@ -562,81 +562,81 @@
       "ath": "-81%"
     },
     "042660": {
-      "rsi": 48,
+      "rsi": 49,
       "chart": 50,
       "trend": "side",
       "athAbs": 564918.875,
       "ath": "-85%"
     },
     "010140": {
-      "rsi": 52,
+      "rsi": 54,
       "chart": 50,
       "trend": "side",
       "athAbs": 42212.6484375,
-      "ath": "-49%"
+      "ath": "-46%"
     },
     "012450": {
-      "rsi": 52,
+      "rsi": 55,
       "chart": 50,
       "trend": "side",
       "athAbs": 1655000,
-      "ath": "-46%"
+      "ath": "-42%"
     },
     "064350": {
-      "rsi": 51,
-      "chart": 50,
-      "trend": "side",
-      "athAbs": 282000,
-      "ath": "-45%"
-    },
-    "079550": {
-      "rsi": 60,
-      "chart": 95,
-      "trend": "up",
-      "athAbs": 1118000,
-      "ath": "-40%"
-    },
-    "034020": {
       "rsi": 52,
       "chart": 50,
       "trend": "side",
+      "athAbs": 282000,
+      "ath": "-41%"
+    },
+    "079550": {
+      "rsi": 63,
+      "chart": 95,
+      "trend": "up",
+      "athAbs": 1118000,
+      "ath": "-34%"
+    },
+    "034020": {
+      "rsi": 53,
+      "chart": 50,
+      "trend": "side",
       "athAbs": 151594.765625,
-      "ath": "-54%"
+      "ath": "-53%"
     },
     "052690": {
-      "rsi": 48,
-      "chart": 20,
+      "rsi": 49,
+      "chart": 50,
       "trend": "side",
       "athAbs": 198000,
-      "ath": "-54%"
+      "ath": "-52%"
     },
     "068270": {
-      "rsi": 49,
-      "chart": 20,
+      "rsi": 50,
+      "chart": 50,
       "trend": "side",
       "athAbs": 325235.46875,
-      "ath": "-48%"
+      "ath": "-47%"
     },
     "009150": {
-      "rsi": 65,
+      "rsi": 66,
       "chart": 95,
       "trend": "up",
       "athAbs": 2417000,
-      "ath": "-44%"
+      "ath": "-41%"
     },
     "011070": {
       "rsi": 57,
       "chart": 95,
       "trend": "up",
       "athAbs": 1788000,
-      "ath": "-64%"
+      "ath": "-63%"
     },
     "011790": {
-      "rsi": 44,
+      "rsi": 45,
       "chart": 0,
       "trend": "down",
       "athAbs": 208000,
-      "ath": "-62%"
+      "ath": "-60%"
     },
     "QQQ": {
       "athAbs": 748.6500244140625,
@@ -675,27 +675,27 @@
     },
     "ETH": {
       "maxPain": 13,
-      "pcr": 0.28,
-      "pcrVol": 0.11,
+      "pcr": 0.29,
+      "pcrVol": 0.17,
       "maxPainTotal": 16.5,
-      "pcrTotal": 0.3,
+      "pcrTotal": 0.29,
       "expiry": "7/24"
     },
     "NVDA": {
-      "maxPain": 205,
-      "pcr": 0.83,
-      "pcrVol": 0.57,
+      "maxPain": 202.5,
+      "pcr": 0.72,
+      "pcrVol": 0.54,
       "maxPainTotal": 185,
       "pcrTotal": 0.83,
-      "expiry": "7/22"
+      "expiry": "7/24"
     },
     "AMD": {
-      "maxPain": 525,
-      "pcr": 1.37,
-      "pcrVol": 0.54,
-      "maxPainTotal": 340,
-      "pcrTotal": 1.12,
-      "expiry": "7/22"
+      "maxPain": 505,
+      "pcr": 1.07,
+      "pcrVol": 0.76,
+      "maxPainTotal": 320,
+      "pcrTotal": 1.11,
+      "expiry": "7/24"
     },
     "ASML": {
       "maxPain": 1780,
@@ -706,12 +706,12 @@
       "expiry": "7/24"
     },
     "MU": {
-      "maxPain": 930,
-      "pcr": 2.35,
-      "pcrVol": 0.69,
-      "maxPainTotal": 800,
-      "pcrTotal": 1.31,
-      "expiry": "7/22"
+      "maxPain": 940,
+      "pcr": 2.59,
+      "pcrVol": 1.43,
+      "maxPainTotal": 790,
+      "pcrTotal": 1.28,
+      "expiry": "7/24"
     },
     "SNDK": {
       "maxPain": 1560,
@@ -844,7 +844,7 @@
     "BAH": {
       "maxPain": 70,
       "pcr": 0.73,
-      "pcrVol": 0.19,
+      "pcrVol": 0.1,
       "maxPainTotal": 75,
       "pcrTotal": 1.08,
       "expiry": "8/21"
@@ -910,33 +910,33 @@
       "ath": "-6%"
     },
     "KOSPI": {
-      "price": 6797.7,
+      "price": 7009.32,
       "rsi": 65,
-      "ath": "-28%"
+      "ath": "-25%"
     },
     "KOSDAQ": {
-      "price": 751.09,
-      "rsi": 43,
-      "ath": "-39%"
+      "price": 770.68,
+      "rsi": 44,
+      "ath": "-37%"
     },
     "WTI 유가": {
-      "price": 87.85,
+      "price": 88.1,
       "rsi": 56,
       "ath": "-40%"
     },
     "Brent 유가": {
-      "price": 95.5,
+      "price": 95.83,
       "rsi": 57,
       "ath": "-35%"
     }
   },
   "macro": {
     "usdkrw": 1480,
-    "fng": 33,
+    "fng": 31,
     "fngCls": "Fear",
-    "btcDom": 56.3,
-    "kimchi": -1.4,
-    "kimchiKrw": -1325652,
+    "btcDom": 56.7,
+    "kimchi": -1.5,
+    "kimchiKrw": -1446004,
     "cpi": "3.5%",
     "cpiDate": "2026-06"
   },
@@ -957,16 +957,20 @@
       "si": "2.81%",
       "date": "06/30"
     },
-    "SNDK": {
-      "si": "7.59%",
-      "date": "06/30"
-    },
     "IREN": {
       "si": "21.97%",
       "date": "06/30"
     },
+    "VRT": {
+      "si": "3.78%",
+      "date": "06/30"
+    },
     "GEV": {
       "si": "4.35%",
+      "date": "06/30"
+    },
+    "CRWV": {
+      "si": "26.97%",
       "date": "06/30"
     },
     "NBIS": {
@@ -1036,68 +1040,68 @@
   },
   "fund": {
     "128940": {
-      "per": "41.71배",
-      "fper": "36.10배"
+      "per": "42.90배",
+      "fper": "37.13배"
     },
     "207940": {
-      "per": "76.47배",
-      "fper": "67.48배"
+      "per": "78.14배",
+      "fper": "68.95배"
     },
     "267260": {
-      "per": "69.38배",
-      "fper": "57.82배"
+      "per": "73.92배",
+      "fper": "61.60배"
     },
     "329180": {
-      "per": "9.54배",
-      "fper": "7.81배"
+      "per": "10.01배",
+      "fper": "8.19배"
     },
     "000660": {
-      "per": "7.60배",
-      "fper": "5.61배"
+      "per": "7.84배",
+      "fper": "5.79배"
     },
     "005930": {
-      "per": "9.30배",
-      "fper": "5.48배"
+      "per": "9.59배",
+      "fper": "5.65배"
     },
     "042660": {
-      "per": "13.76배",
-      "fper": "11.80배"
+      "per": "14.19배",
+      "fper": "12.16배"
     },
     "010140": {
-      "per": "12.57배",
-      "fper": "11.00배"
+      "per": "13.35배",
+      "fper": "11.68배"
     },
     "012450": {
-      "per": "17.22배",
-      "fper": "15.37배"
+      "per": "18.53배",
+      "fper": "16.55배"
     },
     "064350": {
-      "per": "8.06배",
-      "fper": "7.10배"
+      "per": "8.58배",
+      "fper": "7.55배"
     },
     "079550": {
-      "per": "18.61배",
-      "fper": "17.06배"
+      "per": "20.48배",
+      "fper": "18.78배"
     },
     "034020": {
-      "per": "25.95배",
-      "fper": "21.63배"
+      "per": "26.85배",
+      "fper": "22.38배"
     },
     "052690": {
-      "per": "31.11배",
-      "fper": "27.22배"
+      "per": "32.41배",
+      "fper": "28.36배"
     },
     "068270": {
-      "per": "17.98배",
-      "fper": "15.41배"
+      "per": "18.32배",
+      "fper": "15.70배"
     },
     "009150": {
-      "per": "20.96배",
-      "fper": "17.47배"
+      "per": "22.11배",
+      "fper": "18.43배"
     },
     "011070": {
-      "per": "10.90배",
-      "fper": "9.09배"
+      "per": "11.22배",
+      "fper": "9.35배"
     },
     "NVDA": {
       "per": "37.99배",
@@ -1175,16 +1179,14 @@
     "techGot": 70,
     "optsGot": 29,
     "indicesGot": 6,
-    "siGot": 23,
+    "siGot": 24,
     "fundGot": 33,
     "krSI": "수동(KRX 해외IP 차단)",
     "errors": [
       "옵션 SOL: 만기 없음",
       "옵션 XRP: 만기 없음",
       "옵션 XRP(CBOE): HTTP 403",
-      "도미넌스(CG): HTTP 429",
-      "US SI VRT: HTTP 500",
-      "US SI CRWV: HTTP 500"
+      "US SI SNDK: HTTP 500"
     ]
   }
 }
