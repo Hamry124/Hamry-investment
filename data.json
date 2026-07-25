@@ -1,6 +1,6 @@
 {
   "date": "2026-07-25",
-  "updated": "2026-07-25T17:54:28.736Z",
+  "updated": "2026-07-25T18:58:40.133Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 329500
     },
     "bitcoin": {
-      "price": 64234,
-      "chg": 0.2
+      "price": 64344,
+      "chg": 0.5
     },
     "ethereum": {
-      "price": 1870.88,
-      "chg": 0.4
+      "price": 1874.01,
+      "chg": 0.8
     },
     "ripple": {
       "price": 1.1,
-      "chg": 1.1
+      "chg": 1.6
     },
     "solana": {
-      "price": 74.47,
-      "chg": 0.4
+      "price": 74.61,
+      "chg": 0.8
     },
     "hyperliquid": {
-      "price": 58.22,
-      "chg": -1.5
+      "price": 58.4,
+      "chg": -0.8
     },
     "dogecoin": {
-      "price": 0.073191,
-      "chg": 4.5
+      "price": 0.072788,
+      "chg": 6.7
     },
     "chainlink": {
-      "price": 8.4,
-      "chg": 0.6
+      "price": 8.42,
+      "chg": 1
     },
     "sui": {
       "price": 0.714559,
-      "chg": -0.6
+      "chg": 0.2
     },
     "uniswap": {
       "price": 3.68,
-      "chg": -4.4
+      "chg": -3.8
     },
     "ondo-finance": {
-      "price": 0.384286,
-      "chg": -2.9
+      "price": 0.384564,
+      "chg": -2.3
     },
     "world-liberty-financial": {
-      "price": 0.056216,
-      "chg": -3.2
+      "price": 0.056265,
+      "chg": -2
     },
     "aave": {
-      "price": 92.24,
-      "chg": -2.8
+      "price": 92.06,
+      "chg": -2.3
     },
     "filecoin": {
-      "price": 0.727528,
-      "chg": -0.1
+      "price": 0.727645,
+      "chg": 0.3
     },
     "pendle": {
       "price": 1.48,
-      "chg": -3.3
+      "chg": -2.2
     },
     "zksync": {
-      "price": 0.00923415,
-      "chg": 1.2
+      "price": 0.00919976,
+      "chg": 1.4
     },
     "centrifuge": {
-      "price": 0.170601,
-      "chg": -2.2
+      "price": 0.170883,
+      "chg": -3.2
     },
     "NVDA": {
       "price": 206.84
@@ -262,7 +262,7 @@
       "ath": "-49%",
       "athAbs": 126080,
       "rsi": 48,
-      "chart": 40,
+      "chart": 70,
       "trend": "side"
     },
     "ethereum": {
@@ -276,8 +276,8 @@
       "ath": "-70%",
       "athAbs": 3.65,
       "rsi": 36,
-      "chart": 40,
-      "trend": "side"
+      "chart": 15,
+      "trend": "down"
     },
     "solana": {
       "ath": "-75%",
@@ -934,9 +934,9 @@
     "usdkrw": 1461,
     "fng": 27,
     "fngCls": "Fear",
-    "btcDom": 56.1,
-    "kimchi": 0.2,
-    "kimchiKrw": 147900,
+    "btcDom": 56.2,
+    "kimchi": 0,
+    "kimchiKrw": 14971,
     "cpi": "3.5%",
     "cpiDate": "2026-06"
   },
