@@ -1,6 +1,6 @@
 {
   "date": "2026-07-26",
-  "updated": "2026-07-26T05:54:21.546Z",
+  "updated": "2026-07-26T08:14:23.291Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 329500
     },
     "bitcoin": {
-      "price": 64411,
-      "chg": 0.7
+      "price": 64331,
+      "chg": 0.6
     },
     "ethereum": {
-      "price": 1884.76,
-      "chg": 1.5
-    },
-    "ripple": {
-      "price": 1.1,
-      "chg": 0.9
-    },
-    "solana": {
-      "price": 75.03,
+      "price": 1879.64,
       "chg": 1.2
     },
+    "ripple": {
+      "price": 1.098,
+      "chg": 0.8
+    },
+    "solana": {
+      "price": 74.87,
+      "chg": 1.1
+    },
     "hyperliquid": {
-      "price": 58.57,
-      "chg": 2
+      "price": 58.51,
+      "chg": 2.4
     },
     "dogecoin": {
-      "price": 0.073567,
-      "chg": 4.9
+      "price": 0.073199,
+      "chg": 5.5
     },
     "chainlink": {
-      "price": 8.44,
+      "price": 8.41,
       "chg": 1.3
     },
     "sui": {
-      "price": 0.721082,
-      "chg": 1.1
+      "price": 0.718863,
+      "chg": 1.9
     },
     "uniswap": {
-      "price": 3.67,
-      "chg": -1.5
+      "price": 3.66,
+      "chg": -0.4
     },
     "ondo-finance": {
-      "price": 0.387104,
-      "chg": 3.8
-    },
-    "world-liberty-financial": {
-      "price": 0.055484,
-      "chg": -2.3
-    },
-    "aave": {
-      "price": 92.18,
-      "chg": 0.8
-    },
-    "filecoin": {
-      "price": 0.742402,
+      "price": 0.386717,
       "chg": 2.7
     },
+    "world-liberty-financial": {
+      "price": 0.055521,
+      "chg": -2.5
+    },
+    "aave": {
+      "price": 93.11,
+      "chg": 2.1
+    },
+    "filecoin": {
+      "price": 0.748315,
+      "chg": 3.9
+    },
     "pendle": {
-      "price": 1.49,
-      "chg": 1
+      "price": 1.47,
+      "chg": 0.9
     },
     "zksync": {
-      "price": 0.00920483,
-      "chg": 0.6
+      "price": 0.0092806,
+      "chg": 2
     },
     "centrifuge": {
-      "price": 0.17284,
-      "chg": -0.6
+      "price": 0.173528,
+      "chg": 0.6
     },
     "NVDA": {
       "price": 206.84
@@ -366,9 +366,9 @@
       "ath": "-27%"
     },
     "SNDK": {
-      "rsi": 42,
-      "chart": 0,
-      "trend": "down",
+      "rsi": 47,
+      "chart": 30,
+      "trend": "side",
       "athAbs": 2354.39,
       "ath": "-39%"
     },
@@ -380,7 +380,7 @@
       "ath": "-52%"
     },
     "VRT": {
-      "rsi": 53,
+      "rsi": 52,
       "chart": 50,
       "trend": "side",
       "athAbs": 379.935,
@@ -394,16 +394,16 @@
       "ath": "-15%"
     },
     "CRWV": {
-      "rsi": 35,
-      "chart": 0,
-      "trend": "down",
+      "rsi": 42,
+      "chart": 50,
+      "trend": "side",
       "athAbs": 187,
       "ath": "-62%"
     },
     "NBIS": {
-      "rsi": 42,
-      "chart": 0,
-      "trend": "down",
+      "rsi": 51,
+      "chart": 50,
+      "trend": "side",
       "athAbs": 299.86,
       "ath": "-37%"
     },
@@ -415,7 +415,7 @@
       "ath": "-58%"
     },
     "RKLB": {
-      "rsi": 42,
+      "rsi": 43,
       "chart": 20,
       "trend": "side",
       "athAbs": 151,
@@ -436,21 +436,21 @@
       "ath": "-79%"
     },
     "COIN": {
-      "rsi": 40,
+      "rsi": 41,
       "chart": 25,
       "trend": "down",
       "athAbs": 444.65,
       "ath": "-64%"
     },
     "SMR": {
-      "rsi": 36,
+      "rsi": 37,
       "chart": 15,
       "trend": "down",
       "athAbs": 57.42,
       "ath": "-86%"
     },
     "OKLO": {
-      "rsi": 35,
+      "rsi": 36,
       "chart": 0,
       "trend": "down",
       "athAbs": 193.84,
@@ -464,8 +464,8 @@
       "ath": "-68%"
     },
     "INFQ": {
-      "rsi": 35,
-      "chart": 0,
+      "rsi": 39,
+      "chart": 5,
       "trend": "down",
       "athAbs": 21.280000686645508,
       "ath": "-58%"
@@ -934,9 +934,9 @@
     "usdkrw": 1461,
     "fng": 26,
     "fngCls": "Fear",
-    "btcDom": 56.1,
-    "kimchi": 0.1,
-    "kimchiKrw": 64316,
+    "btcDom": 56.4,
+    "kimchi": -0.1,
+    "kimchiKrw": -49969,
     "cpi": "3.5%",
     "cpiDate": "2026-06"
   },
@@ -1189,8 +1189,7 @@
     "errors": [
       "옵션 SOL: 만기 없음",
       "옵션 XRP: 만기 없음",
-      "옵션 XRP(CBOE): HTTP 403",
-      "도미넌스(CG): HTTP 429"
+      "옵션 XRP(CBOE): HTTP 403"
     ]
   }
 }
