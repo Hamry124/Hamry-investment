@@ -1,6 +1,6 @@
 {
   "date": "2026-07-26",
-  "updated": "2026-07-26T10:39:24.794Z",
+  "updated": "2026-07-26T11:58:14.385Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,68 +22,68 @@
       "price": 329500
     },
     "bitcoin": {
-      "price": 64499,
-      "chg": 1
+      "price": 64466,
+      "chg": 0.8
     },
     "ethereum": {
-      "price": 1885.35,
-      "chg": 1.6
+      "price": 1884.81,
+      "chg": 1.5
     },
     "ripple": {
       "price": 1.1,
-      "chg": 1.2
+      "chg": 1.1
     },
     "solana": {
-      "price": 75.15,
-      "chg": 1.7
+      "price": 74.88,
+      "chg": 1.5
     },
     "hyperliquid": {
-      "price": 58.82,
-      "chg": 2.8
+      "price": 58.61,
+      "chg": 1.8
     },
     "dogecoin": {
-      "price": 0.073356,
-      "chg": 5.5
+      "price": 0.073192,
+      "chg": 5.4
     },
     "chainlink": {
-      "price": 8.42,
-      "chg": 1.7
+      "price": 8.43,
+      "chg": 1.6
     },
     "sui": {
-      "price": 0.718505,
-      "chg": 1.9
+      "price": 0.71785,
+      "chg": 1.8
     },
     "uniswap": {
-      "price": 3.7,
-      "chg": 0.3
+      "price": 3.82,
+      "chg": 1.9
     },
     "ondo-finance": {
-      "price": 0.388218,
-      "chg": 3.1
+      "price": 0.385045,
+      "chg": 2.5
     },
     "world-liberty-financial": {
-      "price": 0.055179,
-      "chg": -3.2
+      "price": 0.055092,
+      "chg": -2.6
     },
     "aave": {
-      "price": 95.21,
-      "chg": 2.9
+      "price": 95.68,
+      "chg": 5
     },
     "filecoin": {
-      "price": 0.747536,
-      "chg": 4.7
+      "price": 0.749074,
+      "chg": 4.1
     },
     "pendle": {
       "price": 1.48,
-      "chg": 1.5
+      "chg": 1.1
     },
     "zksync": {
-      "price": 0.00926307,
-      "chg": 0.7
+      "price": 0.00923894,
+      "chg": 0.2
     },
     "centrifuge": {
-      "price": 0.173455,
-      "chg": -0.5
+      "price": 0.17254,
+      "chg": -0.3
     },
     "NVDA": {
       "price": 206.84
@@ -287,7 +287,7 @@
       "trend": "side"
     },
     "hyperliquid": {
-      "ath": "-23%",
+      "ath": "-24%",
       "athAbs": 76.87
     },
     "dogecoin": {
@@ -305,7 +305,7 @@
       "athAbs": 5.35
     },
     "uniswap": {
-      "ath": "-92%",
+      "ath": "-91%",
       "athAbs": 44.92
     },
     "ondo-finance": {
@@ -935,8 +935,8 @@
     "fng": 26,
     "fngCls": "Fear",
     "btcDom": 56.2,
-    "kimchi": 0,
-    "kimchiKrw": 30856,
+    "kimchi": 0.1,
+    "kimchiKrw": 66994,
     "cpi": "3.5%",
     "cpiDate": "2026-06"
   },
