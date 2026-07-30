@@ -404,22 +404,24 @@ async function fetchKimchi(usdkrw, errors) {
 /* ── 알트시즌 인덱스 (Top50 90일 수익률 vs BTC) ────────────────── */
 async function fetchAltseason(errors) {
   try {
-    const arr = await cgGET('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=60&page=1&price_change_percentage=90d');
-    if (!Array.isArray(arr) || !arr.length) return {};
+    // ★ CoinGecko 유효 기간값: 1h,24h,7d,14d,30d,200d,1y — '90d'는 미지원(조용히 무시)이라 30d 사용
+    const WIN = '30d', F = 'price_change_percentage_30d_in_currency';
+    const arr = await cgGET(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=60&page=1&price_change_percentage=${WIN}`);
+    if (!Array.isArray(arr) || !arr.length) { errors.push('알트시즌: 빈 응답'); return {}; }
     const STABLE = new Set(['USDT','USDC','DAI','FDUSD','TUSD','USDD','FRAX','PYUSD','USDE','BUIDL','USDS','USD1']);
     const EXCL = /^(tether|usd-coin|dai|first-digital-usd|true-usd|usdd|frax|paypal-usd|ethena-usde|wrapped-|staked-|coinbase-wrapped|lombard-|binance-peg|bridged-)/;
     const btc = arr.find(c => c.symbol && c.symbol.toLowerCase() === 'btc');
-    if (!btc || btc.price_change_percentage_90d_in_currency == null) return {};
-    const btcRet = btc.price_change_percentage_90d_in_currency;
+    if (!btc || btc[F] == null) { errors.push(`알트시즌: BTC ${WIN} 수익률 필드 없음`); return {}; }
+    const btcRet = btc[F];
     const alts = arr.filter(c => {
       const sym = (c.symbol||'').toUpperCase(), id = (c.id||'').toLowerCase();
       if (sym === 'BTC') return false;
       if (STABLE.has(sym) || EXCL.test(id)) return false;
-      return c.price_change_percentage_90d_in_currency != null;
+      return c[F] != null;
     }).slice(0, 50);
-    if (!alts.length) return {};
-    const beat = alts.filter(c => c.price_change_percentage_90d_in_currency > btcRet).length;
-    return { altseason: Math.round(beat / alts.length * 100), altBeat: beat, altTotal: alts.length };
+    if (!alts.length) { errors.push('알트시즌: 알트 데이터 없음'); return {}; }
+    const beat = alts.filter(c => c[F] > btcRet).length;
+    return { altseason: Math.round(beat / alts.length * 100), altBeat: beat, altTotal: alts.length, altWindow: WIN };
   } catch (e) { errors.push(`알트시즌: ${e.message}`); }
   return {};
 }
@@ -459,11 +461,16 @@ async function fetchAltseason(errors) {
   try { fund = computeFund(fundSeed, prices) || {}; } catch (e) { errors.push('PER: '+e.message); }
 
   // 직전 ATH(athAbs) 보존: 이번에 못 받은 종목도 전고점 유지
-  for (const k in prevTech) { if(!tech[k])tech[k]={}; ['athAbs','ath','rsi'].forEach(f=>{ if(tech[k][f]==null && prevTech[k][f]!=null) tech[k][f]=prevTech[k][f]; }); }
+  // ★ 현재 종목목록(cg/us/kr)에 있는 심볼만 보존 — 삭제된 종목의 고아 항목이 누적되지 않도록
+  const CUR = new Set([...cg, ...us, ...kr]);
+  for (const k in prevTech) {
+    if (!CUR.has(k)) continue;
+    if(!tech[k])tech[k]={}; ['athAbs','ath','rsi'].forEach(f=>{ if(tech[k][f]==null && prevTech[k][f]!=null) tech[k][f]=prevTech[k][f]; });
+  }
 
   // 직전 거시값 보존: 이번에 못 받은 crypto 구조지표는 전값 유지(카드 공백 방지)
   const prevMacro = prev.macro || {};
-  ['btcDom','altseason','altBeat','altTotal'].forEach(f => { if (macro[f] == null && prevMacro[f] != null) macro[f] = prevMacro[f]; });
+  ['btcDom','altseason','altBeat','altTotal','altWindow'].forEach(f => { if (macro[f] == null && prevMacro[f] != null) macro[f] = prevMacro[f]; });
 
   const out = {
     date: new Date().toISOString().slice(0,10), updated: new Date().toISOString(), phase: 2,
