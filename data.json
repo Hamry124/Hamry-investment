@@ -1,6 +1,6 @@
 {
   "date": "2026-07-31",
-  "updated": "2026-07-31T20:57:56.132Z",
+  "updated": "2026-07-31T22:03:33.186Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 328000
     },
     "bitcoin": {
-      "price": 62916,
-      "chg": -2.7
+      "price": 62879,
+      "chg": -2.9
     },
     "ethereum": {
-      "price": 1862.51,
-      "chg": -2.6
+      "price": 1859.46,
+      "chg": -3.2
     },
     "ripple": {
-      "price": 1.062,
-      "chg": -1.9
+      "price": 1.059,
+      "chg": -2.4
     },
     "solana": {
-      "price": 72.92,
-      "chg": -1.8
+      "price": 72.66,
+      "chg": -2.5
     },
     "hyperliquid": {
-      "price": 52.65,
-      "chg": -4.9
+      "price": 52.25,
+      "chg": -5.4
     },
     "dogecoin": {
-      "price": 0.069505,
-      "chg": -1.2
+      "price": 0.069555,
+      "chg": -1.4
     },
     "chainlink": {
-      "price": 8.15,
+      "price": 8.14,
       "chg": -3.7
     },
     "sui": {
-      "price": 0.680081,
-      "chg": -2.9
+      "price": 0.679492,
+      "chg": -2.3
     },
     "uniswap": {
-      "price": 4.29,
-      "chg": -3.5
+      "price": 4.28,
+      "chg": -2.6
     },
     "ondo-finance": {
-      "price": 0.393033,
-      "chg": -5
+      "price": 0.389021,
+      "chg": -7
     },
     "world-liberty-financial": {
-      "price": 0.054944,
-      "chg": -0.2
+      "price": 0.054475,
+      "chg": -0.6
     },
     "aave": {
-      "price": 95.48,
-      "chg": -3.1
+      "price": 94.17,
+      "chg": -4.8
     },
     "morpho": {
-      "price": 1.99,
-      "chg": -1.8
+      "price": 2,
+      "chg": -1.3
     },
     "filecoin": {
-      "price": 0.714,
-      "chg": 0.1
+      "price": 0.71406,
+      "chg": -1.3
     },
     "pendle": {
       "price": 1.44,
-      "chg": 1.2
+      "chg": 0.7
     },
     "zksync": {
-      "price": 0.00789006,
-      "chg": 0.6
+      "price": 0.00781347,
+      "chg": 1.2
     },
     "centrifuge": {
-      "price": 0.176822,
-      "chg": -1.6
+      "price": 0.175791,
+      "chg": -2.9
     },
     "NVDA": {
       "price": 200.75
@@ -235,21 +235,21 @@
       "ath": "-25%"
     },
     "247540": {
-      "rsi": 31,
-      "chart": 0,
+      "rsi": 33,
+      "chart": 5,
       "trend": "down",
       "athAbs": 584000,
       "ath": "-67%"
     },
     "267260": {
-      "rsi": 40,
-      "chart": 5,
+      "rsi": 38,
+      "chart": 0,
       "trend": "down",
       "athAbs": 1430000,
       "ath": "-52%"
     },
     "329180": {
-      "rsi": 41,
+      "rsi": 40,
       "chart": 5,
       "trend": "down",
       "athAbs": 765000,
@@ -286,7 +286,7 @@
     "solana": {
       "ath": "-75%",
       "athAbs": 293.31,
-      "rsi": 40,
+      "rsi": 39,
       "chart": 20,
       "trend": "side"
     },
@@ -317,7 +317,7 @@
       "athAbs": 2.14
     },
     "world-liberty-financial": {
-      "ath": "-83%",
+      "ath": "-84%",
       "athAbs": 0.331336
     },
     "aave": {
@@ -795,7 +795,7 @@
     "OKLO": {
       "maxPain": 40,
       "pcr": 0.74,
-      "pcrVol": 0.52,
+      "pcrVol": 0.59,
       "maxPainTotal": 50,
       "pcrTotal": 0.59,
       "expiry": "7/31"
@@ -803,7 +803,7 @@
     "IONQ": {
       "maxPain": 34.5,
       "pcr": 0.58,
-      "pcrVol": 0.24,
+      "pcrVol": 0.18,
       "maxPainTotal": 40,
       "pcrTotal": 0.88,
       "expiry": "7/31"
@@ -843,7 +843,7 @@
     "GLW": {
       "maxPain": 132,
       "pcr": 0.62,
-      "pcrVol": 0.68,
+      "pcrVol": 0.63,
       "maxPainTotal": 142,
       "pcrTotal": 1,
       "expiry": "7/31"
@@ -903,9 +903,9 @@
       "ath": "-41%"
     },
     "WTI 유가": {
-      "price": 84.59,
-      "rsi": 55,
-      "ath": "-43%"
+      "price": 86.8,
+      "rsi": 56,
+      "ath": "-41%"
     },
     "Brent 유가": {
       "price": 90.12,
@@ -917,9 +917,9 @@
     "usdkrw": 1444,
     "fng": 25,
     "fngCls": "Extreme Fear",
-    "btcDom": 55.9,
+    "btcDom": 56.3,
     "kimchi": -0.6,
-    "kimchiKrw": -526205,
+    "kimchiKrw": -506434,
     "altseason": 35,
     "altBeat": 17,
     "altTotal": 49,
@@ -1176,8 +1176,7 @@
     "errors": [
       "옵션 SOL: 만기 없음",
       "옵션 XRP: 만기 없음",
-      "옵션 XRP(CBOE): HTTP 403",
-      "도미넌스(CG): HTTP 429"
+      "옵션 XRP(CBOE): HTTP 403"
     ]
   }
 }
