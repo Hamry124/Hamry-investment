@@ -1,6 +1,6 @@
 {
   "date": "2026-08-02",
-  "updated": "2026-08-02T15:57:57.429Z",
+  "updated": "2026-08-02T16:55:58.507Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 328000
     },
     "bitcoin": {
-      "price": 63071,
+      "price": 63136,
       "chg": 0
     },
     "ethereum": {
-      "price": 1857,
+      "price": 1862.08,
       "chg": -0.8
     },
     "ripple": {
-      "price": 1.079,
-      "chg": 1.6
+      "price": 1.08,
+      "chg": 1.3
     },
     "solana": {
-      "price": 72.99,
+      "price": 73.13,
       "chg": 0.1
     },
     "hyperliquid": {
-      "price": 51.33,
-      "chg": -1.7
+      "price": 52.23,
+      "chg": -1.8
     },
     "dogecoin": {
-      "price": 0.070318,
-      "chg": 0.4
+      "price": 0.070354,
+      "chg": 0.2
     },
     "chainlink": {
       "price": 8.27,
-      "chg": 2.4
+      "chg": 2.1
     },
     "sui": {
-      "price": 0.689362,
+      "price": 0.690243,
       "chg": 0.7
     },
     "uniswap": {
-      "price": 4.2,
-      "chg": 1.9
+      "price": 4.21,
+      "chg": 2.5
     },
     "ondo-finance": {
-      "price": 0.384665,
-      "chg": -1.3
+      "price": 0.385318,
+      "chg": -1.2
     },
     "world-liberty-financial": {
-      "price": 0.055686,
-      "chg": 3.7
+      "price": 0.055198,
+      "chg": 3.1
     },
     "aave": {
-      "price": 92.16,
-      "chg": -0.1
+      "price": 92.1,
+      "chg": 0
     },
     "morpho": {
       "price": 1.93,
-      "chg": -2
+      "chg": -1.6
     },
     "filecoin": {
-      "price": 0.719032,
-      "chg": 1.5
+      "price": 0.718678,
+      "chg": 1.3
     },
     "pendle": {
       "price": 1.37,
-      "chg": -2.7
+      "chg": -2.8
     },
     "zksync": {
-      "price": 0.00776769,
-      "chg": -0.9
+      "price": 0.00775962,
+      "chg": -2.9
     },
     "centrifuge": {
-      "price": 0.177055,
-      "chg": -0.1
+      "price": 0.176705,
+      "chg": 0.3
     },
     "NVDA": {
       "price": 200.75
@@ -291,7 +291,7 @@
       "trend": "side"
     },
     "hyperliquid": {
-      "ath": "-33%",
+      "ath": "-32%",
       "athAbs": 76.87
     },
     "dogecoin": {
@@ -918,8 +918,8 @@
     "fng": 27,
     "fngCls": "Fear",
     "btcDom": 55.9,
-    "kimchi": -0.6,
-    "kimchiKrw": -543905,
+    "kimchi": -0.7,
+    "kimchiKrw": -643865,
     "altseason": 35,
     "altBeat": 17,
     "altTotal": 49,
