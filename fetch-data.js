@@ -224,7 +224,27 @@ async function deribitOption(cur, curPx) {
   const front = maxPainOf(exp[near]);
   const all = []; keys.forEach(k => { if (expKey(k) > now) all.push(...exp[k]); });
   const total = all.length ? maxPainOf(all) : front;
-  // ★ 검증: 맥스페인이 현재가 대비 비상식적(40~250% 벗어남)이면 파싱 오류로 간주, 폐기
+  // ★ 검증 1: 행사가 분포 대비 — curPx가 없어도 항상 동작(인자 누락 시 검증이 통째로 건너뛰던 문제 수정)
+  //   정상 체인이면 맥스페인은 행사가 중앙값 부근에 위치. 크게 벗어나면 파싱 오류(자릿수·형식 변경 등)로 간주.
+  {
+    const ss = exp[near].map(o => o.strike).filter(v => v > 0).sort((a,b) => a-b);
+    const med = ss.length ? ss[Math.floor(ss.length/2)] : 0;
+    if (med > 0) {
+      const r = front.maxPain / med;
+      if (r < 0.2 || r > 5) {
+        throw new Error(`맥스페인 이상치 ${front.maxPain}(행사가 중앙값 ${med} 대비 ${(r*100).toFixed(0)}%) — 파싱 오류 의심, 폐기`);
+      }
+    }
+  }
+  // ★ 검증 2: 통화별 행사가 하한 — 체인 전체가 잘못 파싱되면 중앙값도 함께 작아지므로 절대 기준을 병행
+  {
+    const FLOOR = { BTC: 1000, ETH: 100, SOL: 1, XRP: 0.1 };
+    const f = FLOOR[cur];
+    if (f && front.maxPain < f) {
+      throw new Error(`맥스페인 ${front.maxPain}이 ${cur} 하한 ${f} 미만 — 파싱 오류 의심, 폐기`);
+    }
+  }
+  // ★ 검증 3: 현재가 대비(현재가를 받은 경우에만)
   if (curPx && curPx > 0) {
     const ratio = front.maxPain / curPx;
     if (ratio < 0.4 || ratio > 2.5) {
