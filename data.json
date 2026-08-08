@@ -1,6 +1,6 @@
 {
   "date": "2026-08-08",
-  "updated": "2026-08-08T11:22:39.739Z",
+  "updated": "2026-08-08T12:33:48.192Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 360000
     },
     "bitcoin": {
-      "price": 64958,
-      "chg": 0.3
+      "price": 64945,
+      "chg": 0.1
     },
     "ethereum": {
-      "price": 1919.76,
+      "price": 1918.85,
       "chg": 0.4
     },
     "ripple": {
       "price": 1.038,
-      "chg": 0.5
+      "chg": 0.3
     },
     "solana": {
-      "price": 75.31,
-      "chg": 2
+      "price": 75.36,
+      "chg": 2.8
     },
     "hyperliquid": {
-      "price": 54.69,
-      "chg": -3
+      "price": 54.51,
+      "chg": -4
     },
     "dogecoin": {
-      "price": 0.070352,
-      "chg": 1.2
+      "price": 0.070359,
+      "chg": 1.4
     },
     "chainlink": {
-      "price": 8.35,
+      "price": 8.32,
       "chg": 1.6
     },
     "sui": {
-      "price": 0.690472,
-      "chg": 2.7
+      "price": 0.690558,
+      "chg": 2.3
     },
     "uniswap": {
       "price": 3.98,
-      "chg": -0.9
+      "chg": -0.4
     },
     "ondo-finance": {
-      "price": 0.352227,
-      "chg": 1.2
+      "price": 0.35192,
+      "chg": 0.5
     },
     "world-liberty-financial": {
-      "price": 0.051145,
-      "chg": -1.5
+      "price": 0.051118,
+      "chg": -1.4
     },
     "aave": {
-      "price": 90.16,
-      "chg": -0.4
+      "price": 90.31,
+      "chg": 0.7
     },
     "morpho": {
       "price": 1.89,
-      "chg": 1.2
+      "chg": 1.1
     },
     "filecoin": {
-      "price": 0.716025,
-      "chg": 4.5
+      "price": 0.715687,
+      "chg": 3.4
     },
     "pendle": {
       "price": 1.38,
-      "chg": 1.1
+      "chg": 2.2
     },
     "zksync": {
-      "price": 0.0078627,
-      "chg": 0.4
+      "price": 0.00789779,
+      "chg": 0.6
     },
     "centrifuge": {
-      "price": 0.162862,
-      "chg": 1.7
+      "price": 0.162598,
+      "chg": 1.4
     },
     "NVDA": {
       "price": 223.96
@@ -918,8 +918,8 @@
     "fng": 30,
     "fngCls": "Fear",
     "btcDom": 56.4,
-    "kimchi": -0.7,
-    "kimchiKrw": -685778,
+    "kimchi": -0.8,
+    "kimchiKrw": -748875,
     "altseason": 27,
     "altBeat": 13,
     "altTotal": 49,
