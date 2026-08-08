@@ -1,6 +1,6 @@
 {
   "date": "2026-08-08",
-  "updated": "2026-08-08T01:05:43.892Z",
+  "updated": "2026-08-08T03:19:40.045Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 360000
     },
     "bitcoin": {
-      "price": 64881,
-      "chg": 0.9
+      "price": 64902,
+      "chg": 0.8
     },
     "ethereum": {
-      "price": 1913.39,
+      "price": 1913.23,
       "chg": 0.6
     },
     "ripple": {
-      "price": 1.026,
-      "chg": -0.9
-    },
-    "solana": {
-      "price": 73.68,
-      "chg": 1.4
-    },
-    "hyperliquid": {
-      "price": 54,
-      "chg": -3.8
-    },
-    "dogecoin": {
-      "price": 0.069732,
-      "chg": 0.8
-    },
-    "chainlink": {
-      "price": 8.17,
-      "chg": -0.3
-    },
-    "sui": {
-      "price": 0.672786,
-      "chg": 0.1
-    },
-    "uniswap": {
-      "price": 3.98,
+      "price": 1.033,
       "chg": -0.6
     },
+    "solana": {
+      "price": 73.95,
+      "chg": 1.6
+    },
+    "hyperliquid": {
+      "price": 54.22,
+      "chg": -3
+    },
+    "dogecoin": {
+      "price": 0.069941,
+      "chg": 0.9
+    },
+    "chainlink": {
+      "price": 8.2,
+      "chg": -0.5
+    },
+    "sui": {
+      "price": 0.677133,
+      "chg": 0.2
+    },
+    "uniswap": {
+      "price": 4,
+      "chg": -1.2
+    },
     "ondo-finance": {
-      "price": 0.347805,
-      "chg": -3.2
+      "price": 0.351734,
+      "chg": -1.7
     },
     "world-liberty-financial": {
-      "price": 0.051558,
-      "chg": -2.2
+      "price": 0.051516,
+      "chg": -2
     },
     "aave": {
-      "price": 89.76,
-      "chg": 0
+      "price": 89.35,
+      "chg": -1.6
     },
     "morpho": {
-      "price": 1.85,
-      "chg": -3.7
+      "price": 1.87,
+      "chg": -1.6
     },
     "filecoin": {
-      "price": 0.686898,
-      "chg": -2.4
+      "price": 0.691515,
+      "chg": -1.5
     },
     "pendle": {
       "price": 1.38,
-      "chg": 1.2
+      "chg": 1.5
     },
     "zksync": {
-      "price": 0.00780102,
-      "chg": -2
+      "price": 0.00783959,
+      "chg": -1.6
     },
     "centrifuge": {
-      "price": 0.160644,
-      "chg": -0.3
+      "price": 0.161552,
+      "chg": -0.5
     },
     "NVDA": {
       "price": 223.96
@@ -286,12 +286,12 @@
     "solana": {
       "ath": "-75%",
       "athAbs": 293.31,
-      "rsi": 43,
+      "rsi": 44,
       "chart": 30,
       "trend": "side"
     },
     "hyperliquid": {
-      "ath": "-30%",
+      "ath": "-29%",
       "athAbs": 76.87
     },
     "dogecoin": {
@@ -326,7 +326,7 @@
       "rsi": 23
     },
     "morpho": {
-      "ath": "-56%",
+      "ath": "-55%",
       "athAbs": 4.17
     },
     "filecoin": {
@@ -444,7 +444,7 @@
       "ath": "-78%"
     },
     "COIN": {
-      "rsi": 41,
+      "rsi": 40,
       "chart": 25,
       "trend": "down",
       "athAbs": 444.65,
@@ -459,15 +459,15 @@
     },
     "OKLO": {
       "rsi": 43,
-      "chart": 30,
-      "trend": "side",
+      "chart": 5,
+      "trend": "down",
       "athAbs": 193.84,
       "ath": "-75%"
     },
     "IONQ": {
-      "rsi": 50,
-      "chart": 85,
-      "trend": "up",
+      "rsi": 49,
+      "chart": 60,
+      "trend": "side",
       "athAbs": 103.23636363636363,
       "ath": "-57%"
     },
@@ -500,7 +500,7 @@
       "ath": "-34%"
     },
     "GLW": {
-      "rsi": 81,
+      "rsi": 84,
       "chart": 95,
       "trend": "up",
       "athAbs": 271.78,
@@ -514,7 +514,7 @@
       "ath": "-61%"
     },
     "COHR": {
-      "rsi": 78,
+      "rsi": 84,
       "chart": 100,
       "trend": "up",
       "athAbs": 440,
@@ -557,7 +557,7 @@
     },
     "066970": {
       "rsi": 46,
-      "chart": 20,
+      "chart": 40,
       "trend": "side",
       "athAbs": 635909,
       "ath": "-86%"
@@ -584,7 +584,7 @@
       "ath": "-48%"
     },
     "012450": {
-      "rsi": 59,
+      "rsi": 58,
       "chart": 50,
       "trend": "side",
       "athAbs": 1655000,
@@ -805,7 +805,7 @@
       "pcr": 0.67,
       "pcrVol": 0.45,
       "maxPainTotal": 40,
-      "pcrTotal": 0.91,
+      "pcrTotal": 0.93,
       "expiry": "8/14"
     },
     "INFQ": {
@@ -918,10 +918,10 @@
     "fng": 30,
     "fngCls": "Fear",
     "btcDom": 56.4,
-    "kimchi": -0.7,
-    "kimchiKrw": -628295,
-    "altseason": 24,
-    "altBeat": 12,
+    "kimchi": -0.6,
+    "kimchiKrw": -562122,
+    "altseason": 22,
+    "altBeat": 11,
     "altTotal": 49,
     "altWindow": "30d",
     "cpi": "3.5%",
