@@ -1,6 +1,6 @@
 {
   "date": "2026-08-13",
-  "updated": "2026-08-13T11:32:06.226Z",
+  "updated": "2026-08-13T11:46:05.896Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,27 +22,27 @@
       "price": 365500
     },
     "bitcoin": {
-      "price": 63393,
+      "price": 63370,
       "chg": -0.7
     },
     "ethereum": {
-      "price": 1875.18,
+      "price": 1876.29,
       "chg": -1.2
     },
     "ripple": {
-      "price": 1.006,
+      "price": 1.003,
       "chg": -1.6
     },
     "solana": {
-      "price": 75.54,
+      "price": 75.57,
       "chg": -1.3
     },
     "hyperliquid": {
-      "price": 57.19,
+      "price": 56.97,
       "chg": 3.9
     },
     "dogecoin": {
-      "price": 0.070057,
+      "price": 0.069945,
       "chg": -2.6
     },
     "chainlink": {
@@ -50,23 +50,23 @@
       "chg": -0.7
     },
     "sui": {
-      "price": 0.68649,
+      "price": 0.685341,
       "chg": -0.4
     },
     "uniswap": {
-      "price": 3.54,
+      "price": 3.53,
       "chg": 1.3
     },
     "world-liberty-financial": {
-      "price": 0.054901,
+      "price": 0.054934,
       "chg": -0.2
     },
     "ondo-finance": {
-      "price": 0.332527,
+      "price": 0.331903,
       "chg": -0.7
     },
     "aave": {
-      "price": 88.41,
+      "price": 88.19,
       "chg": -0.9
     },
     "morpho": {
@@ -74,19 +74,19 @@
       "chg": -0.8
     },
     "filecoin": {
-      "price": 0.673228,
+      "price": 0.671417,
       "chg": -3.8
     },
     "pendle": {
-      "price": 1.35,
+      "price": 1.34,
       "chg": 0.9
     },
     "zksync": {
-      "price": 0.00732459,
+      "price": 0.00731574,
       "chg": -0.4
     },
     "centrifuge": {
-      "price": 0.152421,
+      "price": 0.152489,
       "chg": -3.2
     },
     "NVDA": {
@@ -903,22 +903,23 @@
       "ath": "-30%"
     },
     "WTI 유가": {
-      "price": 81.47,
+      "price": 81.5,
       "rsi": 53,
       "ath": "-45%"
     },
     "Brent 유가": {
-      "price": 87.26,
+      "price": 87.3,
       "rsi": 54,
       "ath": "-41%"
     }
   },
   "macro": {
+    "usdkrw": 1417,
     "fng": 29,
     "fngCls": "Fear",
-    "btcDom": 56.3,
-    "kimchi": 0.8,
-    "kimchiKrw": 747260,
+    "btcDom": 55.9,
+    "kimchi": -0.4,
+    "kimchiKrw": -393650,
     "altseason": 24,
     "altBeat": 12,
     "altTotal": 49,
@@ -1176,7 +1177,7 @@
       "옵션 SOL: 만기 없음",
       "옵션 XRP: 만기 없음",
       "옵션 XRP(CBOE): HTTP 403",
-      "환율: This operation was aborted"
+      "도미넌스(CG): HTTP 429"
     ]
   }
 }
