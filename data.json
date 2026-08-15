@@ -1,6 +1,6 @@
 {
   "date": "2026-08-15",
-  "updated": "2026-08-15T07:25:08.871Z",
+  "updated": "2026-08-15T08:19:49.919Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 369500
     },
     "bitcoin": {
-      "price": 63040,
-      "chg": -0.4
+      "price": 63001,
+      "chg": 0.1
     },
     "ethereum": {
-      "price": 1879.68,
-      "chg": 0
+      "price": 1878.88,
+      "chg": 0.4
     },
     "ripple": {
       "price": 1.002,
-      "chg": -0.3
+      "chg": -0.2
     },
     "solana": {
-      "price": 75.27,
-      "chg": -0.6
+      "price": 75.18,
+      "chg": -0.4
     },
     "hyperliquid": {
-      "price": 56.23,
-      "chg": -0.9
+      "price": 56.3,
+      "chg": 0.1
     },
     "dogecoin": {
-      "price": 0.07004,
-      "chg": 0.3
+      "price": 0.06998,
+      "chg": 0.6
     },
     "chainlink": {
-      "price": 9.37,
-      "chg": 7.2
+      "price": 9.31,
+      "chg": 6.6
     },
     "sui": {
-      "price": 0.682392,
-      "chg": 0.2
+      "price": 0.681756,
+      "chg": 0.6
     },
     "uniswap": {
-      "price": 3.27,
-      "chg": -5.9
+      "price": 3.25,
+      "chg": -7
     },
     "world-liberty-financial": {
-      "price": 0.056787,
-      "chg": 3.6
+      "price": 0.05661,
+      "chg": 2.9
     },
     "ondo-finance": {
-      "price": 0.326625,
+      "price": 0.326091,
       "chg": -1.2
     },
     "aave": {
-      "price": 86.82,
-      "chg": -1
+      "price": 86.59,
+      "chg": -0.7
     },
     "morpho": {
       "price": 1.95,
-      "chg": 0.6
+      "chg": 0.4
     },
     "filecoin": {
-      "price": 0.687912,
+      "price": 0.685073,
       "chg": 2.8
     },
     "pendle": {
       "price": 1.31,
-      "chg": -2.6
+      "chg": -2
     },
     "zksync": {
-      "price": 0.00739864,
-      "chg": 1.9
+      "price": 0.0073982,
+      "chg": 2.2
     },
     "centrifuge": {
-      "price": 0.15445,
-      "chg": 3.9
+      "price": 0.153541,
+      "chg": 4.6
     },
     "NVDA": {
       "price": 225.16
@@ -265,7 +265,7 @@
     "bitcoin": {
       "ath": "-50%",
       "athAbs": 126080,
-      "rsi": 47,
+      "rsi": 46,
       "chart": 20,
       "trend": "side"
     },
@@ -919,9 +919,9 @@
     "fngCls": "Fear",
     "btcDom": 55.8,
     "kimchi": 0.2,
-    "kimchiKrw": 178176,
-    "altseason": 53,
-    "altBeat": 26,
+    "kimchiKrw": 152604,
+    "altseason": 49,
+    "altBeat": 24,
     "altTotal": 49,
     "altWindow": "30d",
     "cpi": "3.4%",
