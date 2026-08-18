@@ -1,6 +1,6 @@
 {
   "date": "2026-08-18",
-  "updated": "2026-08-18T10:21:35.332Z",
+  "updated": "2026-08-18T11:19:34.027Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 351000
     },
     "bitcoin": {
-      "price": 64106,
-      "chg": 1.2
+      "price": 64293,
+      "chg": 1.4
     },
     "ethereum": {
-      "price": 1894.76,
-      "chg": 0.1
+      "price": 1900.9,
+      "chg": 0.2
     },
     "ripple": {
-      "price": 0.994646,
-      "chg": -0.3
+      "price": 0.996931,
+      "chg": -0.1
     },
     "solana": {
-      "price": 75.85,
-      "chg": 0.9
+      "price": 76.04,
+      "chg": 0.7
     },
     "hyperliquid": {
-      "price": 59.6,
+      "price": 59.8,
       "chg": 0.9
     },
     "dogecoin": {
-      "price": 0.069831,
-      "chg": -0.3
+      "price": 0.069912,
+      "chg": -0.5
     },
     "chainlink": {
-      "price": 9.46,
-      "chg": 0.7
+      "price": 9.48,
+      "chg": 0.4
     },
     "sui": {
-      "price": 0.647485,
+      "price": 0.650643,
       "chg": -4
     },
     "uniswap": {
       "price": 3.27,
-      "chg": -0.3
+      "chg": 0
     },
     "world-liberty-financial": {
-      "price": 0.059761,
-      "chg": -1.6
-    },
-    "ondo-finance": {
-      "price": 0.329653,
+      "price": 0.059977,
       "chg": -1.8
     },
+    "ondo-finance": {
+      "price": 0.33133,
+      "chg": -1.9
+    },
     "morpho": {
-      "price": 2.14,
-      "chg": 2.5
+      "price": 2.15,
+      "chg": 2.8
     },
     "aave": {
-      "price": 88.65,
-      "chg": 3.6
+      "price": 89.34,
+      "chg": 3.5
     },
     "filecoin": {
-      "price": 0.624893,
-      "chg": -5.7
+      "price": 0.624516,
+      "chg": -6.2
     },
     "pendle": {
-      "price": 1.35,
-      "chg": 5.1
+      "price": 1.36,
+      "chg": 5
     },
     "zksync": {
-      "price": 0.00752646,
-      "chg": -1.1
+      "price": 0.00754817,
+      "chg": -1.6
     },
     "centrifuge": {
-      "price": 0.162319,
-      "chg": 2.2
+      "price": 0.162492,
+      "chg": 2.5
     },
     "NVDA": {
       "price": 225.01
@@ -265,8 +265,8 @@
     "bitcoin": {
       "ath": "-49%",
       "athAbs": 126080,
-      "rsi": 46,
-      "chart": 85,
+      "rsi": 47,
+      "chart": 100,
       "trend": "up"
     },
     "ethereum": {
@@ -325,7 +325,7 @@
       "athAbs": 4.17
     },
     "aave": {
-      "ath": "-87%",
+      "ath": "-86%",
       "athAbs": 661.69,
       "rsi": 23
     },
@@ -648,6 +648,22 @@
     }
   },
   "opts": {
+    "BTC": {
+      "maxPain": 27,
+      "pcr": 0.46,
+      "pcrVol": 0.06,
+      "maxPainTotal": 29,
+      "pcrTotal": 0.29,
+      "expiry": "8/21"
+    },
+    "ETH": {
+      "maxPain": 17,
+      "pcr": 0.38,
+      "pcrVol": 0.18,
+      "maxPainTotal": 17,
+      "pcrTotal": 0.38,
+      "expiry": "8/21"
+    },
     "NVDA": {
       "maxPain": 225,
       "pcr": 0.84,
@@ -856,22 +872,6 @@
       "pcrTotal": 1.41,
       "expiry": "8/21"
     },
-    "BTC": {
-      "maxPain": 27,
-      "pcr": 0.46,
-      "pcrVol": 0.06,
-      "maxPainTotal": 29,
-      "pcrTotal": 0.29,
-      "expiry": "8/21"
-    },
-    "ETH": {
-      "maxPain": 17,
-      "pcr": 0.38,
-      "pcrVol": 0.18,
-      "maxPainTotal": 17,
-      "pcrTotal": 0.38,
-      "expiry": "8/21"
-    },
     "SOL": {
       "maxPain": 2.5,
       "pcr": 0.02,
@@ -903,12 +903,12 @@
       "ath": "-32%"
     },
     "WTI 유가": {
-      "price": 84.2,
-      "rsi": 55,
+      "price": 83.87,
+      "rsi": 54,
       "ath": "-43%"
     },
     "Brent 유가": {
-      "price": 90.92,
+      "price": 90.67,
       "rsi": 55,
       "ath": "-38%"
     }
@@ -917,9 +917,9 @@
     "usdkrw": 1412,
     "fng": 41,
     "fngCls": "Fear",
-    "btcDom": 56.5,
+    "btcDom": 56.6,
     "kimchi": -0.5,
-    "kimchiKrw": -486684,
+    "kimchiKrw": -446161,
     "altseason": 45,
     "altBeat": 22,
     "altTotal": 49,
@@ -1174,10 +1174,8 @@
     "fundGot": 33,
     "krSI": "수동(KRX 해외IP 차단)",
     "errors": [
-      "옵션 BTC: HTTP 503",
-      "옵션 ETH: HTTP 503",
-      "옵션 SOL: HTTP 503",
-      "옵션 XRP: HTTP 503",
+      "옵션 SOL: 만기 없음",
+      "옵션 XRP: 만기 없음",
       "옵션 XRP(CBOE): HTTP 403"
     ]
   }
