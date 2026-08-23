@@ -1,6 +1,6 @@
 {
   "date": "2026-08-23",
-  "updated": "2026-08-23T19:18:21.462Z",
+  "updated": "2026-08-23T20:15:05.199Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 343500
     },
     "bitcoin": {
-      "price": 77294,
-      "chg": 0
+      "price": 77259,
+      "chg": 0.1
     },
     "ethereum": {
-      "price": 2442.75,
-      "chg": 0.9
+      "price": 2440.32,
+      "chg": 0.8
     },
     "ripple": {
       "price": 1.5,
-      "chg": 1.7
+      "chg": 0.6
     },
     "solana": {
-      "price": 95.03,
-      "chg": 1.1
+      "price": 95.07,
+      "chg": 0.7
     },
     "hyperliquid": {
-      "price": 80.81,
-      "chg": 2.7
+      "price": 80.96,
+      "chg": 2.5
     },
     "dogecoin": {
-      "price": 0.092383,
-      "chg": -0.4
+      "price": 0.092455,
+      "chg": -0.3
     },
     "chainlink": {
-      "price": 11.52,
-      "chg": -1.2
+      "price": 11.46,
+      "chg": -1.9
     },
     "sui": {
-      "price": 0.836084,
-      "chg": 1.5
+      "price": 0.835395,
+      "chg": 0.7
     },
     "uniswap": {
-      "price": 4.57,
-      "chg": 7.4
+      "price": 4.56,
+      "chg": 6.8
     },
     "aave": {
-      "price": 139.92,
-      "chg": 11.4
+      "price": 139.18,
+      "chg": 10.1
     },
     "world-liberty-financial": {
-      "price": 0.059298,
-      "chg": -1.1
+      "price": 0.059505,
+      "chg": -0.8
     },
     "ondo-finance": {
-      "price": 0.381998,
-      "chg": 3.1
+      "price": 0.381141,
+      "chg": 2.3
     },
     "morpho": {
-      "price": 2.7,
-      "chg": 19.4
+      "price": 2.71,
+      "chg": 21.8
     },
     "filecoin": {
-      "price": 0.770708,
-      "chg": -1
+      "price": 0.769651,
+      "chg": -0.3
     },
     "pendle": {
-      "price": 1.9,
-      "chg": 13.6
+      "price": 1.88,
+      "chg": 9.4
     },
     "zksync": {
-      "price": 0.0093386,
-      "chg": 2.6
+      "price": 0.0092372,
+      "chg": 2.1
     },
     "centrifuge": {
-      "price": 0.145049,
-      "chg": 2.8
+      "price": 0.14257,
+      "chg": 3.3
     },
     "NVDA": {
       "price": 214.72
@@ -297,9 +297,7 @@
     "dogecoin": {
       "ath": "-87%",
       "athAbs": 0.731578,
-      "rsi": 55,
-      "chart": 100,
-      "trend": "up"
+      "rsi": 55
     },
     "chainlink": {
       "ath": "-78%",
@@ -922,7 +920,7 @@
     "fngCls": "Greed",
     "btcDom": 56.6,
     "kimchi": -1.1,
-    "kimchiKrw": -1164718,
+    "kimchiKrw": -1175122,
     "altseason": 45,
     "altBeat": 22,
     "altTotal": 49,
