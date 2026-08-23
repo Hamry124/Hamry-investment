@@ -1,6 +1,6 @@
 {
-  "date": "2026-08-22",
-  "updated": "2026-08-22T23:14:47.949Z",
+  "date": "2026-08-23",
+  "updated": "2026-08-23T00:55:17.205Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 343500
     },
     "bitcoin": {
-      "price": 76988,
-      "chg": -1.8
+      "price": 77314,
+      "chg": -1.7
     },
     "ethereum": {
-      "price": 2415.5,
-      "chg": -4.4
-    },
-    "ripple": {
-      "price": 1.47,
-      "chg": 4.3
-    },
-    "solana": {
-      "price": 93.7,
-      "chg": -0.4
-    },
-    "hyperliquid": {
-      "price": 79.15,
-      "chg": 2.4
-    },
-    "dogecoin": {
-      "price": 0.091875,
-      "chg": -0.3
-    },
-    "chainlink": {
-      "price": 11.59,
-      "chg": -5.1
-    },
-    "sui": {
-      "price": 0.814192,
-      "chg": -4.7
-    },
-    "uniswap": {
-      "price": 4.3,
-      "chg": 3.4
-    },
-    "aave": {
-      "price": 126.22,
-      "chg": 3
-    },
-    "world-liberty-financial": {
-      "price": 0.058721,
-      "chg": -6.2
-    },
-    "ondo-finance": {
-      "price": 0.367533,
-      "chg": -6.4
-    },
-    "morpho": {
-      "price": 2.27,
+      "price": 2432.09,
       "chg": -3.9
     },
+    "ripple": {
+      "price": 1.49,
+      "chg": 1.1
+    },
+    "solana": {
+      "price": 96.57,
+      "chg": -0.3
+    },
+    "hyperliquid": {
+      "price": 80.76,
+      "chg": 4.7
+    },
+    "dogecoin": {
+      "price": 0.094002,
+      "chg": -2.3
+    },
+    "chainlink": {
+      "price": 11.7,
+      "chg": -4.2
+    },
+    "sui": {
+      "price": 0.827335,
+      "chg": -4.4
+    },
+    "uniswap": {
+      "price": 4.35,
+      "chg": 3.1
+    },
+    "aave": {
+      "price": 127.62,
+      "chg": 5.2
+    },
+    "world-liberty-financial": {
+      "price": 0.058697,
+      "chg": -5.9
+    },
+    "ondo-finance": {
+      "price": 0.368249,
+      "chg": -8.6
+    },
+    "morpho": {
+      "price": 2.3,
+      "chg": -3.2
+    },
     "filecoin": {
-      "price": 0.760697,
-      "chg": -5.4
+      "price": 0.770678,
+      "chg": -6.5
     },
     "pendle": {
-      "price": 1.68,
-      "chg": 0.2
+      "price": 1.69,
+      "chg": 1
     },
     "zksync": {
-      "price": 0.00894636,
-      "chg": -4.6
+      "price": 0.0090133,
+      "chg": -4.9
     },
     "centrifuge": {
-      "price": 0.135951,
-      "chg": -7.7
+      "price": 0.138435,
+      "chg": -5.9
     },
     "NVDA": {
       "price": 214.72
@@ -265,7 +265,7 @@
     "bitcoin": {
       "ath": "-39%",
       "athAbs": 126080,
-      "rsi": 61,
+      "rsi": 60,
       "chart": 100,
       "trend": "up"
     },
@@ -273,25 +273,25 @@
       "ath": "-51%",
       "athAbs": 4946.05,
       "rsi": 62,
-      "chart": 100,
+      "chart": 95,
       "trend": "up"
     },
     "ripple": {
-      "ath": "-60%",
+      "ath": "-59%",
       "athAbs": 3.65,
-      "rsi": 61,
-      "chart": 80,
-      "trend": "side"
-    },
-    "solana": {
-      "ath": "-68%",
-      "athAbs": 293.31,
       "rsi": 60,
       "chart": 100,
       "trend": "up"
     },
+    "solana": {
+      "ath": "-67%",
+      "athAbs": 293.31,
+      "rsi": 61,
+      "chart": 100,
+      "trend": "up"
+    },
     "hyperliquid": {
-      "ath": "-4%",
+      "ath": "-2%",
       "athAbs": 82.43
     },
     "dogecoin": {
@@ -335,7 +335,7 @@
       "athAbs": 236.84
     },
     "pendle": {
-      "ath": "-78%",
+      "ath": "-77%",
       "athAbs": 7.5
     },
     "zksync": {
@@ -916,13 +916,13 @@
   },
   "macro": {
     "usdkrw": 1384,
-    "fng": 71,
+    "fng": 66,
     "fngCls": "Greed",
-    "btcDom": 58.8,
-    "kimchi": -1,
-    "kimchiKrw": -1012461,
-    "altseason": 39,
-    "altBeat": 19,
+    "btcDom": 56.6,
+    "kimchi": -0.6,
+    "kimchiKrw": -610367,
+    "altseason": 41,
+    "altBeat": 20,
     "altTotal": 49,
     "altWindow": "30d",
     "cpi": "3.4%",
@@ -1177,7 +1177,8 @@
     "errors": [
       "옵션 SOL: 만기 없음",
       "옵션 XRP: 만기 없음",
-      "옵션 XRP(CBOE): HTTP 403"
+      "옵션 XRP(CBOE): HTTP 403",
+      "도미넌스(CG): HTTP 429"
     ]
   }
 }
