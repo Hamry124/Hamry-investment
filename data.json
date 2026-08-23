@@ -1,6 +1,6 @@
 {
   "date": "2026-08-23",
-  "updated": "2026-08-23T04:30:59.231Z",
+  "updated": "2026-08-23T05:23:30.119Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 343500
     },
     "bitcoin": {
-      "price": 76931,
-      "chg": -2
+      "price": 76052,
+      "chg": -2.1
     },
     "ethereum": {
-      "price": 2410.45,
-      "chg": -4
+      "price": 2374.82,
+      "chg": -5.1
     },
     "ripple": {
-      "price": 1.48,
-      "chg": -4.7
+      "price": 1.46,
+      "chg": -6.5
     },
     "solana": {
-      "price": 93.59,
-      "chg": -2
+      "price": 92.68,
+      "chg": -3.7
     },
     "hyperliquid": {
-      "price": 78.12,
-      "chg": -3.4
+      "price": 77.9,
+      "chg": -5.2
     },
     "dogecoin": {
-      "price": 0.091135,
-      "chg": -2.7
+      "price": 0.089742,
+      "chg": -5.7
     },
     "chainlink": {
-      "price": 11.48,
-      "chg": -6.2
+      "price": 11.17,
+      "chg": -8.5
     },
     "sui": {
-      "price": 0.796129,
-      "chg": -12.8
+      "price": 0.789311,
+      "chg": -14.4
     },
     "uniswap": {
-      "price": 4.12,
-      "chg": -5.5
+      "price": 4.06,
+      "chg": -7.9
     },
     "aave": {
-      "price": 123.36,
-      "chg": -1.8
+      "price": 122.12,
+      "chg": -3.9
     },
     "world-liberty-financial": {
-      "price": 0.057459,
-      "chg": -10.8
-    },
-    "ondo-finance": {
-      "price": 0.356489,
-      "chg": -13.8
-    },
-    "morpho": {
-      "price": 2.29,
-      "chg": -6.2
-    },
-    "filecoin": {
-      "price": 0.747606,
-      "chg": -11
-    },
-    "pendle": {
-      "price": 1.62,
-      "chg": -7.1
-    },
-    "zksync": {
-      "price": 0.00859676,
+      "price": 0.057681,
       "chg": -12.1
     },
+    "ondo-finance": {
+      "price": 0.351912,
+      "chg": -16.2
+    },
+    "morpho": {
+      "price": 2.25,
+      "chg": -6.6
+    },
+    "filecoin": {
+      "price": 0.740997,
+      "chg": -12.5
+    },
+    "pendle": {
+      "price": 1.6,
+      "chg": -7.3
+    },
+    "zksync": {
+      "price": 0.00849658,
+      "chg": -13.9
+    },
     "centrifuge": {
-      "price": 0.132066,
-      "chg": -13.3
+      "price": 0.131064,
+      "chg": -16.6
     },
     "NVDA": {
       "price": 214.72
@@ -263,23 +263,23 @@
       "ath": "-45%"
     },
     "bitcoin": {
-      "ath": "-39%",
+      "ath": "-40%",
       "athAbs": 126080,
-      "rsi": 60,
-      "chart": 100,
+      "rsi": 59,
+      "chart": 95,
       "trend": "up"
     },
     "ethereum": {
-      "ath": "-51%",
+      "ath": "-52%",
       "athAbs": 4946.05,
-      "rsi": 62,
+      "rsi": 61,
       "chart": 95,
       "trend": "up"
     },
     "ripple": {
       "ath": "-60%",
       "athAbs": 3.65,
-      "rsi": 60,
+      "rsi": 59,
       "chart": 100,
       "trend": "up"
     },
@@ -287,7 +287,7 @@
       "ath": "-68%",
       "athAbs": 293.31,
       "rsi": 59,
-      "chart": 100,
+      "chart": 95,
       "trend": "up"
     },
     "hyperliquid": {
@@ -300,7 +300,7 @@
       "rsi": 55
     },
     "chainlink": {
-      "ath": "-78%",
+      "ath": "-79%",
       "athAbs": 52.7,
       "rsi": 26
     },
@@ -314,7 +314,7 @@
       "athAbs": 44.92
     },
     "aave": {
-      "ath": "-81%",
+      "ath": "-82%",
       "athAbs": 661.69,
       "rsi": 23
     },
@@ -323,11 +323,11 @@
       "athAbs": 0.331336
     },
     "ondo-finance": {
-      "ath": "-83%",
+      "ath": "-84%",
       "athAbs": 2.14
     },
     "morpho": {
-      "ath": "-45%",
+      "ath": "-46%",
       "athAbs": 4.17
     },
     "filecoin": {
@@ -335,7 +335,7 @@
       "athAbs": 236.84
     },
     "pendle": {
-      "ath": "-78%",
+      "ath": "-79%",
       "athAbs": 7.5
     },
     "zksync": {
@@ -918,9 +918,9 @@
     "usdkrw": 1384,
     "fng": 66,
     "fngCls": "Greed",
-    "btcDom": 59.4,
+    "btcDom": 56.7,
     "kimchi": -0.6,
-    "kimchiKrw": -661162,
+    "kimchiKrw": -631748,
     "altseason": 39,
     "altBeat": 19,
     "altTotal": 49,
@@ -1177,7 +1177,8 @@
     "errors": [
       "옵션 SOL: 만기 없음",
       "옵션 XRP: 만기 없음",
-      "옵션 XRP(CBOE): HTTP 403"
+      "옵션 XRP(CBOE): HTTP 403",
+      "도미넌스(CG): HTTP 429"
     ]
   }
 }
