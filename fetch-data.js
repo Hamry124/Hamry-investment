@@ -277,6 +277,17 @@ async function cboeOption(sym) {
   const all = [];
   keys.forEach(k => { if (k >= todayYY) all.push(...exp[k]); });   // 만기 지난 건 제외
   const total = all.length ? maxPainOf(all) : front;
+  // ★ 검증: 맥스페인이 행사가 중앙값에서 크게 벗어나면 파싱 오류로 간주하고 폐기
+  {
+    const ss = exp[near].map(o => o.strike).filter(v => v > 0).sort((a,b) => a-b);
+    const med = ss.length ? ss[Math.floor(ss.length/2)] : 0;
+    if (med > 0) {
+      const r = front.maxPain / med;
+      if (r < 0.2 || r > 5) {
+        throw new Error(`맥스페인 이상치 ${front.maxPain}(행사가 중앙값 ${med} 대비 ${(r*100).toFixed(0)}%) — 파싱 오류 의심, 폐기`);
+      }
+    }
+  }
   // 만기일 포맷: YYMMDD → M/D
   const expM = parseInt(near.slice(2,4),10), expD = parseInt(near.slice(4,6),10);
   return { maxPain: front.maxPain, pcr: front.pcr, pcrVol: front.pcrVol,
@@ -292,7 +303,12 @@ async function fetchOptions(usOptSyms, errors, cryptoPx) {
     const px = (cryptoPx && cryptoPx[CG_MAP[cur]]) ? cryptoPx[CG_MAP[cur]].price : null;
     try { out[cur] = await deribitOption(cur, px); } catch (e) { errors.push(`옵션 ${cur}: ${e.message}`); }
   }
+  // ★ 크립토 optKey(BTC·ETH·SOL·XRP)는 위 Deribit 루프에서 이미 처리됨.
+  //   index.html의 optKey를 전부 긁어오는 구조라 CBOE 루프가 같은 심볼을 재조회해
+  //   Deribit 결과(검증 통과분)를 엉뚱한 값으로 덮어쓰던 문제가 있어 제외한다.
+  const CRYPTO_CUR = Object.keys(CG_MAP);
   for (const sym of usOptSyms) {
+    if (CRYPTO_CUR.includes(sym)) continue;
     try { out[sym] = await cboeOption(sym); } catch (e) { errors.push(`옵션 ${sym}(CBOE): ${e.message}`); }
     await sleep(200);
   }
