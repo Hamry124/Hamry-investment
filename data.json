@@ -1,6 +1,6 @@
 {
   "date": "2026-09-06",
-  "updated": "2026-09-06T10:03:27.926Z",
+  "updated": "2026-09-06T13:53:05.553Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 358500
     },
     "bitcoin": {
-      "price": 79880,
-      "chg": 0.32241
+      "price": 79829,
+      "chg": 0.25449
     },
     "ethereum": {
-      "price": 2498.96,
-      "chg": 1.67453
+      "price": 2493.97,
+      "chg": 1.64305
     },
     "ripple": {
       "price": 1.42,
-      "chg": 0.91219
+      "chg": 0.38379
     },
     "solana": {
-      "price": 106.49,
-      "chg": 3.87834
+      "price": 106.64,
+      "chg": 3.77447
     },
     "hyperliquid": {
-      "price": 87.84,
-      "chg": 3.52285
+      "price": 89.37,
+      "chg": 4.74271
     },
     "dogecoin": {
-      "price": 0.090252,
-      "chg": 4.97324
+      "price": 0.089613,
+      "chg": 2.79666
     },
     "chainlink": {
-      "price": 12.28,
-      "chg": 4.14587
+      "price": 12.29,
+      "chg": 3.80318
     },
     "uniswap": {
       "price": 7,
-      "chg": 10.03786
+      "chg": 12.07586
     },
     "sui": {
-      "price": 0.800257,
-      "chg": 2.06844
+      "price": 0.79906,
+      "chg": 0.51267
     },
     "aave": {
-      "price": 134.44,
-      "chg": 3.15932
+      "price": 135.38,
+      "chg": 4.42632
     },
     "ondo-finance": {
-      "price": 0.375542,
-      "chg": 1.93598
+      "price": 0.379988,
+      "chg": 2.72849
     },
     "world-liberty-financial": {
-      "price": 0.056765,
-      "chg": 0.36152
+      "price": 0.056711,
+      "chg": -0.36436
     },
     "morpho": {
-      "price": 2.55,
-      "chg": 0.62765
+      "price": 2.57,
+      "chg": 2.04983
     },
     "filecoin": {
-      "price": 0.800162,
-      "chg": 3.89626
+      "price": 0.793504,
+      "chg": 1.6479
     },
     "pendle": {
-      "price": 2.11,
-      "chg": 9.74869
+      "price": 2.06,
+      "chg": 6.8552
     },
     "zksync": {
-      "price": 0.01082066,
-      "chg": 8.23736
+      "price": 0.01092506,
+      "chg": 10.54755
     },
     "centrifuge": {
-      "price": 0.105622,
-      "chg": 4.0248
+      "price": 0.106215,
+      "chg": 3.95543
     },
     "NVDA": {
       "price": 230.36
@@ -270,16 +270,16 @@
       "trend": "up"
     },
     "ethereum": {
-      "ath": "-49%",
+      "ath": "-50%",
       "athAbs": 4946.05,
       "rsi": 59,
-      "chart": 85,
+      "chart": 75,
       "trend": "up"
     },
     "ripple": {
       "ath": "-61%",
       "athAbs": 3.65,
-      "rsi": 54,
+      "rsi": 53,
       "chart": 75,
       "trend": "up"
     },
@@ -292,7 +292,7 @@
     },
     "hyperliquid": {
       "ath": "0%",
-      "athAbs": 88.06
+      "athAbs": 89.6
     },
     "dogecoin": {
       "ath": "-88%",
@@ -326,7 +326,7 @@
       "athAbs": 0.331336
     },
     "morpho": {
-      "ath": "-39%",
+      "ath": "-38%",
       "athAbs": 4.17
     },
     "filecoin": {
@@ -334,7 +334,7 @@
       "athAbs": 236.84
     },
     "pendle": {
-      "ath": "-72%",
+      "ath": "-73%",
       "athAbs": 7.5
     },
     "zksync": {
@@ -650,16 +650,16 @@
   "opts": {
     "BTC": {
       "maxPain": 80000,
-      "pcr": 1.34,
-      "pcrVol": 1.67,
+      "pcr": 1.46,
+      "pcrVol": 1.96,
       "maxPainTotal": 72000,
       "pcrTotal": 0.55,
       "expiry": "7SEP26"
     },
     "ETH": {
-      "maxPain": 2440,
-      "pcr": 0.95,
-      "pcrVol": 0.74,
+      "maxPain": 2460,
+      "pcr": 0.85,
+      "pcrVol": 0.55,
       "maxPainTotal": 2200,
       "pcrTotal": 0.55,
       "expiry": "7SEP26"
@@ -909,11 +909,11 @@
     "usdkrw": 1350,
     "fng": 73,
     "fngCls": "Greed",
-    "btcDom": 59.2,
-    "kimchi": 1,
-    "kimchiKrw": 1034385,
-    "altseason": 49,
-    "altBeat": 24,
+    "btcDom": 56.5,
+    "kimchi": 0.9,
+    "kimchiKrw": 969830,
+    "altseason": 51,
+    "altBeat": 25,
     "altTotal": 49,
     "altWindow": "30d",
     "cpi": "3.4%",
@@ -1167,7 +1167,8 @@
     "krSI": "수동(KRX 해외IP 차단)",
     "errors": [
       "옵션 SOL: 만기 없음",
-      "옵션 XRP: 만기 없음"
+      "옵션 XRP: 만기 없음",
+      "도미넌스(CG): HTTP 429"
     ]
   }
 }
