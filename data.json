@@ -1,6 +1,6 @@
 {
   "date": "2026-09-08",
-  "updated": "2026-09-08T07:40:33.571Z",
+  "updated": "2026-09-08T12:29:53.246Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 348500
     },
     "bitcoin": {
-      "price": 78518,
-      "chg": -0.97444
+      "price": 78301,
+      "chg": -1.51674
     },
     "ethereum": {
-      "price": 2480.55,
-      "chg": -0.18212
+      "price": 2474.09,
+      "chg": -0.75318
     },
     "ripple": {
       "price": 1.39,
-      "chg": -0.59897
+      "chg": -0.85703
     },
     "solana": {
-      "price": 103.01,
-      "chg": -1.34755
+      "price": 102.8,
+      "chg": -2.38613
     },
     "hyperliquid": {
-      "price": 84.29,
-      "chg": -2.40036
+      "price": 83.02,
+      "chg": -5.95056
     },
     "dogecoin": {
-      "price": 0.089679,
-      "chg": 0.61705
+      "price": 0.089057,
+      "chg": -1.43136
     },
     "chainlink": {
-      "price": 12.71,
-      "chg": -3.51987
+      "price": 12.54,
+      "chg": -5.32178
     },
     "uniswap": {
-      "price": 7.1,
-      "chg": 0.93229
+      "price": 7.03,
+      "chg": -0.77215
     },
     "sui": {
-      "price": 0.820928,
-      "chg": 2.79978
+      "price": 0.809673,
+      "chg": -1.54765
     },
     "aave": {
-      "price": 131.59,
-      "chg": -1.20107
+      "price": 128.84,
+      "chg": -4.67986
     },
     "ondo-finance": {
-      "price": 0.376786,
-      "chg": -1.43083
+      "price": 0.375156,
+      "chg": -3.78301
     },
     "world-liberty-financial": {
-      "price": 0.056081,
-      "chg": -0.96914
+      "price": 0.055829,
+      "chg": -1.78207
     },
     "morpho": {
-      "price": 2.42,
-      "chg": -5.53835
+      "price": 2.44,
+      "chg": -4.4712
     },
     "filecoin": {
-      "price": 0.843348,
-      "chg": 3.71479
+      "price": 0.84483,
+      "chg": 1.92073
     },
     "pendle": {
-      "price": 2.21,
-      "chg": 7.63106
+      "price": 2.19,
+      "chg": 1.8044
     },
     "zksync": {
-      "price": 0.01044135,
-      "chg": -4.22438
+      "price": 0.01022931,
+      "chg": -6.37063
     },
     "centrifuge": {
-      "price": 0.118614,
-      "chg": -4.26646
+      "price": 0.11399,
+      "chg": -8.1226
     },
     "NVDA": {
       "price": 230.36
@@ -266,8 +266,8 @@
       "ath": "-38%",
       "athAbs": 126080,
       "rsi": 55,
-      "chart": 75,
-      "trend": "up"
+      "chart": 50,
+      "trend": "side"
     },
     "ethereum": {
       "ath": "-50%",
@@ -291,7 +291,7 @@
       "trend": "up"
     },
     "hyperliquid": {
-      "ath": "-6%",
+      "ath": "-7%",
       "athAbs": 89.6
     },
     "dogecoin": {
@@ -313,7 +313,7 @@
       "athAbs": 5.35
     },
     "aave": {
-      "ath": "-80%",
+      "ath": "-81%",
       "athAbs": 661.69,
       "rsi": 23
     },
@@ -649,17 +649,17 @@
   },
   "opts": {
     "BTC": {
-      "maxPain": 79500,
-      "pcr": 0.13,
-      "pcrVol": 0.08,
+      "maxPain": 79000,
+      "pcr": 0.17,
+      "pcrVol": 0.15,
       "maxPainTotal": 73000,
-      "pcrTotal": 0.54,
+      "pcrTotal": 0.53,
       "expiry": "9SEP26"
     },
     "ETH": {
       "maxPain": 2480,
-      "pcr": 0.83,
-      "pcrVol": 0.54,
+      "pcr": 0.86,
+      "pcrVol": 0.86,
       "maxPainTotal": 2200,
       "pcrTotal": 0.54,
       "expiry": "9SEP26"
@@ -895,12 +895,12 @@
       "ath": "-34%"
     },
     "WTI 유가": {
-      "price": 94.22,
-      "rsi": 59,
+      "price": 93.89,
+      "rsi": 58,
       "ath": "-36%"
     },
     "Brent 유가": {
-      "price": 98.72,
+      "price": 98.71,
       "rsi": 58,
       "ath": "-33%"
     }
@@ -909,11 +909,11 @@
     "usdkrw": 1348,
     "fng": 69,
     "fngCls": "Greed",
-    "btcDom": 58.9,
-    "kimchi": 0.9,
-    "kimchiKrw": 936911,
-    "altseason": 55,
-    "altBeat": 27,
+    "btcDom": 56.2,
+    "kimchi": 0.6,
+    "kimchiKrw": 644866,
+    "altseason": 57,
+    "altBeat": 28,
     "altTotal": 49,
     "altWindow": "30d",
     "cpi": "3.4%",
@@ -1167,7 +1167,8 @@
     "krSI": "수동(KRX 해외IP 차단)",
     "errors": [
       "옵션 SOL: 만기 없음",
-      "옵션 XRP: 만기 없음"
+      "옵션 XRP: 만기 없음",
+      "도미넌스(CG): HTTP 429"
     ]
   }
 }
