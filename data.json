@@ -1,6 +1,6 @@
 {
   "date": "2026-09-18",
-  "updated": "2026-09-18T20:41:13.254Z",
+  "updated": "2026-09-18T22:58:04.520Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 364000
     },
     "bitcoin": {
-      "price": 80980,
-      "chg": 5.73821
+      "price": 81107,
+      "chg": 6.32137
     },
     "ethereum": {
-      "price": 2626.06,
-      "chg": 7.09593
+      "price": 2619.56,
+      "chg": 7.27548
     },
     "ripple": {
       "price": 1.4,
-      "chg": 7.83935
+      "chg": 8.0331
     },
     "solana": {
-      "price": 113.28,
-      "chg": 12.03755
+      "price": 112.98,
+      "chg": 11.63097
     },
     "hyperliquid": {
-      "price": 91.75,
-      "chg": 10.31394
+      "price": 92.5,
+      "chg": 10.44863
     },
     "dogecoin": {
-      "price": 0.087775,
-      "chg": 7.31656
+      "price": 0.088154,
+      "chg": 8.41553
     },
     "chainlink": {
-      "price": 12.36,
-      "chg": 8.85859
+      "price": 12.29,
+      "chg": 8.45332
     },
     "uniswap": {
-      "price": 9.07,
-      "chg": 18.44722
+      "price": 8.81,
+      "chg": 15.76987
     },
     "sui": {
-      "price": 0.810507,
-      "chg": 10.25428
+      "price": 0.816486,
+      "chg": 11.61935
     },
     "aave": {
-      "price": 139.4,
-      "chg": 8.00059
+      "price": 138.25,
+      "chg": 8.13503
     },
     "ondo-finance": {
-      "price": 0.397072,
-      "chg": 6.01625
+      "price": 0.396041,
+      "chg": 7.05186
     },
     "world-liberty-financial": {
-      "price": 0.058998,
-      "chg": 1.34748
+      "price": 0.059042,
+      "chg": 1.65599
     },
     "morpho": {
-      "price": 2.41,
-      "chg": 8.82546
+      "price": 2.44,
+      "chg": 10.68127
     },
     "filecoin": {
-      "price": 0.920599,
-      "chg": 12.05878
+      "price": 0.92906,
+      "chg": 12.29755
     },
     "pendle": {
-      "price": 2.63,
-      "chg": 12.84535
+      "price": 2.6,
+      "chg": 11.28722
     },
     "zksync": {
-      "price": 0.01091168,
-      "chg": 19.21952
+      "price": 0.0112175,
+      "chg": 23.11635
     },
     "centrifuge": {
-      "price": 0.123824,
-      "chg": 6.3361
+      "price": 0.123279,
+      "chg": 8.1541
     },
     "NVDA": {
       "price": 222.27
@@ -279,7 +279,7 @@
     "ripple": {
       "ath": "-62%",
       "athAbs": 3.65,
-      "rsi": 53,
+      "rsi": 52,
       "chart": 85,
       "trend": "up"
     },
@@ -291,7 +291,7 @@
       "trend": "up"
     },
     "hyperliquid": {
-      "ath": "-1%",
+      "ath": "0%",
       "athAbs": 92.56
     },
     "dogecoin": {
@@ -659,8 +659,8 @@
     "ETH": {
       "maxPain": 2520,
       "pcr": 1.13,
-      "pcrVol": 0.62,
-      "maxPainTotal": 2250,
+      "pcrVol": 0.67,
+      "maxPainTotal": 2300,
       "pcrTotal": 0.53,
       "expiry": "19SEP26"
     },
@@ -723,7 +723,7 @@
     "GEV": {
       "maxPain": 910,
       "pcr": 1.09,
-      "pcrVol": 1.02,
+      "pcrVol": 0.97,
       "maxPainTotal": 900,
       "pcrTotal": 1.43,
       "expiry": "9/18"
@@ -843,7 +843,7 @@
     "GLW": {
       "maxPain": 145,
       "pcr": 0.8,
-      "pcrVol": 0.78,
+      "pcrVol": 0.8,
       "maxPainTotal": 145,
       "pcrTotal": 1.07,
       "expiry": "9/18"
@@ -859,7 +859,7 @@
     "COHR": {
       "maxPain": 285,
       "pcr": 0.83,
-      "pcrVol": 0.8,
+      "pcrVol": 0.72,
       "maxPainTotal": 292.5,
       "pcrTotal": 1.21,
       "expiry": "9/18"
@@ -895,12 +895,12 @@
       "ath": "-33%"
     },
     "WTI 유가": {
-      "price": 95.29,
+      "price": 95.47,
       "rsi": 58,
       "ath": "-35%"
     },
     "Brent 유가": {
-      "price": 98.59,
+      "price": 98.77,
       "rsi": 57,
       "ath": "-33%"
     }
@@ -910,11 +910,11 @@
     "fng": 56,
     "fngCls": "Greed",
     "btcDom": 58.4,
-    "kimchi": -1.7,
-    "kimchiKrw": -1927401,
-    "altseason": 60,
-    "altBeat": 30,
-    "altTotal": 50,
+    "kimchi": -1.5,
+    "kimchiKrw": -1739932,
+    "altseason": 55,
+    "altBeat": 27,
+    "altTotal": 49,
     "altWindow": "30d",
     "cpi": "3.4%",
     "cpiDate": "2026-08"
