@@ -1,6 +1,6 @@
 {
   "date": "2026-09-19",
-  "updated": "2026-09-19T17:40:20.374Z",
+  "updated": "2026-09-19T19:52:51.824Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 364000
     },
     "bitcoin": {
-      "price": 81482,
-      "chg": 1.08898
+      "price": 81326,
+      "chg": 0.0309
     },
     "ethereum": {
-      "price": 2644.9,
-      "chg": 2.27351
+      "price": 2636.19,
+      "chg": -0.22803
     },
     "ripple": {
       "price": 1.43,
-      "chg": 3.08733
+      "chg": 2.03869
     },
     "solana": {
-      "price": 111.45,
-      "chg": -0.49128
+      "price": 111.27,
+      "chg": -2.33928
     },
     "hyperliquid": {
-      "price": 92.19,
-      "chg": 1.36894
+      "price": 92.43,
+      "chg": 0.34919
     },
     "dogecoin": {
-      "price": 0.089974,
-      "chg": 2.92416
+      "price": 0.089513,
+      "chg": 1.66631
     },
     "chainlink": {
       "price": 12.52,
-      "chg": 3.27472
+      "chg": 1.39665
     },
     "uniswap": {
-      "price": 8.79,
-      "chg": -0.02456
+      "price": 8.73,
+      "chg": -3.4881
     },
     "sui": {
-      "price": 0.856665,
-      "chg": 7.24839
+      "price": 0.882549,
+      "chg": 8.84
     },
     "aave": {
-      "price": 142.35,
-      "chg": 2.89412
+      "price": 142.77,
+      "chg": 2.88052
     },
     "ondo-finance": {
-      "price": 0.435151,
-      "chg": 8.63924
-    },
-    "morpho": {
-      "price": 2.66,
-      "chg": 10.15316
+      "price": 0.429118,
+      "chg": 7.65118
     },
     "world-liberty-financial": {
-      "price": 0.058458,
-      "chg": -0.62948
+      "price": 0.058395,
+      "chg": -0.2472
+    },
+    "morpho": {
+      "price": 2.6,
+      "chg": 7.89225
     },
     "filecoin": {
-      "price": 1.086,
-      "chg": 21.79038
+      "price": 1.042,
+      "chg": 13.43295
     },
     "pendle": {
-      "price": 2.7,
-      "chg": 3.87865
+      "price": 2.67,
+      "chg": 1.88086
     },
     "zksync": {
-      "price": 0.01101609,
-      "chg": 7.15812
+      "price": 0.01104102,
+      "chg": 1.32216
     },
     "centrifuge": {
-      "price": 0.126839,
-      "chg": 1.09809
+      "price": 0.126302,
+      "chg": 1.74202
     },
     "NVDA": {
       "price": 222.27
@@ -279,7 +279,7 @@
     "ripple": {
       "ath": "-61%",
       "athAbs": 3.65,
-      "rsi": 53,
+      "rsi": 54,
       "chart": 85,
       "trend": "up"
     },
@@ -305,11 +305,11 @@
       "rsi": 26
     },
     "uniswap": {
-      "ath": "-80%",
+      "ath": "-81%",
       "athAbs": 44.92
     },
     "sui": {
-      "ath": "-84%",
+      "ath": "-83%",
       "athAbs": 5.35
     },
     "aave": {
@@ -321,13 +321,13 @@
       "ath": "-80%",
       "athAbs": 2.14
     },
-    "morpho": {
-      "ath": "-36%",
-      "athAbs": 4.17
-    },
     "world-liberty-financial": {
       "ath": "-82%",
       "athAbs": 0.331336
+    },
+    "morpho": {
+      "ath": "-38%",
+      "athAbs": 4.17
     },
     "filecoin": {
       "ath": "-100%",
@@ -651,15 +651,15 @@
     "BTC": {
       "maxPain": 80000,
       "pcr": 0.88,
-      "pcrVol": 0.88,
+      "pcrVol": 0.86,
       "maxPainTotal": 74000,
       "pcrTotal": 0.56,
       "expiry": "20SEP26"
     },
     "ETH": {
       "maxPain": 2580,
-      "pcr": 1.15,
-      "pcrVol": 1.07,
+      "pcr": 1.13,
+      "pcrVol": 0.94,
       "maxPainTotal": 2250,
       "pcrTotal": 0.53,
       "expiry": "20SEP26"
@@ -909,13 +909,15 @@
     "usdkrw": 1388,
     "fng": 71,
     "fngCls": "Greed",
-    "btcDom": 56.1,
+    "btcDom": 58.3,
     "kimchi": -1.6,
-    "kimchiKrw": -1799098,
-    "altseason": 66,
-    "altBeat": 33,
+    "kimchiKrw": -1862740,
+    "altseason": 60,
+    "altBeat": 30,
     "altTotal": 50,
-    "altWindow": "30d"
+    "altWindow": "30d",
+    "cpi": "3.4%",
+    "cpiDate": "2026-08"
   },
   "si": {
     "NVDA": {
@@ -1165,9 +1167,7 @@
     "krSI": "수동(KRX 해외IP 차단)",
     "errors": [
       "옵션 SOL: 만기 없음",
-      "옵션 XRP: 만기 없음",
-      "도미넌스(CG): HTTP 429",
-      "CPI(BLS): This operation was aborted"
+      "옵션 XRP: 만기 없음"
     ]
   }
 }
