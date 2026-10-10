@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-09",
-  "updated": "2026-10-09T20:26:59.050Z",
+  "date": "2026-10-10",
+  "updated": "2026-10-10T00:25:35.452Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 401000
     },
     "bitcoin": {
-      "price": 82382,
-      "chg": 0.83789
+      "price": 82543,
+      "chg": 1.04353
     },
     "ethereum": {
-      "price": 2478.82,
-      "chg": 0.49087
+      "price": 2488.14,
+      "chg": 0.57044
     },
     "ripple": {
-      "price": 1.39,
-      "chg": 0.97114
+      "price": 1.4,
+      "chg": 1.37179
     },
     "solana": {
-      "price": 109.03,
-      "chg": -0.20372
+      "price": 109.18,
+      "chg": 0.21308
     },
     "hyperliquid": {
-      "price": 83.51,
-      "chg": -0.99142
+      "price": 84.34,
+      "chg": 0.48709
     },
     "dogecoin": {
-      "price": 0.08473,
-      "chg": 0.73331
+      "price": 0.085733,
+      "chg": 2.15968
     },
     "chainlink": {
-      "price": 12.79,
-      "chg": 1.3102
+      "price": 12.83,
+      "chg": 0.94704
     },
     "uniswap": {
-      "price": 7.28,
-      "chg": -0.28062
+      "price": 7.35,
+      "chg": 3.09319
     },
     "sui": {
-      "price": 1.06,
-      "chg": 0.90825
+      "price": 1.074,
+      "chg": 3.16032
     },
     "aave": {
-      "price": 167.32,
-      "chg": 0.43166
+      "price": 167.74,
+      "chg": 1.37865
     },
     "ondo-finance": {
-      "price": 0.474674,
-      "chg": -3.30633
+      "price": 0.483827,
+      "chg": 4.42852
     },
     "world-liberty-financial": {
-      "price": 0.056212,
-      "chg": 2.11933
+      "price": 0.057126,
+      "chg": 5.01331
     },
     "morpho": {
-      "price": 2.37,
-      "chg": 0.8115
+      "price": 2.4,
+      "chg": 1.48303
     },
     "filecoin": {
-      "price": 1.078,
-      "chg": 0.70625
+      "price": 1.085,
+      "chg": 2.41634
     },
     "pendle": {
-      "price": 2.07,
-      "chg": -1.21116
+      "price": 2.12,
+      "chg": 1.87514
     },
     "zksync": {
-      "price": 0.01385883,
-      "chg": 20.86047
+      "price": 0.01403733,
+      "chg": 23.87841
     },
     "centrifuge": {
-      "price": 0.140092,
-      "chg": 5.1548
+      "price": 0.143967,
+      "chg": 8.75275
     },
     "NVDA": {
       "price": 229.28
@@ -165,7 +165,7 @@
       "price": 312.62
     },
     "LITE": {
-      "price": 1103.355
+      "price": 1103.35
     },
     "000660": {
       "price": 1681000
@@ -265,14 +265,14 @@
     "bitcoin": {
       "ath": "-35%",
       "athAbs": 126080,
-      "rsi": 56,
+      "rsi": 55,
       "chart": 50,
       "trend": "side"
     },
     "ethereum": {
       "ath": "-50%",
       "athAbs": 4946.05,
-      "rsi": 57,
+      "rsi": 56,
       "chart": 50,
       "trend": "side"
     },
@@ -286,12 +286,12 @@
     "solana": {
       "ath": "-63%",
       "athAbs": 293.31,
-      "rsi": 59,
+      "rsi": 58,
       "chart": 50,
       "trend": "side"
     },
     "hyperliquid": {
-      "ath": "-15%",
+      "ath": "-14%",
       "athAbs": 97.96
     },
     "dogecoin": {
@@ -318,7 +318,7 @@
       "rsi": 23
     },
     "ondo-finance": {
-      "ath": "-78%",
+      "ath": "-77%",
       "athAbs": 2.14
     },
     "world-liberty-financial": {
@@ -326,7 +326,7 @@
       "athAbs": 0.331336
     },
     "morpho": {
-      "ath": "-43%",
+      "ath": "-42%",
       "athAbs": 4.17
     },
     "filecoin": {
@@ -342,7 +342,7 @@
       "athAbs": 0.320983
     },
     "centrifuge": {
-      "ath": "-94%",
+      "ath": "-93%",
       "athAbs": 2.19
     },
     "NVDA": {
@@ -374,7 +374,7 @@
       "ath": "-18%"
     },
     "SNDK": {
-      "rsi": 44,
+      "rsi": 45,
       "chart": 20,
       "trend": "side",
       "athAbs": 2354.39,
@@ -402,14 +402,14 @@
       "ath": "-16%"
     },
     "CRWV": {
-      "rsi": 44,
+      "rsi": 43,
       "chart": 20,
       "trend": "side",
       "athAbs": 187,
       "ath": "-56%"
     },
     "NBIS": {
-      "rsi": 47,
+      "rsi": 46,
       "chart": 20,
       "trend": "side",
       "athAbs": 299.86,
@@ -437,9 +437,9 @@
       "ath": "-23%"
     },
     "CRCL": {
-      "rsi": 49,
-      "chart": 30,
-      "trend": "side",
+      "rsi": 44,
+      "chart": 5,
+      "trend": "down",
       "athAbs": 298.99,
       "ath": "-72%"
     },
@@ -649,180 +649,180 @@
   },
   "opts": {
     "BTC": {
-      "maxPain": 83000,
-      "pcr": 0.72,
-      "pcrVol": 0.86,
-      "maxPainTotal": 79500,
+      "maxPain": 82500,
+      "pcr": 1.76,
+      "pcrVol": 1.18,
+      "maxPainTotal": 79000,
       "pcrTotal": 0.59,
-      "expiry": "10OCT26"
+      "expiry": "11OCT26"
     },
     "ETH": {
-      "maxPain": 2500,
-      "pcr": 1.23,
-      "pcrVol": 1.13,
+      "maxPain": 2540,
+      "pcr": 1.26,
+      "pcrVol": 0.99,
       "maxPainTotal": 2400,
-      "pcrTotal": 0.57,
-      "expiry": "10OCT26"
+      "pcrTotal": 0.56,
+      "expiry": "11OCT26"
     },
     "NVDA": {
-      "maxPain": 230,
-      "pcr": 1.11,
-      "pcrVol": 0.53,
+      "maxPain": 232.5,
+      "pcr": 1,
+      "pcrVol": 0.95,
       "maxPainTotal": 200,
-      "pcrTotal": 0.91,
-      "expiry": "10/9"
+      "pcrTotal": 0.89,
+      "expiry": "10/12"
     },
     "AMD": {
-      "maxPain": 615,
-      "pcr": 1.3,
-      "pcrVol": 0.76,
-      "maxPainTotal": 440,
-      "pcrTotal": 1.13,
-      "expiry": "10/9"
+      "maxPain": 630,
+      "pcr": 1.11,
+      "pcrVol": 0.6,
+      "maxPainTotal": 415,
+      "pcrTotal": 1.12,
+      "expiry": "10/12"
     },
     "ASML": {
-      "maxPain": 1790,
-      "pcr": 1.32,
-      "pcrVol": 1.62,
-      "maxPainTotal": 1660,
-      "pcrTotal": 1.13,
-      "expiry": "10/9"
+      "maxPain": 1720,
+      "pcr": 1.22,
+      "pcrVol": 0.59,
+      "maxPainTotal": 1620,
+      "pcrTotal": 1.11,
+      "expiry": "10/16"
     },
     "MU": {
-      "maxPain": 1050,
-      "pcr": 1.07,
-      "pcrVol": 0.64,
-      "maxPainTotal": 890,
-      "pcrTotal": 0.99,
-      "expiry": "10/9"
+      "maxPain": 1040,
+      "pcr": 0.6,
+      "pcrVol": 0.61,
+      "maxPainTotal": 850,
+      "pcrTotal": 0.98,
+      "expiry": "10/12"
     },
     "SNDK": {
-      "maxPain": 1640,
-      "pcr": 0.78,
-      "pcrVol": 0.65,
-      "maxPainTotal": 1545,
-      "pcrTotal": 1.19,
-      "expiry": "10/9"
+      "maxPain": 1660,
+      "pcr": 1.12,
+      "pcrVol": 0.91,
+      "maxPainTotal": 1500,
+      "pcrTotal": 1.25,
+      "expiry": "10/16"
     },
     "IREN": {
-      "maxPain": 38,
-      "pcr": 0.42,
-      "pcrVol": 0.33,
+      "maxPain": 40,
+      "pcr": 1.06,
+      "pcrVol": 0.46,
       "maxPainTotal": 40,
-      "pcrTotal": 0.8,
-      "expiry": "10/9"
+      "pcrTotal": 0.82,
+      "expiry": "10/16"
     },
     "VRT": {
-      "maxPain": 245,
-      "pcr": 1.02,
-      "pcrVol": 0.87,
+      "maxPain": 252.5,
+      "pcr": 1.84,
+      "pcrVol": 1.27,
       "maxPainTotal": 240,
       "pcrTotal": 1.08,
-      "expiry": "10/9"
+      "expiry": "10/16"
     },
     "GEV": {
-      "maxPain": 975,
-      "pcr": 0.9,
-      "pcrVol": 0.73,
-      "maxPainTotal": 935,
-      "pcrTotal": 1.38,
-      "expiry": "10/9"
+      "maxPain": 960,
+      "pcr": 1.25,
+      "pcrVol": 0.95,
+      "maxPainTotal": 930,
+      "pcrTotal": 1.42,
+      "expiry": "10/16"
     },
     "CRWV": {
       "maxPain": 85,
-      "pcr": 0.53,
-      "pcrVol": 0.65,
+      "pcr": 0.74,
+      "pcrVol": 0.77,
       "maxPainTotal": 90,
-      "pcrTotal": 0.92,
-      "expiry": "10/9"
+      "pcrTotal": 0.95,
+      "expiry": "10/16"
     },
     "NBIS": {
-      "maxPain": 230,
-      "pcr": 0.69,
-      "pcrVol": 0.63,
+      "maxPain": 225,
+      "pcr": 1.05,
+      "pcrVol": 0.65,
       "maxPainTotal": 200,
-      "pcrTotal": 0.93,
-      "expiry": "10/9"
+      "pcrTotal": 0.95,
+      "expiry": "10/16"
     },
     "ASTS": {
-      "maxPain": 58,
-      "pcr": 0.5,
-      "pcrVol": 0.73,
+      "maxPain": 64,
+      "pcr": 0.59,
+      "pcrVol": 0.48,
       "maxPainTotal": 60,
       "pcrTotal": 0.52,
-      "expiry": "10/9"
+      "expiry": "10/16"
     },
     "RKLB": {
       "maxPain": 70,
-      "pcr": 0.57,
-      "pcrVol": 0.51,
-      "maxPainTotal": 68,
-      "pcrTotal": 0.73,
-      "expiry": "10/9"
+      "pcr": 0.65,
+      "pcrVol": 0.5,
+      "maxPainTotal": 65,
+      "pcrTotal": 0.74,
+      "expiry": "10/16"
     },
     "TSLA": {
       "maxPain": 370,
-      "pcr": 1.16,
+      "pcr": 0.88,
       "pcrVol": 0.61,
       "maxPainTotal": 360,
-      "pcrTotal": 0.8,
-      "expiry": "10/9"
+      "pcrTotal": 0.77,
+      "expiry": "10/12"
     },
     "CRCL": {
-      "maxPain": 82,
-      "pcr": 0.47,
-      "pcrVol": 0.44,
-      "maxPainTotal": 85,
-      "pcrTotal": 0.76,
-      "expiry": "10/9"
+      "maxPain": 85,
+      "pcr": 0.72,
+      "pcrVol": 0.39,
+      "maxPainTotal": 86,
+      "pcrTotal": 0.8,
+      "expiry": "10/16"
     },
     "COIN": {
       "maxPain": 180,
-      "pcr": 0.59,
-      "pcrVol": 0.69,
+      "pcr": 0.79,
+      "pcrVol": 0.64,
       "maxPainTotal": 180,
-      "pcrTotal": 0.82,
-      "expiry": "10/9"
+      "pcrTotal": 0.85,
+      "expiry": "10/16"
     },
     "SMR": {
-      "maxPain": 8,
-      "pcr": 0.35,
-      "pcrVol": 0.63,
-      "maxPainTotal": 9,
-      "pcrTotal": 0.45,
-      "expiry": "10/9"
+      "maxPain": 10,
+      "pcr": 0.73,
+      "pcrVol": 0.44,
+      "maxPainTotal": 10,
+      "pcrTotal": 0.46,
+      "expiry": "10/16"
     },
     "OKLO": {
-      "maxPain": 36,
-      "pcr": 0.29,
-      "pcrVol": 0.89,
-      "maxPainTotal": 40,
-      "pcrTotal": 0.47,
-      "expiry": "10/9"
+      "maxPain": 40,
+      "pcr": 0.41,
+      "pcrVol": 0.49,
+      "maxPainTotal": 45,
+      "pcrTotal": 0.48,
+      "expiry": "10/16"
     },
     "IONQ": {
-      "maxPain": 41,
-      "pcr": 0.47,
-      "pcrVol": 0.34,
+      "maxPain": 40,
+      "pcr": 1.08,
+      "pcrVol": 0.55,
       "maxPainTotal": 40,
-      "pcrTotal": 0.83,
-      "expiry": "10/9"
+      "pcrTotal": 0.86,
+      "expiry": "10/16"
     },
     "INFQ": {
-      "maxPain": 11.5,
-      "pcr": 0.45,
-      "pcrVol": 0.51,
+      "maxPain": 12,
+      "pcr": 0.36,
+      "pcrVol": 0.55,
       "maxPainTotal": 12,
       "pcrTotal": 0.39,
-      "expiry": "10/9"
+      "expiry": "10/16"
     },
     "PLTR": {
-      "maxPain": 190,
-      "pcr": 0.56,
-      "pcrVol": 0.51,
-      "maxPainTotal": 150,
-      "pcrTotal": 1.05,
-      "expiry": "10/9"
+      "maxPain": 170,
+      "pcr": 1.26,
+      "pcrVol": 0.61,
+      "maxPainTotal": 145,
+      "pcrTotal": 1.1,
+      "expiry": "10/16"
     },
     "BAH": {
       "maxPain": 75,
@@ -833,44 +833,44 @@
       "expiry": "10/16"
     },
     "MRVL": {
-      "maxPain": 270,
-      "pcr": 0.88,
-      "pcrVol": 0.45,
-      "maxPainTotal": 230,
-      "pcrTotal": 1.25,
-      "expiry": "10/9"
+      "maxPain": 250,
+      "pcr": 1.11,
+      "pcrVol": 0.54,
+      "maxPainTotal": 220,
+      "pcrTotal": 1.29,
+      "expiry": "10/16"
     },
     "GLW": {
       "maxPain": 155,
-      "pcr": 0.94,
-      "pcrVol": 0.68,
+      "pcr": 1.12,
+      "pcrVol": 0.76,
       "maxPainTotal": 150,
-      "pcrTotal": 1.15,
-      "expiry": "10/9"
+      "pcrTotal": 1.16,
+      "expiry": "10/16"
     },
     "CIEN": {
       "maxPain": 410,
-      "pcr": 1.4,
-      "pcrVol": 1.4,
-      "maxPainTotal": 400,
-      "pcrTotal": 0.97,
-      "expiry": "10/9"
+      "pcr": 1.23,
+      "pcrVol": 0.83,
+      "maxPainTotal": 390,
+      "pcrTotal": 0.91,
+      "expiry": "10/16"
     },
     "COHR": {
       "maxPain": 310,
-      "pcr": 0.88,
-      "pcrVol": 0.54,
+      "pcr": 1.3,
+      "pcrVol": 0.72,
       "maxPainTotal": 300,
-      "pcrTotal": 1.42,
-      "expiry": "10/9"
+      "pcrTotal": 1.48,
+      "expiry": "10/16"
     },
     "LITE": {
-      "maxPain": 1075,
-      "pcr": 1.18,
-      "pcrVol": 0.68,
-      "maxPainTotal": 970,
-      "pcrTotal": 1.42,
-      "expiry": "10/9"
+      "maxPain": 980,
+      "pcr": 1.28,
+      "pcrVol": 0.73,
+      "maxPainTotal": 910,
+      "pcrTotal": 1.46,
+      "expiry": "10/16"
     }
   },
   "indices": {
@@ -895,25 +895,25 @@
       "ath": "-27%"
     },
     "WTI 유가": {
-      "price": 91.46,
+      "price": 91.66,
       "rsi": 58,
       "ath": "-38%"
     },
     "Brent 유가": {
-      "price": 104.2,
+      "price": 104.43,
       "rsi": 60,
       "ath": "-29%"
     }
   },
   "macro": {
     "usdkrw": 1341,
-    "fng": 59,
+    "fng": 64,
     "fngCls": "Greed",
     "btcDom": 56.9,
-    "kimchi": 2,
-    "kimchiKrw": 2227941,
-    "altseason": 44,
-    "altBeat": 22,
+    "kimchi": 2.1,
+    "kimchiKrw": 2320504,
+    "altseason": 52,
+    "altBeat": 26,
     "altTotal": 50,
     "altWindow": "30d",
     "cpi": "3.4%",
@@ -1150,7 +1150,7 @@
       "fper": "40.09배"
     },
     "LITE": {
-      "per": "203.33배",
+      "per": "203.32배",
       "fper": "70.23배"
     }
   },
