@@ -1,6 +1,6 @@
 {
   "date": "2026-10-10",
-  "updated": "2026-10-10T13:12:14.662Z",
+  "updated": "2026-10-10T18:09:56.522Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 401000
     },
     "bitcoin": {
-      "price": 82756,
-      "chg": -0.3443
+      "price": 83043,
+      "chg": 0.4898
     },
     "ethereum": {
-      "price": 2494.83,
-      "chg": -0.19413
+      "price": 2507.02,
+      "chg": 0.84918
     },
     "ripple": {
       "price": 1.4,
-      "chg": 0.95692
+      "chg": 1.08191
     },
     "solana": {
-      "price": 109.78,
-      "chg": -0.55325
+      "price": 109.87,
+      "chg": 0.02737
     },
     "hyperliquid": {
-      "price": 84.26,
-      "chg": -1.55214
+      "price": 85.41,
+      "chg": 0.5331
     },
     "dogecoin": {
-      "price": 0.085796,
-      "chg": 1.18439
+      "price": 0.086045,
+      "chg": 1.34862
     },
     "chainlink": {
-      "price": 12.96,
-      "chg": 1.08389
+      "price": 13.11,
+      "chg": 2.11397
     },
     "uniswap": {
-      "price": 7.53,
-      "chg": 2.24552
+      "price": 7.55,
+      "chg": 3.05591
     },
     "sui": {
-      "price": 1.11,
-      "chg": 4.53102
+      "price": 1.12,
+      "chg": 4.33833
     },
     "aave": {
-      "price": 171.96,
-      "chg": 2.02203
+      "price": 170.73,
+      "chg": 1.46179
     },
     "ondo-finance": {
-      "price": 0.496261,
-      "chg": 2.26241
+      "price": 0.496466,
+      "chg": 3.15443
     },
     "world-liberty-financial": {
-      "price": 0.057067,
-      "chg": 5.73188
+      "price": 0.056874,
+      "chg": 3.6216
     },
     "morpho": {
-      "price": 2.39,
-      "chg": 0.18354
+      "price": 2.41,
+      "chg": 1.10691
     },
     "filecoin": {
       "price": 1.12,
-      "chg": 4.38574
+      "chg": 2.63794
     },
     "pendle": {
-      "price": 2.13,
-      "chg": 1.92794
+      "price": 2.15,
+      "chg": 0.87695
     },
     "zksync": {
-      "price": 0.01398742,
-      "chg": 6.71367
+      "price": 0.01468379,
+      "chg": 4.64784
     },
     "centrifuge": {
-      "price": 0.143284,
-      "chg": 4.86733
+      "price": 0.143125,
+      "chg": 2.24388
     },
     "NVDA": {
       "price": 229.28
@@ -265,14 +265,14 @@
     "bitcoin": {
       "ath": "-34%",
       "athAbs": 126080,
-      "rsi": 55,
-      "chart": 50,
+      "rsi": 56,
+      "chart": 60,
       "trend": "side"
     },
     "ethereum": {
-      "ath": "-50%",
+      "ath": "-49%",
       "athAbs": 4946.05,
-      "rsi": 56,
+      "rsi": 57,
       "chart": 50,
       "trend": "side"
     },
@@ -291,15 +291,13 @@
       "trend": "side"
     },
     "hyperliquid": {
-      "ath": "-14%",
+      "ath": "-13%",
       "athAbs": 97.96
     },
     "dogecoin": {
       "ath": "-88%",
       "athAbs": 0.731578,
-      "rsi": 42,
-      "chart": 20,
-      "trend": "side"
+      "rsi": 42
     },
     "chainlink": {
       "ath": "-75%",
@@ -328,7 +326,7 @@
       "athAbs": 0.331336
     },
     "morpho": {
-      "ath": "-43%",
+      "ath": "-42%",
       "athAbs": 4.17
     },
     "filecoin": {
@@ -336,11 +334,11 @@
       "athAbs": 236.84
     },
     "pendle": {
-      "ath": "-72%",
+      "ath": "-71%",
       "athAbs": 7.5
     },
     "zksync": {
-      "ath": "-96%",
+      "ath": "-95%",
       "athAbs": 0.320983
     },
     "centrifuge": {
@@ -652,16 +650,16 @@
   "opts": {
     "BTC": {
       "maxPain": 82500,
-      "pcr": 1.72,
-      "pcrVol": 1.05,
+      "pcr": 1.71,
+      "pcrVol": 1.48,
       "maxPainTotal": 79000,
       "pcrTotal": 0.59,
       "expiry": "11OCT26"
     },
     "ETH": {
       "maxPain": 2540,
-      "pcr": 1.25,
-      "pcrVol": 3.13,
+      "pcr": 1.33,
+      "pcrVol": 2.83,
       "maxPainTotal": 2400,
       "pcrTotal": 0.57,
       "expiry": "11OCT26"
@@ -913,9 +911,9 @@
     "fngCls": "Greed",
     "btcDom": 59.1,
     "kimchi": 1.5,
-    "kimchiKrw": 1676503,
-    "altseason": 52,
-    "altBeat": 26,
+    "kimchiKrw": 1722766,
+    "altseason": 58,
+    "altBeat": 29,
     "altTotal": 50,
     "altWindow": "30d",
     "cpi": "3.4%",
