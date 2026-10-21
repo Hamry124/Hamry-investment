@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-20",
-  "updated": "2026-10-20T21:06:44.222Z",
+  "date": "2026-10-21",
+  "updated": "2026-10-21T00:19:01.940Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 414000
     },
     "bitcoin": {
-      "price": 82771,
-      "chg": 0.94867
+      "price": 83041,
+      "chg": 1.71872
     },
     "ethereum": {
-      "price": 2447.24,
-      "chg": 1.90724
+      "price": 2450,
+      "chg": 2.19112
     },
     "ripple": {
-      "price": 1.33,
-      "chg": 2.42182
+      "price": 1.34,
+      "chg": 2.93734
     },
     "solana": {
-      "price": 106.66,
-      "chg": 1.96654
+      "price": 106.62,
+      "chg": 2.00645
     },
     "hyperliquid": {
-      "price": 80.71,
-      "chg": 2.88386
+      "price": 80.98,
+      "chg": 2.91684
     },
     "dogecoin": {
-      "price": 0.081861,
-      "chg": 3.10345
+      "price": 0.081824,
+      "chg": 3.16184
     },
     "chainlink": {
-      "price": 12.31,
-      "chg": 3.25951
+      "price": 12.34,
+      "chg": 3.11233
     },
     "uniswap": {
-      "price": 7.48,
-      "chg": 3.48521
+      "price": 7.5,
+      "chg": 3.15269
     },
     "sui": {
-      "price": 1.032,
-      "chg": 4.48891
+      "price": 1.03,
+      "chg": 3.84246
     },
     "aave": {
-      "price": 153.74,
-      "chg": 3.73798
+      "price": 154.75,
+      "chg": 3.91442
     },
     "ondo-finance": {
-      "price": 0.455816,
-      "chg": 5.74855
+      "price": 0.454378,
+      "chg": 5.0195
     },
     "world-liberty-financial": {
-      "price": 0.055182,
-      "chg": 1.24568
+      "price": 0.055575,
+      "chg": 2.67562
     },
     "morpho": {
-      "price": 2.39,
-      "chg": -2.41205
+      "price": 2.4,
+      "chg": -3.34438
     },
     "filecoin": {
-      "price": 1.042,
-      "chg": 3.56738
+      "price": 1.037,
+      "chg": 2.42018
     },
     "pendle": {
-      "price": 2.17,
-      "chg": 5.51053
+      "price": 2.16,
+      "chg": 3.96583
     },
     "zksync": {
-      "price": 0.01513031,
-      "chg": 2.34747
+      "price": 0.01483477,
+      "chg": 0.75755
     },
     "centrifuge": {
-      "price": 0.121433,
-      "chg": 1.70836
+      "price": 0.121485,
+      "chg": 2.15874
     },
     "NVDA": {
       "price": 216.47
@@ -265,33 +265,33 @@
     "bitcoin": {
       "ath": "-34%",
       "athAbs": 126080,
-      "rsi": 62,
+      "rsi": 68,
       "chart": 60,
       "trend": "side"
     },
     "ethereum": {
-      "ath": "-51%",
+      "ath": "-50%",
       "athAbs": 4946.05,
-      "rsi": 60,
+      "rsi": 62,
       "chart": 5,
       "trend": "down"
     },
     "ripple": {
       "ath": "-63%",
       "athAbs": 3.65,
-      "rsi": 52,
+      "rsi": 53,
       "chart": 5,
       "trend": "down"
     },
     "solana": {
       "ath": "-64%",
       "athAbs": 293.31,
-      "rsi": 62,
+      "rsi": 64,
       "chart": 30,
       "trend": "side"
     },
     "hyperliquid": {
-      "ath": "-18%",
+      "ath": "-17%",
       "athAbs": 97.96
     },
     "dogecoin": {
@@ -402,8 +402,8 @@
       "ath": "-26%"
     },
     "CRWV": {
-      "rsi": 31,
-      "chart": 5,
+      "rsi": 29,
+      "chart": 0,
       "trend": "down",
       "athAbs": 187,
       "ath": "-67%"
@@ -437,9 +437,9 @@
       "ath": "-25%"
     },
     "CRCL": {
-      "rsi": 52,
-      "chart": 30,
-      "trend": "side",
+      "rsi": 46,
+      "chart": 0,
+      "trend": "down",
       "athAbs": 298.99,
       "ath": "-71%"
     },
@@ -650,19 +650,19 @@
   "opts": {
     "BTC": {
       "maxPain": 82000,
-      "pcr": 0.96,
-      "pcrVol": 0.9,
-      "maxPainTotal": 79000,
+      "pcr": 1.09,
+      "pcrVol": 0.88,
+      "maxPainTotal": 78000,
       "pcrTotal": 0.61,
-      "expiry": "21OCT26"
+      "expiry": "22OCT26"
     },
     "ETH": {
-      "maxPain": 2420,
-      "pcr": 0.74,
-      "pcrVol": 0.97,
-      "maxPainTotal": 2320,
-      "pcrTotal": 0.5,
-      "expiry": "21OCT26"
+      "maxPain": 2400,
+      "pcr": 0.95,
+      "pcrVol": 0.77,
+      "maxPainTotal": 2300,
+      "pcrTotal": 0.49,
+      "expiry": "22OCT26"
     },
     "NVDA": {
       "maxPain": 220,
@@ -811,7 +811,7 @@
     "INFQ": {
       "maxPain": 11.5,
       "pcr": 1.49,
-      "pcrVol": 0.65,
+      "pcrVol": 0.64,
       "maxPainTotal": 11,
       "pcrTotal": 0.37,
       "expiry": "10/23"
@@ -895,23 +895,23 @@
       "ath": "-36%"
     },
     "WTI 유가": {
-      "price": 98.3,
-      "rsi": 59,
+      "price": 98.47,
+      "rsi": 60,
       "ath": "-33%"
     },
     "Brent 유가": {
-      "price": 109.17,
+      "price": 109.44,
       "rsi": 61,
       "ath": "-26%"
     }
   },
   "macro": {
     "usdkrw": 1328,
-    "fng": 55,
+    "fng": 63,
     "fngCls": "Greed",
     "btcDom": 57.4,
-    "kimchi": 0.2,
-    "kimchiKrw": 169891,
+    "kimchi": 0.1,
+    "kimchiKrw": 144075,
     "altseason": 31,
     "altBeat": 15,
     "altTotal": 49,
