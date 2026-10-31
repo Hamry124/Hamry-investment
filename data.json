@@ -1,6 +1,6 @@
 {
   "date": "2026-10-31",
-  "updated": "2026-10-31T07:51:51.078Z",
+  "updated": "2026-10-31T14:10:30.282Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 359500
     },
     "bitcoin": {
-      "price": 77250,
-      "chg": -1.09015
+      "price": 77459,
+      "chg": 0.80357
     },
     "ethereum": {
-      "price": 2239.99,
-      "chg": 0.44171
+      "price": 2250.11,
+      "chg": 1.36923
     },
     "ripple": {
-      "price": 1.24,
-      "chg": -0.48369
+      "price": 1.25,
+      "chg": 0.93543
     },
     "solana": {
-      "price": 95.49,
-      "chg": -1.76042
+      "price": 95.67,
+      "chg": 0.96521
     },
     "hyperliquid": {
-      "price": 87.95,
-      "chg": -3.91467
+      "price": 86.72,
+      "chg": -4.38096
     },
     "dogecoin": {
-      "price": 0.075095,
-      "chg": -0.6308
+      "price": 0.075286,
+      "chg": 0.07297
     },
     "chainlink": {
-      "price": 11.35,
-      "chg": 3.01173
+      "price": 11.56,
+      "chg": 5.24969
     },
     "uniswap": {
       "price": 6.97,
-      "chg": 4.13025
+      "chg": 2.01789
     },
     "sui": {
-      "price": 0.894098,
-      "chg": 1.32561
+      "price": 0.894076,
+      "chg": 1.49687
     },
     "aave": {
-      "price": 130.84,
-      "chg": 4.43206
+      "price": 134.93,
+      "chg": 8.74468
     },
     "ondo-finance": {
-      "price": 0.411756,
-      "chg": 5.69693
+      "price": 0.409065,
+      "chg": 4.96181
     },
     "world-liberty-financial": {
-      "price": 0.04988259,
-      "chg": -2.68914
+      "price": 0.050398,
+      "chg": 0.2078
     },
     "morpho": {
-      "price": 2.11,
-      "chg": 1.70682
+      "price": 2.21,
+      "chg": 7.29065
     },
     "filecoin": {
-      "price": 0.855045,
-      "chg": 2.7648
+      "price": 0.865551,
+      "chg": 1.73974
     },
     "pendle": {
-      "price": 1.84,
-      "chg": 7.45688
+      "price": 1.88,
+      "chg": 10.96873
     },
     "zksync": {
-      "price": 0.01016894,
-      "chg": 0.04887
+      "price": 0.01029338,
+      "chg": -0.84251
     },
     "centrifuge": {
-      "price": 0.095,
-      "chg": 1.70122
+      "price": 0.093284,
+      "chg": 1.7777
     },
     "NVDA": {
       "price": 204.64
@@ -265,15 +265,15 @@
     "bitcoin": {
       "ath": "-39%",
       "athAbs": 126080,
-      "rsi": 59,
+      "rsi": 60,
       "chart": 0,
       "trend": "down"
     },
     "ethereum": {
       "ath": "-55%",
       "athAbs": 4946.05,
-      "rsi": 59,
-      "chart": 0,
+      "rsi": 60,
+      "chart": 5,
       "trend": "down"
     },
     "ripple": {
@@ -286,12 +286,12 @@
     "solana": {
       "ath": "-67%",
       "athAbs": 293.31,
-      "rsi": 57,
+      "rsi": 58,
       "chart": 0,
       "trend": "down"
     },
     "hyperliquid": {
-      "ath": "-10%",
+      "ath": "-11%",
       "athAbs": 97.96,
       "rsi": 55
     },
@@ -328,7 +328,7 @@
       "athAbs": 0.331336
     },
     "morpho": {
-      "ath": "-49%",
+      "ath": "-47%",
       "athAbs": 4.17
     },
     "filecoin": {
@@ -651,17 +651,17 @@
   },
   "opts": {
     "BTC": {
-      "maxPain": 78500,
-      "pcr": 2.69,
-      "pcrVol": 2.31,
+      "maxPain": 78000,
+      "pcr": 2.6,
+      "pcrVol": 1.84,
       "maxPainTotal": 78000,
-      "pcrTotal": 0.66,
+      "pcrTotal": 0.67,
       "expiry": "1NOV26"
     },
     "ETH": {
       "maxPain": 2260,
-      "pcr": 1.24,
-      "pcrVol": 1.02,
+      "pcr": 1.22,
+      "pcrVol": 1.37,
       "maxPainTotal": 2260,
       "pcrTotal": 0.54,
       "expiry": "1NOV26"
@@ -911,11 +911,11 @@
     "usdkrw": 1335,
     "fng": 30,
     "fngCls": "Fear",
-    "btcDom": 57,
+    "btcDom": 59.2,
     "kimchi": 1,
-    "kimchiKrw": 1062959,
-    "altseason": 30,
-    "altBeat": 15,
+    "kimchiKrw": 1055155,
+    "altseason": 32,
+    "altBeat": 16,
     "altTotal": 50,
     "altWindow": "30d",
     "cpi": "3.7%",
@@ -939,7 +939,7 @@
       "date": "10/15"
     },
     "SNDK": {
-      "si": "3.26%",
+      "si": "3.28%",
       "date": "10/15"
     },
     "IREN": {
@@ -979,7 +979,7 @@
       "date": "10/15"
     },
     "COIN": {
-      "si": "10.81%",
+      "si": "10.76%",
       "date": "10/15"
     },
     "SMR": {
@@ -1007,7 +1007,7 @@
       "date": "10/15"
     },
     "GLW": {
-      "si": "1.98%",
+      "si": "2.10%",
       "date": "10/15"
     },
     "CIEN": {
@@ -1169,8 +1169,7 @@
     "krSI": "수동(KRX 해외IP 차단)",
     "errors": [
       "옵션 SOL: 만기 없음",
-      "옵션 XRP: 만기 없음",
-      "도미넌스(CG): HTTP 429"
+      "옵션 XRP: 만기 없음"
     ]
   }
 }
