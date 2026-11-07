@@ -1,6 +1,6 @@
 {
   "date": "2026-11-07",
-  "updated": "2026-11-07T04:01:06.984Z",
+  "updated": "2026-11-07T10:58:17.031Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 337500
     },
     "bitcoin": {
-      "price": 75808,
-      "chg": 0.04256
+      "price": 75896,
+      "chg": -0.23626
     },
     "ethereum": {
-      "price": 2242.13,
-      "chg": 0.47495
+      "price": 2243.13,
+      "chg": 0.27751
     },
     "ripple": {
-      "price": 1.16,
-      "chg": -3.67545
+      "price": 1.17,
+      "chg": -2.2948
     },
     "solana": {
-      "price": 89.91,
-      "chg": 0.3751
+      "price": 89.83,
+      "chg": -0.20068
     },
     "hyperliquid": {
-      "price": 79.44,
-      "chg": 2.52703
+      "price": 78.22,
+      "chg": 0.17616
     },
     "dogecoin": {
-      "price": 0.071905,
-      "chg": 0.22963
+      "price": 0.071856,
+      "chg": -0.59452
     },
     "chainlink": {
-      "price": 10.78,
-      "chg": -0.44088
+      "price": 10.8,
+      "chg": -0.27932
     },
     "uniswap": {
-      "price": 7,
-      "chg": 0.65155
+      "price": 6.99,
+      "chg": -0.09374
     },
     "sui": {
-      "price": 0.864505,
-      "chg": 0.74636
+      "price": 0.860315,
+      "chg": -0.47557
     },
     "aave": {
-      "price": 129.4,
-      "chg": -0.84489
+      "price": 131.23,
+      "chg": 2.27809
     },
     "ondo-finance": {
-      "price": 0.367559,
-      "chg": -1.31472
+      "price": 0.366113,
+      "chg": -2.95881
     },
     "morpho": {
-      "price": 2.1,
-      "chg": -0.66663
+      "price": 2.12,
+      "chg": 1.67158
     },
     "world-liberty-financial": {
-      "price": 0.04618771,
-      "chg": -3.43347
+      "price": 0.04636801,
+      "chg": -2.03411
     },
     "filecoin": {
-      "price": 0.807293,
-      "chg": 0.20377
+      "price": 0.801527,
+      "chg": -0.11151
     },
     "pendle": {
-      "price": 1.65,
-      "chg": -1.67268
+      "price": 1.63,
+      "chg": -1.894
     },
     "zksync": {
-      "price": 0.00955498,
-      "chg": 0.3005
+      "price": 0.00943769,
+      "chg": -1.72917
     },
     "centrifuge": {
-      "price": 0.095248,
-      "chg": -3.84088
+      "price": 0.094873,
+      "chg": -2.26142
     },
     "NVDA": {
       "price": 186.64
@@ -291,14 +291,16 @@
       "trend": "down"
     },
     "hyperliquid": {
-      "ath": "-19%",
+      "ath": "-20%",
       "athAbs": 97.96,
       "rsi": 55
     },
     "dogecoin": {
       "ath": "-90%",
       "athAbs": 0.731578,
-      "rsi": 41
+      "rsi": 41,
+      "chart": 0,
+      "trend": "down"
     },
     "chainlink": {
       "ath": "-80%",
@@ -324,7 +326,7 @@
       "athAbs": 2.14
     },
     "morpho": {
-      "ath": "-50%",
+      "ath": "-49%",
       "athAbs": 4.17
     },
     "world-liberty-financial": {
@@ -652,16 +654,16 @@
   "opts": {
     "BTC": {
       "maxPain": 76000,
-      "pcr": 1.03,
-      "pcrVol": 0.86,
+      "pcr": 1.04,
+      "pcrVol": 0.92,
       "maxPainTotal": 78000,
       "pcrTotal": 0.7,
       "expiry": "8NOV26"
     },
     "ETH": {
-      "maxPain": 2280,
+      "maxPain": 2260,
       "pcr": 0.86,
-      "pcrVol": 0.61,
+      "pcrVol": 0.9,
       "maxPainTotal": 2300,
       "pcrTotal": 0.54,
       "expiry": "8NOV26"
@@ -897,14 +899,14 @@
       "ath": "-48%"
     },
     "WTI 유가": {
-      "price": 90.34,
+      "price": 90.83,
       "rsi": 55,
-      "ath": "-39%"
+      "ath": "-38%"
     },
     "Brent 유가": {
-      "price": 97.76,
+      "price": 98.32,
       "rsi": 55,
-      "ath": "-34%"
+      "ath": "-33%"
     }
   },
   "macro": {
@@ -913,9 +915,9 @@
     "fngCls": "Extreme Fear",
     "btcDom": 57.2,
     "kimchi": 0.3,
-    "kimchiKrw": 318788,
-    "altseason": 33,
-    "altBeat": 16,
+    "kimchiKrw": 315226,
+    "altseason": 31,
+    "altBeat": 15,
     "altTotal": 49,
     "altWindow": "30d",
     "cpi": "3.7%",
@@ -943,7 +945,7 @@
       "date": "10/15"
     },
     "IREN": {
-      "si": "24.40%",
+      "si": "24.26%",
       "date": "10/15"
     },
     "VRT": {
@@ -983,7 +985,7 @@
       "date": "10/15"
     },
     "SMR": {
-      "si": "24.85%",
+      "si": "24.84%",
       "date": "10/15"
     },
     "OKLO": {
