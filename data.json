@@ -1,6 +1,6 @@
 {
   "date": "2026-11-26",
-  "updated": "2026-11-26T13:26:59.043Z",
+  "updated": "2026-11-26T22:45:02.076Z",
   "phase": 2,
   "prices": {
     "128940": {
@@ -22,72 +22,72 @@
       "price": 302000
     },
     "bitcoin": {
-      "price": 60786,
-      "chg": 3.44749
+      "price": 60514,
+      "chg": 0.66938
     },
     "ethereum": {
-      "price": 1704.78,
-      "chg": 3.44013
+      "price": 1694.74,
+      "chg": 0.5435
     },
     "ripple": {
-      "price": 0.950069,
-      "chg": 4.86222
+      "price": 0.947303,
+      "chg": 1.14069
     },
     "solana": {
-      "price": 70.92,
-      "chg": 4.55683
+      "price": 71.15,
+      "chg": 1.04366
     },
     "hyperliquid": {
-      "price": 61.1,
-      "chg": 5.61009
+      "price": 62.32,
+      "chg": 1.48224
     },
     "dogecoin": {
-      "price": 0.056836,
-      "chg": 6.11921
+      "price": 0.056511,
+      "chg": 1.31687
     },
     "chainlink": {
-      "price": 9.25,
-      "chg": 7.16397
+      "price": 9.32,
+      "chg": 3.39831
     },
     "uniswap": {
-      "price": 4.73,
-      "chg": 5.14645
+      "price": 4.66,
+      "chg": -1.04374
     },
     "sui": {
-      "price": 0.666192,
-      "chg": 6.09996
+      "price": 0.66907,
+      "chg": 1.02992
     },
     "aave": {
-      "price": 95.41,
-      "chg": 4.22377
+      "price": 94.56,
+      "chg": -0.40745
     },
     "ondo-finance": {
-      "price": 0.286142,
-      "chg": 7.31552
+      "price": 0.288842,
+      "chg": 3.05385
     },
     "world-liberty-financial": {
-      "price": 0.04219707,
-      "chg": 3.58009
+      "price": 0.04238567,
+      "chg": -0.88543
     },
     "morpho": {
-      "price": 1.63,
-      "chg": 7.07538
+      "price": 1.61,
+      "chg": 2.24675
     },
     "filecoin": {
-      "price": 0.545433,
-      "chg": 5.04845
+      "price": 0.539923,
+      "chg": -1.42755
     },
     "pendle": {
-      "price": 1.23,
-      "chg": 3.02772
+      "price": 1.21,
+      "chg": -1.97055
     },
     "zksync": {
-      "price": 0.00651216,
-      "chg": 5.77391
+      "price": 0.00642251,
+      "chg": 0.53746
     },
     "centrifuge": {
-      "price": 0.050468,
-      "chg": 11.95514
+      "price": 0.051086,
+      "chg": -2.35914
     },
     "NVDA": {
       "price": 149.3
@@ -235,8 +235,8 @@
       "ath": "-33%"
     },
     "247540": {
-      "rsi": 37,
-      "chart": 5,
+      "rsi": 36,
+      "chart": 0,
       "trend": "down",
       "athAbs": 584000,
       "ath": "-67%"
@@ -265,7 +265,7 @@
     "bitcoin": {
       "ath": "-52%",
       "athAbs": 126080,
-      "rsi": 43,
+      "rsi": 42,
       "chart": 5,
       "trend": "down"
     },
@@ -291,7 +291,7 @@
       "trend": "down"
     },
     "hyperliquid": {
-      "ath": "-38%",
+      "ath": "-36%",
       "athAbs": 97.96,
       "rsi": 55
     },
@@ -306,12 +306,12 @@
       "rsi": 26
     },
     "uniswap": {
-      "ath": "-89%",
+      "ath": "-90%",
       "athAbs": 44.92,
       "rsi": 62
     },
     "sui": {
-      "ath": "-88%",
+      "ath": "-87%",
       "athAbs": 5.35
     },
     "aave": {
@@ -651,19 +651,19 @@
   },
   "opts": {
     "BTC": {
-      "maxPain": 71000,
-      "pcr": 0.85,
-      "pcrVol": 1.6,
-      "maxPainTotal": 70000,
-      "pcrTotal": 0.81,
+      "maxPain": 70000,
+      "pcr": 0.83,
+      "pcrVol": 2.73,
+      "maxPainTotal": 69000,
+      "pcrTotal": 0.8,
       "expiry": "27NOV26"
     },
     "ETH": {
       "maxPain": 2100,
       "pcr": 0.56,
-      "pcrVol": 1.24,
+      "pcrVol": 1.03,
       "maxPainTotal": 2000,
-      "pcrTotal": 0.55,
+      "pcrTotal": 0.56,
       "expiry": "27NOV26"
     }
   },
@@ -689,12 +689,12 @@
       "ath": "-47%"
     },
     "WTI 유가": {
-      "price": 84.55,
+      "price": 84.91,
       "rsi": 53,
-      "ath": "-43%"
+      "ath": "-42%"
     },
     "Brent 유가": {
-      "price": 91.22,
+      "price": 91.73,
       "rsi": 53,
       "ath": "-38%"
     }
@@ -703,9 +703,9 @@
     "usdkrw": 1345,
     "fng": 11,
     "fngCls": "Extreme Fear",
-    "btcDom": 56.3,
-    "kimchi": 0.9,
-    "kimchiKrw": 752814,
+    "btcDom": 56.2,
+    "kimchi": 0.8,
+    "kimchiKrw": 667165,
     "altseason": 49,
     "altBeat": 24,
     "altTotal": 49,
